@@ -1,71 +1,74 @@
 package legendary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import legendaryClasses.Method;
+import legendaryInterfaces.IClass;
+import legendaryInterfaces.IMethod;
+
+/*
+ * Modifications made by Sam Pastoriza and Jason Lane
+ */
 public class ClassMethodVisitor extends ClassVisitor {
+	
+	private IClass legendaryClass;
+	
 	public ClassMethodVisitor(int api) {
 		super(api);
 	}
 
-	public ClassMethodVisitor(int api, ClassVisitor decorated) {
+	public ClassMethodVisitor(int api, ClassVisitor decorated, IClass legendaryClass) {
 		super(api, decorated);
+		this.legendaryClass = legendaryClass;
 	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		System.out.println("-----------------------");
-		// TODO: delete the line below
-		System.out.println("method " + name);
-		// TODO: create an internal representation of the current method and
-		// pass it to the methods below
-		addAccessLevel(access);
-		addReturnType(desc);
-		addArguments(desc);
-		// TODO: add the current method to your internal representation of the
-		// current class
-		// What is a good way for the code to remember what the current class
-		// is?
+		
+		IMethod method = new Method();
+		method.setMethodName(name);
+		addAccessLevel(access, method);
+		addArguments(desc, method);
+		addReturnType(desc, method);
+		this.legendaryClass.addMethod(method);
+
 		return toDecorate;
 	}
 
-	void addAccessLevel(int access) {
+	void addAccessLevel(int access, IMethod method) {
 		String level = "";
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
-			level = "public";
+			level = "+";
 		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
-			level = "protected";
+			level = "#";
 		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
-			level = "private";
+			level = "-";
 		} else {
-			level = "default";
+			level = "";
 		}
-		// TODO: delete the next line
-		System.out.println("access level: " + level);
-		// TODO: ADD this information to your representation of the current
-		// method.
+		method.setAccess(level);
 	}
 
-	void addReturnType(String desc) {
+	void addReturnType(String desc, IMethod method) {
 		String returnType = Type.getReturnType(desc).getClassName();
-		// TODO: delete the next line
-		System.out.println("return type: " + returnType);
-		// TODO: ADD this information to your representation of the current
-		// method.
+		method.setReturnType(returnType);
 	}
 
-	void addArguments(String desc) {
+	void addArguments(String desc, IMethod method) {
 		Type[] args = Type.getArgumentTypes(desc);
+		List<String> arguments = new ArrayList<String>();
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i].getClassName();
-			// TODO: delete the next line
-			System.out.println("arg " + i + ": " + arg);
-			// TODO: ADD this information to your representation of the current
-			// method.
+			arguments.add(arg.substring(arg.lastIndexOf(".") + 1, arg.length()));
 		}
+		method.setParameters(arguments);
 	}
 	
 }

@@ -1,0 +1,22 @@
+digraph G{
+	node [shape = "record"]
+	IClass [
+	label = "\<\<interface\>\>\lIClass|
+	|
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ setInterfaces(List) : void\l
+	+ addMethod(IMethod) : void\l
+	+ addField(IField) : void\l
+	+ getClassName() : String\l
+	+ getSuperName() : String\l
+	+ getInterfaces() : List\l
+	+ getMethods() : List\l
+	+ getFields() : List\l
+	+ setIsInterface(boolean) : void\l
+	+ isInterface() : boolean\l
+	"
+	]
+	edge [arrowhead = "empty"]
+	edge [style = "dashed"]
+}
