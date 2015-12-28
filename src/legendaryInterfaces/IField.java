@@ -11,4 +11,5 @@ public interface IField {
 	public String getAccess();
 	public String getMethodName();
 	public String getReturnType();
+	public String toString();
 }

@@ -3,7 +3,6 @@ package legendaryClasses;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -46,31 +45,22 @@ public class ClassParser {
 		writer.write(classRep.toString());
 		writer.close();
 		//Runtime rt = Runtime.getRuntime();
-		//Process pr = rt.exec("dot -Tpng dot.txt -o output.png");
+		//Process pr = rt.exec("dot -Tpng test.dot -o output.png");
 		System.out.println(classRep.toString());
 	}
 	
 	private String addFields(IClass legendaryClass) {
 		String fieldRep = "";
 		for (IField field : legendaryClass.getFields()) {
-			fieldRep += field.getAccess() + " " + field.getMethodName() + ": " + field.getReturnType() + "\n\t";
+			fieldRep += field.toString();
 		}
 		return fieldRep;
 	}
 	
 	private String addMethods(IClass legendaryClass) {
 		String methodRep = "";
-		String methodName = "";
 		for (IMethod method : legendaryClass.getMethods()) {
-			methodName = method.getMethodName();
-			if(methodName.equals("<init>") || methodName.equals("<clinit>")) {
-				continue;
-			}
-			String parameters = Arrays.toString(method.getParameters().toArray());
-			methodRep += method.getAccess() 
-					+ " " + method.getMethodName() 
-					+ "(" + parameters.substring(1, parameters.length()-1)
-					+ ") : " + method.getReturnType() + "\\l\n\t";
+			methodRep += method.toString();
 		}
 		return methodRep;
 	}

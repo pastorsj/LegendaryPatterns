@@ -1,6 +1,7 @@
 package legendaryClasses;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import legendaryInterfaces.IMethod;
@@ -68,6 +69,21 @@ public class Method implements IMethod{
 	public String getReturnType() {
 		// TODO Auto-generated method stub
 		return this.methodReturnType;
+	}
+	
+	@Override
+	public String toString() {
+		String methodRep = "";
+		String methodName = this.getMethodName();
+		if(methodName.equals("<init>") || methodName.equals("<clinit>")) {
+			return "";
+		}
+		String parameters = Arrays.toString(this.getParameters().toArray());
+		methodRep += this.getAccess() 
+				+ " " + methodName 
+				+ "(" + parameters.substring(1, parameters.length()-1)
+				+ ") : " + this.getReturnType() + "\\l\n\t";
+		return methodRep;
 	}
 
 }

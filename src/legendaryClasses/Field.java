@@ -52,5 +52,10 @@ public class Field implements IField{
 		// TODO Auto-generated method stub
 		return this.methodReturnType;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getAccess() + " " + this.getMethodName() + ": " + this.getReturnType() + "\n\t";
+	}
 
 }
