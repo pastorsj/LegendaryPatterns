@@ -1,4 +1,4 @@
-# LegendaryPatterns
+# Legendary Patterns
 Authors: Sam Pastoriza & Jason Lane
 
 ## Overall Design
