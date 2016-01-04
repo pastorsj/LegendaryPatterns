@@ -55,7 +55,7 @@ public class Field implements IField{
 	
 	@Override
 	public String toString() {
-		return this.getAccess() + " " + this.getMethodName() + ": " + this.getReturnType() + "\n\t";
+		return this.getAccess() + " " + this.getMethodName() + ": " + this.getReturnType() + "\\l\n\t";
 	}
 
 }

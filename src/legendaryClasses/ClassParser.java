@@ -16,39 +16,38 @@ import legendaryInterfaces.IMethod;
  */
 public class ClassParser {
 	private Map<String, IClass> classes;
-	
+
 	public ClassParser() {
 		this.classes = new HashMap<String, IClass>();
 	}
-	
+
 	public boolean addClass(IClass class1) {
-		if(!this.classes.containsKey(class1.getClassName())) {
+		if (!this.classes.containsKey(class1.getClassName())) {
 			this.classes.put(class1.getClassName(), class1);
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void parse() throws IOException {
 		StringBuilder classRep = new StringBuilder();
 		classRep.append("digraph G{\n\tnode [shape = \"record\"]\n\t");
 		Set<String> keySet = this.classes.keySet();
-		//For each node
+		// For each node
 		this.addNode(classRep, keySet);
-		//For every super class arrow
+		// For every super class arrow
 		this.addExtensionArrows(classRep, keySet);
-		//For every interface arrow
+		// For every interface arrow
 		this.addInterfaceArrows(classRep, keySet);
-		
 		classRep.append("}");
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
 		writer.write(classRep.toString());
 		writer.close();
-		//Runtime rt = Runtime.getRuntime();
-		//Process pr = rt.exec("dot -Tpng test.dot -o output.png");
+		// Runtime rt = Runtime.getRuntime();
+		// Process pr = rt.exec("dot -Tpng test.dot -o output.png");
 		System.out.println(classRep.toString());
 	}
-	
+
 	private String addFields(IClass legendaryClass) {
 		String fieldRep = "";
 		for (IField field : legendaryClass.getFields()) {
@@ -56,7 +55,7 @@ public class ClassParser {
 		}
 		return fieldRep;
 	}
-	
+
 	private String addMethods(IClass legendaryClass) {
 		String methodRep = "";
 		for (IMethod method : legendaryClass.getMethods()) {
@@ -64,42 +63,44 @@ public class ClassParser {
 		}
 		return methodRep;
 	}
-	
+
 	private void addNode(StringBuilder classRep, Set<String> keySet) {
-		for(String key : keySet) {
+		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
 			String className = legendaryClass.getClassName();
-			classRep.append(className + " [\n\tlabel = \"");
-			//Check for interface here
-			if(legendaryClass.isInterface()) {
-				classRep.append("\\<\\<interface\\>\\>\\l");
+			classRep.append(className + " [\n\tlabel = \"{");
+			// Check for interface here
+			if (legendaryClass.isInterface()) {
+				classRep.append("\\<\\<interface\\>\\>\\n");
 			}
 			classRep.append(className + "|\n\t");
 			classRep.append(addFields(legendaryClass));
 			classRep.append("|\n\t");
 			classRep.append(addMethods(legendaryClass));
-			classRep.append("\"\n\t]\n");
+			classRep.append("}\"\n\t]\n");
 		}
 	}
-	
+
 	private void addExtensionArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("\tedge [arrowhead = \"empty\"]\n");
-		for(String key : keySet) {
+		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
 			String legendarySuperClass = legendaryClass.getSuperName();
-			if(key.contains(legendarySuperClass)) {
-				classRep.append(legendaryClass.getClassName() + "->" + legendarySuperClass + "\\l\n");
+			String name = legendarySuperClass.substring(legendarySuperClass.lastIndexOf("/")+1);
+			if (key.contains(name)) {
+				classRep.append(legendaryClass.getClassName() + "->" + name + "\n\t");
 			}
 		}
 	}
-	
+
 	private void addInterfaceArrows(StringBuilder classRep, Set<String> keySet) {
-		classRep.append("\tedge [style = \"dashed\"]\n");
-		for(String key : keySet) {
+		classRep.append("\tedge [style = \"dashed\"]\n\t");
+		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
-			for(String legendaryInterface : legendaryClass.getInterfaces()) {
-				if(keySet.contains(legendaryInterface)) {
-					classRep.append(legendaryClass.getClassName() + "->" + legendaryInterface + "\\l\n");
+			for (String legendaryInterface : legendaryClass.getInterfaces()) {
+				String name = legendaryInterface.substring(legendaryInterface.indexOf("/")+1);
+				if (keySet.contains(name)) {
+					classRep.append(legendaryClass.getClassName() + "->" + name + "\n\t");
 				}
 			}
 		}
