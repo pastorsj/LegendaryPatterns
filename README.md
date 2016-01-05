@@ -13,14 +13,14 @@ Run graphviz (such as via dot.exe or gvedit.exe) on the .dot file
 
 ## Who did what
 
-### Sam Pastoriza (Completed 50% of milestone/s)
+### Sam Pastoriza (Completed 50% of the milestone/s)
 Class/Method/Field Representation detailing  
 Parser framework  
 Parser detailing  
 Visitor detailing  
 Tests  
 
-### Jason Lane (Completed 50% of milestone/s)
+### Jason Lane (Completed 50% of the milestone/s)
 Class/Method/Field Representation framework  
 Class/Method/Field Representation details  
 Parser detailing  
