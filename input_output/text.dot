@@ -1,145 +1,83 @@
 digraph G{
 	node [shape = "record"]
-	Field [
-	label = "{Field|
-	- methodAccessType: String\l
-	- methodName: String\l
-	- methodReturnType: String\l
+	LauncherHTML [
+	label = "{LauncherHTML|
 	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ toString() : String\l
+	+ launch() : String\l
 	}"
 	]
-ClassFieldVisitor [
-	label = "{ClassFieldVisitor|
-	- legendaryClass: IClass\l
+LauncherPDF [
+	label = "{LauncherPDF|
 	|
-	+ visitField(int, String, String, String, Object) : FieldVisitor\l
-	 addAccessLevel(int, IField) : void\l
+	+ launch() : String\l
 	}"
 	]
-ClassMethodVisitor [
-	label = "{ClassMethodVisitor|
-	- legendaryClass: IClass\l
+Observer [
+	label = "{\<\<interface\>\>\nObserver|
 	|
-	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
-	 addAccessLevel(int, IMethod) : void\l
-	 addReturnType(String, IMethod) : void\l
-	 addArguments(String, IMethod) : void\l
+	+ update(Path) : void\l
 	}"
 	]
-Class [
-	label = "{Class|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\l
-	- methods: List\l
-	- fields: List\l
-	- isInterface: boolean\l
+LauncherFileType [
+	label = "{\<\<interface\>\>\nLauncherFileType|
 	|
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setInterfaces(List) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName() : String\l
-	+ getSuperName() : String\l
-	+ getInterfaces() : List\l
-	+ getMethods() : List\l
-	+ getFields() : List\l
-	+ setIsInterface(boolean) : void\l
-	+ isInterface() : boolean\l
+	+ launch() : String\l
 	}"
 	]
-IClass [
-	label = "{\<\<interface\>\>\nIClass|
+LauncherText [
+	label = "{LauncherText|
 	|
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setInterfaces(List) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName() : String\l
-	+ getSuperName() : String\l
-	+ getInterfaces() : List\l
-	+ getMethods() : List\l
-	+ getFields() : List\l
-	+ setIsInterface(boolean) : void\l
-	+ isInterface() : boolean\l
+	+ launch() : String\l
 	}"
 	]
-Method [
-	label = "{Method|
-	- methodAccess: String\l
-	- methodName: String\l
-	- parameters: List\l
-	- methodReturnType: String\l
+AppLauncher [
+	label = "{AppLauncher|
+	- watcher: WatchService\l
+	- dir: Path\l
+	- stop: boolean\l
+	- addedFile: Path\l
+	- processes: List\l
+	- observers: List\l
+	- typesMap: Map\l
 	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setParameters(List) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getParameters() : List\l
-	+ getReturnType() : String\l
-	+ toString() : String\l
+	+ run() : void\l
+	# clearEverything() : void\l
+	+ stopGracefully() : void\l
+	+ isRunning() : boolean\l
+	+ getApplicationsCount() : int\l
+	+ handleDirectoryEvent(String, Path) : void\l
+	+ main(String[]) : void\l
+	+ registerObserver(Observer) : void\l
+	+ removeObserver(Observer) : void\l
+	+ notifyObservers() : void\l
 	}"
 	]
-IMethod [
-	label = "{\<\<interface\>\>\nIMethod|
+Subject [
+	label = "{\<\<interface\>\>\nSubject|
 	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setParameters(List) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getParameters() : List\l
-	+ getReturnType() : String\l
-	+ toString() : String\l
+	+ registerObserver(Observer) : void\l
+	+ removeObserver(Observer) : void\l
+	+ notifyObservers() : void\l
 	}"
 	]
-ClassDeclarationVisitor [
-	label = "{ClassDeclarationVisitor|
-	- legendaryClass: IClass\l
+ContentObserver [
+	label = "{ContentObserver|
 	|
-	+ visit(int, int, String, String, String, String[]) : void\l
+	+ update(Path) : void\l
 	}"
 	]
-IField [
-	label = "{\<\<interface\>\>\nIField|
+NameObserver [
+	label = "{NameObserver|
 	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ toString() : String\l
-	}"
-	]
-ClassParser [
-	label = "{ClassParser|
-	- classes: Map\l
-	|
-	+ addClass(IClass) : boolean\l
-	+ parse() : void\l
-	- addFields(IClass) : String\l
-	- addMethods(IClass) : String\l
-	- addNode(StringBuilder, Set) : void\l
-	- addExtensionArrows(StringBuilder, Set) : void\l
-	- addInterfaceArrows(StringBuilder, Set) : void\l
+	+ update(Path) : void\l
 	}"
 	]
 	edge [arrowhead = "empty"]
 	edge [style = "dashed"]
-	Field->IField
-	Class->IClass
-	Method->IMethod
+	LauncherHTML->LauncherFileType
+	LauncherPDF->LauncherFileType
+	LauncherText->LauncherFileType
+	AppLauncher->Subject
+	ContentObserver->Observer
+	NameObserver->Observer
 	}
