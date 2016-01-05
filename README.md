@@ -5,27 +5,29 @@ Authors: Sam Pastoriza & Jason Lane
 
 
 ## How to use the code
-Open DesignParser.java in an editor*
+Open DesignParser.java in an editor, probably Eclipse
 Add class names (including package) to the static "classes" String array*
-Run DesignParser
-Copy console output to a .dot file*
+Run DesignParser, where a text.dot file is created in the input_output folder
 Run graphviz (such as via dot.exe or gvedit.exe) on the .dot file*
 
-*Temporary; later versions may not require this step to be executed manually or at all
 
 ## Who did what
 
-### Sam Pastoriza
-ClassRep detailing
+### Sam Pastoriza (Completed 50% of milestone/s)
+Class/Method/Field Representation detailing
 Parser framework
 Parser detailing
 Visitor detailing
 Tests
 
-### Jason Lane
-ClassRep framework
-ClassRep detailing
+### Jason Lane (Completed 50% of milestone/s)
+Class/Method/Field Representation framework
+Class/Method/Field Representation details
 Parser detailing
 Visitor framework
 Visitor detailing
+
+#### Notes
+* framework = interfaces
+* detailing = implementation of those interfaces
 
