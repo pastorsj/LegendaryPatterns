@@ -23,7 +23,7 @@ Add the project you want to analyze to your build path
 Add class names (including package) to the static "classes" String array*  
 Run DesignParser, where a text.dot file is created in the input_output folder  
 Run graphviz (such as via dot.exe or gvedit.exe) on the .dot file  
-The above step can also be done from the command line, by run the command: 'dot -Tpng text.dot -o output.png', where dot.exe is in the same folder as the text.dot file.
+The above step can also be done from the command line, by running the command: 'dot -Tpng text.dot -o output.png', where dot.exe is in the same folder as the text.dot file.
 
 
 ## Who did what
