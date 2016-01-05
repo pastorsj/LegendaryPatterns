@@ -1,7 +1,46 @@
 digraph G{
 	node [shape = "record"]
-	IClass [
-	label = "\<\<interface\>\>\lIClass|
+	Field [
+	label = "{Field|
+	- methodAccessType: String\l
+	- methodName: String\l
+	- methodReturnType: String\l
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getReturnType() : String\l
+	+ toString() : String\l
+	}"
+	]
+ClassFieldVisitor [
+	label = "{ClassFieldVisitor|
+	- legendaryClass: IClass\l
+	|
+	+ visitField(int, String, String, String, Object) : FieldVisitor\l
+	 addAccessLevel(int, IField) : void\l
+	}"
+	]
+ClassMethodVisitor [
+	label = "{ClassMethodVisitor|
+	- legendaryClass: IClass\l
+	|
+	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
+	 addAccessLevel(int, IMethod) : void\l
+	 addReturnType(String, IMethod) : void\l
+	 addArguments(String, IMethod) : void\l
+	}"
+	]
+Class [
+	label = "{Class|
+	- className: String\l
+	- superClassName: String\l
+	- interfaces: List\l
+	- methods: List\l
+	- fields: List\l
+	- isInterface: boolean\l
 	|
 	+ setClassName(String) : void\l
 	+ setSuper(String) : void\l
@@ -15,8 +54,92 @@ digraph G{
 	+ getFields() : List\l
 	+ setIsInterface(boolean) : void\l
 	+ isInterface() : boolean\l
-	"
+	}"
+	]
+IClass [
+	label = "{\<\<interface\>\>\nIClass|
+	|
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ setInterfaces(List) : void\l
+	+ addMethod(IMethod) : void\l
+	+ addField(IField) : void\l
+	+ getClassName() : String\l
+	+ getSuperName() : String\l
+	+ getInterfaces() : List\l
+	+ getMethods() : List\l
+	+ getFields() : List\l
+	+ setIsInterface(boolean) : void\l
+	+ isInterface() : boolean\l
+	}"
+	]
+Method [
+	label = "{Method|
+	- methodAccess: String\l
+	- methodName: String\l
+	- parameters: List\l
+	- methodReturnType: String\l
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setParameters(List) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getParameters() : List\l
+	+ getReturnType() : String\l
+	+ toString() : String\l
+	}"
+	]
+IMethod [
+	label = "{\<\<interface\>\>\nIMethod|
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setParameters(List) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getParameters() : List\l
+	+ getReturnType() : String\l
+	+ toString() : String\l
+	}"
+	]
+ClassDeclarationVisitor [
+	label = "{ClassDeclarationVisitor|
+	- legendaryClass: IClass\l
+	|
+	+ visit(int, int, String, String, String, String[]) : void\l
+	}"
+	]
+IField [
+	label = "{\<\<interface\>\>\nIField|
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getReturnType() : String\l
+	+ toString() : String\l
+	}"
+	]
+ClassParser [
+	label = "{ClassParser|
+	- classes: Map\l
+	|
+	+ addClass(IClass) : boolean\l
+	+ parse() : void\l
+	- addFields(IClass) : String\l
+	- addMethods(IClass) : String\l
+	- addNode(StringBuilder, Set) : void\l
+	- addExtensionArrows(StringBuilder, Set) : void\l
+	- addInterfaceArrows(StringBuilder, Set) : void\l
+	}"
 	]
 	edge [arrowhead = "empty"]
 	edge [style = "dashed"]
-}
+	Field->IField
+	Class->IClass
+	Method->IMethod
+	}

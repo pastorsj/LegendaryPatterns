@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>12</x>
+      <y>114</y>
+      <w>192</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>legendaryClasses::Class
+--
+-className: String
+-superClassName: String
+-interfaces: List&lt;String&gt;
+-methods: List&lt;IMethod&gt;
+-fields: List&lt;IField&gt;
+-isInterface: boolean
+--
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): List&lt;IMethod&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>6</x>
+      <y>360</y>
+      <w>204</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>legendaryClasses::Method
+--
+-methodAccess: String
+-methodName: String
+-parameters: List&lt;String&gt;
+-methodReturnType: String
+--
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>552</y>
+      <w>210</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>legendaryClasses::Field
+--
+-methodAccessType: String
+-methodName: String
+-methodReturnType: String
+--
++setAccess(String methodAccessType): void
++setMethodName(String methodName): void
++setReturnType(String methodReturnType): void
++getAccess(): String
++getMethodName(): String
++getReturnType(): String
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>258</x>
+      <y>366</y>
+      <w>204</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendaryInterfaces::IMethod
+--
+--
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>0</y>
+      <w>300</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>legendaryClasses::ClassParser
+--
+-classes: Map&lt;String, IClass&gt;
+--
++addClass(IClass class1): boolean
++parse(): void
+-addFields(IClass legendaryClass): String
+-addMethods(IClass legendaryClass): String
+-addNode(StringBuilder classRep, Set&lt;String&gt; keySet): void
+-addExtensionArrows(StringBuilder classRep, Set&lt;String&gt; keySet): void
+-addInterfaceArrows(StringBuilder classRep, Set&lt;String&gt; keySet): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>258</x>
+      <y>564</y>
+      <w>210</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendaryInterfaces::IField
+--
+--
++setAccess(String methodAccessType): void
++setMethodName(String methodName): void
++setReturnType(String methodReturnType): void
++getAccess(): String
++getMethodName(): String
++getReturnType(): String
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>564</x>
+      <y>300</y>
+      <w>426</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>legendary::ClassMethodVisitor
+--
+-legendaryClass: IClass
+--
++ClassMethodVisitor(int api): ctor
++ClassMethodVisitor(int api, ClassVisitor decorated, IClass legendaryClass): ctor
++visitMethod(int access, String name, String desc, String signature, String[] exceptions): MethodVisitor
+~addAccessLevel(int access, IMethod method): void
+~addReturnType(String desc, IMethod method): void
+~addArguments(String desc, IMethod method): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>564</x>
+      <y>558</y>
+      <w>378</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary::ClassFieldVisitor
+--
+-legendaryClass: IClass
+--
++ClassFieldVisitor(int api): ctor
++ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass): ctor
++visitField(int access, String name, String desc, String signature, Object value): FieldVisitor
+~addAccessLevel(int access, IField field): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>564</x>
+      <y>456</y>
+      <w>432</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>legendary::ClassDeclarationVisitor
+--
+-legendaryClass: IClass
+--
++ClassDeclarationVisitor(int api, IClass legendaryClass): ctor
++visit(int version, int access, String name, String signature, String superName, String[] interfaces): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>258</x>
+      <y>162</y>
+      <w>198</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendaryInterfaces::IClass
+--
+--
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): List&lt;IMethod&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>222</y>
+      <w>72</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>204</x>
+      <y>414</y>
+      <w>66</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>204</x>
+      <y>606</y>
+      <w>66</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>312</y>
+      <w>72</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>100.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>324</y>
+      <w>84</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>120.0;400.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>252</y>
+      <w>126</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>270</y>
+      <w>126</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>294</y>
+      <w>126</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>372</x>
+      <y>120</y>
+      <w>18</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
