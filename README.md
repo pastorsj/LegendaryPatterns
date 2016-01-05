@@ -8,7 +8,7 @@ Authors: Sam Pastoriza & Jason Lane
 Open DesignParser.java in an editor, probably Eclipse
 Add class names (including package) to the static "classes" String array*
 Run DesignParser, where a text.dot file is created in the input_output folder
-Run graphviz (such as via dot.exe or gvedit.exe) on the .dot file*
+Run graphviz (such as via dot.exe or gvedit.exe) on the .dot file
 
 
 ## Who did what
@@ -30,4 +30,3 @@ Visitor detailing
 #### Notes
 * framework = interfaces
 * detailing = implementation of those interfaces
-
