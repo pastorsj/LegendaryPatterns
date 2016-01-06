@@ -5,11 +5,11 @@ package legendaryInterfaces;
  */
 public interface IField {
 	public void setAccess(String methodAccessType);
-	public void setMethodName(String methodName);
-	public void setReturnType(String methodReturnType);
+	public void setFieldName(String methodName);
+	public void setType(String methodReturnType);
 	
 	public String getAccess();
-	public String getMethodName();
-	public String getReturnType();
+	public String getFieldName();
+	public String getType();
 	public String toString();
 }

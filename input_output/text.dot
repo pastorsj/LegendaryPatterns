@@ -1,83 +1,12 @@
 digraph G{
 	node [shape = "record"]
-	LauncherHTML [
-	label = "{LauncherHTML|
+	ManualTestClass [
+	label = "{ManualTestClass|
+	- m: Map<Integer, String>\l
 	|
-	+ launch() : String\l
-	}"
-	]
-LauncherPDF [
-	label = "{LauncherPDF|
-	|
-	+ launch() : String\l
-	}"
-	]
-Observer [
-	label = "{\<\<interface\>\>\nObserver|
-	|
-	+ update(Path) : void\l
-	}"
-	]
-LauncherFileType [
-	label = "{\<\<interface\>\>\nLauncherFileType|
-	|
-	+ launch() : String\l
-	}"
-	]
-LauncherText [
-	label = "{LauncherText|
-	|
-	+ launch() : String\l
-	}"
-	]
-AppLauncher [
-	label = "{AppLauncher|
-	- watcher: WatchService\l
-	- dir: Path\l
-	- stop: boolean\l
-	- addedFile: Path\l
-	- processes: List\l
-	- observers: List\l
-	- typesMap: Map\l
-	|
-	+ run() : void\l
-	# clearEverything() : void\l
-	+ stopGracefully() : void\l
-	+ isRunning() : boolean\l
-	+ getApplicationsCount() : int\l
-	+ handleDirectoryEvent(String, Path) : void\l
-	+ main(String[]) : void\l
-	+ registerObserver(Observer) : void\l
-	+ removeObserver(Observer) : void\l
-	+ notifyObservers() : void\l
-	}"
-	]
-Subject [
-	label = "{\<\<interface\>\>\nSubject|
-	|
-	+ registerObserver(Observer) : void\l
-	+ removeObserver(Observer) : void\l
-	+ notifyObservers() : void\l
-	}"
-	]
-ContentObserver [
-	label = "{ContentObserver|
-	|
-	+ update(Path) : void\l
-	}"
-	]
-NameObserver [
-	label = "{NameObserver|
-	|
-	+ update(Path) : void\l
+	+ test(Method) : List\l
 	}"
 	]
 	edge [arrowhead = "empty"]
 	edge [style = "dashed"]
-	LauncherHTML->LauncherFileType
-	LauncherPDF->LauncherFileType
-	LauncherText->LauncherFileType
-	AppLauncher->Subject
-	ContentObserver->Observer
-	NameObserver->Observer
 	}

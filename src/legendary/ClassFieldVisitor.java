@@ -27,13 +27,11 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
-		String type = Type.getType(desc).getClassName();
-
 		//New Code
 		IField field = new Field();
 		addAccessLevel(access, field);
-		field.setMethodName(name);
-		field.setReturnType(type);
+		field.setFieldName(name);
+		field.setType(signature);
 		legendaryClass.addField(field);
 		
 		return toDecorate;

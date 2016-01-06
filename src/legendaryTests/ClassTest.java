@@ -67,9 +67,9 @@ public class ClassTest {
 	@Test
 	public void testField() {
 		IField field = new Field();
-		field.setReturnType("String");
+		field.setType("String");
 		IField field2 = new Field();
-		field2.setReturnType("List<String>");
+		field2.setType("List<String>");
 		this.legendaryTestClass.addField(field);
 		this.legendaryTestClass.addField(field2);
 		List<IField> checkFields = this.legendaryTestClass.getFields();

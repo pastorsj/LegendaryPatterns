@@ -32,15 +32,15 @@ public class FieldTest {
 	
 	@Test
 	public void testMethodName() {
-		this.field.setMethodName("TestMethod");
-		String testName = this.field.getMethodName();
+		this.field.setFieldName("TestMethod");
+		String testName = this.field.getFieldName();
 		assertEquals("TestMethod", testName);
 	}
 	
 	@Test
 	public void testReturnType() {
-		this.field.setReturnType("String");
-		String testReturn = this.field.getReturnType();
+		this.field.setType("String");
+		String testReturn = this.field.getType();
 		assertEquals("String", testReturn);
 	}
 }
