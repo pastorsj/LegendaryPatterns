@@ -1,5 +1,7 @@
 package legendaryInterfaces;
 
+import java.util.Set;
+
 /*
  * Author: Jason Lane
  */
@@ -12,4 +14,5 @@ public interface IField {
 	public String getFieldName();
 	public String getType();
 	public String toString();
+	Set<String> getBaseTypes();
 }

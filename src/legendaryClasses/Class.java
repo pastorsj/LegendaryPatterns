@@ -1,7 +1,9 @@
 package legendaryClasses;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import legendaryInterfaces.IClass;
 import legendaryInterfaces.IField;
@@ -17,8 +19,8 @@ public class Class implements IClass{
 	private List<String> interfaces;
 	private List<IMethod> methods;
 	private List<IField> fields;
-	private List<String> usesClasses;
-	private List<String> associationClasses;
+	private Set<String> usesClasses;
+	private Set<String> associationClasses;
 	private boolean isInterface;
 	
 	public Class() {
@@ -27,8 +29,8 @@ public class Class implements IClass{
 		this.interfaces = new ArrayList<String>();
 		this.methods = new ArrayList<IMethod>();
 		this.fields = new ArrayList<IField>();
-		this.usesClasses = new ArrayList<String>();
-		this.associationClasses = new ArrayList<String>();
+		this.usesClasses = new HashSet<String>();
+		this.associationClasses = new HashSet<String>();
 		this.isInterface = false;
 	}
 	
@@ -112,7 +114,7 @@ public class Class implements IClass{
 	}
 
 	@Override
-	public List<String> getUsesClasses() {
+	public Set<String> getUsesClasses() {
 		// TODO Auto-generated method stub
 		return this.usesClasses;
 	}
@@ -126,7 +128,7 @@ public class Class implements IClass{
 	}
 
 	@Override
-	public List<String> getAssociationClasses() {
+	public Set<String> getAssociationClasses() {
 		// TODO Auto-generated method stub
 		return this.associationClasses;
 	}

@@ -1,10 +1,8 @@
 package legendary;
 
-import org.objectweb.asm.MethodVisitor;
-
-import jdk.internal.org.objectweb.asm.Label;
 import legendaryInterfaces.IClass;
-import legendaryClasses.Class;
+
+import org.objectweb.asm.MethodVisitor;
 
 
 public class LegendaryClassMethodVisitor extends MethodVisitor {

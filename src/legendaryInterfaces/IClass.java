@@ -1,6 +1,7 @@
 package legendaryInterfaces;
 
 import java.util.List;
+import java.util.Set;
 
 /*
  * Author: Jason Lane
@@ -21,8 +22,8 @@ public interface IClass {
 	public void setIsInterface(boolean isInterface);
 	public boolean isInterface();
 	public void addUsesClass(String uclass);
-	public List<String> getUsesClasses();
+	public Set<String> getUsesClasses();
 	public void addAssociationClass(String aclass);
-	public List<String> getAssociationClasses();
+	public Set<String> getAssociationClasses();
 	
 };

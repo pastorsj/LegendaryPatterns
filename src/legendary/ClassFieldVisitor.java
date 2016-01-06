@@ -1,13 +1,14 @@
 package legendary;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.FieldVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-
 import legendaryClasses.Field;
 import legendaryInterfaces.IClass;
 import legendaryInterfaces.IField;
+
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Opcodes;
+
+import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 
 /*
  * Modifications made by Sam Pastoriza and Jason Lane
@@ -31,9 +32,12 @@ public class ClassFieldVisitor extends ClassVisitor {
 		IField field = new Field();
 		addAccessLevel(access, field);
 		field.setFieldName(name);
-		field.setType(signature);
+		field.setType((signature==null) ? Type.getType(desc).toString() : signature);
 		legendaryClass.addField(field);
-		
+		for(String s: field.getBaseTypes())
+		{
+			legendaryClass.addAssociationClass(s);
+		}
 		return toDecorate;
 	};
 	

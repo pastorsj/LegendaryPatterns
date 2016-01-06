@@ -1,8 +1,7 @@
 package legendaryClasses;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -39,13 +38,18 @@ public class ClassParser {
 		this.addExtensionArrows(classRep, keySet);
 		// For every interface arrow
 		this.addInterfaceArrows(classRep, keySet);
+
+		this.addUsageArrows(classRep, keySet);
+
+		this.addAssociationArrows(classRep, keySet);
 		classRep.append("}");
-//		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
-//		writer.write(classRep.toString());
-//		writer.close();
+		// BufferedWriter writer = new BufferedWriter(new
+		// FileWriter("./input_output/text.dot"));
+		// writer.write(classRep.toString());
+		// writer.close();
 		// Runtime rt = Runtime.getRuntime();
 		// Process pr = rt.exec("dot -Tpng test.dot -o output.png");
-//		System.out.println(classRep.toString());
+		System.out.println(classRep.toString());
 	}
 
 	private String addFields(IClass legendaryClass) {
@@ -86,9 +90,11 @@ public class ClassParser {
 		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
 			String legendarySuperClass = legendaryClass.getSuperName();
-			String name = legendarySuperClass.substring(legendarySuperClass.lastIndexOf("/")+1);
+			String name = legendarySuperClass.substring(legendarySuperClass
+					.lastIndexOf("/") + 1);
 			if (key.contains(name)) {
-				classRep.append(legendaryClass.getClassName() + "->" + name + "\n\t");
+				classRep.append(legendaryClass.getClassName() + "->" + name
+						+ "\n\t");
 			}
 		}
 	}
@@ -98,9 +104,60 @@ public class ClassParser {
 		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
 			for (String legendaryInterface : legendaryClass.getInterfaces()) {
-				String name = legendaryInterface.substring(legendaryInterface.indexOf("/")+1);
+				String name = legendaryInterface.substring(legendaryInterface
+						.lastIndexOf("/") + 1);
 				if (keySet.contains(name)) {
-					classRep.append(legendaryClass.getClassName() + "->" + name + "\n\t");
+					classRep.append(legendaryClass.getClassName() + "->" + name
+							+ "\n\t");
+				}
+			}
+		}
+	}
+
+	private void addUsageArrows(StringBuilder classRep, Set<String> keySet) {
+		classRep.append("edge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+		for (String key : keySet) {
+			IClass legendaryClass = this.classes.get(key);
+			for (String useClass : legendaryClass.getUsesClasses()) {
+				String name = useClass.substring(useClass.indexOf("/") + 1);
+				if (keySet.contains(name)) {
+					String lsuperc = legendaryClass.getSuperName();
+					ArrayList<String> higher = new ArrayList<String>();
+					higher.add(lsuperc);
+					higher.addAll(legendaryClass.getInterfaces());
+					boolean add = true;
+					for (String s : higher) {
+						s = s.substring(s.lastIndexOf("/") + 1);
+						if (this.classes.containsKey(s) && this.classes
+								.get(s).getUsesClasses().contains(useClass)) {
+							add = false;
+						}
+					}
+					if (add)
+						classRep.append(legendaryClass.getClassName() + "->"
+								+ name + "\n\t");
+				}
+			}
+		}
+	}
+
+	private void addAssociationArrows(StringBuilder classRep, Set<String> keySet) {
+		classRep.append("edge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+		for (String key : keySet) {
+			IClass legendaryClass = this.classes.get(key);
+			for (String legendaryInterface : legendaryClass
+					.getAssociationClasses()) {
+				String name = legendaryInterface.substring(legendaryInterface
+						.indexOf("/") + 1);
+				String lsuperc = legendaryClass.getSuperName();
+				lsuperc = lsuperc.substring(lsuperc.lastIndexOf("/") + 1);
+				if (keySet.contains(name)
+						&& legendaryClass.getSuperName() != ""
+						&& (!this.classes.containsKey(lsuperc) || !this.classes
+								.get(lsuperc).getAssociationClasses()
+								.contains(name))) {
+					classRep.append(legendaryClass.getClassName() + "->" + name
+							+ "\n\t");
 				}
 			}
 		}

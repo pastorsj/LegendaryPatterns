@@ -21,7 +21,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-
 		this.legendaryClass.setClassName(name);
 		this.legendaryClass.setSuper(superName);
 		this.legendaryClass.setInterfaces(Arrays.asList(interfaces));

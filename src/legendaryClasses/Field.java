@@ -1,7 +1,7 @@
 package legendaryClasses;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import legendaryInterfaces.IField;
 
@@ -13,13 +13,13 @@ public class Field implements IField {
 	private String fieldAccessType;
 	private String fieldName;
 	private String fieldType;
-	private List<String> baseFields;
+	private Set<String> baseFields;
 
 	public Field() {
 		this.fieldAccessType = "";
 		this.fieldName = "";
 		this.fieldType = "";
-		this.baseFields = new ArrayList<String>();
+		this.baseFields = new HashSet<String>();
 	}
 
 	@Override
@@ -37,6 +37,7 @@ public class Field implements IField {
 		String s = in;
 		if (in.contains("<")) {
 			String split1 = s.substring(0, s.indexOf("<"));
+			this.baseFields.add(split1);
 			String split2 = s.substring(s.indexOf("<") + 1);
 			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
 			String[] split = split2.split(";");
@@ -48,13 +49,14 @@ public class Field implements IField {
 			}
 		} else
 			this.baseFields.add(s.substring(s.lastIndexOf("/") + 1));
-		return s.substring(s.lastIndexOf("/") + 1);
+		return s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<")
+				.replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
 	}
 
 	@Override
 	public void setType(String fieldType) {
 		// TODO Auto-generated method stub
-		String s =  fieldType;
+		String s = fieldType;
 		if (fieldType != null)
 			s = typeCollections(fieldType);
 		this.fieldType = s;
@@ -84,4 +86,8 @@ public class Field implements IField {
 				+ this.getType() + "\\l\n\t";
 	}
 
+	@Override
+	public Set<String> getBaseTypes() {
+		return this.baseFields;
+	}
 }
