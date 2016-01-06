@@ -14,11 +14,11 @@ import legendaryInterfaces.IClass;
  */
 public class DesignParser {
 	public static final String[] classes = {
-			"legendaryTests.ManualTestClass"
-			/*"legendaryInterfaces.IClass", "legendaryClasses.Class", "legendary.ClassDeclarationVisitor",
+			//"legendaryTests.ManualTestClass"
+			"legendaryInterfaces.IClass", "legendaryClasses.Class", "legendary.ClassDeclarationVisitor",
 			"legendary.ClassFieldVisitor", "legendary.ClassMethodVisitor", "legendaryClasses.ClassParser", 
 			"legendaryClasses.Field", "legendaryClasses.Method", "legendaryInterfaces.IField",
-			"legendaryInterfaces.IField", "legendaryInterfaces.IMethod"*/
+			"legendaryInterfaces.IField", "legendaryInterfaces.IMethod"
 	};
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.

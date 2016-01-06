@@ -33,7 +33,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		IMethod method = new Method();
 		method.setMethodName(name);
-		addAccessLevel(access, method);
+		addAccessLevel(access, method); 
 		addArguments(desc, method);
 		addReturnType(desc, method);
 		this.legendaryClass.addMethod(method);

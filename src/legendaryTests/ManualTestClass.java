@@ -1,13 +1,15 @@
 package legendaryTests;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import legendaryClasses.Method;
 
 public class ManualTestClass {
-	private Map<Integer, String> m;
+	private List<String> test;
+	private Map<List<List<List<Map<String, Integer>>>>, String> m;
 	public List<String> test(Method m){
-		return null;
+		return new ArrayList<String>();
 	}
 }
