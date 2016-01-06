@@ -40,12 +40,12 @@ public class ClassParser {
 		// For every interface arrow
 		this.addInterfaceArrows(classRep, keySet);
 		classRep.append("}");
-		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
-		writer.write(classRep.toString());
-		writer.close();
+//		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
+//		writer.write(classRep.toString());
+//		writer.close();
 		// Runtime rt = Runtime.getRuntime();
 		// Process pr = rt.exec("dot -Tpng test.dot -o output.png");
-		System.out.println(classRep.toString());
+//		System.out.println(classRep.toString());
 	}
 
 	private String addFields(IClass legendaryClass) {

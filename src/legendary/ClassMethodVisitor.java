@@ -37,7 +37,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		addArguments(desc, method);
 		addReturnType(desc, method);
 		this.legendaryClass.addMethod(method);
-
+		System.out.println("Name: " + name + "\nSignature: " + signature + "\n==================");
 		return toDecorate;
 	}
 

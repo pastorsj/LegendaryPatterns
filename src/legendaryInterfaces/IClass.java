@@ -20,4 +20,9 @@ public interface IClass {
 	public List<IField> getFields();
 	public void setIsInterface(boolean isInterface);
 	public boolean isInterface();
+	public void addUsesClass(String uclass);
+	public List<String> getUsesClasses();
+	public void addAssociationClass(String aclass);
+	public List<String> getAssociationClasses();
+	
 };

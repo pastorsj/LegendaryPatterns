@@ -42,6 +42,8 @@ Class [
 	- interfaces: List<String>\l
 	- methods: List<IMethod>\l
 	- fields: List<IField>\l
+	- usesClasses: List<String>\l
+	- associationClasses: List<String>\l
 	- isInterface: null\l
 	|
 	+ setClassName(String) : void\l
@@ -56,6 +58,10 @@ Class [
 	+ getFields() : List\l
 	+ setIsInterface(boolean) : void\l
 	+ isInterface() : boolean\l
+	+ addUsesClass(String) : void\l
+	+ getUsesClasses() : List\l
+	+ addAssociationClass(String) : void\l
+	+ getAssociationClasses() : List\l
 	}"
 	]
 IClass [
@@ -73,6 +79,10 @@ IClass [
 	+ getFields() : List\l
 	+ setIsInterface(boolean) : void\l
 	+ isInterface() : boolean\l
+	+ addUsesClass(String) : void\l
+	+ getUsesClasses() : List\l
+	+ addAssociationClass(String) : void\l
+	+ getAssociationClasses() : List\l
 	}"
 	]
 Method [

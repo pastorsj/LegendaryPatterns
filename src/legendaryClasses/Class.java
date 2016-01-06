@@ -17,6 +17,8 @@ public class Class implements IClass{
 	private List<String> interfaces;
 	private List<IMethod> methods;
 	private List<IField> fields;
+	private List<String> usesClasses;
+	private List<String> associationClasses;
 	private boolean isInterface;
 	
 	public Class() {
@@ -25,6 +27,8 @@ public class Class implements IClass{
 		this.interfaces = new ArrayList<String>();
 		this.methods = new ArrayList<IMethod>();
 		this.fields = new ArrayList<IField>();
+		this.usesClasses = new ArrayList<String>();
+		this.associationClasses = new ArrayList<String>();
 		this.isInterface = false;
 	}
 	
@@ -97,6 +101,34 @@ public class Class implements IClass{
 	public boolean isInterface() {
 		// TODO Auto-generated method stub
 		return this.isInterface;
+	}
+
+	@Override
+	public void addUsesClass(String uclass) {
+		// TODO Auto-generated method stub
+		if(!this.usesClasses.contains(uclass)) {
+			this.usesClasses.add(uclass);
+		}
+	}
+
+	@Override
+	public List<String> getUsesClasses() {
+		// TODO Auto-generated method stub
+		return this.usesClasses;
+	}
+
+	@Override
+	public void addAssociationClass(String aclass) {
+		// TODO Auto-generated method stub
+		if(!this.associationClasses.contains(aclass)) {
+			this.associationClasses.add(aclass);
+		}
+	}
+
+	@Override
+	public List<String> getAssociationClasses() {
+		// TODO Auto-generated method stub
+		return this.associationClasses;
 	}
 
 }
