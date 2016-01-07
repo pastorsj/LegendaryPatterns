@@ -1,5 +1,7 @@
 package legendaryClasses;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,12 +45,12 @@ public class ClassParser {
 
 		this.addAssociationArrows(classRep, keySet);
 		classRep.append("}");
-		// BufferedWriter writer = new BufferedWriter(new
-		// FileWriter("./input_output/text.dot"));
-		// writer.write(classRep.toString());
-		// writer.close();
-		// Runtime rt = Runtime.getRuntime();
-		// Process pr = rt.exec("dot -Tpng test.dot -o output.png");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(
+				"./input_output/text.dot"));
+		writer.write(classRep.toString());
+		writer.close();
+//		Runtime rt = Runtime.getRuntime();
+//		rt.exec("dot -Tpng test.dot -o output.png");
 		System.out.println(classRep.toString());
 	}
 
@@ -119,7 +121,7 @@ public class ClassParser {
 		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
 			for (String useClass : legendaryClass.getUsesClasses()) {
-				String name = useClass.substring(useClass.indexOf("/") + 1);
+				String name = useClass.substring(useClass.lastIndexOf("/") + 1);
 				if (keySet.contains(name)) {
 					String lsuperc = legendaryClass.getSuperName();
 					ArrayList<String> higher = new ArrayList<String>();
@@ -128,8 +130,9 @@ public class ClassParser {
 					boolean add = true;
 					for (String s : higher) {
 						s = s.substring(s.lastIndexOf("/") + 1);
-						if (this.classes.containsKey(s) && this.classes
-								.get(s).getUsesClasses().contains(useClass)) {
+						if (this.classes.containsKey(s)
+								&& this.classes.get(s).getUsesClasses()
+										.contains(useClass)) {
 							add = false;
 						}
 					}

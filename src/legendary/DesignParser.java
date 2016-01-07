@@ -28,6 +28,7 @@ public class DesignParser {
 	// "legendaryInterfaces.IField", "legendaryInterfaces.IMethod"
 	// };
 
+	public static final String packageName = "headfirst";
 	public static final String[] directories = {
 	// "./src/legendary", "./src/legendaryClasses", "./src/legendaryInterfaces"
 	"C:/Users/Administrator/Documents/CSSE374/Lab2-3/src/headfirst" };
@@ -78,7 +79,7 @@ public class DesignParser {
 				res2.addAll(getClassesFromDir(dirFiles[i]));
 				for (String r : res2) {
 					r = r.substring(
-							r.lastIndexOf("headfirst"),
+							r.lastIndexOf(packageName),
 							(r.contains("java") ? r.lastIndexOf("java") - 1 : r
 									.length())).replace("\\", ".");
 					res.add(r);

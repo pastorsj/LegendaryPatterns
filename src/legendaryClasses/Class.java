@@ -12,7 +12,7 @@ import legendaryInterfaces.IMethod;
 /*
  * Author: Jason Lane
  */
-public class Class implements IClass{
+public class Class implements IClass {
 
 	private String className;
 	private String superClassName;
@@ -22,7 +22,7 @@ public class Class implements IClass{
 	private Set<String> usesClasses;
 	private Set<String> associationClasses;
 	private boolean isInterface;
-	
+
 	public Class() {
 		this.className = "";
 		this.superClassName = "";
@@ -33,11 +33,11 @@ public class Class implements IClass{
 		this.associationClasses = new HashSet<String>();
 		this.isInterface = false;
 	}
-	
+
 	@Override
 	public void setClassName(String className) {
 		// TODO Auto-generated method stub
-		this.className = className.substring(className.lastIndexOf("/")+1);
+		this.className = className.substring(className.lastIndexOf("/") + 1);
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class Class implements IClass{
 	public void setIsInterface(boolean isInterface) {
 		this.isInterface = isInterface;
 	}
-	
+
 	@Override
 	public boolean isInterface() {
 		// TODO Auto-generated method stub
@@ -108,7 +108,12 @@ public class Class implements IClass{
 	@Override
 	public void addUsesClass(String uclass) {
 		// TODO Auto-generated method stub
-		if(!this.usesClasses.contains(uclass)) {
+		if (this.superClassName.equals(uclass)) {
+//			return;
+		}
+		if (this.associationClasses.contains(uclass))
+			this.associationClasses.remove(uclass);
+		if (!this.usesClasses.contains(uclass)) {
 			this.usesClasses.add(uclass);
 		}
 	}
@@ -122,7 +127,9 @@ public class Class implements IClass{
 	@Override
 	public void addAssociationClass(String aclass) {
 		// TODO Auto-generated method stub
-		if(!this.associationClasses.contains(aclass)) {
+		if (this.usesClasses.contains(aclass))
+			return;
+		if (!this.associationClasses.contains(aclass)) {
 			this.associationClasses.add(aclass);
 		}
 	}

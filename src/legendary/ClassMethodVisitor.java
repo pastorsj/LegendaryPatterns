@@ -33,6 +33,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
+		MethodVisitor toDecorateMore = new LegendaryClassMethodVisitor(Opcodes.ASM5, toDecorate, this.legendaryClass);
 		IMethod method = new Method();
 		method.setMethodName(name);
 		addAccessLevel(access, method);
@@ -40,7 +41,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		addReturnType((signature == null) ? desc : signature, method);
 		// System.out.println(name + " " + signature + " " + desc);
 		this.legendaryClass.addMethod(method);
-		return toDecorate;
+		return toDecorateMore;
 	}
 
 	public String typeCollections(String in) {
