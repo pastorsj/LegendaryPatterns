@@ -116,7 +116,7 @@ public class ClassParser {
 		}
 	}
 
-	private void addUsageArrows(StringBuilder classRep, Set<String> keySet) {
+	public void addUsageArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("edge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
@@ -144,7 +144,7 @@ public class ClassParser {
 		}
 	}
 
-	private void addAssociationArrows(StringBuilder classRep, Set<String> keySet) {
+	public void addAssociationArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("edge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
 		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
@@ -155,7 +155,7 @@ public class ClassParser {
 				String lsuperc = legendaryClass.getSuperName();
 				lsuperc = lsuperc.substring(lsuperc.lastIndexOf("/") + 1);
 				if (keySet.contains(name)
-						&& legendaryClass.getSuperName() != ""
+						//&& legendaryClass.getSuperName() != ""
 						&& (!this.classes.containsKey(lsuperc) || !this.classes
 								.get(lsuperc).getAssociationClasses()
 								.contains(name))) {
