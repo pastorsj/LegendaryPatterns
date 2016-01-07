@@ -1,14 +1,14 @@
 package legendary;
 
-import legendaryClasses.Field;
-import legendaryInterfaces.IClass;
-import legendaryInterfaces.IField;
-
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Type;
+
+import legendary.Classes.Field;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IField;
 
 /*
  * Modifications made by Sam Pastoriza and Jason Lane

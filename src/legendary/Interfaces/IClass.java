@@ -1,4 +1,4 @@
-package legendaryInterfaces;
+package legendary.Interfaces;
 
 import java.util.List;
 import java.util.Set;

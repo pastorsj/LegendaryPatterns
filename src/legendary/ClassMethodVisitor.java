@@ -3,13 +3,13 @@ package legendary;
 import java.util.ArrayList;
 import java.util.List;
 
-import legendaryClasses.Method;
-import legendaryInterfaces.IClass;
-import legendaryInterfaces.IMethod;
-
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+
+import legendary.Classes.Method;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IMethod;
 
 /*
  * Modifications made by Sam Pastoriza and Jason Lane

@@ -1,10 +1,10 @@
-package legendaryTests;
+package testingLegends;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import legendaryClasses.Method;
+import legendary.Classes.Method;
 
 @SuppressWarnings("unused")
 public class ManualTestClass {

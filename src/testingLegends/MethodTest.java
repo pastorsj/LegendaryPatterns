@@ -1,4 +1,4 @@
-package legendaryTests;
+package testingLegends;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import legendaryClasses.Method;
-import legendaryInterfaces.IMethod;
+import legendary.Classes.Method;
+import legendary.Interfaces.IMethod;
 
 public class MethodTest {
 	

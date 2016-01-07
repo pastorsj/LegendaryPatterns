@@ -1,4 +1,4 @@
-package legendaryClasses;
+package legendary.Classes;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import legendaryInterfaces.IClass;
-import legendaryInterfaces.IField;
-import legendaryInterfaces.IMethod;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IField;
+import legendary.Interfaces.IMethod;
 
 /*
  * Author: Sam Pastoriza

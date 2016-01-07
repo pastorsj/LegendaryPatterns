@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import legendaryInterfaces.IClass;
+import legendary.Interfaces.IClass;
 
 /*
  * Modification made by Sam Pastoriza

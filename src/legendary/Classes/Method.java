@@ -1,10 +1,10 @@
-package legendaryClasses;
+package legendary.Classes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import legendaryInterfaces.IMethod;
+import legendary.Interfaces.IMethod;
 
 /*
  * Author: Jason Lane

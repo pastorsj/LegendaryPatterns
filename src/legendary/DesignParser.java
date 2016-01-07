@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import legendaryClasses.Class;
-import legendaryClasses.ClassParser;
-import legendaryInterfaces.IClass;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
+
+import legendary.Classes.Class;
+import legendary.Classes.ClassParser;
+import legendary.Interfaces.IClass;
 
 /*
  * Modification made by Sam Pastoriza and Jason Lane
@@ -28,10 +28,10 @@ public class DesignParser {
 	// "legendaryInterfaces.IField", "legendaryInterfaces.IMethod"
 	// };
 
-	public static final String packageName = "headfirst";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
 	// "./src/legendary", "./src/legendaryClasses", "./src/legendaryInterfaces"
-	"C:/Users/Administrator/Documents/CSSE374/Lab2-3/src/headfirst" };
+	"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.

@@ -1,4 +1,4 @@
-package legendaryTests;
+package testingLegends;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import legendaryClasses.Field;
-import legendaryInterfaces.IField;
+import legendary.Classes.Field;
+import legendary.Interfaces.IField;
 
 public class FieldTest {
 	

@@ -1,9 +1,9 @@
-package legendaryClasses;
+package legendary.Classes;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import legendaryInterfaces.IField;
+import legendary.Interfaces.IField;
 
 /*
  * Author: Jason Lane

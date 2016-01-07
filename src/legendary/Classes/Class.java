@@ -1,13 +1,13 @@
-package legendaryClasses;
+package legendary.Classes;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import legendaryInterfaces.IClass;
-import legendaryInterfaces.IField;
-import legendaryInterfaces.IMethod;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IField;
+import legendary.Interfaces.IMethod;
 
 /*
  * Author: Jason Lane

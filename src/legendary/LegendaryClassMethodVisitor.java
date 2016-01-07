@@ -1,8 +1,8 @@
 package legendary;
 
-import legendaryInterfaces.IClass;
-
 import org.objectweb.asm.MethodVisitor;
+
+import legendary.Interfaces.IClass;
 
 
 public class LegendaryClassMethodVisitor extends MethodVisitor {
