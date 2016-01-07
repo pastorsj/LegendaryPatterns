@@ -28,10 +28,10 @@ public class DesignParser {
 	// "legendaryInterfaces.IField", "legendaryInterfaces.IMethod"
 	// };
 
-	public static final String packageName = "legendary";
+	public static final String packageName = "headfirst";
 	public static final String[] directories = {
 	// "./src/legendary", "./src/legendaryClasses", "./src/legendaryInterfaces"
-	"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+	"/Users/SamPastoriza/Documents/Programming/Java Development/Lab2-3/src/headfirst" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.

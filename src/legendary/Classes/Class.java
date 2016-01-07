@@ -109,7 +109,7 @@ public class Class implements IClass {
 	public void addUsesClass(String uclass) {
 		// TODO Auto-generated method stub
 		if (this.superClassName.equals(uclass)) {
-//			return;
+			return;
 		}
 		if (this.associationClasses.contains(uclass))
 			this.associationClasses.remove(uclass);

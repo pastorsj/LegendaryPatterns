@@ -1,198 +1,393 @@
 digraph G{
 	node [shape = "record"]
-	Field [
-	label = "{Field|
-	- fieldAccessType: String\l
-	- fieldName: String\l
-	- fieldType: String\l
-	- baseFields: Set\<String\>\l
+	PizzaStore [
+	label = "{PizzaStore|
 	|
-	+ setAccess(String) : void\l
-	+ setFieldName(String) : void\l
-	+ typeCollections(String) : String\l
-	+ setType(String) : void\l
-	+ getAccess(String) : String\l
-	+ getFieldName(String) : String\l
-	+ getType(String) : String\l
-	+ toString(String) : String\l
-	+ getBaseTypes(Set\<String\>) : Set\<String\>\l
+	# createPizza(Pizza) : Pizza\l
+	+ orderPizza(Pizza) : Pizza\l
 	}"
 	]
-ClassFieldVisitor [
-	label = "{ClassFieldVisitor|
-	- legendaryClass: IClass\l
+Veggies [
+	label = "{\<\<interface\>\>\nVeggies|
 	|
-	+ visitField(FieldVisitor) : FieldVisitor\l
-	 addAccessLevel(IField) : void\l
-	}"
-	]
-ClassMethodVisitor [
-	label = "{ClassMethodVisitor|
-	- legendaryClass: IClass\l
-	|
-	+ visitMethod(MethodVisitor) : MethodVisitor\l
-	+ typeCollections(String) : String\l
-	 addAccessLevel(IMethod) : void\l
-	 addReturnType(IMethod) : void\l
-	 addArguments(IMethod) : void\l
-	}"
-	]
-LegendaryClassMethodVisitor [
-	label = "{LegendaryClassMethodVisitor|
-	 legendaryClass: IClass\l
-	|
-	+ visitMethodInsn(String) : void\l
-	}"
-	]
-Class [
-	label = "{Class|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\<String\>\l
-	- methods: List\<IMethod\>\l
-	- fields: List\<IField\>\l
-	- usesClasses: Set\<String\>\l
-	- associationClasses: Set\<String\>\l
-	- isInterface: Z\l
-	|
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName(String) : String\l
-	+ getSuperName(String) : String\l
-	+ getInterfaces(List\<String\>) : List\<String\>\l
-	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
-	+ getFields(List\<IField\>) : List\<IField\>\l
-	+ setIsInterface() : void\l
-	+ isInterface() : boolean\l
-	+ addUsesClass(String) : void\l
-	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
-	+ addAssociationClass(String) : void\l
-	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
-	}"
-	]
-Method [
-	label = "{Method|
-	- methodAccess: String\l
-	- methodName: String\l
-	- parameters: List\<String\>\l
-	- methodReturnType: String\l
-	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setParameters(List\<String\>) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess(String) : String\l
-	+ getMethodName(String) : String\l
-	+ getParameters(List\<String\>) : List\<String\>\l
-	+ getReturnType(String) : String\l
 	+ toString(String) : String\l
 	}"
 	]
-IClass [
-	label = "{\<\<interface\>\>\nIClass|
+ChicagoStylePepperoniPizza [
+	label = "{ChicagoStylePepperoniPizza|
 	|
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName(String) : String\l
-	+ getSuperName(String) : String\l
-	+ getInterfaces(List\<String\>) : List\<String\>\l
-	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
-	+ getFields(List\<IField\>) : List\<IField\>\l
-	+ setIsInterface() : void\l
-	+ isInterface() : boolean\l
-	+ addUsesClass(String) : void\l
-	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
-	+ addAssociationClass(String) : void\l
-	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
+	 cut() : void\l
 	}"
 	]
-IMethod [
-	label = "{\<\<interface\>\>\nIMethod|
+NYStyleClamPizza [
+	label = "{NYStyleClamPizza|
 	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setParameters(List\<String\>) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess(String) : String\l
-	+ getMethodName(String) : String\l
-	+ getParameters(List\<String\>) : List\<String\>\l
-	+ getReturnType(String) : String\l
+	}"
+	]
+MarinaraSauce [
+	label = "{MarinaraSauce|
+	|
 	+ toString(String) : String\l
 	}"
 	]
-ClassDeclarationVisitor [
-	label = "{ClassDeclarationVisitor|
-	- legendaryClass: IClass\l
+Cheese [
+	label = "{\<\<interface\>\>\nCheese|
 	|
-	+ visit(String) : void\l
-	}"
-	]
-IField [
-	label = "{\<\<interface\>\>\nIField|
-	|
-	+ setAccess(String) : void\l
-	+ setFieldName(String) : void\l
-	+ setType(String) : void\l
-	+ getAccess(String) : String\l
-	+ getFieldName(String) : String\l
-	+ getType(String) : String\l
 	+ toString(String) : String\l
-	+ getBaseTypes(Set\<String\>) : Set\<String\>\l
 	}"
 	]
-DesignParser [
-	label = "{DesignParser|
-	+ packageName: String\l
-	+ directories: String\l
+PizzaIngredientFactory [
+	label = "{\<\<interface\>\>\nPizzaIngredientFactory|
+	|
+	+ createDough(Dough) : Dough\l
+	+ createSauce(Sauce) : Sauce\l
+	+ createCheese(Cheese) : Cheese\l
+	+ createVeggies(Veggies) : Veggies\l
+	+ createPepperoni(Pepperoni) : Pepperoni\l
+	+ createClam(Clams) : Clams\l
+	}"
+	]
+RedPepper [
+	label = "{RedPepper|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+NYStylePepperoniPizza [
+	label = "{NYStylePepperoniPizza|
+	|
+	}"
+	]
+ThickCrustDough [
+	label = "{ThickCrustDough|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+NYPizzaIngredientFactory [
+	label = "{NYPizzaIngredientFactory|
+	|
+	+ createDough(Dough) : Dough\l
+	+ createSauce(Sauce) : Sauce\l
+	+ createCheese(Cheese) : Cheese\l
+	+ createVeggies(Veggies) : Veggies\l
+	+ createPepperoni(Pepperoni) : Pepperoni\l
+	+ createClam(Clams) : Clams\l
+	}"
+	]
+PepperoniPizza [
+	label = "{PepperoniPizza|
+	 ingredientFactory: PizzaIngredientFactory\l
+	|
+	 prepare() : void\l
+	}"
+	]
+SlicedPepperoni [
+	label = "{SlicedPepperoni|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+Eggplant [
+	label = "{Eggplant|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+ChicagoStyleVeggiePizza [
+	label = "{ChicagoStyleVeggiePizza|
+	|
+	 cut() : void\l
+	}"
+	]
+BlackOlives [
+	label = "{BlackOlives|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+Sauce [
+	label = "{\<\<interface\>\>\nSauce|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+MozzarellaCheese [
+	label = "{MozzarellaCheese|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+NYPizzaStore [
+	label = "{NYPizzaStore|
+	|
+	# createPizza(Pizza) : Pizza\l
+	}"
+	]
+ChicagoStyleClamPizza [
+	label = "{ChicagoStyleClamPizza|
+	|
+	 cut() : void\l
+	}"
+	]
+ReggianoCheese [
+	label = "{ReggianoCheese|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+Spinach [
+	label = "{Spinach|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+DependentPizzaStore [
+	label = "{DependentPizzaStore|
+	|
+	+ createPizza(Pizza) : Pizza\l
+	}"
+	]
+NYStyleCheesePizza [
+	label = "{NYStyleCheesePizza|
+	|
+	}"
+	]
+Onion [
+	label = "{Onion|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+Mushroom [
+	label = "{Mushroom|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+SimplePizzaFactory [
+	label = "{SimplePizzaFactory|
+	|
+	+ createPizza(Pizza) : Pizza\l
+	}"
+	]
+VeggiePizza [
+	label = "{VeggiePizza|
+	 ingredientFactory: PizzaIngredientFactory\l
+	|
+	 prepare() : void\l
+	}"
+	]
+ClamPizza [
+	label = "{ClamPizza|
+	 ingredientFactory: PizzaIngredientFactory\l
+	|
+	 prepare() : void\l
+	}"
+	]
+NYStyleVeggiePizza [
+	label = "{NYStyleVeggiePizza|
+	|
+	}"
+	]
+Pizza [
+	label = "{Pizza|
+	 name: String\l
+	 dough: Dough\l
+	 sauce: Sauce\l
+	 veggies: Veggies\l
+	 cheese: Cheese\l
+	 pepperoni: Pepperoni\l
+	 clam: Clams\l
+	|
+	 prepare() : void\l
+	 bake() : void\l
+	 cut() : void\l
+	 box() : void\l
+	 setName(String) : void\l
+	 getName(String) : String\l
+	+ toString(String) : String\l
+	}"
+	]
+PlumTomatoSauce [
+	label = "{PlumTomatoSauce|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+ThinCrustDough [
+	label = "{ThinCrustDough|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+ChicagoStyleCheesePizza [
+	label = "{ChicagoStyleCheesePizza|
+	|
+	 cut() : void\l
+	}"
+	]
+ChicagoPizzaIngredientFactory [
+	label = "{ChicagoPizzaIngredientFactory|
+	|
+	+ createDough(Dough) : Dough\l
+	+ createSauce(Sauce) : Sauce\l
+	+ createCheese(Cheese) : Cheese\l
+	+ createVeggies(Veggies) : Veggies\l
+	+ createPepperoni(Pepperoni) : Pepperoni\l
+	+ createClam(Clams) : Clams\l
+	}"
+	]
+PizzaTestDrive [
+	label = "{PizzaTestDrive|
 	|
 	+ main(String) : void\l
-	+ getClassesFromDir(List\<String\>) : List\<String\>\l
 	}"
 	]
-ClassParser [
-	label = "{ClassParser|
-	- classes: Map\<String, IClass\>\l
+CheesePizza [
+	label = "{CheesePizza|
+	 ingredientFactory: PizzaIngredientFactory\l
 	|
-	+ addClass(IClass) : boolean\l
-	+ parse() : void\l
-	- addFields(String) : String\l
-	- addMethods(String) : String\l
-	- addNode(Set\<String\>) : void\l
-	- addExtensionArrows(Set\<String\>) : void\l
-	- addInterfaceArrows(Set\<String\>) : void\l
-	- addUsageArrows(Set\<String\>) : void\l
-	- addAssociationArrows(Set\<String\>) : void\l
+	 prepare() : void\l
+	}"
+	]
+Dough [
+	label = "{\<\<interface\>\>\nDough|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+Garlic [
+	label = "{Garlic|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+ParmesanCheese [
+	label = "{ParmesanCheese|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+FrozenClams [
+	label = "{FrozenClams|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+Clams [
+	label = "{\<\<interface\>\>\nClams|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+FreshClams [
+	label = "{FreshClams|
+	|
+	+ toString(String) : String\l
+	}"
+	]
+ChicagoPizzaStore [
+	label = "{ChicagoPizzaStore|
+	|
+	# createPizza(Pizza) : Pizza\l
+	}"
+	]
+Pepperoni [
+	label = "{\<\<interface\>\>\nPepperoni|
+	|
+	+ toString(String) : String\l
 	}"
 	]
 	edge [arrowhead = "empty"]
-LegendaryClassMethodVisitor->MethodVisitor
+ChicagoStylePepperoniPizza->Pizza
+	NYStyleClamPizza->Pizza
+	NYStylePepperoniPizza->Pizza
+	PepperoniPizza->Pizza
+	ChicagoStyleVeggiePizza->Pizza
+	NYPizzaStore->PizzaStore
+	ChicagoStyleClamPizza->Pizza
+	NYStyleCheesePizza->Pizza
+	VeggiePizza->Pizza
+	ClamPizza->Pizza
+	NYStyleVeggiePizza->Pizza
+	ChicagoStyleCheesePizza->Pizza
+	CheesePizza->Pizza
+	ChicagoPizzaStore->PizzaStore
 		edge [style = "dashed"]
-	Field->IField
-	Class->IClass
-	Method->IMethod
+	MarinaraSauce->Sauce
+	RedPepper->Veggies
+	ThickCrustDough->Dough
+	NYPizzaIngredientFactory->PizzaIngredientFactory
+	SlicedPepperoni->Pepperoni
+	Eggplant->Veggies
+	BlackOlives->Veggies
+	MozzarellaCheese->Cheese
+	ReggianoCheese->Cheese
+	Spinach->Veggies
+	Onion->Veggies
+	Mushroom->Veggies
+	PlumTomatoSauce->Sauce
+	ThinCrustDough->Dough
+	ChicagoPizzaIngredientFactory->PizzaIngredientFactory
+	Garlic->Veggies
+	ParmesanCheese->Cheese
+	FrozenClams->Clams
+	FreshClams->Clams
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->Field
-	ClassFieldVisitor->IClass
-	ClassFieldVisitor->IField
-	ClassMethodVisitor->IClass
-	ClassMethodVisitor->IMethod
-	ClassMethodVisitor->LegendaryClassMethodVisitor
-	ClassMethodVisitor->Method
-	LegendaryClassMethodVisitor->IClass
-	IClass->IMethod
-	IClass->IField
-	ClassDeclarationVisitor->IClass
-	DesignParser->ClassParser
-	DesignParser->Class
-	DesignParser->ClassDeclarationVisitor
-	DesignParser->ClassFieldVisitor
-	DesignParser->ClassMethodVisitor
-	ClassParser->IClass
+	PizzaStore->Pizza
+	PizzaIngredientFactory->Veggies
+	PizzaIngredientFactory->Sauce
+	PizzaIngredientFactory->Dough
+	PizzaIngredientFactory->Cheese
+	PizzaIngredientFactory->Clams
+	PizzaIngredientFactory->Pepperoni
+	NYPizzaIngredientFactory->SlicedPepperoni
+	NYPizzaIngredientFactory->MarinaraSauce
+	NYPizzaIngredientFactory->ThinCrustDough
+	NYPizzaIngredientFactory->RedPepper
+	NYPizzaIngredientFactory->FreshClams
+	NYPizzaIngredientFactory->Garlic
+	NYPizzaIngredientFactory->ReggianoCheese
+	NYPizzaIngredientFactory->Onion
+	NYPizzaIngredientFactory->Mushroom
+	PepperoniPizza->PizzaIngredientFactory
+	NYPizzaStore->NYPizzaIngredientFactory
+	NYPizzaStore->CheesePizza
+	NYPizzaStore->VeggiePizza
+	NYPizzaStore->PepperoniPizza
+	NYPizzaStore->ClamPizza
+	DependentPizzaStore->Pizza
+	DependentPizzaStore->NYStyleVeggiePizza
+	DependentPizzaStore->ChicagoStylePepperoniPizza
+	DependentPizzaStore->NYStylePepperoniPizza
+	DependentPizzaStore->ChicagoStyleClamPizza
+	DependentPizzaStore->ChicagoStyleCheesePizza
+	DependentPizzaStore->NYStyleClamPizza
+	DependentPizzaStore->ChicagoStyleVeggiePizza
+	DependentPizzaStore->NYStyleCheesePizza
+	SimplePizzaFactory->Pizza
+	SimplePizzaFactory->PepperoniPizza
+	SimplePizzaFactory->ClamPizza
+	SimplePizzaFactory->VeggiePizza
+	SimplePizzaFactory->CheesePizza
+	VeggiePizza->PizzaIngredientFactory
+	ClamPizza->PizzaIngredientFactory
+	ChicagoPizzaIngredientFactory->SlicedPepperoni
+	ChicagoPizzaIngredientFactory->PlumTomatoSauce
+	ChicagoPizzaIngredientFactory->ThickCrustDough
+	ChicagoPizzaIngredientFactory->MozzarellaCheese
+	ChicagoPizzaIngredientFactory->FrozenClams
+	ChicagoPizzaIngredientFactory->BlackOlives
+	ChicagoPizzaIngredientFactory->Eggplant
+	ChicagoPizzaIngredientFactory->Spinach
+	PizzaTestDrive->ChicagoPizzaStore
+	PizzaTestDrive->NYPizzaStore
+	CheesePizza->PizzaIngredientFactory
+	ChicagoPizzaStore->CheesePizza
+	ChicagoPizzaStore->VeggiePizza
+	ChicagoPizzaStore->ChicagoPizzaIngredientFactory
+	ChicagoPizzaStore->PepperoniPizza
+	ChicagoPizzaStore->ClamPizza
 	edge [style = "solid"] [arrowhead = "open"]
 	}
