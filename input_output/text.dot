@@ -180,18 +180,18 @@ LegendaryClassMethodVisitor->MethodVisitor
 	ClassFieldVisitor->Field
 	ClassFieldVisitor->IClass
 	ClassFieldVisitor->IField
-	ClassMethodVisitor->LegendaryClassMethodVisitor
 	ClassMethodVisitor->IClass
 	ClassMethodVisitor->IMethod
+	ClassMethodVisitor->LegendaryClassMethodVisitor
 	ClassMethodVisitor->Method
 	LegendaryClassMethodVisitor->IClass
 	IClass->IMethod
 	IClass->IField
 	ClassDeclarationVisitor->IClass
-	DesignParser->ClassFieldVisitor
 	DesignParser->ClassParser
 	DesignParser->Class
 	DesignParser->ClassDeclarationVisitor
+	DesignParser->ClassFieldVisitor
 	DesignParser->ClassMethodVisitor
 	ClassParser->IClass
 	edge [style = "solid"] [arrowhead = "open"]

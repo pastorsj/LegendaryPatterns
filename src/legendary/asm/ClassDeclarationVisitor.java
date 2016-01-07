@@ -1,4 +1,4 @@
-package legendary;
+package legendary.asm;
 
 import java.util.Arrays;
 

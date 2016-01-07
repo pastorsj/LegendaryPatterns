@@ -1,4 +1,4 @@
-package legendary;
+package legendary.asm;
 
 import org.objectweb.asm.MethodVisitor;
 

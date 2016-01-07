@@ -1,4 +1,4 @@
-package legendary;
+package legendary.asm;
 
 import java.io.File;
 import java.io.IOException;
