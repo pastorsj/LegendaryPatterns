@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/asm-all-5.0.4.jar" sourcepath="lib/asm-all-5.0.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lab1-3"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lab2-3"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lab2-1"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
