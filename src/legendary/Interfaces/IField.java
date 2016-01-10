@@ -13,6 +13,5 @@ public interface IField {
 	public String getAccess();
 	public String getFieldName();
 	public String getType();
-	public String toString();
 	Set<String> getBaseTypes();
 }

@@ -20,10 +20,11 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "problem";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
-	"/Users/SamPastoriza/Documents/Programming/Java Development/Lab2-1/src/problem"};
-//	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
+			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary"};
+			//	 "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"
+//	 };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -41,21 +42,18 @@ public class DesignParser {
 		for (String dir : directories) {
 			classes.addAll(getClassesFromDir(new File(dir)));
 		}
-
 		for (String className : classes) {
 			IClass legendaryClass = new Class();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
 			ClassReader reader = new ClassReader(className);
 			// make class declaration visitor to get superclass and interfaces
-			ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,
-					legendaryClass, legendaryModel);
+			ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, legendaryClass, legendaryModel);
 			// DECORATE declaration visitor with field visitor
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					decVisitor, legendaryClass, legendaryModel);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decVisitor, legendaryClass, legendaryModel);
 			// DECORATE field visitor with method visitor
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
-					fieldVisitor, legendaryClass, legendaryModel);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, legendaryClass,
+					legendaryModel);
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			legendaryModel.addClass(legendaryClass);
@@ -70,14 +68,13 @@ public class DesignParser {
 			File[] dirFiles = dir.listFiles();
 			for (int i = 0; i < dirFiles.length; i++) {
 				res2.addAll(getClassesFromDir(dirFiles[i]));
-				for (String r : res2) {
-					r = r.substring(
-							r.lastIndexOf(packageName),
-							(r.contains("java") ? r.lastIndexOf("java") - 1 : r
-									.length())).replace("\\", ".");
-					res.add(r);
-				}
 			}
+			for (String r : res2) {
+				r = r.substring(r.lastIndexOf(packageName),
+						(r.contains("java") ? r.lastIndexOf("java") - 1 : r.length())).replace("\\", ".");
+				res.add(r);
+			}
+
 		} else
 			res.add(dir.toString());
 		return res;

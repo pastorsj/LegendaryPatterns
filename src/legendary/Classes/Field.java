@@ -78,12 +78,6 @@ public class Field implements IField, ITraverser{
 	}
 
 	@Override
-	public String toString() {
-		return this.getAccess() + " " + this.getFieldName() + ": "
-				+ this.getType() + "\\l\n\t";
-	}
-
-	@Override
 	public Set<String> getBaseTypes() {
 		return this.baseFields;
 	}

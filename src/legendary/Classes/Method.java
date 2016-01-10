@@ -75,20 +75,5 @@ public class Method implements IMethod, ITraverser{
 		v.visit(this);
 		v.postvisit(this);		
 	}
-	
-	@Override
-	public String toString() {
-		String methodRep = "";
-		String methodName = this.getMethodName();
-		if(methodName.equals("<init>") || methodName.equals("<clinit>")) {
-			return "";
-		}
-		String parameters = Arrays.toString(this.getParameters().toArray());
-		methodRep += this.getAccess() 
-				+ " " + methodName 
-				+ "(" + parameters.substring(1, parameters.length()-1)
-				+ ") : " + this.getReturnType() + "\\l\n\t";
-		return methodRep;
-	}
 
 }

@@ -1,148 +1,377 @@
 digraph G{
 	node [shape = "record"]
-	IDecryption[
-	label="{\<\<interface\>\>\nIDecryption||
-+ decrypt() : (C)C\l
+Method [
+	label = "{Method|
+	- methodAccess: String\l
+	- methodName: String\l
+	- parameters: List\<String\>\l
+	- methodReturnType: String\l
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setParameters(List\<String\>) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess(String) : String\l
+	+ getMethodName(String) : String\l
+	+ getParameters(List\<String\>) : List\<String\>\l
+	+ getReturnType(String) : String\l
+	+ accept(IVisitor) : void\l
+	+ toString(String) : String\l
 	}"
-]
-	DecipherInputStream[
-	label="{DecipherInputStream|\l
-	- cipher: SubstitutionCipher|
-+ read() : ()I\l
-	+ read() : ([BII)I\l
+	]
+VisitorAdapter [
+	label = "{VisitorAdapter|
+	|
+	+ previsit(IModel) : void\l
+	+ visit(IModel) : void\l
+	+ postvisit(IModel) : void\l
+	+ previsit(IClass) : void\l
+	+ visit(IClass) : void\l
+	+ postvisit(IClass) : void\l
+	+ previsit(IMethod) : void\l
+	+ visit(IMethod) : void\l
+	+ postvisit(IMethod) : void\l
+	+ previsit(IField) : void\l
+	+ visit(IField) : void\l
+	+ postvisit(IField) : void\l
 	}"
-]
-	CipherOutputStream[
-	label="{CipherOutputStream|\l
-	- cipher: SubstitutionCipher|
-+ write() : void\l
-	+ write() : void\l
+	]
+ClassFieldVisitor [
+	label = "{ClassFieldVisitor|
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visitField(FieldVisitor) : FieldVisitor\l
+	 addAccessLevel(IField) : void\l
 	}"
-]
-	TextEditorApp[
-	label="{TextEditorApp||
-+ main(String) : void\l
+	]
+Class [
+	label = "{Class|
+	- className: String\l
+	- superClassName: String\l
+	- interfaces: List\<String\>\l
+	- methods: List\<IMethod\>\l
+	- fields: List\<IField\>\l
+	- usesClasses: Set\<String\>\l
+	- associationClasses: Set\<String\>\l
+	- isInterface: Z\l
+	|
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ setInterfaces(List\<String\>) : void\l
+	+ addMethod(IMethod) : void\l
+	+ addField(IField) : void\l
+	+ getClassName(String) : String\l
+	+ getSuperName(String) : String\l
+	+ getInterfaces(List\<String\>) : List\<String\>\l
+	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
+	+ getFields(List\<IField\>) : List\<IField\>\l
+	+ setIsInterface() : void\l
+	+ isInterface() : boolean\l
+	+ addUsesClass(String) : void\l
+	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
+	+ addAssociationClass(String) : void\l
+	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
+	+ accept(IVisitor) : void\l
 	}"
-]
-	CipherOutputStream[
-	label="{CipherOutputStream|\l
-	- cipher: SubstitutionCipher|
-+ write() : void\l
-	+ write() : void\l
+	]
+Model [
+	label = "{Model|
+	- classList: Set\<IClass\>\l
+	- relations: Map\<List\<String\>, List\<Relations\>\>\l
+	|
+	+ getClasses(Set\<IClass\>) : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	+ getRelations(Map\<List\<String\>,, List\<Relations\>\>) : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addRelation(Relations) : void\l
+	+ accept(IVisitor) : void\l
 	}"
-]
-	IEncryption[
-	label="{\<\<interface\>\>\nIEncryption||
-+ encrypt() : (C)C\l
+	]
+Field [
+	label = "{Field|
+	- fieldAccessType: String\l
+	- fieldName: String\l
+	- fieldType: String\l
+	- baseFields: Set\<String\>\l
+	|
+	+ setAccess(String) : void\l
+	+ setFieldName(String) : void\l
+	+ typeCollections(String) : String\l
+	+ setType(String) : void\l
+	+ getAccess(String) : String\l
+	+ getFieldName(String) : String\l
+	+ getType(String) : String\l
+	+ toString(String) : String\l
+	+ getBaseTypes(Set\<String\>) : Set\<String\>\l
+	+ accept(IVisitor) : void\l
 	}"
-]
-	IDecryption[
-	label="{\<\<interface\>\>\nIDecryption||
-+ decrypt() : (C)C\l
+	]
+IMethod [
+	label = "{\<\<interface\>\>\nIMethod|
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setParameters(List\<String\>) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess(String) : String\l
+	+ getMethodName(String) : String\l
+	+ getParameters(List\<String\>) : List\<String\>\l
+	+ getReturnType(String) : String\l
+	+ toString(String) : String\l
 	}"
-]
-	SubstitutionCipher[
-	label="{SubstitutionCipher|\l
-	- encryptionKey: [C\l
-	- decryptionKey: [C|
-+ encrypt() : (C)C\l
-	+ decrypt() : (C)C\l
+	]
+Relations [
+	label = "{Relations|
+	+ EXTENDS: Relations\l
+	+ IMPLEMENTS: Relations\l
+	+ USES: Relations\l
+	+ ASSOCIATES: Relations\l
+	- ENUM$VALUES: Relations\l
+	|
+	+ values(Relations) : Relations\l
+	+ valueOf(Relations) : Relations\l
 	}"
-]
-	CipherOutputStream[
-	label="{CipherOutputStream|\l
-	- cipher: SubstitutionCipher|
-+ write() : void\l
-	+ write() : void\l
+	]
+GraphVizOutputStream [
+	label = "{GraphVizOutputStream|
+	- builder: StringBuilder\l
+	- relationRep: Map\<Relations, String\>\l
+	|
+	- write(String) : void\l
+	+ previsit(IModel) : void\l
+	+ visit(IModel) : void\l
+	- addArrows(String) : String\l
+	+ postvisit(IModel) : void\l
+	+ previsit(IClass) : void\l
+	+ visit(IClass) : void\l
+	+ postvisit(IClass) : void\l
+	+ visit(IField) : void\l
+	+ visit(IMethod) : void\l
 	}"
-]
-	IDecryption[
-	label="{\<\<interface\>\>\nIDecryption||
-+ decrypt() : (C)C\l
+	]
+IClass [
+	label = "{\<\<interface\>\>\nIClass|
+	|
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ setInterfaces(List\<String\>) : void\l
+	+ addMethod(IMethod) : void\l
+	+ addField(IField) : void\l
+	+ getClassName(String) : String\l
+	+ getSuperName(String) : String\l
+	+ getInterfaces(List\<String\>) : List\<String\>\l
+	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
+	+ getFields(List\<IField\>) : List\<IField\>\l
+	+ setIsInterface() : void\l
+	+ isInterface() : boolean\l
+	+ addUsesClass(String) : void\l
+	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
+	+ addAssociationClass(String) : void\l
+	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
 	}"
-]
-	IEncryption[
-	label="{\<\<interface\>\>\nIEncryption||
-+ encrypt() : (C)C\l
+	]
+IField [
+	label = "{\<\<interface\>\>\nIField|
+	|
+	+ setAccess(String) : void\l
+	+ setFieldName(String) : void\l
+	+ setType(String) : void\l
+	+ getAccess(String) : String\l
+	+ getFieldName(String) : String\l
+	+ getType(String) : String\l
+	+ toString(String) : String\l
+	+ getBaseTypes(Set\<String\>) : Set\<String\>\l
 	}"
-]
-	DecipherInputStream[
-	label="{DecipherInputStream|\l
-	- cipher: SubstitutionCipher|
-+ read() : ()I\l
-	+ read() : ([BII)I\l
+	]
+ClassMethodVisitor [
+	label = "{ClassMethodVisitor|
+	- usesClasses: List\<String\>\l
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visitMethod(MethodVisitor) : MethodVisitor\l
+	+ typeCollections(String) : String\l
+	 addAccessLevel(IMethod) : void\l
+	 addReturnType(IMethod) : void\l
+	 addArguments(IMethod) : void\l
 	}"
-]
-	CipherOutputStream[
-	label="{CipherOutputStream|\l
-	- cipher: SubstitutionCipher|
-+ write() : void\l
-	+ write() : void\l
+	]
+ClassDeclarationVisitor [
+	label = "{ClassDeclarationVisitor|
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visit(String) : void\l
 	}"
-]
-	DecipherInputStream[
-	label="{DecipherInputStream|\l
-	- cipher: SubstitutionCipher|
-+ read() : ()I\l
-	+ read() : ([BII)I\l
+	]
+LegendaryClassMethodVisitor [
+	label = "{LegendaryClassMethodVisitor|
+	 legendaryClass: IClass\l
+	 legendaryModel: IModel\l
+	|
+	+ visitMethodInsn(String) : void\l
 	}"
-]
-	IDecryption[
-	label="{\<\<interface\>\>\nIDecryption||
-+ decrypt() : (C)C\l
+	]
+IVisitor [
+	label = "{\<\<interface\>\>\nIVisitor|
+	|
+	+ previsit(IModel) : void\l
+	+ visit(IModel) : void\l
+	+ postvisit(IModel) : void\l
+	+ previsit(IClass) : void\l
+	+ visit(IClass) : void\l
+	+ postvisit(IClass) : void\l
+	+ previsit(IMethod) : void\l
+	+ visit(IMethod) : void\l
+	+ postvisit(IMethod) : void\l
+	+ previsit(IField) : void\l
+	+ visit(IField) : void\l
+	+ postvisit(IField) : void\l
 	}"
-]
-	CipherOutputStream[
-	label="{CipherOutputStream|\l
-	- cipher: SubstitutionCipher|
-+ write() : void\l
-	+ write() : void\l
+	]
+IModel [
+	label = "{\<\<interface\>\>\nIModel|
+	|
+	+ getClasses(Set\<IClass\>) : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	+ getRelations(Map\<List\<String\>,, List\<Relations\>\>) : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addRelation(Relations) : void\l
 	}"
-]
-	CipherOutputStream[
-	label="{CipherOutputStream|\l
-	- cipher: SubstitutionCipher|
-+ write() : void\l
-	+ write() : void\l
+	]
+ITraverser [
+	label = "{\<\<interface\>\>\nITraverser|
+	|
+	+ accept(IVisitor) : void\l
 	}"
-]
-	IEncryption[
-	label="{\<\<interface\>\>\nIEncryption||
-+ encrypt() : (C)C\l
+	]
+DesignParser [
+	label = "{DesignParser|
+	+ packageName: String\l
+	+ directories: String\l
+	|
+	+ main(String) : void\l
+	+ getClassesFromDir(List\<String\>) : List\<String\>\l
 	}"
-]
-	SubstitutionCipher[
-	label="{SubstitutionCipher|\l
-	- encryptionKey: [C\l
-	- decryptionKey: [C|
-+ encrypt() : (C)C\l
-	+ decrypt() : (C)C\l
+	]
+ClassParser [
+	label = "{ClassParser|
+	- classes: Map\<String, IClass\>\l
+	+ instance: ClassParser\l
+	|
+	+ getInstance(ClassParser) : ClassParser\l
+	+ parseModel(IModel) : void\l
 	}"
-]
-	DecipherInputStream[
-	label="{DecipherInputStream|\l
-	- cipher: SubstitutionCipher|
-+ read() : ()I\l
-	+ read() : ([BII)I\l
-	}"
-]
-	DecipherInputStream[
-	label="{DecipherInputStream|\l
-	- cipher: SubstitutionCipher|
-+ read() : ()I\l
-	+ read() : ([BII)I\l
-	}"
-]
+	]
+	edge [style = "solid"] [arrowhead = "open"]
+	Model->Relations
 	edge [style = "dashed"] [arrowhead = "open"]
-	TextEditorApp->DecipherInputStream
+	IVisitor->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	Relations->Relations
 	edge [style = "dashed"] [arrowhead = "empty"]
-	SubstitutionCipher->IEncryption
+	Class->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassFieldVisitor->IField
 	edge [style = "dashed"] [arrowhead = "empty"]
-	SubstitutionCipher->IDecryption
+	VisitorAdapter->IVisitor
 	edge [style = "dashed"] [arrowhead = "open"]
-	TextEditorApp->CipherOutputStream
+	ClassDeclarationVisitor->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
-	CipherOutputStream->SubstitutionCipher
+	Model->IVisitor
 	edge [style = "dashed"] [arrowhead = "open"]
-	DecipherInputStream->SubstitutionCipher
+	ClassFieldVisitor->IModel
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Field->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->ClassMethodVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	IModel->Relations
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Field->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IClass
+	edge [style = "solid"] [arrowhead = "open"]
+	GraphVizOutputStream->Relations
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IField
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Model->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IModel
+	edge [style = "solid"] [arrowhead = "empty"]
+GraphVizOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->ClassFieldVisitor
+	edge [style = "solid"] [arrowhead = "open"]
+	Class->IField
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Model->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->LegendaryClassMethodVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	IClass->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IModel
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Method->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	IClass->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->Model
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassParser->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	Model->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	Field->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	Method->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->ClassParser
+	edge [style = "solid"] [arrowhead = "open"]
+	Class->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassFieldVisitor->Field
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->GraphVizOutputStream
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryClassMethodVisitor->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IModel->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	ITraverser->IVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Method->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->ClassDeclarationVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	Class->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	Class->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->Class
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->Method
 }

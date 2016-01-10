@@ -69,7 +69,7 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void previsit(IClass c) {
-		String line = String.format("\t%s[\n\tlabel=\"{%s%s|",
+		String line = String.format("%s [\n\tlabel = \"{%s%s|\n\t",
 				c.getClassName(),
 				(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""),
 				c.getClassName());
@@ -83,12 +83,12 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void postvisit(IClass c) {
-		this.write("}\"\n]\n");
+		this.write("\t}\"\n\t]\n");
 	}
 
 	@Override
 	public void visit(IField f) {
-		String line = String.format("\\l\n\t%s %s: %s", 
+		String line = String.format("%s %s: %s\\l\n\t", 
 				f.getAccess(),
 				f.getFieldName(),
 				f.getType());
@@ -99,7 +99,7 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	public void visit(IMethod m) {
 		if(!(m.getMethodName().equals("<init>") || m.getMethodName().equals("<clinit>"))) {
 			String parameters = Arrays.toString(m.getParameters().toArray());
-			String line = String.format("%s %s(%s) : %s\\l\n\t",
+			String line = String.format("\t%s %s(%s) : %s\\l\n",
 					m.getAccess(),
 					m.getMethodName(),
 					parameters.substring(1, parameters.length()-1),
