@@ -16,6 +16,5 @@ public interface IMethod {
 	public String getMethodName();
 	public List<String> getParameters();
 	public String getReturnType();
-	public String toString();
-	
+	public String toString();	
 }

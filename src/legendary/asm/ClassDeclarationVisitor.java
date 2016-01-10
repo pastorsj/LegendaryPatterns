@@ -1,31 +1,38 @@
 package legendary.asm;
 
-import java.util.Arrays;
+import legendary.Classes.Relations;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IModel;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
-
-import legendary.Interfaces.IClass;
 
 /*
  * Modification made by Sam Pastoriza
  */
 public class ClassDeclarationVisitor extends ClassVisitor {
-	
+
 	private IClass legendaryClass;
-	
-	public ClassDeclarationVisitor(int api, IClass legendaryClass) {
+	private IModel legendaryModel;
+
+	public ClassDeclarationVisitor(int api, IClass legendaryClass,
+			IModel legendaryModel) {
 		super(api);
 		this.legendaryClass = legendaryClass;
+		this.legendaryModel = legendaryModel;
 	}
 
 	@Override
-	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+	public void visit(int version, int access, String name, String signature,
+			String superName, String[] interfaces) {
 		this.legendaryClass.setClassName(name);
-		this.legendaryClass.setSuper(superName);
-		this.legendaryClass.setInterfaces(Arrays.asList(interfaces));
-		
-		if((access & Opcodes.ACC_INTERFACE) != 0) {
+		if (superName != null)
+			this.legendaryModel.addRelation(name, superName, Relations.EXTENDS);
+		for(String i : interfaces){
+			this.legendaryModel.addRelation(name, i, Relations.IMPLEMENTS);
+		}
+
+		if ((access & Opcodes.ACC_INTERFACE) != 0) {
 			legendaryClass.setIsInterface(true);
 		}
 

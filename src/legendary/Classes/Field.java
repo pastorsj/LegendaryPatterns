@@ -4,11 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import legendary.Interfaces.IField;
+import legendary.Interfaces.ITraverser;
+import legendary.Interfaces.IVisitor;
 
 /*
- * Author: Jason Lane
+ * Authors: Jason Lane, Sam Pastoriza
  */
-public class Field implements IField {
+public class Field implements IField, ITraverser{
 
 	private String fieldAccessType;
 	private String fieldName;
@@ -29,7 +31,6 @@ public class Field implements IField {
 
 	@Override
 	public void setFieldName(String fieldName) {
-		// TODO Auto-generated method stub
 		this.fieldName = fieldName;
 	}
 
@@ -55,7 +56,6 @@ public class Field implements IField {
 
 	@Override
 	public void setType(String fieldType) {
-		// TODO Auto-generated method stub
 		String s = fieldType;
 		if (fieldType != null)
 			s = typeCollections(fieldType);
@@ -64,19 +64,16 @@ public class Field implements IField {
 
 	@Override
 	public String getAccess() {
-		// TODO Auto-generated method stub
 		return this.fieldAccessType;
 	}
 
 	@Override
 	public String getFieldName() {
-		// TODO Auto-generated method stub
 		return this.fieldName;
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return this.fieldType;
 	}
 
@@ -89,5 +86,12 @@ public class Field implements IField {
 	@Override
 	public Set<String> getBaseTypes() {
 		return this.baseFields;
+	}
+
+	@Override
+	public void accept(IVisitor v) {
+		v.previsit(this);
+		v.visit(this);
+		v.postvisit(this);
 	}
 }

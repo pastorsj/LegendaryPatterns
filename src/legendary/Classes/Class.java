@@ -8,11 +8,13 @@ import java.util.Set;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
+import legendary.Interfaces.ITraverser;
+import legendary.Interfaces.IVisitor;
 
 /*
  * Author: Jason Lane
  */
-public class Class implements IClass {
+public class Class implements IClass, ITraverser {
 
 	private String className;
 	private String superClassName;
@@ -134,6 +136,13 @@ public class Class implements IClass {
 	public Set<String> getAssociationClasses() {
 		// TODO Auto-generated method stub
 		return this.associationClasses;
+	}
+
+	@Override
+	public void accept(IVisitor v) {
+		v.previsit(this);
+		v.visit(this);
+		v.postvisit(this);		
 	}
 
 }

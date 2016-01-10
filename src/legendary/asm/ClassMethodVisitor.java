@@ -10,6 +10,7 @@ import org.objectweb.asm.Opcodes;
 import legendary.Classes.Method;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
+import legendary.Interfaces.IModel;
 
 /*
  * Modifications made by Sam Pastoriza and Jason Lane
@@ -17,15 +18,17 @@ import legendary.Interfaces.IMethod;
 public class ClassMethodVisitor extends ClassVisitor {
 
 	private IClass legendaryClass;
+	private IModel legendaryModel;
 
 	public ClassMethodVisitor(int api) {
 		super(api);
 	}
 
 	public ClassMethodVisitor(int api, ClassVisitor decorated,
-			IClass legendaryClass) {
+			IClass legendaryClass, IModel legendaryModel) {
 		super(api, decorated);
 		this.legendaryClass = legendaryClass;
+		this.legendaryModel = legendaryModel;
 	}
 
 	@Override
@@ -33,7 +36,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
-		MethodVisitor toDecorateMore = new LegendaryClassMethodVisitor(Opcodes.ASM5, toDecorate, this.legendaryClass);
+		MethodVisitor toDecorateMore = new LegendaryClassMethodVisitor(
+				Opcodes.ASM5, toDecorate, this.legendaryClass,
+				this.legendaryModel);
 		IMethod method = new Method();
 		method.setMethodName(name);
 		addAccessLevel(access, method);

@@ -5,11 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import legendary.Interfaces.IMethod;
+import legendary.Interfaces.ITraverser;
+import legendary.Interfaces.IVisitor;
 
 /*
  * Author: Jason Lane
  */
-public class Method implements IMethod{
+public class Method implements IMethod, ITraverser{
 
 	private String methodAccess;
 	private String methodName;
@@ -69,6 +71,13 @@ public class Method implements IMethod{
 	public String getReturnType() {
 		// TODO Auto-generated method stub
 		return this.methodReturnType;
+	}
+	
+	@Override
+	public void accept(IVisitor v){
+		v.previsit(this);
+		v.visit(this);
+		v.postvisit(this);		
 	}
 	
 	@Override

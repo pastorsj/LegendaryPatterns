@@ -33,8 +33,10 @@ public class DesignParser {
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
 	// "./src/legendary", "./src/legendaryClasses", "./src/legendaryInterfaces"
-//	"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-		"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
+	// "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary"
+	// };
+	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
+
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
 	 *
@@ -51,7 +53,7 @@ public class DesignParser {
 		for (String dir : directories) {
 			classes.addAll(getClassesFromDir(new File(dir)));
 		}
-		
+
 		for (String className : classes) {
 			IClass legendaryClass = new Class();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
@@ -59,13 +61,13 @@ public class DesignParser {
 			ClassReader reader = new ClassReader(className);
 			// make class declaration visitor to get superclass and interfaces
 			ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5,
-					legendaryClass);
+					legendaryClass, legendaryModel);
 			// DECORATE declaration visitor with field visitor
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5,
-					decVisitor, legendaryClass);
+					decVisitor, legendaryClass, legendaryModel);
 			// DECORATE field visitor with method visitor
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5,
-					fieldVisitor, legendaryClass);
+					fieldVisitor, legendaryClass, legendaryModel);
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			legendaryModel.addClass(legendaryClass);

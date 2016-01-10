@@ -7,40 +7,47 @@ import org.objectweb.asm.Opcodes;
 import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 
 import legendary.Classes.Field;
+import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
+import legendary.Interfaces.IModel;
 
 /*
  * Modifications made by Sam Pastoriza and Jason Lane
  */
 public class ClassFieldVisitor extends ClassVisitor {
-	
+
 	private IClass legendaryClass;
-	
+	private IModel legendaryModel;
+
 	public ClassFieldVisitor(int api) {
 		super(api);
 	}
 
-	public ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass) {
+	public ClassFieldVisitor(int api, ClassVisitor decorated,
+			IClass legendaryClass, IModel legendaryModel) {
 		super(api, decorated);
 		this.legendaryClass = legendaryClass;
+		this.legendaryModel = legendaryModel;
 	}
 
-	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
-		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
-		//New Code
+	public FieldVisitor visitField(int access, String name, String desc,
+			String signature, Object value) {
+		FieldVisitor toDecorate = super.visitField(access, name, desc,
+				signature, value);
 		IField field = new Field();
 		addAccessLevel(access, field);
 		field.setFieldName(name);
-		field.setType((signature==null) ? Type.getType(desc).toString() : signature);
+		field.setType((signature == null) ? Type.getType(desc).toString()
+				: signature);
 		legendaryClass.addField(field);
-		for(String s: field.getBaseTypes())
-		{
-			legendaryClass.addAssociationClass(s);
+		for (String s : field.getBaseTypes()) {
+			legendaryModel.addRelation(legendaryClass.getClassName(), s,
+					Relations.ASSOCIATES);
 		}
 		return toDecorate;
 	};
-	
+
 	void addAccessLevel(int access, IField field) {
 		String level = "";
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {

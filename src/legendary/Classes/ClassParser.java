@@ -40,7 +40,7 @@ public class ClassParser {
 		return false;
 	}
 
-	public void parse(IModel m) {
+	public void parseModel(IModel m) {
 		
 	}
 	
