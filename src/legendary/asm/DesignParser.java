@@ -19,23 +19,11 @@ import org.objectweb.asm.Opcodes;
  * Modification made by Sam Pastoriza and Jason Lane
  */
 public class DesignParser {
-	// public static final String[] classes = {
-	// // "legendaryTests.ManualTestClass"
-	// "legendaryInterfaces.IClass", "legendaryClasses.Class",
-	// "legendary.ClassDeclarationVisitor",
-	// "legendary.ClassFieldVisitor", "legendary.ClassMethodVisitor",
-	// "legendaryClasses.ClassParser",
-	// "legendaryClasses.Field", "legendaryClasses.Method",
-	// "legendaryInterfaces.IField",
-	// "legendaryInterfaces.IField", "legendaryInterfaces.IMethod"
-	// };
 
-	public static final String packageName = "legendary";
+	public static final String packageName = "problem";
 	public static final String[] directories = {
-	// "./src/legendary", "./src/legendaryClasses", "./src/legendaryInterfaces"
-	// "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary"
-	// };
-	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
+	"/Users/SamPastoriza/Documents/Programming/Java Development/Lab2-1/src/problem"};
+//	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -71,9 +59,8 @@ public class DesignParser {
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			legendaryModel.addClass(legendaryClass);
-			legendaryParser.addClass(legendaryClass);
 		}
-		legendaryParser.parse();
+		legendaryParser.parseModel(legendaryModel);
 	}
 
 	public static List<String> getClassesFromDir(File dir) {

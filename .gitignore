@@ -2,3 +2,4 @@
 *.class
 *.DS_Store
 input_output/text.dot
+.classpath

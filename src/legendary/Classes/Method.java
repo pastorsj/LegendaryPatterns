@@ -2,7 +2,9 @@ package legendary.Classes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.ITraverser;
@@ -27,49 +29,43 @@ public class Method implements IMethod, ITraverser{
 	
 	@Override
 	public void setAccess(String accessType) {
-		// TODO Auto-generated method stub
 		this.methodAccess = accessType;
 	}
 
 	@Override
 	public void setMethodName(String methodName) {
-		// TODO Auto-generated method stub
 		this.methodName = methodName;
 	}
 
 	@Override
 	public void setParameters(List<String> parameters) {
-		// TODO Auto-generated method stub
 		this.parameters = parameters;
 	}
 
 	@Override
 	public void setReturnType(String returnType) {
-		// TODO Auto-generated method stub
 		this.methodReturnType = returnType.substring(returnType.lastIndexOf(".")+1);
+		//Mess with the return types here
+		
 	}
 
 	@Override
 	public String getAccess() {
-		// TODO Auto-generated method stub
 		return this.methodAccess;
 	}
 
 	@Override
 	public String getMethodName() {
-		// TODO Auto-generated method stub
 		return this.methodName;
 	}
 
 	@Override
 	public List<String> getParameters() {
-		// TODO Auto-generated method stub
 		return this.parameters;
 	}
 
 	@Override
 	public String getReturnType() {
-		// TODO Auto-generated method stub
 		return this.methodReturnType;
 	}
 	

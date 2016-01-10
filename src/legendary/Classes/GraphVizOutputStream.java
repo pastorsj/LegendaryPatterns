@@ -1,6 +1,8 @@
 package legendary.Classes;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +14,15 @@ import legendary.Interfaces.VisitorAdapter;
 
 public class GraphVizOutputStream extends VisitorAdapter {
 	private final StringBuilder builder;
-
-	public GraphVizOutputStream(StringBuilder builder) throws IOException {
+	private final Map<Relations, String> relationRep;
+	
+	public GraphVizOutputStream(StringBuilder builder) {
 		this.builder = builder;
+		this.relationRep = new HashMap<>();
+		this.relationRep.put(Relations.ASSOCIATES, "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.EXTENDS, "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n");
+		this.relationRep.put(Relations.IMPLEMENTS, "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.USES, "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 	}
 
 	private void write(String s) {
@@ -34,26 +42,20 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	private String addArrows(IModel m) {
 		StringBuilder sb = new StringBuilder();
 		Map<List<String>, List<Relations>> relMap = m.getRelations();
+		List<String> classNames = new ArrayList<>();
+		for(IClass c : m.getClasses()){
+			classNames.add(c.getClassName());
+		}
 		for (List<String> al : relMap.keySet()) {
+			if(!classNames.contains(al.get(1))) {
+				continue;
+			}
 			for (Relations r : relMap.get(al)) {
-				switch (r) {
-				case USES:
-					sb.append("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
-					break;
-				case ASSOCIATES:
-					sb.append("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
-					break;
-				case EXTENDS:
-					sb.append("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n");
-					break;
-				case IMPLEMENTS:
-					sb.append("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
-					break;
-				default:
-					System.out.println("null relation for classes " + al.get(0)
-							+ " and " + al.get(1));
+				if(!this.relationRep.containsKey(r)) {
+					System.out.println("null relation for classes " + al.get(0) + " and " + al.get(1));
 					break;
 				}
+				sb.append(this.relationRep.get(r));
 				sb.append(al.get(0) + "->" + al.get(1) + "\n");
 			}
 		}
@@ -67,36 +69,42 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void previsit(IClass c) {
-		this.write("\t" + c.getClassName() + " [\n");
+		String line = String.format("\t%s[\n\tlabel=\"{%s%s|",
+				c.getClassName(),
+				(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""),
+				c.getClassName());
+		this.write(line);
 	}
 
 	@Override
 	public void visit(IClass c) {
-		// TODO: Implement
+		this.write("|\n");
 	}
 
 	@Override
 	public void postvisit(IClass c) {
-		this.write("]");
+		this.write("}\"\n]\n");
 	}
 
 	@Override
 	public void visit(IField f) {
-		// TODO: Implement
-	}
-
-	@Override
-	public void postvisit(IField f) {
-		// TODO: Implement
+		String line = String.format("\\l\n\t%s %s: %s", 
+				f.getAccess(),
+				f.getFieldName(),
+				f.getType());
+		this.write(line);
 	}
 
 	@Override
 	public void visit(IMethod m) {
-		// TODO: Implement
-	}
-
-	@Override
-	public void postvisit(IMethod m) {
-		// TODO: Implement
+		if(!(m.getMethodName().equals("<init>") || m.getMethodName().equals("<clinit>"))) {
+			String parameters = Arrays.toString(m.getParameters().toArray());
+			String line = String.format("%s %s(%s) : %s\\l\n\t",
+					m.getAccess(),
+					m.getMethodName(),
+					parameters.substring(1, parameters.length()-1),
+					m.getReturnType());
+			this.write(line);
+		}
 	}
 }

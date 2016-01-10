@@ -44,55 +44,46 @@ public class Class implements IClass, ITraverser {
 
 	@Override
 	public void setSuper(String superClassName) {
-		// TODO Auto-generated method stub
-		this.superClassName = superClassName;
+		this.superClassName = superClassName.substring(superClassName.lastIndexOf("/") + 1);
 	}
 
 	@Override
 	public void setInterfaces(List<String> interfaces) {
-		// TODO Auto-generated method stub
 		this.interfaces = interfaces;
 	}
 
 	@Override
 	public void addMethod(IMethod method) {
-		// TODO Auto-generated method stub
 		this.methods.add(method);
 	}
 
 	@Override
 	public void addField(IField field) {
-		// TODO Auto-generated method stub
 		this.fields.add(field);
 	}
 
 	@Override
 	public String getClassName() {
-		// TODO Auto-generated method stub
 		return this.className;
 	}
 
 	@Override
 	public String getSuperName() {
-		// TODO Auto-generated method stub
 		return this.superClassName;
 	}
 
 	@Override
 	public List<String> getInterfaces() {
-		// TODO Auto-generated method stub
 		return this.interfaces;
 	}
 
 	@Override
 	public List<IMethod> getMethods() {
-		// TODO Auto-generated method stub
 		return this.methods;
 	}
 
 	@Override
 	public List<IField> getFields() {
-		// TODO Auto-generated method stub
 		return this.fields;
 	}
 
@@ -103,7 +94,6 @@ public class Class implements IClass, ITraverser {
 
 	@Override
 	public boolean isInterface() {
-		// TODO Auto-generated method stub
 		return this.isInterface;
 	}
 
@@ -118,13 +108,11 @@ public class Class implements IClass, ITraverser {
 
 	@Override
 	public Set<String> getUsesClasses() {
-		// TODO Auto-generated method stub
 		return this.usesClasses;
 	}
 
 	@Override
 	public void addAssociationClass(String aclass) {
-		// TODO Auto-generated method stub
 		if (this.usesClasses.contains(aclass))
 			usesClasses.remove(aclass);
 		if (!this.associationClasses.contains(aclass)) {
@@ -134,14 +122,21 @@ public class Class implements IClass, ITraverser {
 
 	@Override
 	public Set<String> getAssociationClasses() {
-		// TODO Auto-generated method stub
 		return this.associationClasses;
 	}
 
 	@Override
 	public void accept(IVisitor v) {
 		v.previsit(this);
+		for(IField f : this.fields) {
+			ITraverser t = (ITraverser) f;
+			t.accept(v);
+		}
 		v.visit(this);
+		for(IMethod m : this.methods) {
+			ITraverser t = (ITraverser) m;
+			t.accept(v);
+		}
 		v.postvisit(this);		
 	}
 

@@ -40,9 +40,11 @@ public class Model implements IModel, ITraverser {
 	@Override
 	public void addRelation(String c1, String c2, Relations r) {
 		List<String> al = new ArrayList<String>();
-		al.add(c1);
-		al.add(c2);
+		al.add(c1.substring(c1.lastIndexOf("/") + 1));
+		al.add(c2.substring(c2.lastIndexOf("/") + 1));
 		if (relations.containsKey(al)) {
+			if(relations.get(al).contains(r))
+				return;
 			if (r.equals(Relations.ASSOCIATES)) {
 				List<Relations> lr = relations.get(al);
 				lr.remove(Relations.USES);
@@ -51,8 +53,9 @@ public class Model implements IModel, ITraverser {
 			}
 			if (r.equals(Relations.USES)) {
 				List<Relations> lr = relations.get(al);
-				if (lr.contains(Relations.ASSOCIATES))
+				if (!lr.contains(Relations.ASSOCIATES))
 					lr.add(Relations.USES);
+				return;
 			}
 		}
 		List<Relations> rl = new ArrayList<>();
@@ -63,6 +66,10 @@ public class Model implements IModel, ITraverser {
 	@Override
 	public void accept(IVisitor v) {
 		v.previsit(this);
+		for(IClass c : this.classList) {
+			ITraverser t = (ITraverser) c;
+			t.accept(v);
+		}
 		v.visit(this);
 		v.postvisit(this);
 	}

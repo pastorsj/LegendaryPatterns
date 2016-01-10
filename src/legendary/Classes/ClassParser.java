@@ -12,6 +12,8 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.Interfaces.ITraverser;
+import legendary.Interfaces.IVisitor;
 
 /*
  * Author: Sam Pastoriza
@@ -31,160 +33,17 @@ public class ClassParser {
 		return instance;
 	}
 
-	@Deprecated
-	public boolean addClass(IClass class1) {
-		if (!this.classes.containsKey(class1.getClassName())) {
-			this.classes.put(class1.getClassName(), class1);
-			return true;
-		}
-		return false;
-	}
-
-	public void parseModel(IModel m) {
-		
-	}
-	
-	@Deprecated
-	public void parse() throws IOException {
-		StringBuilder classRep = new StringBuilder();
-		classRep.append("digraph G{\n\tnode [shape = \"record\"]\n\t");
-		Set<String> keySet = this.classes.keySet();
-		// For each node
-		this.addNode(classRep, keySet);
-		// For every super class arrow
-		this.addExtensionArrows(classRep, keySet);
-		// For every interface arrow
-		this.addInterfaceArrows(classRep, keySet);
-
-		this.addUsageArrows(classRep, keySet);
-
-		this.addAssociationArrows(classRep, keySet);
-		classRep.append("}");
+	public void parseModel(IModel m) throws IOException {
+		StringBuilder builder = new StringBuilder();
+		IVisitor dotVisitor = new GraphVizOutputStream(builder);
+		ITraverser t = (ITraverser) m;
+		t.accept(dotVisitor);
 		BufferedWriter writer = new BufferedWriter(new FileWriter(
 				"./input_output/text.dot"));
-		writer.write(classRep.toString());
+		writer.write(builder.toString());
 		writer.close();
 //		Runtime rt = Runtime.getRuntime();
 //		rt.exec("dot -Tpng test.dot -o output.png");
-		System.out.println(classRep.toString());
-	}
-
-	@Deprecated
-	private String addFields(IClass legendaryClass) {
-		String fieldRep = "";
-		for (IField field : legendaryClass.getFields()) {
-			fieldRep += field.toString();
-		}
-		return fieldRep;
-	}
-
-	@Deprecated
-	private String addMethods(IClass legendaryClass) {
-		String methodRep = "";
-		for (IMethod method : legendaryClass.getMethods()) {
-			methodRep += method.toString();
-		}
-		return methodRep;
-	}
-
-	@Deprecated
-	private void addNode(StringBuilder classRep, Set<String> keySet) {
-		for (String key : keySet) {
-			IClass legendaryClass = this.classes.get(key);
-			String className = legendaryClass.getClassName();
-			classRep.append(className + " [\n\tlabel = \"{");
-			// Check for interface here
-			if (legendaryClass.isInterface()) {
-				classRep.append("\\<\\<interface\\>\\>\\n");
-			}
-			classRep.append(className + "|\n\t");
-			classRep.append(addFields(legendaryClass));
-			classRep.append("|\n\t");
-			classRep.append(addMethods(legendaryClass));
-			classRep.append("}\"\n\t]\n");
-		}
-	}
-
-	@Deprecated
-	private void addExtensionArrows(StringBuilder classRep, Set<String> keySet) {
-		classRep.append("\tedge [arrowhead = \"empty\"]\n");
-		for (String key : keySet) {
-			IClass legendaryClass = this.classes.get(key);
-			String legendarySuperClass = legendaryClass.getSuperName();
-			String name = legendarySuperClass.substring(legendarySuperClass
-					.lastIndexOf("/") + 1);
-			if (key.contains(name)) {
-				classRep.append(legendaryClass.getClassName() + "->" + name
-						+ "\n\t");
-			}
-		}
-	}
-
-	@Deprecated
-	private void addInterfaceArrows(StringBuilder classRep, Set<String> keySet) {
-		classRep.append("\tedge [style = \"dashed\"]\n\t");
-		for (String key : keySet) {
-			IClass legendaryClass = this.classes.get(key);
-			for (String legendaryInterface : legendaryClass.getInterfaces()) {
-				String name = legendaryInterface.substring(legendaryInterface
-						.lastIndexOf("/") + 1);
-				if (keySet.contains(name)) {
-					classRep.append(legendaryClass.getClassName() + "->" + name
-							+ "\n\t");
-				}
-			}
-		}
-	}
-
-	@Deprecated
-	public void addUsageArrows(StringBuilder classRep, Set<String> keySet) {
-		classRep.append("edge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
-		for (String key : keySet) {
-			IClass legendaryClass = this.classes.get(key);
-			for (String useClass : legendaryClass.getUsesClasses()) {
-				String name = useClass.substring(useClass.lastIndexOf("/") + 1);
-				if (keySet.contains(name)) {
-					String lsuperc = legendaryClass.getSuperName();
-					ArrayList<String> higher = new ArrayList<String>();
-					higher.add(lsuperc);
-					higher.addAll(legendaryClass.getInterfaces());
-					boolean add = true;
-					for (String s : higher) {
-						s = s.substring(s.lastIndexOf("/") + 1);
-						if (this.classes.containsKey(s)
-								&& this.classes.get(s).getUsesClasses()
-										.contains(useClass)) {
-							add = false;
-						}
-					}
-					if (add)
-						classRep.append(legendaryClass.getClassName() + "->"
-								+ name + "\n\t");
-				}
-			}
-		}
-	}
-
-	@Deprecated
-	public void addAssociationArrows(StringBuilder classRep, Set<String> keySet) {
-		classRep.append("edge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
-		for (String key : keySet) {
-			IClass legendaryClass = this.classes.get(key);
-			for (String legendaryInterface : legendaryClass
-					.getAssociationClasses()) {
-				String name = legendaryInterface.substring(legendaryInterface
-						.indexOf("/") + 1);
-				String lsuperc = legendaryClass.getSuperName();
-				lsuperc = lsuperc.substring(lsuperc.lastIndexOf("/") + 1);
-				if (keySet.contains(name)
-						//&& legendaryClass.getSuperName() != ""
-						&& (!this.classes.containsKey(lsuperc) || !this.classes
-								.get(lsuperc).getAssociationClasses()
-								.contains(name))) {
-					classRep.append(legendaryClass.getClassName() + "->" + name
-							+ "\n\t");
-				}
-			}
-		}
+		System.out.println(builder.toString());
 	}
 }
