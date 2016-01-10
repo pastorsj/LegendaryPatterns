@@ -1,29 +1,12 @@
 digraph G{
 	node [shape = "record"]
-	Field [
-	label = "{Field|
-	- fieldAccessType: String\l
-	- fieldName: String\l
-	- fieldType: String\l
-	- baseFields: Set\<String\>\l
+	IModel [
+	label = "{\<\<interface\>\>\nIModel|
 	|
-	+ setAccess(String) : void\l
-	+ setFieldName(String) : void\l
-	+ typeCollections(String) : String\l
-	+ setType(String) : void\l
-	+ getAccess(String) : String\l
-	+ getFieldName(String) : String\l
-	+ getType(String) : String\l
-	+ toString(String) : String\l
-	+ getBaseTypes(Set\<String\>) : Set\<String\>\l
-	}"
-	]
-ClassFieldVisitor [
-	label = "{ClassFieldVisitor|
-	- legendaryClass: IClass\l
-	|
-	+ visitField(FieldVisitor) : FieldVisitor\l
-	 addAccessLevel(IField) : void\l
+	+ getClasses(Set\<IClass\>) : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	+ getRelations(Map\<List\<IClass\>,, Relations\>) : Map\<List\<IClass\>, Relations\>\l
+	+ addRelation(Relations) : void\l
 	}"
 	]
 ClassMethodVisitor [
@@ -37,40 +20,16 @@ ClassMethodVisitor [
 	 addArguments(IMethod) : void\l
 	}"
 	]
-LegendaryClassMethodVisitor [
-	label = "{LegendaryClassMethodVisitor|
-	 legendaryClass: IClass\l
+Relations [
+	label = "{Relations|
+	+ EXTENDS: Relations\l
+	+ IMPLEMENTS: Relations\l
+	+ USES: Relations\l
+	+ ASSOCIATES: Relations\l
+	- ENUM$VALUES: Relations\l
 	|
-	+ visitMethodInsn(String) : void\l
-	}"
-	]
-Class [
-	label = "{Class|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\<String\>\l
-	- methods: List\<IMethod\>\l
-	- fields: List\<IField\>\l
-	- usesClasses: Set\<String\>\l
-	- associationClasses: Set\<String\>\l
-	- isInterface: Z\l
-	|
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName(String) : String\l
-	+ getSuperName(String) : String\l
-	+ getInterfaces(List\<String\>) : List\<String\>\l
-	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
-	+ getFields(List\<IField\>) : List\<IField\>\l
-	+ setIsInterface() : void\l
-	+ isInterface() : boolean\l
-	+ addUsesClass(String) : void\l
-	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
-	+ addAssociationClass(String) : void\l
-	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
+	+ values(Relations) : Relations\l
+	+ valueOf(Relations) : Relations\l
 	}"
 	]
 Method [
@@ -79,41 +38,6 @@ Method [
 	- methodName: String\l
 	- parameters: List\<String\>\l
 	- methodReturnType: String\l
-	|
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ setParameters(List\<String\>) : void\l
-	+ setReturnType(String) : void\l
-	+ getAccess(String) : String\l
-	+ getMethodName(String) : String\l
-	+ getParameters(List\<String\>) : List\<String\>\l
-	+ getReturnType(String) : String\l
-	+ toString(String) : String\l
-	}"
-	]
-IClass [
-	label = "{\<\<interface\>\>\nIClass|
-	|
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName(String) : String\l
-	+ getSuperName(String) : String\l
-	+ getInterfaces(List\<String\>) : List\<String\>\l
-	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
-	+ getFields(List\<IField\>) : List\<IField\>\l
-	+ setIsInterface() : void\l
-	+ isInterface() : boolean\l
-	+ addUsesClass(String) : void\l
-	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
-	+ addAssociationClass(String) : void\l
-	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
-	}"
-	]
-IMethod [
-	label = "{\<\<interface\>\>\nIMethod|
 	|
 	+ setAccess(String) : void\l
 	+ setMethodName(String) : void\l
@@ -155,6 +79,119 @@ DesignParser [
 	+ getClassesFromDir(List\<String\>) : List\<String\>\l
 	}"
 	]
+Field [
+	label = "{Field|
+	- fieldAccessType: String\l
+	- fieldName: String\l
+	- fieldType: String\l
+	- baseFields: Set\<String\>\l
+	|
+	+ setAccess(String) : void\l
+	+ setFieldName(String) : void\l
+	+ typeCollections(String) : String\l
+	+ setType(String) : void\l
+	+ getAccess(String) : String\l
+	+ getFieldName(String) : String\l
+	+ getType(String) : String\l
+	+ toString(String) : String\l
+	+ getBaseTypes(Set\<String\>) : Set\<String\>\l
+	}"
+	]
+ClassFieldVisitor [
+	label = "{ClassFieldVisitor|
+	- legendaryClass: IClass\l
+	|
+	+ visitField(FieldVisitor) : FieldVisitor\l
+	 addAccessLevel(IField) : void\l
+	}"
+	]
+IRelation [
+	label = "{\<\<interface\>\>\nIRelation|
+	|
+	}"
+	]
+LegendaryClassMethodVisitor [
+	label = "{LegendaryClassMethodVisitor|
+	 legendaryClass: IClass\l
+	|
+	+ visitMethodInsn(String) : void\l
+	}"
+	]
+Model [
+	label = "{Model|
+	- classList: Set\<IClass\>\l
+	- relations: Map\<List\<IClass\>, Relations\>\l
+	|
+	+ getClasses(Set\<IClass\>) : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	+ getRelations(Map\<List\<IClass\>,, Relations\>) : Map\<List\<IClass\>, Relations\>\l
+	+ addRelation(Relations) : void\l
+	}"
+	]
+Class [
+	label = "{Class|
+	- className: String\l
+	- superClassName: String\l
+	- interfaces: List\<String\>\l
+	- methods: List\<IMethod\>\l
+	- fields: List\<IField\>\l
+	- usesClasses: Set\<String\>\l
+	- associationClasses: Set\<String\>\l
+	- isInterface: Z\l
+	|
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ setInterfaces(List\<String\>) : void\l
+	+ addMethod(IMethod) : void\l
+	+ addField(IField) : void\l
+	+ getClassName(String) : String\l
+	+ getSuperName(String) : String\l
+	+ getInterfaces(List\<String\>) : List\<String\>\l
+	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
+	+ getFields(List\<IField\>) : List\<IField\>\l
+	+ setIsInterface() : void\l
+	+ isInterface() : boolean\l
+	+ addUsesClass(String) : void\l
+	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
+	+ addAssociationClass(String) : void\l
+	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
+	}"
+	]
+IClass [
+	label = "{\<\<interface\>\>\nIClass|
+	|
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ setInterfaces(List\<String\>) : void\l
+	+ addMethod(IMethod) : void\l
+	+ addField(IField) : void\l
+	+ getClassName(String) : String\l
+	+ getSuperName(String) : String\l
+	+ getInterfaces(List\<String\>) : List\<String\>\l
+	+ getMethods(List\<IMethod\>) : List\<IMethod\>\l
+	+ getFields(List\<IField\>) : List\<IField\>\l
+	+ setIsInterface() : void\l
+	+ isInterface() : boolean\l
+	+ addUsesClass(String) : void\l
+	+ getUsesClasses(Set\<String\>) : Set\<String\>\l
+	+ addAssociationClass(String) : void\l
+	+ getAssociationClasses(Set\<String\>) : Set\<String\>\l
+	}"
+	]
+IMethod [
+	label = "{\<\<interface\>\>\nIMethod|
+	|
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ setParameters(List\<String\>) : void\l
+	+ setReturnType(String) : void\l
+	+ getAccess(String) : String\l
+	+ getMethodName(String) : String\l
+	+ getParameters(List\<String\>) : List\<String\>\l
+	+ getReturnType(String) : String\l
+	+ toString(String) : String\l
+	}"
+	]
 ClassParser [
 	label = "{ClassParser|
 	- classes: Map\<String, IClass\>\l
@@ -173,26 +210,35 @@ ClassParser [
 	edge [arrowhead = "empty"]
 LegendaryClassMethodVisitor->MethodVisitor
 		edge [style = "dashed"]
-	Field->IField
-	Class->IClass
 	Method->IMethod
+	Field->IField
+	Model->IModel
+	Class->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->Field
-	ClassFieldVisitor->IClass
-	ClassFieldVisitor->IField
+	IModel->Relations
+	IModel->IClass
 	ClassMethodVisitor->IClass
 	ClassMethodVisitor->IMethod
 	ClassMethodVisitor->LegendaryClassMethodVisitor
 	ClassMethodVisitor->Method
-	LegendaryClassMethodVisitor->IClass
-	IClass->IMethod
-	IClass->IField
+	Relations->Relations
+	Relations->Relations
 	ClassDeclarationVisitor->IClass
 	DesignParser->ClassParser
 	DesignParser->Class
 	DesignParser->ClassDeclarationVisitor
 	DesignParser->ClassFieldVisitor
 	DesignParser->ClassMethodVisitor
-	ClassParser->IClass
+	ClassFieldVisitor->Field
+	ClassFieldVisitor->IClass
+	ClassFieldVisitor->IField
+	LegendaryClassMethodVisitor->IClass
+	IClass->IMethod
+	IClass->IField
 	edge [style = "solid"] [arrowhead = "open"]
+	Model->Relations
+	Model->IClass
+	Class->IMethod
+	Class->IField
+	ClassParser->IClass
 	}

@@ -107,12 +107,8 @@ public class Class implements IClass {
 
 	@Override
 	public void addUsesClass(String uclass) {
-		// TODO Auto-generated method stub
-		if (this.superClassName.equals(uclass)) {
-//			return;
-		}
 		if (this.associationClasses.contains(uclass))
-			this.associationClasses.remove(uclass);
+			return;
 		if (!this.usesClasses.contains(uclass)) {
 			this.usesClasses.add(uclass);
 		}
@@ -128,7 +124,7 @@ public class Class implements IClass {
 	public void addAssociationClass(String aclass) {
 		// TODO Auto-generated method stub
 		if (this.usesClasses.contains(aclass))
-			return;
+			usesClasses.remove(aclass);
 		if (!this.associationClasses.contains(aclass)) {
 			this.associationClasses.add(aclass);
 		}

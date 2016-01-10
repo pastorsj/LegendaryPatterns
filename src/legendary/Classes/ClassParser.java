@@ -11,6 +11,7 @@ import java.util.Set;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
+import legendary.Interfaces.IModel;
 
 /*
  * Author: Sam Pastoriza
@@ -18,10 +19,19 @@ import legendary.Interfaces.IMethod;
 public class ClassParser {
 	private Map<String, IClass> classes;
 
-	public ClassParser() {
+	public static ClassParser instance;
+	
+	private ClassParser() {
 		this.classes = new HashMap<String, IClass>();
 	}
+	
+	public static ClassParser getInstance(){
+		if(instance == null)
+			instance = new ClassParser();
+		return instance;
+	}
 
+	@Deprecated
 	public boolean addClass(IClass class1) {
 		if (!this.classes.containsKey(class1.getClassName())) {
 			this.classes.put(class1.getClassName(), class1);
@@ -30,6 +40,11 @@ public class ClassParser {
 		return false;
 	}
 
+	public void parse(IModel m) {
+		
+	}
+	
+	@Deprecated
 	public void parse() throws IOException {
 		StringBuilder classRep = new StringBuilder();
 		classRep.append("digraph G{\n\tnode [shape = \"record\"]\n\t");
@@ -54,6 +69,7 @@ public class ClassParser {
 		System.out.println(classRep.toString());
 	}
 
+	@Deprecated
 	private String addFields(IClass legendaryClass) {
 		String fieldRep = "";
 		for (IField field : legendaryClass.getFields()) {
@@ -62,6 +78,7 @@ public class ClassParser {
 		return fieldRep;
 	}
 
+	@Deprecated
 	private String addMethods(IClass legendaryClass) {
 		String methodRep = "";
 		for (IMethod method : legendaryClass.getMethods()) {
@@ -70,6 +87,7 @@ public class ClassParser {
 		return methodRep;
 	}
 
+	@Deprecated
 	private void addNode(StringBuilder classRep, Set<String> keySet) {
 		for (String key : keySet) {
 			IClass legendaryClass = this.classes.get(key);
@@ -87,6 +105,7 @@ public class ClassParser {
 		}
 	}
 
+	@Deprecated
 	private void addExtensionArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("\tedge [arrowhead = \"empty\"]\n");
 		for (String key : keySet) {
@@ -101,6 +120,7 @@ public class ClassParser {
 		}
 	}
 
+	@Deprecated
 	private void addInterfaceArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("\tedge [style = \"dashed\"]\n\t");
 		for (String key : keySet) {
@@ -116,6 +136,7 @@ public class ClassParser {
 		}
 	}
 
+	@Deprecated
 	public void addUsageArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("edge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 		for (String key : keySet) {
@@ -144,6 +165,7 @@ public class ClassParser {
 		}
 	}
 
+	@Deprecated
 	public void addAssociationArrows(StringBuilder classRep, Set<String> keySet) {
 		classRep.append("edge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
 		for (String key : keySet) {

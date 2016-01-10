@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import legendary.Classes.Class;
+import legendary.Classes.ClassParser;
+import legendary.Classes.Model;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IModel;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
-
-import legendary.Classes.Class;
-import legendary.Classes.ClassParser;
-import legendary.Interfaces.IClass;
 
 /*
  * Modification made by Sam Pastoriza and Jason Lane
@@ -31,8 +33,8 @@ public class DesignParser {
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
 	// "./src/legendary", "./src/legendaryClasses", "./src/legendaryInterfaces"
-	"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-
+//	"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+		"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
 	 *
@@ -43,12 +45,13 @@ public class DesignParser {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		ClassParser legendaryParser = new ClassParser();
+		ClassParser legendaryParser = ClassParser.getInstance();
 		List<String> classes = new ArrayList<String>();
+		IModel legendaryModel = new Model();
 		for (String dir : directories) {
 			classes.addAll(getClassesFromDir(new File(dir)));
 		}
-
+		
 		for (String className : classes) {
 			IClass legendaryClass = new Class();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
@@ -65,6 +68,7 @@ public class DesignParser {
 					fieldVisitor, legendaryClass);
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			legendaryModel.addClass(legendaryClass);
 			legendaryParser.addClass(legendaryClass);
 		}
 		legendaryParser.parse();
