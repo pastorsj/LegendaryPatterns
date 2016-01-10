@@ -1,6 +1,8 @@
 package legendary.Classes;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
@@ -26,7 +28,36 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void visit(IModel m) {
-		// TODO:Implement
+		this.write(this.addArrows(m));
+	}
+
+	private String addArrows(IModel m) {
+		StringBuilder sb = new StringBuilder();
+		Map<List<String>, List<Relations>> relMap = m.getRelations();
+		for (List<String> al : relMap.keySet()) {
+			for (Relations r : relMap.get(al)) {
+				switch (r) {
+				case USES:
+					sb.append("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+					break;
+				case ASSOCIATES:
+					sb.append("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+					break;
+				case EXTENDS:
+					sb.append("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n");
+					break;
+				case IMPLEMENTS:
+					sb.append("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
+					break;
+				default:
+					System.out.println("null relation for classes " + al.get(0)
+							+ " and " + al.get(1));
+					break;
+				}
+				sb.append(al.get(0) + "->" + al.get(1) + "\n");
+			}
+		}
+		return sb.toString();
 	}
 
 	@Override
