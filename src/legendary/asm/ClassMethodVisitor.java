@@ -8,6 +8,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import legendary.Classes.Method;
+import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
@@ -17,6 +18,7 @@ import legendary.Interfaces.IModel;
  */
 public class ClassMethodVisitor extends ClassVisitor {
 
+	private List<String> usesClasses;
 	private IClass legendaryClass;
 	private IModel legendaryModel;
 
@@ -29,6 +31,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		super(api, decorated);
 		this.legendaryClass = legendaryClass;
 		this.legendaryModel = legendaryModel;
+		this.usesClasses = new ArrayList<String>();
 	}
 
 	@Override
@@ -46,6 +49,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 		addReturnType((signature == null) ? desc : signature, method);
 		// System.out.println(name + " " + signature + " " + desc);
 		this.legendaryClass.addMethod(method);
+		for (String s : this.usesClasses) {
+			this.legendaryModel.addRelation(this.legendaryClass.getClassName(),
+					s, Relations.USES);
+		}
 		return toDecorateMore;
 	}
 
@@ -55,7 +62,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			s = s.substring(0, s.lastIndexOf(")"));
 		if (in.contains("<")) {
 			String split1 = s.substring(0, s.indexOf("<"));
-			this.legendaryClass.addUsesClass(split1);
+			this.usesClasses.add(split1);
 			String split2 = s.substring(s.indexOf("<") + 1);
 			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
 			String[] split = split2.split(";");
@@ -66,8 +73,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 					s += ", ";
 			}
 		} else
-			this.legendaryClass.addUsesClass(s
-					.substring(s.lastIndexOf("/") + 1).replace(";", ""));
+			this.usesClasses.add(s.substring(s.lastIndexOf("/") + 1).replace(
+					";", ""));
 		s = s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<")
 				.replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
 		return s;

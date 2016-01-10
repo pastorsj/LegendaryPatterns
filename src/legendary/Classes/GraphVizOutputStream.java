@@ -25,6 +25,11 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	}
 
 	@Override
+	public void visit(IModel m) {
+		// TODO:Implement
+	}
+
+	@Override
 	public void postvisit(IModel m) {
 		this.write("}");
 	}
