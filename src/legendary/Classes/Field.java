@@ -6,6 +6,7 @@ import java.util.Set;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
+import legendary.ParsingUtil.ParsingFieldUtil;
 
 /*
  * Authors: Jason Lane, Sam Pastoriza
@@ -16,12 +17,14 @@ public class Field implements IField, ITraverser{
 	private String fieldName;
 	private String fieldType;
 	private Set<String> baseFields;
+	private ParsingFieldUtil util;
 
 	public Field() {
 		this.fieldAccessType = "";
 		this.fieldName = "";
 		this.fieldType = "";
 		this.baseFields = new HashSet<String>();
+		this.util = new ParsingFieldUtil(this.baseFields);
 	}
 
 	@Override
@@ -33,33 +36,24 @@ public class Field implements IField, ITraverser{
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
-
-	public String typeCollections(String in) {
-		String s = in;
-		if (in.contains("<")) {
-			String split1 = s.substring(0, s.indexOf("<"));
-			this.baseFields.add(split1);
-			String split2 = s.substring(s.indexOf("<") + 1);
-			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
-			String[] split = split2.split(";");
-			for (int i = 0; i < split.length; i++) {
-				String s2 = split[i];
-				s += typeCollections(s2);
-				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
-					s += ", ";
-			}
-		} else
-			this.baseFields.add(s.substring(s.lastIndexOf("/") + 1));
-		return s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<")
-				.replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
-	}
-
+	
 	@Override
 	public void setType(String fieldType) {
 		String s = fieldType;
-		if (fieldType != null)
-			s = typeCollections(fieldType);
-		this.fieldType = s;
+		if (this.util.getPrimCheck().containsKey(s)) {
+			this.fieldType = this.util.getPrimCheck().get(s);
+		} else if(s.charAt(0) == '[') {
+			if(this.util.getPrimCheck().containsKey(String.valueOf(s.charAt(1)))) {
+				this.fieldType = this.util.getPrimCheck().get(String.valueOf(s.charAt(1))) + "[]";
+			} else {
+				this.fieldType = this.util.typeCollections(s.substring(1)) + "[]";
+			}
+		} else {
+			if (fieldType != null) {
+				s = this.util.typeCollections(fieldType);			
+			}
+			this.fieldType = s;
+		}
 	}
 
 	@Override

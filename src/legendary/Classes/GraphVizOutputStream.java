@@ -19,10 +19,7 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	public GraphVizOutputStream(StringBuilder builder) {
 		this.builder = builder;
 		this.relationRep = new HashMap<>();
-		this.relationRep.put(Relations.ASSOCIATES, "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
-		this.relationRep.put(Relations.EXTENDS, "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n");
-		this.relationRep.put(Relations.IMPLEMENTS, "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.USES, "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+		this.initialize();
 	}
 
 	private void write(String s) {
@@ -106,5 +103,12 @@ public class GraphVizOutputStream extends VisitorAdapter {
 					m.getReturnType());
 			this.write(line);
 		}
+	}
+	
+	public void initialize() {
+		this.relationRep.put(Relations.ASSOCIATES, "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.EXTENDS, "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n");
+		this.relationRep.put(Relations.IMPLEMENTS, "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.USES, "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 	}
 }

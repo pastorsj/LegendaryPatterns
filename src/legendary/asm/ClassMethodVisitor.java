@@ -12,6 +12,7 @@ import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.ParsingUtil.ParsingMethodUtil;
 
 /*
  * Modifications made by Sam Pastoriza and Jason Lane
@@ -21,6 +22,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	private List<String> usesClasses;
 	private IClass legendaryClass;
 	private IModel legendaryModel;
+	private ParsingMethodUtil util;
 
 	public ClassMethodVisitor(int api) {
 		super(api);
@@ -31,7 +33,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 		super(api, decorated);
 		this.legendaryClass = legendaryClass;
 		this.legendaryModel = legendaryModel;
-		this.usesClasses = new ArrayList<String>();
+		this.usesClasses = new ArrayList<>();
+		this.util = new ParsingMethodUtil(this.usesClasses);
 	}
 
 	@Override
@@ -47,38 +50,13 @@ public class ClassMethodVisitor extends ClassVisitor {
 		addAccessLevel(access, method);
 		addArguments((signature == null) ? desc : signature, method);
 		addReturnType((signature == null) ? desc : signature, method);
-		// System.out.println(name + " " + signature + " " + desc);
 		this.legendaryClass.addMethod(method);
 		for (String s : this.usesClasses) {
 			this.legendaryModel.addRelation(this.legendaryClass.getClassName(),
 					s, Relations.USES);
 		}
 		return toDecorateMore;
-	}
-
-	public String typeCollections(String in) {
-		String s = in;
-		if (s.endsWith(")V") || s.endsWith(")Z"))
-			s = s.substring(0, s.lastIndexOf(")"));
-		if (in.contains("<")) {
-			String split1 = s.substring(0, s.indexOf("<"));
-			this.usesClasses.add(split1);
-			String split2 = s.substring(s.indexOf("<") + 1);
-			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
-			String[] split = split2.split(";");
-			for (int i = 0; i < split.length; i++) {
-				String s2 = split[i];
-				s += typeCollections(s2);
-				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
-					s += ", ";
-			}
-		} else
-			this.usesClasses.add(s.substring(s.lastIndexOf("/") + 1).replace(
-					";", ""));
-		s = s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<")
-				.replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
-		return s;
-	}
+	}	
 
 	void addAccessLevel(int access, IMethod method) {
 		String level = "";
@@ -96,30 +74,25 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 	void addReturnType(String desc, IMethod method) {
 		String returnType = desc;
-		if (desc.endsWith(")Z")) {
-			method.setReturnType("boolean");
-			return;
+		if(desc != null) {
+			String retSub = desc.substring(desc.length()-2, desc.length());
+			String val = String.valueOf(retSub.charAt(1));
+			if (retSub.charAt(0) == ')' && this.util.getPrimCheck().containsKey(val)) {
+				method.setReturnType(this.util.getPrimCheck().get(val));
+			} else {
+				returnType = this.util.typeCollections(desc);
+				method.setReturnType(returnType);				
+			}
 		}
-		if (desc.endsWith(")V")) {
-			method.setReturnType("void");
-			return;
-		}
-		if (desc != null) {
-			returnType = typeCollections(desc);
-			method.setReturnType(returnType);
-		}
-
 	}
 
 	void addArguments(String desc, IMethod method) {
 		String s = desc;
-		s = s.substring(0, s.lastIndexOf(";") + 1);
-		List<String> arguments = new ArrayList<String>();
-		String out = (typeCollections(s));
-		// System.out.println(out);
-		for (String arg : out.split(" "))
+		List<String> arguments = new ArrayList<>();
+		List<String> out = this.util.typeArgumentCollections(s);
+		for (String arg : out)
 			arguments.add(arg);
 		method.setParameters(arguments);
 	}
-
+	
 }

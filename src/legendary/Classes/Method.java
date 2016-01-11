@@ -44,9 +44,7 @@ public class Method implements IMethod, ITraverser{
 
 	@Override
 	public void setReturnType(String returnType) {
-		this.methodReturnType = returnType.substring(returnType.lastIndexOf(".")+1);
-		//Mess with the return types here
-		
+		this.methodReturnType = returnType.substring(returnType.lastIndexOf(".")+1);		
 	}
 
 	@Override
@@ -73,7 +71,7 @@ public class Method implements IMethod, ITraverser{
 	public void accept(IVisitor v){
 		v.previsit(this);
 		v.visit(this);
-		v.postvisit(this);		
+		v.postvisit(this);
 	}
 
 }
