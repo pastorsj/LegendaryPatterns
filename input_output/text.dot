@@ -94,7 +94,7 @@ ParsingMethodUtil [
 	+ typeArgumentCollections(String) : List\<String\>\l
 	- convert(List\<String\>) : List\<String\>, List\<String\>\l
 	+ typeCollections(String) : String\l
-	- parsePrimOut(java/lang/String, List\<String\>) : void\l
+	- parsePrimOut(String, List\<String\>) : void\l
 	+ getPrimCheck() : Map\<String, String\>\l
 	- initialize() : void\l
 	}"

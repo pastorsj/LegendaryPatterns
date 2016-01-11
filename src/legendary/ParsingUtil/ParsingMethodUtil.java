@@ -53,7 +53,7 @@ public class ParsingMethodUtil {
 				argSet.remove(i);
 				argSet.remove(i-1);
 				argSet.add(i-1, argGet);
-				finalArgSet = argSet;
+				finalArgSet.set(i-1, argGet);
 				continue;
 			}
 			if(this.returnPrimCheck.containsKey(arg)) {
@@ -61,8 +61,6 @@ public class ParsingMethodUtil {
 			} else if(arg.startsWith("[")) {
 				finalArgSet.add(this.typeCollections(arg.substring(1)) + "[]");
 			} else {
-				//Do type collections stuff
-				//The last holdout
 				finalArgSet.add(this.typeCollections(arg));
 			}
 		}
