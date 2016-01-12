@@ -29,18 +29,20 @@ public class ClassParser {
 	}
 
 	public void makeSDEdit(String classname, String methodname, int depth, IModel model) {
-		StringBuilder sbMethods = new StringBuilder();
-		Set<String> sbClasses = new HashSet<>();
+		StringBuilder builder = new StringBuilder();
 		outerloop: for (IClass c : model.getClasses()) {
 			if (c.getClassName().equals(classname)) {
 				for (IMethod method : c.getMethods().values()) {
 					if (method.getMethodName().equals(methodname)) {
-						ParsingMethodUtil.getCompleteCallStack(model, method, depth, depth, sbMethods, sbClasses);
+						SDEditOutputStream stream = new SDEditOutputStream(model, depth, builder);
+						ITraverser t = (ITraverser) method;
+						t.accept(stream);
 						break outerloop;
 					}
 				}
 			}
 		}
+		System.out.println(builder.toString());
 	}
 
 	public void makeGraphViz(IModel m) throws IOException {
