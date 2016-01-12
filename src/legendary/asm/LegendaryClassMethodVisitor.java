@@ -26,7 +26,7 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 			String desc, boolean itf) {
 		if (name.contains("<init>")) {
 			this.legendaryModel.addRelation(this.legendaryClass.getClassName(), owner, Relations.USES);
-		} else if(owner.startsWith("legendary")) {
+		} else if(owner.startsWith(DesignParser.packageName)) {
 //			System.out.println("\n======Class Name: "+ this.legendaryClass.getClassName());
 //			System.out.println("======Method Insn Owner: " + owner);
 //			System.out.println("======Method description: " + desc);

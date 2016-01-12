@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+
 import legendary.Classes.Class;
 import legendary.Classes.ClassParser;
 import legendary.Classes.Model;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
-
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
 
 /*
  * Modification made by Sam Pastoriza and Jason Lane
@@ -22,9 +22,9 @@ public class DesignParser {
 
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
-			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary"};
-			//	 "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"
-//	 };
+//			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"
+	 };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -58,7 +58,13 @@ public class DesignParser {
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			legendaryModel.addClass(legendaryClass);
 		}
-		legendaryParser.parseModel(legendaryModel);
+//		if (args.length > 0) {
+//			if (args.length != 3) {
+//				throw new IllegalArgumentException();
+//			}
+			legendaryParser.makeSDEdit("ClassMethodVisitor", "visitMethod", 5, legendaryModel);
+//		}
+		legendaryParser.makeGraphViz(legendaryModel);
 	}
 
 	public static List<String> getClassesFromDir(File dir) {
