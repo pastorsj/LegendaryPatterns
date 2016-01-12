@@ -5,34 +5,28 @@ Method [
 	- methodAccess: String\l
 	- methodName: String\l
 	- parameters: List\<String\>\l
+	- methodCallStack: Queue\<List\<String\>\>\l
 	- methodReturnType: String\l
 	|
+	+ setParameters(List\<String\>) : void\l
+	+ addMethodToCallStack(String, String, String) : void\l
 	+ setAccess(String) : void\l
 	+ setMethodName(String) : void\l
-	+ setParameters(List\<String\>) : void\l
-	+ setReturnType(String) : void\l
 	+ getAccess() : String\l
 	+ getMethodName() : String\l
-	+ getParameters() : List\<String\>\l
 	+ getReturnType() : String\l
+	+ setReturnType(String) : void\l
+	+ getParameters() : List\<String\>\l
+	+ getCallStack() : Queue\<List\<String\>\>\l
 	+ accept(IVisitor) : void\l
 	}"
 	]
 VisitorAdapter [
 	label = "{VisitorAdapter|
 	|
-	+ previsit(IModel) : void\l
-	+ visit(IModel) : void\l
-	+ postvisit(IModel) : void\l
-	+ previsit(IClass) : void\l
-	+ visit(IClass) : void\l
-	+ postvisit(IClass) : void\l
-	+ previsit(IMethod) : void\l
-	+ visit(IMethod) : void\l
-	+ postvisit(IMethod) : void\l
+	+ postvisit(IField) : void\l
 	+ previsit(IField) : void\l
 	+ visit(IField) : void\l
-	+ postvisit(IField) : void\l
 	}"
 	]
 ClassFieldVisitor [
@@ -49,29 +43,29 @@ Class [
 	- className: String\l
 	- superClassName: String\l
 	- interfaces: List\<String\>\l
-	- methods: List\<IMethod\>\l
+	- methods: Map\<String, IMethod\>\l
 	- fields: List\<IField\>\l
 	- usesClasses: Set\<String\>\l
 	- associationClasses: Set\<String\>\l
 	- isInterface: boolean\l
 	|
+	+ addUsesClass(String) : void\l
+	+ setInterfaces(List\<String\>) : void\l
+	+ getSuperName() : String\l
+	+ setIsInterface(boolean) : void\l
+	+ addField(IField) : void\l
+	+ getInterfaces() : List\<String\>\l
 	+ setClassName(String) : void\l
 	+ setSuper(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName() : String\l
-	+ getSuperName() : String\l
-	+ getInterfaces() : List\<String\>\l
-	+ getMethods() : List\<IMethod\>\l
-	+ getFields() : List\<IField\>\l
-	+ setIsInterface(boolean) : void\l
-	+ isInterface() : boolean\l
-	+ addUsesClass(String) : void\l
-	+ getUsesClasses() : Set\<String\>\l
-	+ addAssociationClass(String) : void\l
 	+ getAssociationClasses() : Set\<String\>\l
 	+ accept(IVisitor) : void\l
+	+ getFields() : List\<IField\>\l
+	+ addAssociationClass(String) : void\l
+	+ getClassName() : String\l
+	+ getMethods() : Map\<String, IMethod\>\l
+	+ isInterface() : boolean\l
+	+ getUsesClasses() : Set\<String\>\l
+	+ addMethod(IMethod) : void\l
 	}"
 	]
 Model [
@@ -79,10 +73,10 @@ Model [
 	- classList: Set\<IClass\>\l
 	- relations: Map\<List\<String\>, List\<Relations\>\>\l
 	|
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
 	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
 	+ addRelation(String, String, Relations) : void\l
+	+ getClasses() : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
 	+ accept(IVisitor) : void\l
 	}"
 	]
@@ -91,12 +85,12 @@ ParsingMethodUtil [
 	- returnPrimCheck: Map\<String, String\>\l
 	- usesClasses: List\<String\>\l
 	|
-	+ typeArgumentCollections(String) : List\<String\>\l
-	- convert(List\<String\>) : List\<String\>, List\<String\>\l
 	+ typeCollections(String) : String\l
+	- convert(List\<String\>) : List\<String\>, List\<String\>\l
 	- parsePrimOut(String, List\<String\>) : void\l
-	+ getPrimCheck() : Map\<String, String\>\l
 	- initialize() : void\l
+	+ typeArgumentCollections(String) : List\<String\>\l
+	+ getPrimCheck() : Map\<String, String\>\l
 	}"
 	]
 ParsingFieldUtil [
@@ -104,9 +98,9 @@ ParsingFieldUtil [
 	- returnPrimCheck: Map\<String, String\>\l
 	- baseFields: Set\<String\>\l
 	|
-	+ getPrimCheck() : Map\<String, String\>\l
 	+ typeCollections(String) : String\l
 	- initialize() : void\l
+	+ getPrimCheck() : Map\<String, String\>\l
 	}"
 	]
 Field [
@@ -118,26 +112,28 @@ Field [
 	- util: ParsingFieldUtil\l
 	|
 	+ setAccess(String) : void\l
-	+ setFieldName(String) : void\l
-	+ setType(String) : void\l
-	+ getAccess() : String\l
-	+ getFieldName() : String\l
-	+ getType() : String\l
 	+ getBaseTypes() : Set\<String\>\l
+	+ setFieldName(String) : void\l
+	+ getAccess() : String\l
+	+ getType() : String\l
+	+ setType(String) : void\l
+	+ getFieldName() : String\l
 	+ accept(IVisitor) : void\l
 	}"
 	]
 IMethod [
 	label = "{\<\<interface\>\>\nIMethod|
 	|
+	+ setParameters(List\<String\>) : void\l
+	+ addMethodToCallStack(String, String, String) : void\l
 	+ setAccess(String) : void\l
 	+ setMethodName(String) : void\l
-	+ setParameters(List\<String\>) : void\l
-	+ setReturnType(String) : void\l
 	+ getAccess() : String\l
 	+ getMethodName() : String\l
-	+ getParameters() : List\<String\>\l
 	+ getReturnType() : String\l
+	+ setReturnType(String) : void\l
+	+ getParameters() : List\<String\>\l
+	+ getCallStack() : Queue\<List\<String\>\>\l
 	}"
 	]
 Relations [
@@ -148,8 +144,8 @@ Relations [
 	+ ASSOCIATES: Relations\l
 	- ENUM$VALUES: Relations[]\l
 	|
-	+ values() : Relations\l
 	+ valueOf(String) : Relations\l
+	+ values() : Relations\l
 	}"
 	]
 GraphVizOutputStream [
@@ -157,50 +153,45 @@ GraphVizOutputStream [
 	- builder: StringBuilder\l
 	- relationRep: Map\<Relations, String\>\l
 	|
-	- write(String) : void\l
-	+ previsit(IModel) : void\l
-	+ visit(IModel) : void\l
 	- addArrows(IModel) : String\l
-	+ postvisit(IModel) : void\l
-	+ previsit(IClass) : void\l
-	+ visit(IClass) : void\l
 	+ postvisit(IClass) : void\l
-	+ visit(IField) : void\l
+	+ previsit(IClass) : void\l
 	+ visit(IMethod) : void\l
 	+ initialize() : void\l
+	- write(String) : void\l
 	}"
 	]
 IClass [
 	label = "{\<\<interface\>\>\nIClass|
 	|
+	+ addUsesClass(String) : void\l
+	+ setInterfaces(List\<String\>) : void\l
+	+ getSuperName() : String\l
+	+ setIsInterface(boolean) : void\l
+	+ addField(IField) : void\l
+	+ getInterfaces() : List\<String\>\l
 	+ setClassName(String) : void\l
 	+ setSuper(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ addMethod(IMethod) : void\l
-	+ addField(IField) : void\l
-	+ getClassName() : String\l
-	+ getSuperName() : String\l
-	+ getInterfaces() : List\<String\>\l
-	+ getMethods() : List\<IMethod\>\l
-	+ getFields() : List\<IField\>\l
-	+ setIsInterface(boolean) : void\l
-	+ isInterface() : boolean\l
-	+ addUsesClass(String) : void\l
-	+ getUsesClasses() : Set\<String\>\l
-	+ addAssociationClass(String) : void\l
 	+ getAssociationClasses() : Set\<String\>\l
+	+ getFields() : List\<IField\>\l
+	+ addAssociationClass(String) : void\l
+	+ getClassName() : String\l
+	+ getMethods() : Map\<String, IMethod\>\l
+	+ isInterface() : boolean\l
+	+ getUsesClasses() : Set\<String\>\l
+	+ addMethod(IMethod) : void\l
 	}"
 	]
 IField [
 	label = "{\<\<interface\>\>\nIField|
 	|
 	+ setAccess(String) : void\l
-	+ setFieldName(String) : void\l
-	+ setType(String) : void\l
-	+ getAccess() : String\l
-	+ getFieldName() : String\l
-	+ getType() : String\l
 	+ getBaseTypes() : Set\<String\>\l
+	+ setFieldName(String) : void\l
+	+ getAccess() : String\l
+	+ getType() : String\l
+	+ setType(String) : void\l
+	+ getFieldName() : String\l
 	}"
 	]
 ClassMethodVisitor [
@@ -210,10 +201,10 @@ ClassMethodVisitor [
 	- legendaryModel: IModel\l
 	- util: ParsingMethodUtil\l
 	|
-	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
-	 addAccessLevel(int, IMethod) : void\l
-	 addReturnType(String, IMethod) : void\l
 	 addArguments(String, IMethod) : void\l
+	 addAccessLevel(int, IMethod) : void\l
+	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
+	 addReturnType(String, IMethod) : void\l
 	}"
 	]
 ClassDeclarationVisitor [
@@ -228,37 +219,29 @@ LegendaryClassMethodVisitor [
 	label = "{LegendaryClassMethodVisitor|
 	 legendaryClass: IClass\l
 	 legendaryModel: IModel\l
+	 legendaryMethod: IMethod\l
 	|
-	+ visitMethodInsn(int, String, String, String, boolean) : void\l
-	+ visitFieldInsn(int, String, String, String) : void\l
 	+ visitTypeInsn(int, String) : void\l
 	+ visitVarInsn(int, int) : void\l
+	+ visitMethodInsn(int, String, String, String, boolean) : void\l
+	+ visitFieldInsn(int, String, String, String) : void\l
 	}"
 	]
 IVisitor [
 	label = "{\<\<interface\>\>\nIVisitor|
 	|
-	+ previsit(IModel) : void\l
-	+ visit(IModel) : void\l
-	+ postvisit(IModel) : void\l
-	+ previsit(IClass) : void\l
-	+ visit(IClass) : void\l
-	+ postvisit(IClass) : void\l
-	+ previsit(IMethod) : void\l
-	+ visit(IMethod) : void\l
-	+ postvisit(IMethod) : void\l
+	+ postvisit(IField) : void\l
 	+ previsit(IField) : void\l
 	+ visit(IField) : void\l
-	+ postvisit(IField) : void\l
 	}"
 	]
 IModel [
 	label = "{\<\<interface\>\>\nIModel|
 	|
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
 	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
 	+ addRelation(String, String, Relations) : void\l
+	+ getClasses() : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
 	}"
 	]
 ITraverser [
@@ -281,8 +264,8 @@ ClassParser [
 	- classes: Map\<String, IClass\>\l
 	+ instance: ClassParser\l
 	|
-	+ getInstance() : ClassParser\l
 	+ parseModel(IModel) : void\l
+	+ getInstance() : ClassParser\l
 	}"
 	]
 	edge [style = "solid"] [arrowhead = "open"]
@@ -399,6 +382,8 @@ GraphVizOutputStream->VisitorAdapter
 	Field->ParsingFieldUtil
 	edge [style = "dashed"] [arrowhead = "empty"]
 	Method->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryClassMethodVisitor->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->ClassDeclarationVisitor
 	edge [style = "dashed"] [arrowhead = "empty"]

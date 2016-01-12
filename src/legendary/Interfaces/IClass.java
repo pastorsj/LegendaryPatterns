@@ -1,6 +1,7 @@
 package legendary.Interfaces;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /*
@@ -17,7 +18,7 @@ public interface IClass {
 	public String getClassName();
 	public String getSuperName();
 	public List<String> getInterfaces();
-	public List<IMethod> getMethods();
+	public Map<String, IMethod> getMethods();
 	public List<IField> getFields();
 	public void setIsInterface(boolean isInterface);
 	public boolean isInterface();

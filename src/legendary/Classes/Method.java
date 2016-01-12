@@ -1,10 +1,9 @@
 package legendary.Classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Queue;
 
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.ITraverser;
@@ -18,12 +17,14 @@ public class Method implements IMethod, ITraverser{
 	private String methodAccess;
 	private String methodName;
 	private List<String> parameters;
+	private Queue<List<String>> methodCallStack;
 	private String methodReturnType;
 	
 	public Method() {
 		this.methodAccess = "";
 		this.methodName = "";
-		this.parameters = new ArrayList<String>();
+		this.parameters = new ArrayList<>();
+		this.methodCallStack = new LinkedList<>();
 		this.methodReturnType = "";
 	}
 	
@@ -72,6 +73,20 @@ public class Method implements IMethod, ITraverser{
 		v.previsit(this);
 		v.visit(this);
 		v.postvisit(this);
+	}
+
+	@Override
+	public void addMethodToCallStack(String methodOwner, String className, String methodName) {
+		List<String> classToMethod = new ArrayList<>();
+		classToMethod.add(methodOwner);
+		classToMethod.add(className);
+		classToMethod.add(methodName);
+		this.methodCallStack.add(classToMethod);
+	}
+
+	@Override
+	public Queue<List<String>> getCallStack() {
+		return this.methodCallStack;
 	}
 
 }

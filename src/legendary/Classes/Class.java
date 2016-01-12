@@ -1,8 +1,10 @@
 package legendary.Classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import legendary.Interfaces.IClass;
@@ -19,7 +21,7 @@ public class Class implements IClass, ITraverser {
 	private String className;
 	private String superClassName;
 	private List<String> interfaces;
-	private List<IMethod> methods;
+	private Map<String, IMethod> methods;
 	private List<IField> fields;
 	private Set<String> usesClasses;
 	private Set<String> associationClasses;
@@ -29,7 +31,7 @@ public class Class implements IClass, ITraverser {
 		this.className = "";
 		this.superClassName = "";
 		this.interfaces = new ArrayList<String>();
-		this.methods = new ArrayList<IMethod>();
+		this.methods = new HashMap<String, IMethod>();
 		this.fields = new ArrayList<IField>();
 		this.usesClasses = new HashSet<String>();
 		this.associationClasses = new HashSet<String>();
@@ -54,7 +56,7 @@ public class Class implements IClass, ITraverser {
 
 	@Override
 	public void addMethod(IMethod method) {
-		this.methods.add(method);
+		this.methods.put(method.getMethodName(), method);
 	}
 
 	@Override
@@ -78,7 +80,7 @@ public class Class implements IClass, ITraverser {
 	}
 
 	@Override
-	public List<IMethod> getMethods() {
+	public Map<String, IMethod> getMethods() {
 		return this.methods;
 	}
 
@@ -133,7 +135,7 @@ public class Class implements IClass, ITraverser {
 			t.accept(v);
 		}
 		v.visit(this);
-		for(IMethod m : this.methods) {
+		for(IMethod m : this.methods.values()) {
 			ITraverser t = (ITraverser) m;
 			t.accept(v);
 		}

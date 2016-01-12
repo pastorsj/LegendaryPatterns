@@ -19,12 +19,9 @@ import legendary.Interfaces.IVisitor;
  * Author: Sam Pastoriza
  */
 public class ClassParser {
-	private Map<String, IClass> classes;
-
 	public static ClassParser instance;
 	
 	private ClassParser() {
-		this.classes = new HashMap<String, IClass>();
 	}
 	
 	public static ClassParser getInstance(){
@@ -44,6 +41,6 @@ public class ClassParser {
 		writer.close();
 //		Runtime rt = Runtime.getRuntime();
 //		rt.exec("dot -Tpng test.dot -o output.png");
-		System.out.println(builder.toString());
+//		System.out.println(builder.toString());
 	}
 }

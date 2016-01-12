@@ -42,9 +42,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
-		MethodVisitor toDecorateMore = new LegendaryClassMethodVisitor(
-				Opcodes.ASM5, toDecorate, this.legendaryClass,
-				this.legendaryModel);
 		IMethod method = new Method();
 		method.setMethodName(name);
 		addAccessLevel(access, method);
@@ -55,6 +52,9 @@ public class ClassMethodVisitor extends ClassVisitor {
 			this.legendaryModel.addRelation(this.legendaryClass.getClassName(),
 					s, Relations.USES);
 		}
+		MethodVisitor toDecorateMore = new LegendaryClassMethodVisitor(
+				Opcodes.ASM5, toDecorate, this.legendaryClass,
+				this.legendaryModel, method);
 		return toDecorateMore;
 	}	
 
