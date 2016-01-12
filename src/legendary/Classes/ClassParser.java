@@ -3,15 +3,12 @@ package legendary.Classes;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
-import legendary.ParsingUtil.ParsingMethodUtil;
 
 /*
  * Author: Sam Pastoriza
@@ -21,7 +18,7 @@ public class ClassParser {
 
 	private ClassParser() {
 	}
-
+	
 	public static ClassParser getInstance() {
 		if (instance == null)
 			instance = new ClassParser();

@@ -54,10 +54,27 @@ public class SDEditOutputStream extends VisitorAdapter {
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
 				if (c.getClassName().equals(className)) {
-					this.classes.add(className);
+					if (mDetails.get(2).contains("<init>")) {
+						if (classes.contains(className)) {
+							classes.remove(className);
+							classes.add("/" + className);
+						} else
+							classes.add(className);
+					} else if (!classes.contains("/" + className))
+						classes.add(className);
 					IMethod method = c.getMethods().get(mDetails.get(2));
-					this.methodCalls.add(String.format("%s:%s.%s\n",
-							mDetails.get(0), mDetails.get(1), mDetails.get(2)));
+					String s;
+					s = String.format("%s:%s.%s\n", mDetails.get(0), mDetails
+							.get(1),
+							(mDetails.get(2).contains("<init>") ? "new"
+									: mDetails.get(2)));
+
+					if (mDetails.get(0).equals(mDetails.get(1))) {
+						if (!methodCalls.get(methodCalls.size() - 1).equals(s))
+							this.methodCalls.add(s);
+					} else
+						this.methodCalls.add(s);
+
 					ITraverser m2 = (ITraverser) method;
 					m2.accept((IVisitor) this);
 					break;
@@ -71,7 +88,8 @@ public class SDEditOutputStream extends VisitorAdapter {
 		this.depth++;
 		if (this.depth == this.origDepth) {
 			for (String s : this.classes) {
-				this.write(String.format("%s:%s\n", s, s));
+				this.write(String.format("%s:%s\n", s,
+						(s.startsWith("/") ? s.substring(1) : s)));
 			}
 			this.write("\n");
 			for (String s : this.methodCalls) {

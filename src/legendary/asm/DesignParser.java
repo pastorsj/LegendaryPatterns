@@ -5,15 +5,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
-
 import legendary.Classes.Class;
 import legendary.Classes.ClassParser;
 import legendary.Classes.Model;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
+import legendary.ParsingUtil.GeneralUtil;
+
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 /*
  * Modification made by Sam Pastoriza and Jason Lane
@@ -40,7 +41,7 @@ public class DesignParser {
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new Model();
 		for (String dir : directories) {
-			classes.addAll(getClassesFromDir(new File(dir)));
+			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
 		}
 		for (String className : classes) {
 			IClass legendaryClass = new Class();
@@ -62,27 +63,10 @@ public class DesignParser {
 //			if (args.length != 3) {
 //				throw new IllegalArgumentException();
 //			}
-			legendaryParser.makeSDEdit("ClassMethodVisitor", "visitMethod", 5, legendaryModel);
+			legendaryParser.makeSDEdit("DesignParser", "main", 100, legendaryModel);
 //		}
 		legendaryParser.makeGraphViz(legendaryModel);
 	}
 
-	public static List<String> getClassesFromDir(File dir) {
-		ArrayList<String> res = new ArrayList<String>();
-		ArrayList<String> res2 = new ArrayList<String>();
-		if (dir.isDirectory()) {
-			File[] dirFiles = dir.listFiles();
-			for (int i = 0; i < dirFiles.length; i++) {
-				res2.addAll(getClassesFromDir(dirFiles[i]));
-			}
-			for (String r : res2) {
-				r = r.substring(r.lastIndexOf(packageName),
-						(r.contains("java") ? r.lastIndexOf("java") - 1 : r.length())).replace("\\", ".");
-				res.add(r);
-			}
 
-		} else
-			res.add(dir.toString());
-		return res;
-	}
 }
