@@ -6,7 +6,7 @@ import org.objectweb.asm.Opcodes;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Type;
 
-import legendary.Classes.Field;
+import legendary.Classes.LegendaryField;
 import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
@@ -35,7 +35,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 			String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc,
 				signature, value);
-		IField field = new Field();
+		IField field = new LegendaryField();
 		addAccessLevel(access, field);
 		field.setFieldName(name);
 		field.setType((signature == null) ? Type.getType(desc).toString()

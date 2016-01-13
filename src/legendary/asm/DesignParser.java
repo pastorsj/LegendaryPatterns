@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import legendary.Classes.Class;
+import legendary.Classes.LegendaryClass;
 import legendary.Classes.ClassParser;
-import legendary.Classes.Model;
+import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
@@ -39,12 +39,12 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
 		List<String> classes = new ArrayList<String>();
-		IModel legendaryModel = new Model();
+		IModel legendaryModel = new LegendaryModel();
 		for (String dir : directories) {
 			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
 		}
 		for (String className : classes) {
-			IClass legendaryClass = new Class();
+			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
 			ClassReader reader = new ClassReader(className);

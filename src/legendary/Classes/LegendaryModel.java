@@ -12,12 +12,12 @@ import legendary.Interfaces.IModel;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
 
-public class Model implements IModel, ITraverser {
+public class LegendaryModel implements IModel, ITraverser {
 
 	private Set<IClass> classList;
 	private Map<List<String>, List<Relations>> relations;
 
-	public Model() {
+	public LegendaryModel() {
 		this.classList = new HashSet<IClass>();
 		this.relations = new HashMap<>();
 	}
@@ -43,21 +43,24 @@ public class Model implements IModel, ITraverser {
 		al.add(c1.substring(c1.lastIndexOf("/") + 1));
 		al.add(c2.substring(c2.lastIndexOf("/") + 1));
 		if (relations.containsKey(al)) {
+			List<Relations> lr = relations.get(al);
 			if(relations.get(al).contains(r))
 				return;
 			if (r.equals(Relations.ASSOCIATES)) {
-				List<Relations> lr = relations.get(al);
 				lr.remove(Relations.USES);
 				lr.add(Relations.ASSOCIATES);
 				return;
 			}
 			if (r.equals(Relations.USES)) {
-				List<Relations> lr = relations.get(al);
 				if (!lr.contains(Relations.ASSOCIATES))
 					lr.add(Relations.USES);
 				return;
+			} else {
+				lr.add(r);
+				return;
 			}
 		}
+		
 		List<Relations> rl = new ArrayList<>();
 		rl.add(r);
 		relations.put(al, rl);

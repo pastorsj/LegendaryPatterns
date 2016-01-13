@@ -9,9 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import legendary.Classes.Class;
-import legendary.Classes.Field;
-import legendary.Classes.Method;
+import legendary.Classes.LegendaryClass;
+import legendary.Classes.LegendaryField;
+import legendary.Classes.LegendaryMethod;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
@@ -22,7 +22,7 @@ public class ClassTest {
 
 	@Before
 	public void setUp() {
-		this.legendaryTestClass = new Class();
+		this.legendaryTestClass = new LegendaryClass();
 	}
 
 	@After
@@ -56,19 +56,19 @@ public class ClassTest {
 
 	@Test
 	public void testMethod() {
-		IMethod method = new Method();
+		IMethod method = new LegendaryMethod();
 		method.setMethodName("TestMethod");
 		this.legendaryTestClass.addMethod(method);
-		List<IMethod> checkMethod = this.legendaryTestClass.getMethods();
+		List<IMethod> checkMethod = this.legendaryTestClass.getMethodObjects();;
 		assertEquals(method, checkMethod.get(0));
 
 	}
 
 	@Test
 	public void testField() {
-		IField field = new Field();
+		IField field = new LegendaryField();
 		field.setType("String");
-		IField field2 = new Field();
+		IField field2 = new LegendaryField();
 		field2.setType("List<String>");
 		this.legendaryTestClass.addField(field);
 		this.legendaryTestClass.addField(field2);

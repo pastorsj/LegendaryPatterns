@@ -12,22 +12,22 @@ import legendary.Interfaces.IVisitor;
 /*
  * Author: Jason Lane
  */
-public class Method implements IMethod, ITraverser{
+public class LegendaryMethod implements IMethod, ITraverser {
 
 	private String methodAccess;
 	private String methodName;
 	private List<String> parameters;
 	private Queue<List<String>> methodCallStack;
 	private String methodReturnType;
-	
-	public Method() {
+
+	public LegendaryMethod() {
 		this.methodAccess = "";
 		this.methodName = "";
 		this.parameters = new ArrayList<>();
 		this.methodCallStack = new LinkedList<>();
 		this.methodReturnType = "";
 	}
-	
+
 	@Override
 	public void setAccess(String accessType) {
 		this.methodAccess = accessType;
@@ -45,7 +45,7 @@ public class Method implements IMethod, ITraverser{
 
 	@Override
 	public void setReturnType(String returnType) {
-		this.methodReturnType = returnType.substring(returnType.lastIndexOf(".")+1);		
+		this.methodReturnType = returnType.substring(returnType.lastIndexOf(".") + 1);
 	}
 
 	@Override
@@ -67,9 +67,9 @@ public class Method implements IMethod, ITraverser{
 	public String getReturnType() {
 		return this.methodReturnType;
 	}
-	
+
 	@Override
-	public void accept(IVisitor v){
+	public void accept(IVisitor v) {
 		v.previsit(this);
 		v.visit(this);
 		v.postvisit(this);

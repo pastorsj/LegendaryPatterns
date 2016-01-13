@@ -11,7 +11,7 @@ import legendary.ParsingUtil.ParsingFieldUtil;
 /*
  * Authors: Jason Lane, Sam Pastoriza
  */
-public class Field implements IField, ITraverser{
+public class LegendaryField implements IField, ITraverser{
 
 	private String fieldAccessType;
 	private String fieldName;
@@ -19,7 +19,7 @@ public class Field implements IField, ITraverser{
 	private Set<String> baseFields;
 	private ParsingFieldUtil util;
 
-	public Field() {
+	public LegendaryField() {
 		this.fieldAccessType = "";
 		this.fieldName = "";
 		this.fieldType = "";

@@ -7,7 +7,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import legendary.Classes.Method;
+import legendary.Classes.LegendaryMethod;
 import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
@@ -42,7 +42,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc,
 				signature, exceptions);
-		IMethod method = new Method();
+		IMethod method = new LegendaryMethod();
 		method.setMethodName(name);
 		addAccessLevel(access, method);
 		addArguments((signature == null) ? desc : signature, method);

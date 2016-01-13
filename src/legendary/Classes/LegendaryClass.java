@@ -2,10 +2,8 @@ package legendary.Classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
@@ -16,25 +14,21 @@ import legendary.Interfaces.IVisitor;
 /*
  * Author: Jason Lane
  */
-public class Class implements IClass, ITraverser {
+public class LegendaryClass implements IClass, ITraverser {
 
 	private String className;
 	private String superClassName;
 	private List<String> interfaces;
 	private Map<String, IMethod> methods;
 	private List<IField> fields;
-	private Set<String> usesClasses;
-	private Set<String> associationClasses;
 	private boolean isInterface;
 
-	public Class() {
+	public LegendaryClass() {
 		this.className = "";
 		this.superClassName = "";
 		this.interfaces = new ArrayList<String>();
 		this.methods = new HashMap<String, IMethod>();
 		this.fields = new ArrayList<IField>();
-		this.usesClasses = new HashSet<String>();
-		this.associationClasses = new HashSet<String>();
 		this.isInterface = false;
 	}
 
@@ -100,34 +94,6 @@ public class Class implements IClass, ITraverser {
 	}
 
 	@Override
-	public void addUsesClass(String uclass) {
-		if (this.associationClasses.contains(uclass))
-			return;
-		if (!this.usesClasses.contains(uclass)) {
-			this.usesClasses.add(uclass);
-		}
-	}
-
-	@Override
-	public Set<String> getUsesClasses() {
-		return this.usesClasses;
-	}
-
-	@Override
-	public void addAssociationClass(String aclass) {
-		if (this.usesClasses.contains(aclass))
-			usesClasses.remove(aclass);
-		if (!this.associationClasses.contains(aclass)) {
-			this.associationClasses.add(aclass);
-		}
-	}
-
-	@Override
-	public Set<String> getAssociationClasses() {
-		return this.associationClasses;
-	}
-
-	@Override
 	public void accept(IVisitor v) {
 		v.previsit(this);
 		for(IField f : this.fields) {
@@ -140,6 +106,16 @@ public class Class implements IClass, ITraverser {
 			t.accept(v);
 		}
 		v.postvisit(this);		
+	}
+
+	@Override
+	public List<IMethod> getMethodObjects() {
+		// TODO Auto-generated method stub
+		List<IMethod> methodSet = new ArrayList<>();
+		for(IMethod method : this.getMethods().values()) {
+			methodSet.add(method);
+		}
+		return methodSet;
 	}
 
 }

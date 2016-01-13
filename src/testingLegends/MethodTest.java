@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import legendary.Classes.Method;
+import legendary.Classes.LegendaryMethod;
 import legendary.Interfaces.IMethod;
 
 public class MethodTest {
@@ -18,7 +18,7 @@ public class MethodTest {
 	
 	@Before
 	public void setUp() {
-		this.method = new Method();
+		this.method = new LegendaryMethod();
 	}
 	
 	@After

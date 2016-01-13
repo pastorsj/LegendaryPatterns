@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import legendary.Classes.Field;
+import legendary.Classes.LegendaryField;
 import legendary.Interfaces.IField;
 
 public class FieldTest {
@@ -15,7 +15,7 @@ public class FieldTest {
 	
 	@Before
 	public void setUp() {
-		this.field = new Field();
+		this.field = new LegendaryField();
 	}
 	
 	@After

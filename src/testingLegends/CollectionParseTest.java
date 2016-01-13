@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import legendary.Classes.Field;
+import legendary.Classes.LegendaryField;
 
 public class CollectionParseTest {
-	private Field f = new Field();
+	private LegendaryField f = new LegendaryField();
 
 	@Test
 	public void testBasic() {

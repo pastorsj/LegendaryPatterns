@@ -2,7 +2,6 @@ package legendary.Interfaces;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /*
  * Author: Jason Lane
@@ -22,9 +21,6 @@ public interface IClass {
 	public List<IField> getFields();
 	public void setIsInterface(boolean isInterface);
 	public boolean isInterface();
-	public void addUsesClass(String uclass);
-	public Set<String> getUsesClasses();
-	public void addAssociationClass(String aclass);
-	public Set<String> getAssociationClasses();
+	public List<IMethod> getMethodObjects();
 	
 };
