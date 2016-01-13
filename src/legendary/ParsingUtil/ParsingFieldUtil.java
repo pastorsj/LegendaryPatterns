@@ -18,7 +18,7 @@ public class ParsingFieldUtil {
 		return this.returnPrimCheck;
 	}
 	
-	public String typeCollections(String in) {
+	public static String typeCollections(String in) {
 		String s = in;
 		if(s.equals("Z")) {
 			System.out.println("Find me" + s);
