@@ -1,277 +1,7 @@
 digraph G{
 	node [shape = "record"]
-Field [
-	label = "{Field|
-	- fieldAccessType: String\l
-	- fieldName: String\l
-	- fieldType: String\l
-	- baseFields: Set\<String\>\l
-	- util: ParsingFieldUtil\l
-	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-IModel [
-	label = "{\<\<interface\>\>\nIModel|
-	|
-	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	}"
-	]
-DesignParser [
-	label = "{DesignParser|
-	+ packageName: String\l
-	+ directories: String[]\l
-	|
-	+ main(String[]) : void\l
-	}"
-	]
-GeneralUtil [
-	label = "{GeneralUtil|
-	|
-	+ getClassesFromDir(File) : List\<String\>\l
-	}"
-	]
-GraphVizOutputStream [
-	label = "{GraphVizOutputStream|
-	- builder: StringBuilder\l
-	- relationRep: Map\<Relations, String\>\l
-	|
-	- addArrows(IModel) : String\l
-	+ postvisit(IClass) : void\l
-	+ previsit(IClass) : void\l
-	+ visit(IMethod) : void\l
-	+ initialize() : void\l
-	- write(String) : void\l
-	}"
-	]
-IVisitor [
-	label = "{\<\<interface\>\>\nIVisitor|
-	|
-	+ postvisit(IField) : void\l
-	+ previsit(IField) : void\l
-	+ visit(IField) : void\l
-	}"
-	]
-ITraverser [
-	label = "{\<\<interface\>\>\nITraverser|
-	|
-	+ accept(IVisitor) : void\l
-	}"
-	]
-VisitorAdapter [
-	label = "{VisitorAdapter|
-	|
-	+ postvisit(IField) : void\l
-	+ previsit(IField) : void\l
-	+ visit(IField) : void\l
-	}"
-	]
-Class [
-	label = "{Class|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\<String\>\l
-	- methods: Map\<String, IMethod\>\l
-	- fields: List\<IField\>\l
-	- usesClasses: Set\<String\>\l
-	- associationClasses: Set\<String\>\l
-	- isInterface: boolean\l
-	|
-	+ addUsesClass(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ getAssociationClasses() : Set\<String\>\l
-	+ accept(IVisitor) : void\l
-	+ getFields() : List\<IField\>\l
-	+ addAssociationClass(String) : void\l
-	+ getClassName() : String\l
-	+ getMethods() : Map\<String, IMethod\>\l
-	+ isInterface() : boolean\l
-	+ getUsesClasses() : Set\<String\>\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-SDEditOutputStream [
-	label = "{SDEditOutputStream|
-	- model: IModel\l
-	- builder: StringBuilder\l
-	- classes: Set\<String\>\l
-	- methodCalls: List\<String\>\l
-	- depth: int\l
-	- origDepth: int\l
-	|
-	+ postvisit(IMethod) : void\l
-	+ previsit(IMethod) : void\l
-	+ visit(IMethod) : void\l
-	+ write(String) : void\l
-	}"
-	]
-ClassParser [
-	label = "{ClassParser|
-	+ instance: ClassParser\l
-	|
-	+ getInstance() : ClassParser\l
-	+ makeSDEdit(String, String, int, IModel) : void\l
-	+ makeGraphViz(IModel) : void\l
-	}"
-	]
-Relations [
-	label = "{Relations|
-	+ EXTENDS: Relations\l
-	+ IMPLEMENTS: Relations\l
-	+ USES: Relations\l
-	+ ASSOCIATES: Relations\l
-	- ENUM$VALUES: Relations[]\l
-	|
-	+ valueOf(String) : Relations\l
-	+ values() : Relations\l
-	}"
-	]
-ParsingFieldUtil [
-	label = "{ParsingFieldUtil|
-	- returnPrimCheck: Map\<String, String\>\l
-	- baseFields: Set\<String\>\l
-	|
-	+ typeCollections(String) : String\l
-	- initialize() : void\l
-	+ getPrimCheck() : Map\<String, String\>\l
-	}"
-	]
-ClassDeclarationVisitor [
-	label = "{ClassDeclarationVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	|
-	+ visit(int, int, String, String, String, String[]) : void\l
-	}"
-	]
-Model [
-	label = "{Model|
-	- classList: Set\<IClass\>\l
-	- relations: Map\<List\<String\>, List\<Relations\>\>\l
-	|
-	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-ClassMethodVisitor [
-	label = "{ClassMethodVisitor|
-	- usesClasses: List\<String\>\l
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	- util: ParsingMethodUtil\l
-	|
-	 addArguments(String, IMethod) : void\l
-	 addAccessLevel(int, IMethod) : void\l
-	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
-	 addReturnType(String, IMethod) : void\l
-	}"
-	]
-IMethod [
-	label = "{\<\<interface\>\>\nIMethod|
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<String\>\>\l
-	}"
-	]
-IClass [
-	label = "{\<\<interface\>\>\nIClass|
-	|
-	+ addUsesClass(String) : void\l
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ getAssociationClasses() : Set\<String\>\l
-	+ getFields() : List\<IField\>\l
-	+ addAssociationClass(String) : void\l
-	+ getClassName() : String\l
-	+ getMethods() : Map\<String, IMethod\>\l
-	+ isInterface() : boolean\l
-	+ getUsesClasses() : Set\<String\>\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-ParsingMethodUtil [
-	label = "{ParsingMethodUtil|
-	- returnPrimCheck: Map\<String, String\>\l
-	- usesClasses: List\<String\>\l
-	|
-	+ getCompleteCallStack(IModel, IMethod, int, int, StringBuilder, Set\<String\>) : void\l
-	- SDEditFormatClass(IClass) : String\l
-	+ typeCollections(String) : String\l
-	- convert(List\<String\>) : List\<String\>, List\<String\>\l
-	- parsePrimOut(String, List\<String\>) : void\l
-	- initialize() : void\l
-	+ typeArgumentCollections(String) : List\<String\>\l
-	+ getPrimCheck() : Map\<String, String\>\l
-	- SDEditFormatMethod(List\<String\>) : List\<String\>, String\l
-	}"
-	]
-IField [
-	label = "{\<\<interface\>\>\nIField|
-	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	}"
-	]
-ClassFieldVisitor [
-	label = "{ClassFieldVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	|
-	+ visitField(int, String, String, String, Object) : FieldVisitor\l
-	 addAccessLevel(int, IField) : void\l
-	}"
-	]
-LegendaryClassMethodVisitor [
-	label = "{LegendaryClassMethodVisitor|
-	 legendaryClass: IClass\l
-	 legendaryModel: IModel\l
-	 legendaryMethod: IMethod\l
-	|
-	+ visitTypeInsn(int, String) : void\l
-	+ visitVarInsn(int, int) : void\l
-	+ visitMethodInsn(int, String, String, String, boolean) : void\l
-	+ visitFieldInsn(int, String, String, String) : void\l
-	}"
-	]
-Method [
-	label = "{Method|
+LegendaryMethod [
+	label = "{LegendaryMethod|
 	- methodAccess: String\l
 	- methodName: String\l
 	- parameters: List\<String\>\l
@@ -291,30 +21,296 @@ Method [
 	+ accept(IVisitor) : void\l
 	}"
 	]
+IVisitor [
+	label = "{\<\<interface\>\>\nIVisitor|
+	|
+	+ postvisit(IField) : void\l
+	+ previsit(IField) : void\l
+	+ visit(IField) : void\l
+	}"
+	]
+ClassFieldVisitor [
+	label = "{ClassFieldVisitor|
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visitField(int, String, String, String, Object) : FieldVisitor\l
+	 addAccessLevel(int, IField) : void\l
+	}"
+	]
+ClassParser [
+	label = "{ClassParser|
+	+ instance: ClassParser\l
+	|
+	+ getInstance() : ClassParser\l
+	+ makeSDEdit(String, String, int, IModel) : void\l
+	+ makeGraphViz(IModel) : void\l
+	}"
+	]
+ParsingMethodUtil [
+	label = "{ParsingMethodUtil|
+	- returnPrimCheck: Map\<String, String\>\l
+	- usesClasses: List\<String\>\l
+	|
+	+ getCompleteCallStack(IModel, IMethod, int, int, StringBuilder, Set\<String\>) : void\l
+	- SDEditFormatClass(IClass) : String\l
+	+ typeCollections(String) : String\l
+	- convert(List\<String\>) : List\<String\>, List\<String\>\l
+	- parsePrimOut(String, List\<String\>) : void\l
+	- initialize() : void\l
+	+ typeArgumentCollections(String) : List\<String\>\l
+	+ getPrimCheck() : Map\<String, String\>\l
+	- SDEditFormatMethod(List\<String\>) : List\<String\>, String\l
+	}"
+	]
+LegendaryModel [
+	label = "{LegendaryModel|
+	- classList: Set\<IClass\>\l
+	- relations: Map\<List\<String\>, List\<Relations\>\>\l
+	|
+	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addRelation(String, String, Relations) : void\l
+	+ getClasses() : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	+ accept(IVisitor) : void\l
+	}"
+	]
+GeneralUtil [
+	label = "{GeneralUtil|
+	|
+	+ getClassesFromDir(File) : List\<String\>\l
+	}"
+	]
+VisitorAdapter [
+	label = "{VisitorAdapter|
+	|
+	+ postvisit(IField) : void\l
+	+ previsit(IField) : void\l
+	+ visit(IField) : void\l
+	}"
+	]
+ParsingFieldUtil [
+	label = "{ParsingFieldUtil|
+	+ primCodes: Map\<String, String\>\l
+	|
+	+ getBaseFields(String) : Set\<String\>\l
+	+ typeCollections(String) : String\l
+	- replacePrims(String) : String\l
+	}"
+	]
+LegendaryClass [
+	label = "{LegendaryClass|
+	- className: String\l
+	- superClassName: String\l
+	- interfaces: List\<String\>\l
+	- methods: Map\<String, IMethod\>\l
+	- fields: List\<IField\>\l
+	- isInterface: boolean\l
+	|
+	+ setInterfaces(List\<String\>) : void\l
+	+ getSuperName() : String\l
+	+ setIsInterface(boolean) : void\l
+	+ addField(IField) : void\l
+	+ getInterfaces() : List\<String\>\l
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ accept(IVisitor) : void\l
+	+ getFields() : List\<IField\>\l
+	+ getMethodObjects() : List\<IMethod\>\l
+	+ getClassName() : String\l
+	+ getMethods() : Map\<String, IMethod\>\l
+	+ isInterface() : boolean\l
+	+ addMethod(IMethod) : void\l
+	}"
+	]
+IField [
+	label = "{\<\<interface\>\>\nIField|
+	|
+	+ setAccess(String) : void\l
+	+ getBaseTypes() : Set\<String\>\l
+	+ setFieldName(String) : void\l
+	+ getAccess() : String\l
+	+ getType() : String\l
+	+ setType(String) : void\l
+	+ getFieldName() : String\l
+	}"
+	]
+Relations [
+	label = "{Relations|
+	+ EXTENDS: Relations\l
+	+ IMPLEMENTS: Relations\l
+	+ USES: Relations\l
+	+ ASSOCIATES: Relations\l
+	- ENUM$VALUES: Relations[]\l
+	|
+	+ valueOf(String) : Relations\l
+	+ values() : Relations\l
+	}"
+	]
+LegendaryField [
+	label = "{LegendaryField|
+	- fieldAccessType: String\l
+	- fieldName: String\l
+	- fieldType: String\l
+	- baseFields: Set\<String\>\l
+	|
+	+ setAccess(String) : void\l
+	+ getBaseTypes() : Set\<String\>\l
+	+ setFieldName(String) : void\l
+	+ getAccess() : String\l
+	+ getType() : String\l
+	+ setType(String) : void\l
+	+ getFieldName() : String\l
+	+ accept(IVisitor) : void\l
+	}"
+	]
+SDEditOutputStream [
+	label = "{SDEditOutputStream|
+	- model: IModel\l
+	- builder: StringBuilder\l
+	- classes: Set\<String\>\l
+	- methodCalls: List\<String\>\l
+	- depth: int\l
+	- origDepth: int\l
+	|
+	+ postvisit(IMethod) : void\l
+	+ previsit(IMethod) : void\l
+	+ visit(IMethod) : void\l
+	+ write(String) : void\l
+	}"
+	]
+IClass [
+	label = "{\<\<interface\>\>\nIClass|
+	|
+	+ setInterfaces(List\<String\>) : void\l
+	+ getSuperName() : String\l
+	+ setIsInterface(boolean) : void\l
+	+ addField(IField) : void\l
+	+ getInterfaces() : List\<String\>\l
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ getFields() : List\<IField\>\l
+	+ getMethodObjects() : List\<IMethod\>\l
+	+ getClassName() : String\l
+	+ getMethods() : Map\<String, IMethod\>\l
+	+ isInterface() : boolean\l
+	+ addMethod(IMethod) : void\l
+	}"
+	]
+ClassMethodVisitor [
+	label = "{ClassMethodVisitor|
+	- usesClasses: List\<String\>\l
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	- util: ParsingMethodUtil\l
+	|
+	 addArguments(String, IMethod) : void\l
+	 addAccessLevel(int, IMethod) : void\l
+	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
+	 addReturnType(String, IMethod) : void\l
+	}"
+	]
+ClassDeclarationVisitor [
+	label = "{ClassDeclarationVisitor|
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visit(int, int, String, String, String, String[]) : void\l
+	}"
+	]
+LegendaryClassMethodVisitor [
+	label = "{LegendaryClassMethodVisitor|
+	 legendaryClass: IClass\l
+	 legendaryModel: IModel\l
+	 legendaryMethod: IMethod\l
+	|
+	+ visitTypeInsn(int, String) : void\l
+	+ visitVarInsn(int, int) : void\l
+	+ visitMethodInsn(int, String, String, String, boolean) : void\l
+	+ visitFieldInsn(int, String, String, String) : void\l
+	}"
+	]
+ITraverser [
+	label = "{\<\<interface\>\>\nITraverser|
+	|
+	+ accept(IVisitor) : void\l
+	}"
+	]
+IMethod [
+	label = "{\<\<interface\>\>\nIMethod|
+	|
+	+ setParameters(List\<String\>) : void\l
+	+ addMethodToCallStack(String, String, String) : void\l
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getReturnType() : String\l
+	+ setReturnType(String) : void\l
+	+ getParameters() : List\<String\>\l
+	+ getCallStack() : Queue\<List\<String\>\>\l
+	}"
+	]
+IModel [
+	label = "{\<\<interface\>\>\nIModel|
+	|
+	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addRelation(String, String, Relations) : void\l
+	+ getClasses() : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	}"
+	]
+DesignParser [
+	label = "{DesignParser|
+	+ packageName: String\l
+	+ directories: String[]\l
+	|
+	+ main(String[]) : void\l
+	}"
+	]
+GraphVizOutputStream [
+	label = "{GraphVizOutputStream|
+	- builder: StringBuilder\l
+	- relationRep: Map\<Relations, String\>\l
+	|
+	- addArrows(IModel) : String\l
+	+ postvisit(IClass) : void\l
+	+ previsit(IClass) : void\l
+	+ visit(IMethod) : void\l
+	+ initialize() : void\l
+	- write(String) : void\l
+	}"
+	]
 	edge [style = "dashed"] [arrowhead = "open"]
 	IVisitor->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	VisitorAdapter->IField
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClass->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryClass->IVisitor
 	edge [style = "dashed"] [arrowhead = "empty"]
-	Class->ITraverser
+	LegendaryMethod->ITraverser
 	edge [style = "dashed"] [arrowhead = "empty"]
 	VisitorAdapter->IVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	Model->IVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryField->IField
 	edge [style = "solid"] [arrowhead = "empty"]
-SDEditOutputStream->VisitorAdapter
+	SDEditOutputStream->VisitorAdapter
 	edge [style = "dashed"] [arrowhead = "open"]
 	SDEditOutputStream->VisitorAdapter
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Field->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->LegendaryClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	VisitorAdapter->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->ClassMethodVisitor
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Field->ITraverser
 	edge [style = "solid"] [arrowhead = "open"]
 	GraphVizOutputStream->Relations
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassFieldVisitor->LegendaryField
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClass->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	VisitorAdapter->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
@@ -323,34 +319,30 @@ SDEditOutputStream->VisitorAdapter
 	ClassMethodVisitor->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->ClassFieldVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	Class->IField
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Model->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassMethodVisitor->LegendaryClassMethodVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryModel->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryModel->Relations
 	edge [style = "dashed"] [arrowhead = "open"]
 	GraphVizOutputStream->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	ParsingMethodUtil->IModel
-	edge [style = "solid"] [arrowhead = "open"]
-	Model->IClass
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryClass->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassMethodVisitor->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	Method->IVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	Class->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassParser->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	IVisitor->IField
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->Field
-	edge [style = "dashed"] [arrowhead = "open"]
 	ClassParser->GraphVizOutputStream
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassFieldVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryClass->ITraverser
 	edge [style = "dashed"] [arrowhead = "open"]
 	GraphVizOutputStream->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
@@ -363,26 +355,28 @@ SDEditOutputStream->VisitorAdapter
 	LegendaryClassMethodVisitor->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	ParsingMethodUtil->IMethod
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryMethod->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	ITraverser->IVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	Field->ParsingFieldUtil
 	edge [style = "dashed"] [arrowhead = "open"]
 	LegendaryClassMethodVisitor->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->ClassDeclarationVisitor
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Class->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassParser->SDEditOutputStream
 	edge [style = "solid"] [arrowhead = "open"]
-	Model->Relations
+	LegendaryModel->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassMethodVisitor->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	Relations->Relations
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryField->ITraverser
 	edge [style = "dashed"] [arrowhead = "open"]
 	SDEditOutputStream->IModel
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryModel->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassFieldVisitor->IField
 	edge [style = "dashed"] [arrowhead = "open"]
@@ -397,38 +391,32 @@ SDEditOutputStream->VisitorAdapter
 	ClassMethodVisitor->ParsingMethodUtil
 	edge [style = "dashed"] [arrowhead = "open"]
 	GraphVizOutputStream->IField
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Model->ITraverser
 	edge [style = "solid"] [arrowhead = "empty"]
-GraphVizOutputStream->VisitorAdapter
+	GraphVizOutputStream->VisitorAdapter
 	edge [style = "dashed"] [arrowhead = "open"]
 	GraphVizOutputStream->VisitorAdapter
 	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->LegendaryMethod
+	edge [style = "dashed"] [arrowhead = "open"]
 	IClass->IMethod
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Method->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	IClass->IField
 	edge [style = "dashed"] [arrowhead = "open"]
 	VisitorAdapter->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->Model
-	edge [style = "dashed"] [arrowhead = "open"]
 	IVisitor->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	Field->IVisitor
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassParser->ClassParser
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassDeclarationVisitor->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryModel->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->LegendaryModel
+	edge [style = "dashed"] [arrowhead = "open"]
 	IModel->IClass
-	edge [style = "dashed"] [arrowhead = "empty"]
-	Method->ITraverser
 	edge [style = "dashed"] [arrowhead = "open"]
-	Class->IVisitor
+	LegendaryMethod->IVisitor
 	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->Class
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->Method
+	LegendaryField->IVisitor
 }

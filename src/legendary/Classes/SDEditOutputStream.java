@@ -1,6 +1,7 @@
 package legendary.Classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
@@ -51,6 +52,9 @@ public class SDEditOutputStream extends VisitorAdapter {
 			return;
 		Queue<List<String>> callStack = m.getCallStack();
 		for (List<String> mDetails : callStack) {
+			System.out.println(Arrays.toString(mDetails.toArray()));
+			if(mDetails.get(2).contains("visit"))
+				System.out.println("AHHHHHHHHHH\n\n");
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
 				if (c.getClassName().equals(className)) {

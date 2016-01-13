@@ -31,12 +31,16 @@ public class ParsingFieldUtil {
 		if (in.contains("<")) {
 			String split1, split2;
 			split1 = in.substring(0, in.indexOf("<"));
-			split2 = in.substring(in.indexOf("<"), in.indexOf(">"));
+			split2 = in.substring(in.indexOf("<") + 1, (in.contains(">") ? in.indexOf(">") : in.length()));
 			res.add(split1.substring(split1.lastIndexOf("/")));
 			for (String s : split2.split(";"))
 				res.addAll(getBaseFields(s));
-		} else
-			res.add(in.substring(in.lastIndexOf("/"), in.length() - 1));
+		} else {
+			if (res.contains("/"))
+				res.add(in.substring(in.lastIndexOf("/"), in.length() - 1));
+			else
+				res.add(in);
+		}
 		return res;
 	}
 
@@ -59,20 +63,19 @@ public class ParsingFieldUtil {
 				.replace(";", "");
 	}
 
-	//shouldn't be necessary
+	// shouldn't be necessary
 	private static String replacePrims(String s) {
-		System.out.println(s);
 		String res = "";
 		boolean flag = false;
 		for (String s2 : s.split(";")) {
 			if (flag || !primCodes.containsKey(s2.charAt(0) + ""))
-				res += s2+";";
+				res += s2 + ";";
 			else {
 				flag = true;
-				res += primCodes.get(s2.charAt(0)+"") + ";"+s2.substring(1);
+				res += primCodes.get(s2.charAt(0) + "") + ";" + s2.substring(1);
 			}
 		}
-		if(flag)
+		if (flag)
 			return replacePrims(res);
 		return res;
 	}
