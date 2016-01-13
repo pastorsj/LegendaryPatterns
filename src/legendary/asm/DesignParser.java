@@ -23,9 +23,9 @@ public class DesignParser {
 
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
-			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-//	 "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"
-//	 };
+//			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"
+	 };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -63,7 +63,7 @@ public class DesignParser {
 //			if (args.length != 3) {
 //				throw new IllegalArgumentException();
 //			}
-			legendaryParser.makeSDEdit("SDEditOutputStream", "visit", 10, legendaryModel);
+			legendaryParser.makeSDEdit("DesignParser", "main", 10, legendaryModel);
 //		}
 		legendaryParser.makeGraphViz(legendaryModel);
 	}

@@ -52,26 +52,19 @@ public class SDEditOutputStream extends VisitorAdapter {
 			return;
 		Queue<List<String>> callStack = m.getCallStack();
 		for (List<String> mDetails : callStack) {
-			System.out.println(Arrays.toString(mDetails.toArray()));
-			if(mDetails.get(2).contains("visit"))
-				System.out.println("AHHHHHHHHHH\n\n");
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
 				if (c.getClassName().equals(className)) {
 					if (mDetails.get(2).contains("<init>")) {
-						if (classes.contains(className)) {
-							classes.remove(className);
-							classes.add("/" + className);
-						} else
-							classes.add(className);
-					} else if (!classes.contains("/" + className))
+						classes.remove(className);
+						classes.add("/" + className);
+					} else if (!classes.contains("/" + className)) {
 						classes.add(className);
+					}
 					IMethod method = c.getMethods().get(mDetails.get(2));
 					String s;
-					s = String.format("%s:%s.%s\n", mDetails.get(0), mDetails
-							.get(1),
-							(mDetails.get(2).contains("<init>") ? "new"
-									: mDetails.get(2)));
+					s = String.format("%s:%s.%s\n", mDetails.get(0), mDetails.get(1),
+							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)));
 
 					if (mDetails.get(0).equals(mDetails.get(1))) {
 						if (!methodCalls.get(methodCalls.size() - 1).equals(s))
@@ -92,8 +85,7 @@ public class SDEditOutputStream extends VisitorAdapter {
 		this.depth++;
 		if (this.depth == this.origDepth) {
 			for (String s : this.classes) {
-				this.write(String.format("%s:%s\n", s,
-						(s.startsWith("/") ? s.substring(1) : s)));
+				this.write(String.format("%s:%s\n", s, (s.startsWith("/") ? s.substring(1) : s)));
 			}
 			this.write("\n");
 			for (String s : this.methodCalls) {
