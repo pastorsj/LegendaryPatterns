@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import legendary.Classes.LegendaryClass;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+
 import legendary.Classes.ClassParser;
+import legendary.Classes.LegendaryClass;
 import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
-
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
 
 /*
  * Modification made by Sam Pastoriza and Jason Lane

@@ -1,31 +1,50 @@
 package legendary.ParsingUtil;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class ParsingFieldUtil {
-	private Map<String, String> returnPrimCheck;
-	private Set<String> baseFields;
-	
-	public ParsingFieldUtil(Set<String> baseFields) {
-		returnPrimCheck = new HashMap<>();
-		this.baseFields = baseFields;
-		this.initialize();
+	public static Map<String, String> primCodes;
+
+	/*
+	 * Primitive Representations for ASM 5 Primitive representations: 'V' - void
+	 * 'Z' - boolean 'C' - char 'B' - byte 'S' - short 'I' - int 'F' - float 'J'
+	 * - long 'D' - double
+	 */
+	static {
+		primCodes = new HashMap<>();
+		primCodes.put("V", "void");
+		primCodes.put("Z", "boolean");
+		primCodes.put("C", "char");
+		primCodes.put("B", "byte");
+		primCodes.put("S", "short");
+		primCodes.put("I", "int");
+		primCodes.put("F", "float");
+		primCodes.put("J", "long");
+		primCodes.put("D", "double");
 	}
-	
-	public Map<String, String> getPrimCheck() {
-		return this.returnPrimCheck;
+
+	public static Set<String> getBaseFields(String in) {
+		Set<String> res = new HashSet<>();
+		if (in.contains("<")) {
+			String split1, split2;
+			split1 = in.substring(0, in.indexOf("<"));
+			split2 = in.substring(in.indexOf("<"), in.indexOf(">"));
+			res.add(split1.substring(split1.lastIndexOf("/")));
+			for (String s : split2.split(";"))
+				res.addAll(getBaseFields(s));
+		} else
+			res.add(in.substring(in.lastIndexOf("/"), in.length() - 1));
+		return res;
 	}
-	
+
 	public static String typeCollections(String in) {
 		String s = in;
-		if(s.equals("Z")) {
-			System.out.println("Find me" + s);
-		}
+		s = replacePrims(s);
 		if (in.contains("<")) {
 			String split1 = s.substring(0, s.indexOf("<"));
-			this.baseFields.add(split1);
 			String split2 = s.substring(s.indexOf("<") + 1);
 			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
 			String[] split = split2.split(";");
@@ -35,34 +54,26 @@ public class ParsingFieldUtil {
 				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
 					s += ", ";
 			}
-		} else
-			this.baseFields.add(s.substring(s.lastIndexOf("/") + 1));
-		return s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<")
-				.replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
+		}
+		return s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\")
+				.replace(";", "");
 	}
-	
-	/*
-	 * Primitive Representations for ASM 5
-	 * Primitive representations:
-	 * 'V' - void
-	 * 'Z' - boolean
-	 * 'C' - char
-	 * 'B' - byte
-	 * 'S' - short
-	 * 'I' - int
-	 * 'F' - float
-	 * 'J' - long
-	 * 'D' - double
-	 */
-	private void initialize() {
-		this.returnPrimCheck.put("V", "void");
-		this.returnPrimCheck.put("Z", "boolean");
-		this.returnPrimCheck.put("C", "char");
-		this.returnPrimCheck.put("B", "byte");
-		this.returnPrimCheck.put("S", "short");
-		this.returnPrimCheck.put("I", "int");
-		this.returnPrimCheck.put("F", "float");
-		this.returnPrimCheck.put("J", "long");
-		this.returnPrimCheck.put("D", "double");
+
+	//shouldn't be necessary
+	private static String replacePrims(String s) {
+		System.out.println(s);
+		String res = "";
+		boolean flag = false;
+		for (String s2 : s.split(";")) {
+			if (flag || !primCodes.containsKey(s2.charAt(0) + ""))
+				res += s2+";";
+			else {
+				flag = true;
+				res += primCodes.get(s2.charAt(0)+"") + ";"+s2.substring(1);
+			}
+		}
+		if(flag)
+			return replacePrims(res);
+		return res;
 	}
 }

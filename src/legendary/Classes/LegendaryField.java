@@ -1,6 +1,5 @@
 package legendary.Classes;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import legendary.Interfaces.IField;
@@ -17,14 +16,11 @@ public class LegendaryField implements IField, ITraverser{
 	private String fieldName;
 	private String fieldType;
 	private Set<String> baseFields;
-	private ParsingFieldUtil util;
 
 	public LegendaryField() {
 		this.fieldAccessType = "";
 		this.fieldName = "";
 		this.fieldType = "";
-		this.baseFields = new HashSet<String>();
-		this.util = new ParsingFieldUtil(this.baseFields);
 	}
 
 	@Override
@@ -40,20 +36,21 @@ public class LegendaryField implements IField, ITraverser{
 	@Override
 	public void setType(String fieldType) {
 		String s = fieldType;
-		if (this.util.getPrimCheck().containsKey(s)) {
-			this.fieldType = this.util.getPrimCheck().get(s);
+		if (ParsingFieldUtil.primCodes.containsKey(s)) {
+			this.fieldType = ParsingFieldUtil.primCodes.get(s);
 		} else if(s.charAt(0) == '[') {
-			if(this.util.getPrimCheck().containsKey(String.valueOf(s.charAt(1)))) {
-				this.fieldType = this.util.getPrimCheck().get(String.valueOf(s.charAt(1))) + "[]";
+			if(ParsingFieldUtil.primCodes.containsKey(String.valueOf(s.charAt(1)))) {
+				this.fieldType = ParsingFieldUtil.primCodes.get(String.valueOf(s.charAt(1))) + "[]";
 			} else {
-				this.fieldType = this.util.typeCollections(s.substring(1)) + "[]";
+				this.fieldType = ParsingFieldUtil.typeCollections(s.substring(1)) + "[]";
 			}
 		} else {
 			if (fieldType != null) {
-				s = this.util.typeCollections(fieldType);			
+				s = ParsingFieldUtil.typeCollections(fieldType);			
 			}
 			this.fieldType = s;
 		}
+		this.baseFields = ParsingFieldUtil.getBaseFields(fieldType);
 	}
 
 	@Override
