@@ -18,7 +18,6 @@ public class GeneralUtil {
 			for (String r : res2) {
 				r = r.substring(r.lastIndexOf(DesignParser.packageName),
 						(r.contains("java") ? r.lastIndexOf("java") - 1 : r.length())).replace("\\", ".");
-				System.out.println(r);
 				res.add(r);
 			}
 

@@ -3,7 +3,6 @@ package legendary.asm;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.objectweb.asm.ClassReader;
@@ -26,7 +25,7 @@ public class DesignParser {
 	public static final String[] directories = {
 			// "/Users/SamPastoriza/Documents/Programming/Java
 			// Development/LegendaryPatterns/src/legendary" };
-			"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/lib/src/java/util" };
+			"java/util/Collections" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -44,6 +43,7 @@ public class DesignParser {
 		for (String dir : directories) {
 			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
 		}
+//		String[] classes = PackageInspector.getClasses(directories[0], new File(directories[0]));
 		for (String className : classes) {
 			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled

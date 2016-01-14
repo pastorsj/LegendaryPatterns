@@ -70,6 +70,7 @@ public class ParsingFieldUtil {
 		for (String s2 : s.split(";")) {
 			if (flag || !primCodes.containsKey(s2.charAt(0) + ""))
 				res += s2 + ";";
+
 			else {
 				flag = true;
 				res += primCodes.get(s2.charAt(0) + "") + ";" + s2.substring(1);

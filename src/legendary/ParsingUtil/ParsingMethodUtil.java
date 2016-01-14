@@ -50,7 +50,8 @@ public class ParsingMethodUtil {
 
 	private List<String> convert(List<String> argSet) {
 		List<String> finalArgSet = new LinkedList<>();
-		for (int i = 0; i < argSet.size(); i++) {
+		int argSize = argSet.size();
+		for (int i = 0; i < argSize; i++) {
 			String arg = argSet.get(i);
 			if (arg.equals(">")) {
 				String argGet = finalArgSet.get(i - 1) + "\\>";
@@ -58,6 +59,8 @@ public class ParsingMethodUtil {
 				argSet.remove(i - 1);
 				argSet.add(i - 1, argGet);
 				finalArgSet.set(i - 1, argGet);
+				i--;
+				argSize--;
 				continue;
 			}
 			if (this.returnPrimCheck.containsKey(arg)) {
