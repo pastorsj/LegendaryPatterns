@@ -29,8 +29,7 @@ public class ClassParser {
 	}
 
 	public void makeSDEdit(String classname, String methodname, int depth,
-			IModel model) throws IOException {
-		StringBuilder builder = new StringBuilder();
+			IModel model, StringBuilder builder) throws IOException {
 		String params = methodname.substring(methodname.indexOf("(") + 1,
 				methodname.indexOf(")"));
 		methodname = methodname.substring(0, methodname.indexOf("("));
@@ -42,7 +41,6 @@ public class ClassParser {
 		outerloop: for (IClass c : model.getClasses()) {
 			if (c.getClassName().equals(classname)) {
 				for (IMethod method : c.getMethods().values()) {
-					System.out.println(method.getMethodName());
 					List<String> genParams = new ArrayList<>();
 					for (String s : method.getParameters()) {
 						genParams.add((s.contains("<") ? (s.substring(0,

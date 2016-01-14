@@ -70,7 +70,7 @@ public class DesignParser {
 			String arg2 = args[0].substring(args[0].lastIndexOf(".")+1);
 			arg1 = arg1.substring(arg1.lastIndexOf(".")+1);
 			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5),
-					legendaryModel);
+					legendaryModel, new StringBuilder());
 		}
 		legendaryParser.makeGraphViz(legendaryModel);
 	}
