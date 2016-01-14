@@ -21,8 +21,9 @@ public class GeneralUtil {
 				res.add(r);
 			}
 
-		} else
+		} else if(dir.toString().endsWith(".java")) {
 			res.add(dir.toString());
+		}
 		return res;
 	}
 }

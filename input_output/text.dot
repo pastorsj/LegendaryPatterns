@@ -86,4 +86,130 @@ Collections [
 	+ unmodifiableSortedSet(T, :, Object\>, (, SortedSet\<TT\>) : \<Object, SortedSet\<TT\>, SortedSet\<TT\>\l
 	}"
 	]
+AtomicLong [
+	label = "{AtomicLong|
+	- serialVersionUID: long\l
+	- unsafe: Unsafe\l
+	- valueOffset: long\l
+	 VM_SUPPORTS_LONG_CAS: boolean\l
+	- value: long\l
+	|
+	+ getAndIncrement() : long\l
+	+ set(long) : void\l
+	+ incrementAndGet() : long\l
+	+ weakCompareAndSet(long, long) : boolean\l
+	+ intValue() : int\l
+	+ floatValue() : float\l
+	+ decrementAndGet() : long\l
+	+ updateAndGet(LongUnaryOperator) : long\l
+	+ doubleValue() : double\l
+	+ longValue() : long\l
+	+ compareAndSet(long, long) : boolean\l
+	+ get() : long\l
+	+ lazySet(long) : void\l
+	+ getAndAdd(long) : long\l
+	+ addAndGet(long) : long\l
+	+ toString() : String\l
+	+ getAndSet(long) : long\l
+	+ getAndUpdate(LongUnaryOperator) : long\l
+	- VMSupportsCS8() : boolean\l
+	+ getAndDecrement() : long\l
+	+ getAndAccumulate(long, LongBinaryOperator) : long\l
+	+ accumulateAndGet(long, LongBinaryOperator) : long\l
+	}"
+	]
+System [
+	label = "{System|
+	+ in: InputStream\l
+	+ out: PrintStream\l
+	+ err: PrintStream\l
+	- security: SecurityManager\l
+	- cons: Console\l
+	- props: Properties\l
+	- lineSeparator: String\l
+	|
+	- initProperties(Properties) : Properties\l
+	+ setSecurityManager(SecurityManager) : void\l
+	- initializeSystemClass() : void\l
+	+ setProperties(Properties) : void\l
+	- setJavaLangAccess() : void\l
+	- registerNatives() : void\l
+	- setSecurityManager0(SecurityManager) : void\l
+	+ runFinalizersOnExit(boolean) : void\l
+	+ lineSeparator() : String\l
+	+ setOut(PrintStream) : void\l
+	+ clearProperty(String) : String\l
+	- checkIO() : void\l
+	+ identityHashCode(Object) : int\l
+	- newPrintStream(FileOutputStream, String) : PrintStream\l
+	+ load(String) : void\l
+	+ arraycopy(Object, int, Object, int, int) : void\l
+	+ nanoTime() : long\l
+	+ inheritedChannel() : Channel\l
+	+ gc() : void\l
+	+ getenv() : Map\<String, String\>\l
+	+ setErr(PrintStream) : void\l
+	+ console() : Console\l
+	+ loadLibrary(String) : void\l
+	+ setIn(InputStream) : void\l
+	+ getProperty(String, String) : String\l
+	- setErr0(PrintStream) : void\l
+	+ getProperties() : Properties\l
+	- setOut0(PrintStream) : void\l
+	- setIn0(InputStream) : void\l
+	- checkKey(String) : void\l
+	+ getSecurityManager() : SecurityManager\l
+	+ exit(int) : void\l
+	+ mapLibraryName(String) : String\l
+	+ currentTimeMillis() : long\l
+	+ setProperty(String, String) : String\l
+	+ runFinalization() : void\l
+	}"
+	]
+Random [
+	label = "{Random|
+	 serialVersionUID: long\l
+	- seed: AtomicLong\l
+	- multiplier: long\l
+	- addend: long\l
+	- mask: long\l
+	- DOUBLE_UNIT: double\l
+	 BadBound: String\l
+	 BadRange: String\l
+	 BadSize: String\l
+	- seedUniquifier: AtomicLong\l
+	- nextNextGaussian: double\l
+	- haveNextNextGaussian: boolean\l
+	- serialPersistentFields: ObjectStreamField[]\l
+	- unsafe: Unsafe\l
+	- seedOffset: long\l
+	|
+	# next(int) : int\l
+	+ nextFloat() : float\l
+	- resetSeed(long) : void\l
+	- writeObject(ObjectOutputStream) : void\l
+	+ nextInt(int) : int\l
+	+ nextLong() : long\l
+	+ nextDouble() : double\l
+	+ nextGaussian() : double\l
+	+ nextBytes([], byte) : void\l
+	- readObject(ObjectInputStream) : void\l
+	 internalNextLong(long, long) : long\l
+	+ longs(long, long) : LongStream\l
+	- seedUniquifier() : long\l
+	- initialScramble(long) : long\l
+	 internalNextDouble(double, double) : double\l
+	+ ints(int, int) : IntStream\l
+	+ doubles(double, double) : DoubleStream\l
+	+ nextBoolean() : boolean\l
+	+ setSeed(long) : void\l
+	 internalNextInt(int, int) : int\l
+	}"
+	]
+	edge [style = "dashed"] [arrowhead = "open"]
+	Collections->Random
+	edge [style = "dashed"] [arrowhead = "open"]
+	Random->AtomicLong
+	edge [style = "dashed"] [arrowhead = "open"]
+	Random->Random
 }

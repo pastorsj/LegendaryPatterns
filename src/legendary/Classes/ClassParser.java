@@ -46,8 +46,8 @@ public class ClassParser {
 		writer.close();
 		Runtime rt = Runtime.getRuntime();
 		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o ./input_output/SDEoutput.png -t png ./input_output/text.sd");
-//		Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
-		// System.out.println(builder.toString());
+		//Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
+		System.out.println(builder.toString());
 	}
 
 	public void makeGraphViz(IModel m) throws IOException {
@@ -58,8 +58,8 @@ public class ClassParser {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
 		writer.write(builder.toString());
 		writer.close();
-		Runtime rt = Runtime.getRuntime();
-		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
+//		Runtime rt = Runtime.getRuntime();
+//		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
 //		Desktop.getDesktop().open(new File("./input_output/GraphVizoutput.png"));
 		// System.out.println(builder.toString());
 	}
