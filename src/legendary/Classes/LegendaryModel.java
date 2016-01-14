@@ -44,8 +44,6 @@ public class LegendaryModel implements IModel, ITraverser {
 		al.add(c2.substring(c2.lastIndexOf("/") + 1));
 		if (relations.containsKey(al)) {
 			List<Relations> lr = relations.get(al);
-			if(c1.contains("ClassMethodVisitor")&&c2.contains("IClass"))
-				System.out.println(r);
 			if(relations.get(al).contains(r))
 				return;
 			if (r.equals(Relations.ASSOCIATES)) {

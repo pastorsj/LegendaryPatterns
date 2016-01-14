@@ -1,6 +1,7 @@
 package legendary.Classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
@@ -55,7 +56,8 @@ public class SDEditOutputStream extends VisitorAdapter {
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
 				if (c.getClassName().equals(className)) {
-					if (mDetails.get(2).contains("<init>") && !classes.contains(className)) {
+					if (mDetails.get(2).contains("<init>")
+							&& !classes.contains(className)) {
 						if (classes.contains("/" + className))
 							continue;
 						classes.add("/" + className);
@@ -64,12 +66,16 @@ public class SDEditOutputStream extends VisitorAdapter {
 					}
 					IMethod method = c.getMethods().get(mDetails.get(2));
 					String s;
-						
-					s = String.format("%s:%s=%s.%s(%s)\n", mDetails.get(0), mDetails.get(3), mDetails.get(1),
-							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)), mDetails.get(4));
+
+					String params = Arrays.toString(method
+							.getParameters().toArray());
+					s = String.format("%s:%s=%s.%s(%s)\n", mDetails.get(0),
+							method.getReturnType(), mDetails.get(1), (mDetails
+									.get(2).contains("<init>") ? "new"
+									: mDetails.get(2)), params.substring(1, params.length() - 1));
 
 					if (mDetails.get(0).equals(mDetails.get(1))) {
-						if(mDetails.get(2).contains("<init>"))
+						if (mDetails.get(2).contains("<init>"))
 							continue;
 						if (!methodCalls.get(methodCalls.size() - 1).equals(s))
 							this.methodCalls.add(s);
@@ -89,7 +95,8 @@ public class SDEditOutputStream extends VisitorAdapter {
 		this.depth++;
 		if (this.depth == this.origDepth) {
 			for (String s : this.classes) {
-				this.write(String.format("%s:%s\n", s, (s.startsWith("/") ? s.substring(1) : s)));
+				this.write(String.format("%s:%s\n", s,
+						(s.startsWith("/") ? s.substring(1) : s)));
 			}
 			this.write("\n");
 			for (String s : this.methodCalls) {

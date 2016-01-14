@@ -45,7 +45,8 @@ public class LegendaryMethod implements IMethod, ITraverser {
 
 	@Override
 	public void setReturnType(String returnType) {
-		this.methodReturnType = returnType.substring(returnType.lastIndexOf(".") + 1);
+		this.methodReturnType = returnType.substring(returnType
+				.lastIndexOf(".") + 1);
 	}
 
 	@Override
@@ -76,13 +77,12 @@ public class LegendaryMethod implements IMethod, ITraverser {
 	}
 
 	@Override
-	public void addMethodToCallStack(String methodOwner, String className, String methodName, String returnType, String params) {
+	public void addMethodToCallStack(String methodOwner, String className,
+			String methodName) {
 		List<String> classToMethod = new ArrayList<>();
 		classToMethod.add(methodOwner);
 		classToMethod.add(className);
 		classToMethod.add(methodName);
-		classToMethod.add(returnType);
-		classToMethod.add(params);
 		this.methodCallStack.add(classToMethod);
 	}
 

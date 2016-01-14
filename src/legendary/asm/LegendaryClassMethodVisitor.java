@@ -4,7 +4,6 @@ import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
-import legendary.ParsingUtil.ParsingFieldUtil;
 
 import org.objectweb.asm.MethodVisitor;
 
@@ -32,7 +31,6 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 		}
 		// } else if(owner.startsWith(DesignParser.packageName)) {
 		if (owner.startsWith(DesignParser.packageName)) {
-			System.out.println(desc + " " + ParsingFieldUtil.typeCollections(desc));
 			// System.out.println("\n======Class Name: "+
 			// this.legendaryClass.getClassName());
 			// System.out.println("======Method Insn Owner: " + owner);
@@ -41,7 +39,7 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 			// System.out.println("======Owner Class: " + ownerClass);
 			// System.out.println("======Method Name: " + name);
 			this.legendaryMethod.addMethodToCallStack(
-					this.legendaryClass.getClassName(), ownerClass, name, ParsingFieldUtil.typeCollections(desc), "");
+					this.legendaryClass.getClassName(), ownerClass, name);
 		}
 	}
 

@@ -12,7 +12,7 @@ public interface IMethod {
 	public void setMethodName(String methodName);
 	public void setParameters(List<String> parameters);
 	public void setReturnType(String returnType);
-	public void addMethodToCallStack(String methodOwner, String className, String methodName, String returnType, String params);
+	public void addMethodToCallStack(String methodOwner, String className, String methodName);
 	
 	public String getAccess();
 	public String getMethodName();
