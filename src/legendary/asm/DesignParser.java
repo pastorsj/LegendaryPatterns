@@ -24,8 +24,9 @@ public class DesignParser {
 
 	public static final String packageName = "util";
 	public static final String[] directories = {
-			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/JRE System Library/rt.jar/java/util/Collections" };
-//			"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/lib/src/java/util" };
+			// "/Users/SamPastoriza/Documents/Programming/Java
+			// Development/LegendaryPatterns/src/legendary" };
+			"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/lib/src/java/util" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -40,11 +41,10 @@ public class DesignParser {
 		ClassParser legendaryParser = ClassParser.getInstance();
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
-//		for (String dir : directories) {
-//			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
-//		}
-//		for (String className : classes) {
-		String className = "Collections.class";
+		for (String dir : directories) {
+			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
+		}
+		for (String className : classes) {
 			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
@@ -59,14 +59,14 @@ public class DesignParser {
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			legendaryModel.addClass(legendaryClass);
-//		}
+		}
 		if (args.length > 0) {
 			if (args.length != 3 && args.length != 2) {
 				// legendaryParser.makeSDEdit("DesignParser", "main", 5,
 				// legendaryModel);
 				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
 			}
-			legendaryParser.makeSDEdit("Collections.class", "shuffle", (args.length == 3 ? Integer.parseInt(args[2]) : 5),
+			legendaryParser.makeSDEdit(args[0], args[1], (args.length == 3 ? Integer.parseInt(args[2]) : 5),
 					legendaryModel);
 		}
 		legendaryParser.makeGraphViz(legendaryModel);

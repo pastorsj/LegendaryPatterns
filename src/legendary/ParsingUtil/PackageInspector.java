@@ -1,10 +1,9 @@
-package utils;
+package legendary.ParsingUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class PackageInspector {
-//	Sample sourceDir = "C:\\Users\\yangr\\git\\AsianDomination-CSSE374\\AsianDomination\\src";
 
 	private static ArrayList<String> toArrayHelper(String sourceDir, File dir) {
 		ArrayList<String> classList = new ArrayList<String>();
