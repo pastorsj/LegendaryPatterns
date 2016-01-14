@@ -66,7 +66,10 @@ public class DesignParser {
 				// legendaryModel);
 				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
 			}
-			legendaryParser.makeSDEdit(args[0], args[1], (args.length == 3 ? Integer.parseInt(args[2]) : 5),
+			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));
+			String arg2 = args[0].substring(args[0].lastIndexOf(".")+1);
+			arg1 = arg1.substring(arg1.lastIndexOf(".")+1);
+			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5),
 					legendaryModel);
 		}
 		legendaryParser.makeGraphViz(legendaryModel);
