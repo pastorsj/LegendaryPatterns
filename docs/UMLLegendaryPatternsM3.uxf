@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>605</x>
+      <y>205</y>
+      <w>160</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryClass
+--
+-className: String
+-superClassName: String
+-interfaces: List&lt;String&gt;
+-methods: Map&lt;String, IMethod&gt;
+-fields: List&lt;IField&gt;
+-isInterface: boolean
+--
++LegendaryClass(): ctor
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): Map&lt;String, IMethod&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
++accept(IVisitor v): void
++getMethodObjects(): List&lt;IMethod&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>205</y>
+      <w>320</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryMethod
+--
+-methodAccess: String
+-methodName: String
+-parameters: List&lt;String&gt;
+-methodCallStack: Queue&lt;List&lt;String&gt;&gt;
+-methodReturnType: String
+--
++LegendaryMethod(): ctor
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++accept(IVisitor v): void
++addMethodToCallStack(String methodOwner, String className, String methodName): void
++getCallStack(): Queue&lt;List&lt;String&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1855</x>
+      <y>450</y>
+      <w>185</w>
+      <h>145</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::GraphVizOutputStream
+--
+-builder: StringBuilder
+-relationRep: Map&lt;Relations, String&gt;
+--
++GraphVizOutputStream(StringBuilder builder): ctor
+-write(String s): void
++previsit(IModel m): void
++visit(IModel m): void
+-addArrows(IModel m): String
++postvisit(IModel m): void
++previsit(IClass c): void
++visit(IClass c): void
++postvisit(IClass c): void
++visit(IField f): void
++visit(IMethod m): void
++initialize(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1300</x>
+      <y>205</y>
+      <w>145</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryField
+--
+-fieldAccessType: String
+-fieldName: String
+-fieldType: String
+-baseFields: Set&lt;String&gt;
+--
++LegendaryField(): ctor
++setAccess(String fieldAccessType): void
++setFieldName(String fieldName): void
++setType(String fieldType): void
++getAccess(): String
++getFieldName(): String
++getType(): String
++getBaseTypes(): Set&lt;String&gt;
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1550</x>
+      <y>475</y>
+      <w>260</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::SDEditOutputStream
+--
+-model: IModel
+-builder: StringBuilder
+-classes: Set&lt;String&gt;
+-methodCalls: List&lt;String&gt;
+-depth: int
+-origDepth: int
+--
++SDEditOutputStream(IModel model, int depth, StringBuilder builder): ctor
++write(String s): void
++previsit(IMethod m): void
++visit(IMethod m): void
++postvisit(IMethod m): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1100</x>
+      <y>205</y>
+      <w>190</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryModel
+--
+-classList: Set&lt;IClass&gt;
+-relations: Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
+--
++LegendaryModel(): ctor
++getClasses(): Set&lt;IClass&gt;
++addClass(IClass c): void
++getRelations(): Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
++addRelation(String c1, String c2, Relations r): void
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1555</x>
+      <y>215</y>
+      <w>290</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::ClassParser
+--
++instance: ClassParser
+--
+-ClassParser(): ctor
++getInstance(): ClassParser
++makeSDEdit(String classname, String methodname, int depth, IModel model): void
++makeGraphViz(IModel m): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>605</x>
+      <y>465</y>
+      <w>165</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IClass
+--
+--
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): Map&lt;String, IMethod&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
++getMethodObjects(): List&lt;IMethod&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>710</y>
+      <w>110</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IVisitor
+--
+--
++previsit(IModel m): void
++visit(IModel m): void
++postvisit(IModel m): void
++previsit(IClass c): void
++visit(IClass c): void
++postvisit(IClass c): void
++previsit(IMethod m): void
++visit(IMethod m): void
++postvisit(IMethod m): void
++previsit(IField f): void
++visit(IField f): void
++postvisit(IField f): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1745</x>
+      <y>665</y>
+      <w>135</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>/legendary.Interfaces::VisitorAdapter/
+--
+--
++previsit(IModel m): void
++visit(IModel m): void
++postvisit(IModel m): void
++previsit(IClass c): void
++visit(IClass c): void
++postvisit(IClass c): void
++previsit(IMethod m): void
++visit(IMethod m): void
++postvisit(IMethod m): void
++previsit(IField f): void
++visit(IField f): void
++postvisit(IField f): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>775</x>
+      <y>465</y>
+      <w>325</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IMethod
+--
+--
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++addMethodToCallStack(String methodOwner, String className, String methodName): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++getCallStack(): Queue&lt;List&lt;String&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1310</x>
+      <y>465</y>
+      <w>165</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IField
+--
+--
++setAccess(String methodAccessType): void
++setFieldName(String methodName): void
++setType(String methodReturnType): void
++getAccess(): String
++getFieldName(): String
++getType(): String
+~getBaseTypes(): Set&lt;String&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1110</x>
+      <y>465</y>
+      <w>195</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IModel
+--
+--
++getClasses(): Set&lt;IClass&gt;
++addClass(IClass c): void
++getRelations(): Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
++addRelation(String c1, String c2, Relations r): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1125</x>
+      <y>730</y>
+      <w>120</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::ITraverser
+--
+--
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>685</x>
+      <y>0</y>
+      <w>475</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>legendary.ParsingUtil::ParsingMethodUtil
+--
+-returnPrimCheck: Map&lt;String, String&gt;
+-usesClasses: List&lt;String&gt;
+--
++ParsingMethodUtil(List&lt;String&gt; usesClasses): ctor
++typeArgumentCollections(String in): List&lt;String&gt;
+-convert(List&lt;String&gt; argSet): List&lt;String&gt;
++typeCollections(String in): String
+-parsePrimOut(String arg, List&lt;String&gt; argSet): void
++getPrimCheck(): Map&lt;String, String&gt;
+-initialize(): void
++getCompleteCallStack(IModel model, IMethod method, int origDepth, int depth, StringBuilder sbMethods, Set&lt;String&gt; sbClasses): void
+-SDEditFormatMethod(List&lt;String&gt; methodDetails): String
+-SDEditFormatClass(IClass c): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1270</x>
+      <y>75</y>
+      <w>140</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>legendary.ParsingUtil::ParsingFieldUtil
+--
++primCodes: Map&lt;String, String&gt;
+--
++getBaseFields(String in): Set&lt;String&gt;
++typeCollections(String in): String
+-replacePrims(String s): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>25</y>
+      <w>155</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>legendary.ParsingUtil::GeneralUtil
+--
+--
++getClassesFromDir(File dir): List&lt;String&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>350</y>
+      <w>370</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassMethodVisitor
+--
+-usesClasses: List&lt;String&gt;
+-legendaryClass: IClass
+-legendaryModel: IModel
+-util: ParsingMethodUtil
+--
++ClassMethodVisitor(int api): ctor
++ClassMethodVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel): ctor
++visitMethod(int access, String name, String desc, String signature, String[] exceptions): MethodVisitor
+~addAccessLevel(int access, IMethod method): void
+~addReturnType(String desc, IMethod method): void
+~addArguments(String desc, IMethod method): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>510</y>
+      <w>505</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::LegendaryClassMethodVisitor
+--
+~legendaryClass: IClass
+~legendaryModel: IModel
+~legendaryMethod: IMethod
+--
++LegendaryClassMethodVisitor(int api, MethodVisitor decorated, IClass legendaryClass, IModel legendaryModel, IMethod legendaryMethod): ctor
++visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf): void
++visitFieldInsn(int opcode, String owner, String name, String desc): void
++visitTypeInsn(int opcode, String type): void
++visitVarInsn(int opcode, int var): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>650</y>
+      <w>360</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassFieldVisitor
+--
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassFieldVisitor(int api): ctor
++ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel): ctor
++visitField(int access, String name, String desc, String signature, Object value): FieldVisitor
+~addAccessLevel(int access, IField field): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>225</y>
+      <w>365</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassDeclarationVisitor
+--
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassDeclarationVisitor(int api, IClass legendaryClass, IModel legendaryModel): ctor
++visit(int version, int access, String name, String signature, String superName, String[] interfaces): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>110</y>
+      <w>450</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::DesignParser
+--
++packageName = "legendary": String
++directories = { "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" }: String[]
+--
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>695</x>
+      <y>405</y>
+      <w>15</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>375</y>
+      <w>15</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1185</x>
+      <y>295</y>
+      <w>15</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;340.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1395</x>
+      <y>340</y>
+      <w>15</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>405</x>
+      <y>155</y>
+      <w>75</w>
+      <h>205</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;390.0;120.0;260.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>155</y>
+      <w>60</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;140.0;70.0;70.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>485</x>
+      <y>130</y>
+      <w>695</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1370.0;150.0;1370.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>485</x>
+      <y>130</y>
+      <w>130</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>240.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>155</y>
+      <w>125</w>
+      <h>520</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;1020.0;230.0;910.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>280</y>
+      <w>195</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>370.0;370.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>280</y>
+      <w>730</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1440.0;370.0;1390.0;330.0;140.0;290.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>425</x>
+      <y>375</y>
+      <w>190</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>360.0;210.0;120.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>425</x>
+      <y>395</y>
+      <w>710</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1400.0;140.0;1390.0;100.0;120.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>425</x>
+      <y>120</y>
+      <w>680</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1340.0;10.0;220.0;140.0;10.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>425</x>
+      <y>165</y>
+      <w>535</w>
+      <h>245</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1050.0;80.0;780.0;10.0;240.0;70.0;10.0;470.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>450</y>
+      <w>20</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;120.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>580</y>
+      <w>115</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>575</y>
+      <w>340</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>650.0;10.0;660.0;120.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>500</x>
+      <y>525</y>
+      <w>670</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1320.0;10.0;1310.0;160.0;670.0;220.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>590</y>
+      <w>180</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>340.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>525</y>
+      <w>765</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1480.0;10.0;1510.0;170.0;10.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>340</y>
+      <w>1130</w>
+      <h>375</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1800.0;10.0;2240.0;310.0;2040.0;590.0;10.0;730.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>550</y>
+      <w>935</w>
+      <h>145</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1850.0;10.0;1830.0;140.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>385</y>
+      <w>65</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>110.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>385</y>
+      <w>365</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>710.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>745</x>
+      <y>390</y>
+      <w>45</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;640.0;70.0;430.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>385</y>
+      <w>380</w>
+      <h>355</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>740.0;690.0;690.0;330.0;680.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1085</x>
+      <y>370</y>
+      <w>65</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>110.0;720.0;60.0;380.0;50.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1095</x>
+      <y>295</y>
+      <w>60</w>
+      <h>445</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>100.0;870.0;10.0;230.0;20.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1175</x>
+      <y>340</y>
+      <w>370</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;780.0;720.0;670.0;710.0;220.0;470.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>745</x>
+      <y>375</y>
+      <w>325</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;670.0;60.0;90.0;630.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>745</x>
+      <y>295</y>
+      <w>485</w>
+      <h>425</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;830.0;60.0;640.0;70.0;270.0;950.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>575</y>
+      <w>125</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>230.0;10.0;200.0;70.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1095</x>
+      <y>525</y>
+      <w>125</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;110.0;200.0;70.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1645</x>
+      <y>285</y>
+      <w>70</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;380.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1720</x>
+      <y>285</y>
+      <w>250</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>480.0;330.0;330.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1730</x>
+      <y>590</y>
+      <w>80</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1845</x>
+      <y>590</y>
+      <w>75</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1765</x>
+      <y>590</y>
+      <w>55</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>90.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1830</x>
+      <y>590</y>
+      <w>55</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;150.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1235</x>
+      <y>525</y>
+      <w>325</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0;630.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1025</x>
+      <y>575</y>
+      <w>535</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;20.0;70.0;1050.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1245</x>
+      <y>525</y>
+      <w>620</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0;870.0;160.0;1220.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>695</x>
+      <y>590</y>
+      <w>1175</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>30.0;30.0;10.0;130.0;700.0;60.0;2330.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1435</x>
+      <y>350</y>
+      <w>435</w>
+      <h>195</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;230.0;320.0;10.0;750.0;160.0;850.0;370.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1280</x>
+      <y>285</y>
+      <w>315</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;360.0;610.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>505</x>
+      <y>50</y>
+      <w>190</w>
+      <h>425</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>330.0;830.0;90.0;650.0;10.0;290.0;360.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>515</x>
+      <y>50</y>
+      <w>270</w>
+      <h>425</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>520.0;830.0;220.0;750.0;80.0;640.0;10.0;310.0;340.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>525</x>
+      <y>50</y>
+      <w>630</w>
+      <h>425</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1230.0;830.0;1240.0;740.0;220.0;770.0;80.0;660.0;10.0;330.0;320.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>55</y>
+      <w>40</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1355</x>
+      <y>130</y>
+      <w>30</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;150.0</additional_attributes>
+  </element>
+</diagram>
