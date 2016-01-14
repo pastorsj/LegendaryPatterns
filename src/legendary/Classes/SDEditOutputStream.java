@@ -1,7 +1,6 @@
 package legendary.Classes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
@@ -42,7 +41,8 @@ public class SDEditOutputStream extends VisitorAdapter {
 		if (this.depth == 0)
 			return;
 		Queue<List<String>> callStack = m.getCallStack();
-		if (!callStack.isEmpty() && !callStack.peek().isEmpty())
+		if (!callStack.isEmpty() && !callStack.peek().isEmpty()
+				&& !this.classes.contains("/" + callStack.peek().get(0)))
 			this.classes.add(callStack.peek().get(0));
 	}
 
@@ -55,18 +55,22 @@ public class SDEditOutputStream extends VisitorAdapter {
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
 				if (c.getClassName().equals(className)) {
-					if (mDetails.get(2).contains("<init>")) {
-						classes.remove(className);
+					if (mDetails.get(2).contains("<init>") && !classes.contains(className)) {
+						if (classes.contains("/" + className))
+							continue;
 						classes.add("/" + className);
 					} else if (!classes.contains("/" + className)) {
 						classes.add(className);
 					}
 					IMethod method = c.getMethods().get(mDetails.get(2));
 					String s;
+						
 					s = String.format("%s:%s.%s\n", mDetails.get(0), mDetails.get(1),
 							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)));
 
 					if (mDetails.get(0).equals(mDetails.get(1))) {
+						if(mDetails.get(2).contains("<init>"))
+							continue;
 						if (!methodCalls.get(methodCalls.size() - 1).equals(s))
 							this.methodCalls.add(s);
 					} else
