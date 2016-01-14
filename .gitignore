@@ -1,4 +1,5 @@
 
 *.class
 *.DS_Store
-input_output/text.dot
+lib/GraphViz2.38
+lib/src

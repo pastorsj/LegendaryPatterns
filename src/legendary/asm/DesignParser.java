@@ -3,6 +3,7 @@ package legendary.asm;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.objectweb.asm.ClassReader;
@@ -21,11 +22,11 @@ import legendary.ParsingUtil.GeneralUtil;
  */
 public class DesignParser {
 
-	public static final String packageName = "legendary";
+	public static final String packageName = "util";
 	public static final String[] directories = {
-//			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"
-	 };
+			// "/Users/SamPastoriza/Documents/Programming/Java
+			// Development/LegendaryPatterns/src/legendary" };
+			"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/lib/src/java/util" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -59,14 +60,16 @@ public class DesignParser {
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			legendaryModel.addClass(legendaryClass);
 		}
-//		if (args.length > 0) {
-//			if (args.length != 3) {
-//				throw new IllegalArgumentException();
-//			}
-			legendaryParser.makeSDEdit("DesignParser", "main", 10, legendaryModel);
-//		}
+		if (args.length > 0) {
+			if (args.length != 3 && args.length != 2) {
+				// legendaryParser.makeSDEdit("DesignParser", "main", 5,
+				// legendaryModel);
+				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
+			}
+			legendaryParser.makeSDEdit(args[0], args[1], (args.length == 3 ? Integer.parseInt(args[2]) : 5),
+					legendaryModel);
+		}
 		legendaryParser.makeGraphViz(legendaryModel);
 	}
-
 
 }
