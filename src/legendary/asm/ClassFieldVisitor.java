@@ -1,5 +1,7 @@
 package legendary.asm;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
@@ -42,8 +44,11 @@ public class ClassFieldVisitor extends ClassVisitor {
 				: signature);
 		legendaryClass.addField(field);
 		for (String s : field.getBaseTypes()) {
+			if(legendaryClass.getClassName().equals("LegendaryModel"))
+				System.out.println(s);
 			legendaryModel.addRelation(legendaryClass.getClassName(), s,
 					Relations.ASSOCIATES);
+//			System.out.println(s);
 		}
 		return toDecorate;
 	};

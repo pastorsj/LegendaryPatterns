@@ -2,6 +2,9 @@ package testingLegends;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Test;
 
 import legendary.ParsingUtil.ParsingFieldUtil;
@@ -12,6 +15,9 @@ public class CollectionParseTest {
 	public void testBasic() {
 		String s = "Ljava/lang/String;";
 		assertEquals("String", ParsingFieldUtil.typeCollections(s));
+		Set<String> test = new HashSet<>();
+		test.add("IClass");
+		assertEquals(test, ParsingFieldUtil.getBaseFields("Llegendary/Interfaces/IClass;"));
 	}
 
 	@Test

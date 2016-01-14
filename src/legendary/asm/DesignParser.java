@@ -24,8 +24,8 @@ public class DesignParser {
 
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
-			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-//			"java.util.Collections" };
+//			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+			"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -38,14 +38,13 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
-		//List<String> classes = new ArrayList<String>();
-		// List<String> classes = new ArrayList<String>();
+		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
-		// for (String dir : directories) {
-		// classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
-		// }
-		String[] classes = new String[] { "java/util/Collections", "java/util/Random", "java/lang/System",
-		"java/util/concurrent/atomic/AtomicLong" };
+		 for (String dir : directories) {
+		 classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
+		 }
+//		String[] classes = new String[] { "java/util/Collections", "java/util/Random", "java/lang/System",
+//		"java/util/concurrent/atomic/AtomicLong" };
 		for (String className : classes) {
 			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled

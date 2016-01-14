@@ -27,18 +27,21 @@ public class ParsingFieldUtil {
 	}
 
 	public static Set<String> getBaseFields(String in) {
+		if(in.equals("Ljava/util/Set<Llegendary/Interfaces/IClass;>;"))
+			System.out.println();
 		Set<String> res = new HashSet<>();
 		if (in.contains("<")) {
 			String split1, split2;
 			split1 = in.substring(0, in.indexOf("<"));
 			split2 = in.substring(in.indexOf("<") + 1, (in.contains(">") ? in.indexOf(">") : in.length()));
 			res.add(split1.substring(split1.lastIndexOf("/")));
-			for (String s : split2.split(";"))
+			for (String s : split2.split(";")) {
 				res.addAll(getBaseFields(s));
+			}
 		} else {
-			if (res.contains("/"))
-				res.add(in.substring(in.lastIndexOf("/"), in.length() - 1));
-			else
+			if (in.contains("/")) {
+				res.add(in.substring(in.lastIndexOf("/") + 1).replace(";", ""));
+			} else
 				res.add(in);
 		}
 		return res;

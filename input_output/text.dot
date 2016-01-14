@@ -1,215 +1,422 @@
 digraph G{
 	node [shape = "record"]
-Collections [
-	label = "{Collections|
-	- BINARYSEARCH_THRESHOLD: int\l
-	- REVERSE_THRESHOLD: int\l
-	- SHUFFLE_THRESHOLD: int\l
-	- FILL_THRESHOLD: int\l
-	- ROTATE_THRESHOLD: int\l
-	- COPY_THRESHOLD: int\l
-	- REPLACEALL_THRESHOLD: int\l
-	- INDEXOFSUBLIST_THRESHOLD: int\l
-	- r: Random\l
-	+ EMPTY_SET: Set\l
-	+ EMPTY_LIST: List\l
-	+ EMPTY_MAP: Map\l
+LegendaryModel [
+	label = "{LegendaryModel|
+	- classList: Set\<IClass\>\l
+	- relations: Map\<List\<String\>, List\<Relations\>\>\l
 	|
-	+ rotate(List\<*\>, int) : void\l
-	+ emptyIterator(T, :, Object\>, () : \<Object, Iterator\<TT\>\l
-	+ emptyNavigableSet(E, :, Object\>, () : \<Object, NavigableSet\<TE\>\l
-	+ newSetFromMap(E, :, Object\>, (, Map\<TE, Boolean\>) : \<Object, Map\<TE, Boolean\>, Set\<TE\>\l
-	+ indexOfSubList(List\<*\>, List\<*\>) : int\l
-	+ frequency(Collection\<*\>, Object) : int\l
-	+ unmodifiableCollection(T, :, Object\>, (, Collection\<+TT\>) : \<Object, Collection\<+TT\>, Collection\<TT\>\l
-	+ checkedNavigableSet(E, :, Object\>, (, NavigableSet\<TE\>, Class\<TE\>) : \<Object, NavigableSet\<TE\>, Class\<TE\>, NavigableSet\<TE\>\l
-	+ checkedSortedMap(K, :, Object, void, :, Object\>, (, SortedMap\<TK, T, void\>, Class\<TK\>, Class\<TV\>) : \<Object, Object, SortedMap\<TK, TV\>, Class\<TK\>, Class\<TV\>, SortedMap\<TK, TV\>\l
-	- indexedBinarySearch(T, :, Object\>, (, List\<+TT\>, T, T, Comparator\<-TT\>) : int\l
-	+ checkedSortedSet(E, :, Object\>, (, SortedSet\<TE\>, Class\<TE\>) : \<Object, SortedSet\<TE\>, Class\<TE\>, SortedSet\<TE\>\l
-	+ checkedNavigableMap(K, :, Object, void, :, Object\>, (, NavigableMap\<TK, T, void\>, Class\<TK\>, Class\<TV\>) : \<Object, Object, NavigableMap\<TK, TV\>, Class\<TK\>, Class\<TV\>, NavigableMap\<TK, TV\>\l
-	+ singletonMap(K, :, Object, void, :, Object\>, (, T, K, T, void) : \<Object, Object, \>(TK, TV, Map\<TK, TV\>\l
-	+ disjoint(Collection\<*\>, Collection\<*\>) : boolean\l
-	+ enumeration(T, :, Object\>, (, Collection\<TT\>) : \<Object, Collection\<TT\>, Enumeration\<TT\>\l
-	- iteratorBinarySearch(T, :, Object\>, (, List\<+TT\>, T, T, Comparator\<-TT\>) : int\l
-	+ unmodifiableNavigableSet(T, :, Object\>, (, NavigableSet\<TT\>) : \<Object, NavigableSet\<TT\>, NavigableSet\<TT\>\l
-	+ emptyNavigableMap(K, :, Object, void, :, Object\>, () : \<Object, Object, NavigableMap\<TK, TV\>\l
-	+ emptyEnumeration(T, :, Object\>, () : \<Object, Enumeration\<TT\>\l
-	+ synchronizedNavigableMap(K, :, Object, void, :, Object\>, (, NavigableMap\<TK, T, void\>) : \<Object, Object, NavigableMap\<TK, TV\>, NavigableMap\<TK, TV\>\l
-	 singletonIterator(E, :, Object\>, (, T, E) : \<Object, \>(TE, Iterator\<TE\>\l
-	+ synchronizedSortedSet(T, :, Object\>, (, SortedSet\<TT\>) : \<Object, SortedSet\<TT\>, SortedSet\<TT\>\l
-	- swap(Object[], int, int) : void\l
-	+ checkedCollection(E, :, Object\>, (, Collection\<TE\>, Class\<TE\>) : \<Object, Collection\<TE\>, Class\<TE\>, Collection\<TE\>\l
-	+ sort(T, :, Object\>, (, List\<TT\>, Comparator\<-TT\>) : void\l
-	+ fill(T, :, Object\>, (, List\<-TT\>, T, T) : void\l
-	+ synchronizedNavigableSet(T, :, Object\>, (, NavigableSet\<TT\>) : \<Object, NavigableSet\<TT\>, NavigableSet\<TT\>\l
-	+ list(T, :, Object\>, (, Enumeration\<TT\>) : \<Object, Enumeration\<TT\>, ArrayList\<TT\>\l
-	 eq(Object, Object) : boolean\l
-	+ unmodifiableMap(K, :, Object, void, :, Object\>, (, Map\<+TK, +, T, void\>) : \<Object, Object, Map\<+TK, +TV\>, Map\<TK, TV\>\l
-	 zeroLengthArray(T, :, Object\>, (, Class\<TT\>) : \<Object, Class\<TT\>, )[TT\l
-	+ unmodifiableList(T, :, Object\>, (, List\<+TT\>) : \<Object, List\<+TT\>, List\<TT\>\l
-	+ lastIndexOfSubList(List\<*\>, List\<*\>) : int\l
-	- rotate1(T, :, Object\>, (, List\<TT\>, int) : void\l
-	- rotate2(List\<*\>, int) : void\l
-	+ asLifoQueue(T, :, Object\>, (, Deque\<TT\>) : \<Object, Deque\<TT\>, Queue\<TT\>\l
-	+ synchronizedSortedMap(K, :, Object, void, :, Object\>, (, SortedMap\<TK, T, void\>) : \<Object, Object, SortedMap\<TK, TV\>, SortedMap\<TK, TV\>\l
-	+ emptySet(T, :, Object\>, () : \<Object, Set\<TT\>\l
-	+ reverseOrder(T, :, Object\>, (, Comparator\<TT\>) : \<Object, Comparator\<TT\>, Comparator\<TT\>\l
-	 synchronizedCollection(T, :, Object\>, (, Collection\<TT\>, Object) : \<Object, Collection\<TT\>, Object, Collection\<TT\>\l
-	+ binarySearch(T, :, Object\>, (, List\<+TT\>, T, T, Comparator\<-TT\>) : int\l
-	+ replaceAll(T, :, Object\>, (, List\<TT\>, T, T, T, T) : boolean\l
-	+ checkedMap(K, :, Object, void, :, Object\>, (, Map\<TK, T, void\>, Class\<TK\>, Class\<TV\>) : \<Object, Object, Map\<TK, TV\>, Class\<TK\>, Class\<TV\>, Map\<TK, TV\>\l
-	+ emptyList(T, :, Object\>, () : \<Object, List\<TT\>\l
-	+ min(T, :, Object\>, (, Collection\<+TT\>, Comparator\<-TT\>) : \<Object, Collection\<+TT\>, Comparator\<-TT\>, )TT\l
-	+ unmodifiableSet(T, :, Object\>, (, Set\<+TT\>) : \<Object, Set\<+TT\>, Set\<TT\>\l
-	- get(T, :, Object\>, (, ListIterator\<+TT\>, int) : \<Object, ListIterator\<+TT\>, I)TT\l
-	+ emptyMap(K, :, Object, void, :, Object\>, () : \<Object, Object, Map\<TK, TV\>\l
-	 synchronizedList(T, :, Object\>, (, List\<TT\>, Object) : \<Object, List\<TT\>, Object, List\<TT\>\l
-	+ copy(T, :, Object\>, (, List\<-TT\>, List\<+TT\>) : void\l
-	+ checkedSet(E, :, Object\>, (, Set\<TE\>, Class\<TE\>) : \<Object, Set\<TE\>, Class\<TE\>, Set\<TE\>\l
-	+ singleton(T, :, Object\>, (, T, T) : \<Object, \>(TT, Set\<TT\>\l
-	+ synchronizedMap(K, :, Object, void, :, Object\>, (, Map\<TK, T, void\>) : \<Object, Object, Map\<TK, TV\>, Map\<TK, TV\>\l
-	+ unmodifiableNavigableMap(K, :, Object, void, :, Object\>, (, NavigableMap\<TK, +, T, void\>) : \<Object, Object, NavigableMap\<TK, +TV\>, NavigableMap\<TK, TV\>\l
-	 synchronizedSet(T, :, Object\>, (, Set\<TT\>, Object) : \<Object, Set\<TT\>, Object, Set\<TT\>\l
-	+ max(T, :, Object\>, (, Collection\<+TT\>, Comparator\<-TT\>) : \<Object, Collection\<+TT\>, Comparator\<-TT\>, )TT\l
-	+ singletonList(T, :, Object\>, (, T, T) : \<Object, \>(TT, List\<TT\>\l
-	+ reverse(List\<*\>) : void\l
-	 singletonSpliterator(T, :, Object\>, (, T, T) : \<Object, \>(TT, Spliterator\<TT\>\l
-	+ checkedList(E, :, Object\>, (, List\<TE\>, Class\<TE\>) : \<Object, List\<TE\>, Class\<TE\>, List\<TE\>\l
-	+ emptySortedMap(K, :, Object, void, :, Object\>, () : \<Object, Object, SortedMap\<TK, TV\>\l
-	+ nCopies(T, :, Object\>, (, int, T, T) : \<Object, \>(ITT, List\<TT\>\l
-	+ unmodifiableSortedMap(K, :, Object, void, :, Object\>, (, SortedMap\<TK, +, T, void\>) : \<Object, Object, SortedMap\<TK, +TV\>, SortedMap\<TK, TV\>\l
-	+ emptyListIterator(T, :, Object\>, () : \<Object, ListIterator\<TT\>\l
-	+ addAll(T, :, Object\>, (, Collection\<-TT\>, [], T, T) : boolean\l
-	+ checkedQueue(E, :, Object\>, (, Queue\<TE\>, Class\<TE\>) : \<Object, Queue\<TE\>, Class\<TE\>, Queue\<TE\>\l
-	+ emptySortedSet(E, :, Object\>, () : \<Object, SortedSet\<TE\>\l
-	+ shuffle(List\<*\>, Random) : void\l
-	+ unmodifiableSortedSet(T, :, Object\>, (, SortedSet\<TT\>) : \<Object, SortedSet\<TT\>, SortedSet\<TT\>\l
+	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addRelation(String, String, Relations) : void\l
+	+ getClasses() : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	+ accept(IVisitor) : void\l
 	}"
 	]
-AtomicLong [
-	label = "{AtomicLong|
-	- serialVersionUID: long\l
-	- unsafe: Unsafe\l
-	- valueOffset: long\l
-	 VM_SUPPORTS_LONG_CAS: boolean\l
-	- value: long\l
+VisitorAdapter [
+	label = "{VisitorAdapter|
 	|
-	+ getAndIncrement() : long\l
-	+ set(long) : void\l
-	+ incrementAndGet() : long\l
-	+ weakCompareAndSet(long, long) : boolean\l
-	+ intValue() : int\l
-	+ floatValue() : float\l
-	+ decrementAndGet() : long\l
-	+ updateAndGet(LongUnaryOperator) : long\l
-	+ doubleValue() : double\l
-	+ longValue() : long\l
-	+ compareAndSet(long, long) : boolean\l
-	+ get() : long\l
-	+ lazySet(long) : void\l
-	+ getAndAdd(long) : long\l
-	+ addAndGet(long) : long\l
-	+ toString() : String\l
-	+ getAndSet(long) : long\l
-	+ getAndUpdate(LongUnaryOperator) : long\l
-	- VMSupportsCS8() : boolean\l
-	+ getAndDecrement() : long\l
-	+ getAndAccumulate(long, LongBinaryOperator) : long\l
-	+ accumulateAndGet(long, LongBinaryOperator) : long\l
+	+ postvisit(IField) : void\l
+	+ previsit(IField) : void\l
+	+ visit(IField) : void\l
 	}"
 	]
-System [
-	label = "{System|
-	+ in: InputStream\l
-	+ out: PrintStream\l
-	+ err: PrintStream\l
-	- security: SecurityManager\l
-	- cons: Console\l
-	- props: Properties\l
-	- lineSeparator: String\l
+ClassMethodVisitor [
+	label = "{ClassMethodVisitor|
+	- usesClasses: List\<String\>\l
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	- util: ParsingMethodUtil\l
 	|
-	- initProperties(Properties) : Properties\l
-	+ setSecurityManager(SecurityManager) : void\l
-	- initializeSystemClass() : void\l
-	+ setProperties(Properties) : void\l
-	- setJavaLangAccess() : void\l
-	- registerNatives() : void\l
-	- setSecurityManager0(SecurityManager) : void\l
-	+ runFinalizersOnExit(boolean) : void\l
-	+ lineSeparator() : String\l
-	+ setOut(PrintStream) : void\l
-	+ clearProperty(String) : String\l
-	- checkIO() : void\l
-	+ identityHashCode(Object) : int\l
-	- newPrintStream(FileOutputStream, String) : PrintStream\l
-	+ load(String) : void\l
-	+ arraycopy(Object, int, Object, int, int) : void\l
-	+ nanoTime() : long\l
-	+ inheritedChannel() : Channel\l
-	+ gc() : void\l
-	+ getenv() : Map\<String, String\>\l
-	+ setErr(PrintStream) : void\l
-	+ console() : Console\l
-	+ loadLibrary(String) : void\l
-	+ setIn(InputStream) : void\l
-	+ getProperty(String, String) : String\l
-	- setErr0(PrintStream) : void\l
-	+ getProperties() : Properties\l
-	- setOut0(PrintStream) : void\l
-	- setIn0(InputStream) : void\l
-	- checkKey(String) : void\l
-	+ getSecurityManager() : SecurityManager\l
-	+ exit(int) : void\l
-	+ mapLibraryName(String) : String\l
-	+ currentTimeMillis() : long\l
-	+ setProperty(String, String) : String\l
-	+ runFinalization() : void\l
+	 addArguments(String, IMethod) : void\l
+	 addAccessLevel(int, IMethod) : void\l
+	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
+	 addReturnType(String, IMethod) : void\l
 	}"
 	]
-Random [
-	label = "{Random|
-	 serialVersionUID: long\l
-	- seed: AtomicLong\l
-	- multiplier: long\l
-	- addend: long\l
-	- mask: long\l
-	- DOUBLE_UNIT: double\l
-	 BadBound: String\l
-	 BadRange: String\l
-	 BadSize: String\l
-	- seedUniquifier: AtomicLong\l
-	- nextNextGaussian: double\l
-	- haveNextNextGaussian: boolean\l
-	- serialPersistentFields: ObjectStreamField[]\l
-	- unsafe: Unsafe\l
-	- seedOffset: long\l
+GraphVizOutputStream [
+	label = "{GraphVizOutputStream|
+	- builder: StringBuilder\l
+	- relationRep: Map\<Relations, String\>\l
 	|
-	# next(int) : int\l
-	+ nextFloat() : float\l
-	- resetSeed(long) : void\l
-	- writeObject(ObjectOutputStream) : void\l
-	+ nextInt(int) : int\l
-	+ nextLong() : long\l
-	+ nextDouble() : double\l
-	+ nextGaussian() : double\l
-	+ nextBytes([], byte) : void\l
-	- readObject(ObjectInputStream) : void\l
-	 internalNextLong(long, long) : long\l
-	+ longs(long, long) : LongStream\l
-	- seedUniquifier() : long\l
-	- initialScramble(long) : long\l
-	 internalNextDouble(double, double) : double\l
-	+ ints(int, int) : IntStream\l
-	+ doubles(double, double) : DoubleStream\l
-	+ nextBoolean() : boolean\l
-	+ setSeed(long) : void\l
-	 internalNextInt(int, int) : int\l
+	- addArrows(IModel) : String\l
+	+ postvisit(IClass) : void\l
+	+ previsit(IClass) : void\l
+	+ visit(IMethod) : void\l
+	+ initialize() : void\l
+	- write(String) : void\l
+	}"
+	]
+ParsingFieldUtil [
+	label = "{ParsingFieldUtil|
+	+ primCodes: Map\<String, String\>\l
+	|
+	+ getBaseFields(String) : Set\<String\>\l
+	+ typeCollections(String) : String\l
+	- replacePrims(String) : String\l
+	}"
+	]
+GeneralUtil [
+	label = "{GeneralUtil|
+	|
+	+ getClassesFromDir(File) : List\<String\>\l
+	}"
+	]
+ParsingMethodUtil [
+	label = "{ParsingMethodUtil|
+	- returnPrimCheck: Map\<String, String\>\l
+	- usesClasses: List\<String\>\l
+	|
+	+ getCompleteCallStack(IModel, IMethod, int, int, StringBuilder, Set\<String\>) : void\l
+	- SDEditFormatClass(IClass) : String\l
+	+ typeCollections(String) : String\l
+	- convert(List\<String\>) : List\<String\>, List\<String\>\l
+	- parsePrimOut(String, List\<String\>) : void\l
+	- initialize() : void\l
+	+ typeArgumentCollections(String) : List\<String\>\l
+	+ getPrimCheck() : Map\<String, String\>\l
+	- SDEditFormatMethod(List\<String\>) : List\<String\>, String\l
+	}"
+	]
+LegendaryField [
+	label = "{LegendaryField|
+	- fieldAccessType: String\l
+	- fieldName: String\l
+	- fieldType: String\l
+	- baseFields: Set\<String\>\l
+	|
+	+ setAccess(String) : void\l
+	+ getBaseTypes() : Set\<String\>\l
+	+ setFieldName(String) : void\l
+	+ getAccess() : String\l
+	+ getType() : String\l
+	+ setType(String) : void\l
+	+ getFieldName() : String\l
+	+ accept(IVisitor) : void\l
+	}"
+	]
+IMethod [
+	label = "{\<\<interface\>\>\nIMethod|
+	|
+	+ setParameters(List\<String\>) : void\l
+	+ addMethodToCallStack(String, String, String) : void\l
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getReturnType() : String\l
+	+ setReturnType(String) : void\l
+	+ getParameters() : List\<String\>\l
+	+ getCallStack() : Queue\<List\<String\>\>\l
+	}"
+	]
+SDEditOutputStream [
+	label = "{SDEditOutputStream|
+	- model: IModel\l
+	- builder: StringBuilder\l
+	- classes: Set\<String\>\l
+	- methodCalls: List\<String\>\l
+	- depth: int\l
+	- origDepth: int\l
+	|
+	+ postvisit(IMethod) : void\l
+	+ previsit(IMethod) : void\l
+	+ visit(IMethod) : void\l
+	+ write(String) : void\l
+	}"
+	]
+LegendaryMethod [
+	label = "{LegendaryMethod|
+	- methodAccess: String\l
+	- methodName: String\l
+	- parameters: List\<String\>\l
+	- methodCallStack: Queue\<List\<String\>\>\l
+	- methodReturnType: String\l
+	|
+	+ setParameters(List\<String\>) : void\l
+	+ addMethodToCallStack(String, String, String) : void\l
+	+ setAccess(String) : void\l
+	+ setMethodName(String) : void\l
+	+ getAccess() : String\l
+	+ getMethodName() : String\l
+	+ getReturnType() : String\l
+	+ setReturnType(String) : void\l
+	+ getParameters() : List\<String\>\l
+	+ getCallStack() : Queue\<List\<String\>\>\l
+	+ accept(IVisitor) : void\l
+	}"
+	]
+ClassDeclarationVisitor [
+	label = "{ClassDeclarationVisitor|
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visit(int, int, String, String, String, String[]) : void\l
+	}"
+	]
+IClass [
+	label = "{\<\<interface\>\>\nIClass|
+	|
+	+ setInterfaces(List\<String\>) : void\l
+	+ getSuperName() : String\l
+	+ setIsInterface(boolean) : void\l
+	+ addField(IField) : void\l
+	+ getInterfaces() : List\<String\>\l
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ getFields() : List\<IField\>\l
+	+ getMethodObjects() : List\<IMethod\>\l
+	+ getClassName() : String\l
+	+ getMethods() : Map\<String, IMethod\>\l
+	+ isInterface() : boolean\l
+	+ addMethod(IMethod) : void\l
+	}"
+	]
+IField [
+	label = "{\<\<interface\>\>\nIField|
+	|
+	+ setAccess(String) : void\l
+	+ getBaseTypes() : Set\<String\>\l
+	+ setFieldName(String) : void\l
+	+ getAccess() : String\l
+	+ getType() : String\l
+	+ setType(String) : void\l
+	+ getFieldName() : String\l
+	}"
+	]
+DesignParser [
+	label = "{DesignParser|
+	+ packageName: String\l
+	+ directories: String[]\l
+	|
+	+ main(String[]) : void\l
+	}"
+	]
+ClassFieldVisitor [
+	label = "{ClassFieldVisitor|
+	- legendaryClass: IClass\l
+	- legendaryModel: IModel\l
+	|
+	+ visitField(int, String, String, String, Object) : FieldVisitor\l
+	 addAccessLevel(int, IField) : void\l
+	}"
+	]
+Relations [
+	label = "{Relations|
+	+ EXTENDS: Relations\l
+	+ IMPLEMENTS: Relations\l
+	+ USES: Relations\l
+	+ ASSOCIATES: Relations\l
+	- ENUM$VALUES: Relations[]\l
+	|
+	+ valueOf(String) : Relations\l
+	+ values() : Relations\l
+	}"
+	]
+ClassParser [
+	label = "{ClassParser|
+	+ instance: ClassParser\l
+	|
+	+ getInstance() : ClassParser\l
+	+ makeSDEdit(String, String, int, IModel) : void\l
+	+ makeGraphViz(IModel) : void\l
+	}"
+	]
+IVisitor [
+	label = "{\<\<interface\>\>\nIVisitor|
+	|
+	+ postvisit(IField) : void\l
+	+ previsit(IField) : void\l
+	+ visit(IField) : void\l
+	}"
+	]
+IModel [
+	label = "{\<\<interface\>\>\nIModel|
+	|
+	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addRelation(String, String, Relations) : void\l
+	+ getClasses() : Set\<IClass\>\l
+	+ addClass(IClass) : void\l
+	}"
+	]
+ITraverser [
+	label = "{\<\<interface\>\>\nITraverser|
+	|
+	+ accept(IVisitor) : void\l
+	}"
+	]
+LegendaryClassMethodVisitor [
+	label = "{LegendaryClassMethodVisitor|
+	 legendaryClass: IClass\l
+	 legendaryModel: IModel\l
+	 legendaryMethod: IMethod\l
+	|
+	+ visitTypeInsn(int, String) : void\l
+	+ visitVarInsn(int, int) : void\l
+	+ visitMethodInsn(int, String, String, String, boolean) : void\l
+	+ visitFieldInsn(int, String, String, String) : void\l
+	}"
+	]
+LegendaryClass [
+	label = "{LegendaryClass|
+	- className: String\l
+	- superClassName: String\l
+	- interfaces: List\<String\>\l
+	- methods: Map\<String, IMethod\>\l
+	- fields: List\<IField\>\l
+	- isInterface: boolean\l
+	|
+	+ setInterfaces(List\<String\>) : void\l
+	+ getSuperName() : String\l
+	+ setIsInterface(boolean) : void\l
+	+ addField(IField) : void\l
+	+ getInterfaces() : List\<String\>\l
+	+ setClassName(String) : void\l
+	+ setSuper(String) : void\l
+	+ accept(IVisitor) : void\l
+	+ getFields() : List\<IField\>\l
+	+ getMethodObjects() : List\<IMethod\>\l
+	+ getClassName() : String\l
+	+ getMethods() : Map\<String, IMethod\>\l
+	+ isInterface() : boolean\l
+	+ addMethod(IMethod) : void\l
 	}"
 	]
 	edge [style = "dashed"] [arrowhead = "open"]
-	Collections->Random
+	IVisitor->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
-	Random->AtomicLong
+	VisitorAdapter->IField
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClass->IField
 	edge [style = "dashed"] [arrowhead = "open"]
-	Random->Random
+	LegendaryClass->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->IMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	Relations->Relations
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryField->ITraverser
+	edge [style = "solid"] [arrowhead = "open"]
+	SDEditOutputStream->IModel
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryModel->IModel
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryMethod->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassFieldVisitor->IField
+	edge [style = "dashed"] [arrowhead = "empty"]
+	VisitorAdapter->IVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryField->IField
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassDeclarationVisitor->IModel
+	edge [style = "solid"] [arrowhead = "empty"]
+	SDEditOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	SDEditOutputStream->VisitorAdapter
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassFieldVisitor->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->LegendaryClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->ClassMethodVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	IModel->Relations
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IClass
+	edge [style = "solid"] [arrowhead = "open"]
+	GraphVizOutputStream->Relations
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassFieldVisitor->LegendaryField
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassMethodVisitor->ParsingMethodUtil
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IField
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClass->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	SDEditOutputStream->IMethod
+	edge [style = "solid"] [arrowhead = "empty"]
+	GraphVizOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->VisitorAdapter
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassMethodVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->ClassFieldVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->LegendaryMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->LegendaryClassMethodVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryModel->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryModel->Relations
+	edge [style = "dashed"] [arrowhead = "open"]
+	IClass->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	ParsingMethodUtil->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IClass->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IMethod
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryClass->IClass
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassMethodVisitor->IModel
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassParser->ClassParser
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassDeclarationVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryModel->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->GraphVizOutputStream
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassFieldVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryClass->ITraverser
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	ParsingMethodUtil->IClass
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClassMethodVisitor->IModel
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClassMethodVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->LegendaryModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IModel->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	ParsingMethodUtil->IMethod
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryMethod->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	ITraverser->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryMethod->IVisitor
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryClassMethodVisitor->IMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->ClassDeclarationVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->SDEditOutputStream
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryModel->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryField->IVisitor
 }
