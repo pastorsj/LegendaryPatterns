@@ -13,13 +13,26 @@ import legendary.Interfaces.IModel;
 
 public class ParsingMethodUtil {
 
-	private Map<String, String> returnPrimCheck;
+	public static Map<String, String> returnPrimCheck;
 	private List<String> usesClasses;
 
+	static {
+		returnPrimCheck = new HashMap<>();
+
+		returnPrimCheck.put("V", "void");
+		returnPrimCheck.put("Z", "boolean");
+		returnPrimCheck.put("C", "char");
+		returnPrimCheck.put("B", "byte");
+		returnPrimCheck.put("S", "short");
+		returnPrimCheck.put("I", "int");
+		returnPrimCheck.put("F", "float");
+		returnPrimCheck.put("J", "long");
+		returnPrimCheck.put("D", "double");
+
+	}
+
 	public ParsingMethodUtil(List<String> usesClasses) {
-		this.returnPrimCheck = new HashMap<>();
 		this.usesClasses = usesClasses;
-		this.initialize();
 	}
 
 	public List<String> typeArgumentCollections(String in) {
@@ -42,7 +55,7 @@ public class ParsingMethodUtil {
 			} else if (argVal.startsWith("[L")) {
 				finalArgSet.add("[" + argVal.substring(2));
 			} else {
-				this.parsePrimOut(argVal, finalArgSet);
+				ParsingMethodUtil.parsePrimOut(argVal, finalArgSet);
 			}
 		}
 		return this.convert(finalArgSet);
@@ -63,8 +76,8 @@ public class ParsingMethodUtil {
 				argSize--;
 				continue;
 			}
-			if (this.returnPrimCheck.containsKey(arg)) {
-				finalArgSet.add(this.returnPrimCheck.get(arg));
+			if (returnPrimCheck.containsKey(arg)) {
+				finalArgSet.add(returnPrimCheck.get(arg));
 			} else if (arg.startsWith("[")) {
 				finalArgSet.add(this.typeCollections(arg.substring(1)) + "[]");
 			} else {
@@ -95,7 +108,7 @@ public class ParsingMethodUtil {
 		return s;
 	}
 
-	private void parsePrimOut(String arg, List<String> argSet) {
+	private static void parsePrimOut(String arg, List<String> argSet) {
 		argSet.add(String.valueOf(arg.charAt(0)));
 		arg = arg.substring(1);
 		if (arg.length() == 0) {
@@ -112,7 +125,7 @@ public class ParsingMethodUtil {
 	}
 
 	public Map<String, String> getPrimCheck() {
-		return this.returnPrimCheck;
+		return returnPrimCheck;
 	}
 
 	/*
@@ -120,18 +133,8 @@ public class ParsingMethodUtil {
 	 * 'Z' - boolean 'C' - char 'B' - byte 'S' - short 'I' - int 'F' - float 'J'
 	 * - long 'D' - double
 	 */
-	private void initialize() {
-		this.returnPrimCheck.put("V", "void");
-		this.returnPrimCheck.put("Z", "boolean");
-		this.returnPrimCheck.put("C", "char");
-		this.returnPrimCheck.put("B", "byte");
-		this.returnPrimCheck.put("S", "short");
-		this.returnPrimCheck.put("I", "int");
-		this.returnPrimCheck.put("F", "float");
-		this.returnPrimCheck.put("J", "long");
-		this.returnPrimCheck.put("D", "double");
-	}
 
+	@Deprecated
 	public static void getCompleteCallStack(IModel model, IMethod method, int origDepth, int depth,
 			StringBuilder sbMethods, Set<String> sbClasses) {
 		if (depth == 0)

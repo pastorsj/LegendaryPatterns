@@ -76,11 +76,13 @@ public class LegendaryMethod implements IMethod, ITraverser {
 	}
 
 	@Override
-	public void addMethodToCallStack(String methodOwner, String className, String methodName) {
+	public void addMethodToCallStack(String methodOwner, String className, String methodName, String returnType, String params) {
 		List<String> classToMethod = new ArrayList<>();
 		classToMethod.add(methodOwner);
 		classToMethod.add(className);
 		classToMethod.add(methodName);
+		classToMethod.add(returnType);
+		classToMethod.add(params);
 		this.methodCallStack.add(classToMethod);
 	}
 

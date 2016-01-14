@@ -65,8 +65,8 @@ public class SDEditOutputStream extends VisitorAdapter {
 					IMethod method = c.getMethods().get(mDetails.get(2));
 					String s;
 						
-					s = String.format("%s:%s.%s\n", mDetails.get(0), mDetails.get(1),
-							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)));
+					s = String.format("%s:%s=%s.%s(%s)\n", mDetails.get(0), mDetails.get(3), mDetails.get(1),
+							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)), mDetails.get(4));
 
 					if (mDetails.get(0).equals(mDetails.get(1))) {
 						if(mDetails.get(2).contains("<init>"))
