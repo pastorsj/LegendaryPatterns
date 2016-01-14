@@ -1,39 +1,20 @@
-IModel:IModel
-GeneralUtil:GeneralUtil
-/LegendaryClass:LegendaryClass
-DesignParser:DesignParser
-/LegendaryModel:LegendaryModel
-/ParsingMethodUtil:ParsingMethodUtil
-/VisitorAdapter:VisitorAdapter
-/ClassDeclarationVisitor:ClassDeclarationVisitor
-IClass:IClass
-IMethod:IMethod
-/ClassFieldVisitor:ClassFieldVisitor
-/GraphVizOutputStream:GraphVizOutputStream
-/ClassMethodVisitor:ClassMethodVisitor
-/SDEditOutputStream:SDEditOutputStream
-ClassParser:ClassParser
-ITraverser:ITraverser
+AtomicLong:AtomicLong
+Random:Random
+Collections:Collections
 
-DesignParser:ClassParser=ClassParser.getInstance()
-DesignParser:void=LegendaryModel.new()
-DesignParser:List\<String\>=GeneralUtil.getClassesFromDir(File)
-GeneralUtil:List\<String\>=GeneralUtil.getClassesFromDir(File)
-DesignParser:void=LegendaryClass.new()
-DesignParser:void=ClassDeclarationVisitor.new(int, IClass, IModel)
-DesignParser:void=ClassFieldVisitor.new(int, ClassVisitor, IClass, IModel)
-DesignParser:void=ClassMethodVisitor.new(int, ClassVisitor, IClass, IModel)
-ClassMethodVisitor:void=ParsingMethodUtil.new(List\<String\>)
-DesignParser:void=IModel.addClass(IClass)
-DesignParser:void=ClassParser.makeSDEdit(String, String, int, IModel)
-ClassParser:Set\<IClass\>=IModel.getClasses()
-ClassParser:String=IClass.getClassName()
-ClassParser:Map\<String, IMethod\>=IClass.getMethods()
-ClassParser:String=IMethod.getMethodName()
-ClassParser:void=SDEditOutputStream.new(IModel, int, StringBuilder)
-SDEditOutputStream:void=VisitorAdapter.new()
-ClassParser:void=ITraverser.accept(IVisitor)
-DesignParser:void=ClassParser.makeGraphViz(IModel)
-ClassParser:void=GraphVizOutputStream.new(StringBuilder)
-GraphVizOutputStream:void=GraphVizOutputStream.initialize()
-ClassParser:void=ITraverser.accept(IVisitor)
+Collections:int=Random.nextInt(int)
+Random:int=Random.next(int)
+Random:long=AtomicLong.get()
+Random:boolean=AtomicLong.compareAndSet(long, long)
+Random:int=Random.next(int)
+Random:long=AtomicLong.get()
+Random:boolean=AtomicLong.compareAndSet(long, long)
+Collections:void=Collections.swap(Object[], int, int)
+Collections:int=Random.nextInt(int)
+Random:int=Random.next(int)
+Random:long=AtomicLong.get()
+Random:boolean=AtomicLong.compareAndSet(long, long)
+Random:int=Random.next(int)
+Random:long=AtomicLong.get()
+Random:boolean=AtomicLong.compareAndSet(long, long)
+Collections:void=Collections.swap(Object[], int, int)

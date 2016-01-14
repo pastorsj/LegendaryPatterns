@@ -21,7 +21,7 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "legendary";
+	public static final String packageName = "java";
 	public static final String[] directories = {
 //			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 			"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
@@ -37,13 +37,13 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
-		List<String> classes = new ArrayList<String>();
+		// List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
-		 for (String dir : directories) {
-		 classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
-		 }
-//		String[] classes = new String[] { "java/util/Collections", "java/util/Random", "java/lang/System",
-//		"java/util/concurrent/atomic/AtomicLong" };
+		// for (String dir : directories) {
+		// classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
+		// }
+		String[] classes = new String[] { "java/util/Collections", "java/util/Random", "java/lang/System",
+		"java/util/concurrent/atomic/AtomicLong" };
 		for (String className : classes) {
 			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
