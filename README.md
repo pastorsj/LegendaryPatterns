@@ -50,6 +50,10 @@ Association & uses arrows framework
 Association & uses arrows detailing
 Intra-method object declaration framework and detailing
 #### Milestone 3
+Major Milestone 2 refactoring using visitor pattern
+GraphViz and SDEdit framework, detailing and refactoring
+Arrow Testing using reflection
+Manual testing for SDEdit diagrams
 
 ### Jason Lane (Completed 50% of the milestone/s)
 #### Milestone 1  
@@ -64,6 +68,10 @@ Parsing directories work
 Parameterized fields/types
 Association and uses arrows detailing
 #### Milestone 3
+Util refactoring
+Major Milestone 2 refactoring using visitor pattern
+SDEdit visitor pattern framework and detailing
+Auto generated testing for GraphViz and SDEdit
 
 ## Evolution of the Design
 ### Milestone 1
