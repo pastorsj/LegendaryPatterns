@@ -9,7 +9,6 @@ import org.junit.runners.Suite;
 	ClassTest.class,
 	CollectionParseTest.class,
 	FieldTest.class,
-	ManualTestClass.class,
 	MethodTest.class,
 	SDEditTest.class
 })
