@@ -21,10 +21,11 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "java";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
-//			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-			"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
+			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+	// "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"
+	// };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -37,13 +38,14 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
-		// List<String> classes = new ArrayList<String>();
+		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
-		// for (String dir : directories) {
-		// classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
-		// }
-		String[] classes = new String[] { "java/util/Collections", "java/util/Random", "java/lang/System",
-		"java/util/concurrent/atomic/AtomicLong" };
+		for (String dir : directories) {
+			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
+		}
+		// String[] classes = new String[] { "java/util/Collections",
+		// "java/util/Random", "java/lang/System",
+		// "java/util/concurrent/atomic/AtomicLong" };
 		for (String className : classes) {
 			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
@@ -67,10 +69,10 @@ public class DesignParser {
 				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
 			}
 			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));
-			String arg2 = args[0].substring(args[0].lastIndexOf(".")+1);
-			arg1 = arg1.substring(arg1.lastIndexOf(".")+1);
-			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5),
-					legendaryModel, new StringBuilder());
+			String arg2 = args[0].substring(args[0].lastIndexOf(".") + 1);
+			arg1 = arg1.substring(arg1.lastIndexOf(".") + 1);
+			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5), legendaryModel,
+					new StringBuilder());
 		}
 		legendaryParser.makeGraphViz(legendaryModel);
 	}

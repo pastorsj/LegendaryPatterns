@@ -39,25 +39,27 @@ public class SDEditOutputStream extends VisitorAdapter {
 	@Override
 	public void previsit(IMethod m) {
 		this.depth--;
-		if (this.depth == 0)
+		if (this.depth <= 0) {
 			return;
+		}
 		Queue<List<String>> callStack = m.getCallStack();
 		if (!callStack.isEmpty() && !callStack.peek().isEmpty()
-				&& !this.classes.contains("/" + callStack.peek().get(0)))
+				&& !this.classes.contains("/" + callStack.peek().get(0))) {
 			this.classes.add(callStack.peek().get(0));
+		}
 	}
 
 	@Override
 	public void visit(IMethod m) {
-		if (this.depth == 0)
+		if (this.depth <= 0)
 			return;
 		Queue<List<String>> callStack = m.getCallStack();
+//		System.out.println("Size of Call Stack: " + callStack.size());
 		for (List<String> mDetails : callStack) {
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
-				if (c.getClassName().equals(className)) {
-					if (mDetails.get(2).contains("<init>")
-							&& !classes.contains(className)) {
+				if (c.getClassName().equals(className)) {					
+					if (mDetails.get(2).contains("<init>") && !classes.contains(className)) {
 						if (classes.contains("/" + className))
 							continue;
 						classes.add("/" + className);
@@ -67,12 +69,13 @@ public class SDEditOutputStream extends VisitorAdapter {
 					IMethod method = c.getMethods().get(mDetails.get(2));
 					String s;
 
-					String params = Arrays.toString(method
-							.getParameters().toArray());
-					s = String.format("%s:%s=%s.%s(%s)\n", mDetails.get(0),
-							method.getReturnType(), mDetails.get(1), (mDetails
-									.get(2).contains("<init>") ? "new"
-									: mDetails.get(2)), params.substring(1, params.length() - 1));
+					String params = "[]";
+					if (method.getParameters().size() != 0) {
+						params = Arrays.toString(method.getParameters().toArray());
+					}
+					s = String.format("%s:%s=%s.%s(%s)\n", mDetails.get(0), method.getReturnType(), mDetails.get(1),
+							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)),
+							params.substring(1, params.length() - 1));
 
 					if (mDetails.get(0).equals(mDetails.get(1))) {
 						if (mDetails.get(2).contains("<init>"))
@@ -95,8 +98,7 @@ public class SDEditOutputStream extends VisitorAdapter {
 		this.depth++;
 		if (this.depth == this.origDepth) {
 			for (String s : this.classes) {
-				this.write(String.format("%s:%s\n", s,
-						(s.startsWith("/") ? s.substring(1) : s)));
+				this.write(String.format("%s:%s\n", s, (s.startsWith("/") ? s.substring(1) : s)));
 			}
 			this.write("\n");
 			for (String s : this.methodCalls) {
