@@ -74,7 +74,7 @@ public class DesignParser {
 			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5), legendaryModel,
 					new StringBuilder());
 		}
-		legendaryParser.makeGraphViz(legendaryModel);
+		legendaryParser.makeGraphViz(legendaryModel, new StringBuilder());
 	}
 
 }

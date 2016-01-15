@@ -68,8 +68,7 @@ public class ClassParser {
 		// System.out.println(builder.toString());
 	}
 
-	public void makeGraphViz(IModel m) throws IOException {
-		StringBuilder builder = new StringBuilder();
+	public void makeGraphViz(IModel m, StringBuilder builder) throws IOException {
 		IVisitor dotVisitor = new GraphVizOutputStream(builder);
 		ITraverser t = (ITraverser) m;
 		t.accept(dotVisitor);

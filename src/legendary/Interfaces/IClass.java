@@ -22,5 +22,5 @@ public interface IClass {
 	public void setIsInterface(boolean isInterface);
 	public boolean isInterface();
 	public List<IMethod> getMethodObjects();
-	
+	public int getCreationOrder();
 };

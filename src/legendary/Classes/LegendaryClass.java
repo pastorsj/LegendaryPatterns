@@ -14,7 +14,7 @@ import legendary.Interfaces.IVisitor;
 /*
  * Author: Jason Lane
  */
-public class LegendaryClass implements IClass, ITraverser {
+public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 
 	private String className;
 	private String superClassName;
@@ -22,6 +22,8 @@ public class LegendaryClass implements IClass, ITraverser {
 	private Map<String, IMethod> methods;
 	private List<IField> fields;
 	private boolean isInterface;
+	private int creationOrder;
+	private static int count;
 
 	public LegendaryClass() {
 		this.className = "";
@@ -30,6 +32,7 @@ public class LegendaryClass implements IClass, ITraverser {
 		this.methods = new HashMap<String, IMethod>();
 		this.fields = new ArrayList<IField>();
 		this.isInterface = false;
+		creationOrder = ++count;
 	}
 
 	@Override
@@ -116,6 +119,17 @@ public class LegendaryClass implements IClass, ITraverser {
 			methodSet.add(method);
 		}
 		return methodSet;
+	}
+	
+	@Override
+	public int getCreationOrder() {
+		return this.creationOrder;
+	}
+
+	@Override
+	public int compareTo(IClass o) {
+		// TODO Auto-generated method stub
+		return (this.getCreationOrder() > o.getCreationOrder()) ? 1 : 0;
 	}
 
 }

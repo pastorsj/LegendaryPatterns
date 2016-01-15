@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
@@ -18,13 +19,13 @@ public class LegendaryModel implements IModel, ITraverser {
 	private Map<List<String>, List<Relations>> relations;
 
 	public LegendaryModel() {
-		this.classList = new HashSet<IClass>();
+		this.classList = new TreeSet<IClass>();
 		this.relations = new HashMap<>();
 	}
 
 	@Override
 	public Set<IClass> getClasses() {
-		return classList;
+		return this.classList;
 	}
 
 	@Override

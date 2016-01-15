@@ -3,7 +3,6 @@ package testingLegends;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.After;
@@ -14,25 +13,23 @@ import legendary.Classes.ClassParser;
 import legendary.Classes.LegendaryClass;
 import legendary.Classes.LegendaryMethod;
 import legendary.Classes.LegendaryModel;
-import legendary.Classes.SDEditOutputStream;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 
-public class SDEditTests {
+public class SDEditTest {
 
-	public IModel testModel;
-	public IClass testClass1;
-	public IClass testClass2;
-	public IClass testClass3;
-	public IClass testClass4;
-	public IMethod testMethod;
-	public IMethod callMethod1;
-	public IMethod callMethod2;
-	public IMethod callMethod3;
-	public StringBuilder builder;
-	public SDEditOutputStream stream;
-	public ClassParser parser;
+	private IModel testModel;
+	private IClass testClass1;
+	private IClass testClass2;
+	private IClass testClass3;
+	private IClass testClass4;
+	private IMethod testMethod;
+	private IMethod callMethod1;
+	private IMethod callMethod2;
+	private IMethod callMethod3;
+	private StringBuilder builder;
+	private ClassParser parser;
 	
 	@Before
 	public void setUp() {
