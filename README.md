@@ -33,65 +33,58 @@ The above step can also be done from the command line, by running the command: '
 Download the sequence editor jar file from the SDEdit website
 From the command line, type the following command:  
 java -jar sdedit-3.0.jar -o /input_output/SDEoutput.png -t png /input_output/text.sd  
-In the input_output file, the png image should be generated.
+In the input_output file, the png image should be generated. 
 
-## Who did what
-
-### Sam Pastoriza (Completed 50% of the milestone/s)
-#### Milestone 1  
-Class/Method/Field Representation detailing  
-Parser framework  
-Parser detailing  
-Visitor detailing  
-Tests  
-#### Milestone 2  
-Test Pictures  
-Association & uses arrows framework  
-Association & uses arrows detailing  
-Intra-method object declaration framework and detailing  
-#### Milestone 3
-Major Milestone 2 refactoring using visitor pattern  
-GraphViz and SDEdit framework, detailing and refactoring  
-Arrow Testing using reflection  
-Manual testing for SDEdit diagrams  
-
-### Jason Lane (Completed 50% of the milestone/s)
-#### Milestone 1  
+# Evolution of the Design
+## Milestone 1
+We originally designed the tool around easily added support for new  
+features such as more complicated class analysis and support for other arrows  
+This translated pretty well into Milestone 2, where we needed to add support  
+for uses and association arrows  
+![UML Milestone 1](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM1.png)  
+#### Completed by Jason Lane
 Class/Method/Field Representation framework  
 Class/Method/Field Representation details  
 Parser detailing  
 Visitor framework  
 Visitor detailing  
-#### Milestone 2  
-Unit tests  
-Parsing directories work  
-Parameterized fields/types  
-Association and uses arrows detailing  
-#### Milestone 3
-Util refactoring  
-Major Milestone 2 refactoring using visitor pattern  
-SDEdit visitor pattern framework and detailing  
-Auto generated testing for GraphViz and SDEdit  
-
-## Evolution of the Design
-### Milestone 1
-We originally designed the tool around easily added support for new  
-features such as more complicated class analysis and support for other arrows  
-This translated pretty well into Milestone 2, where we needed to add support  
-for uses and association arrows  
-![UML Milestone 1](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM1.png)
+#### Completed by Sam Pastoriza
+Class/Method/Field Representation detailing  
+Parser framework  
+Parser detailing  
+Visitor detailing  
+Tests  
 ### Milestone 2
 When we add support for the uses and association arrows, we did not need to change  
 the overall design significantly. We added a class that when visiting methods, would  
 help discern the objects declared in each method. Much of the grunt work came from the parsing  
 of the class names and making it easier to run for another user.  
 ![UML Milestone 2](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM2.png)
+#### Completed by Jason Lane
+Unit tests  
+Parsing directories work  
+Parameterized fields/types  
+Association and uses arrows detailing  
+#### Completed by Sam Pastoriza
+Test Pictures  
+Association & uses arrows framework  
+Association & uses arrows detailing  
+Intra-method object declaration framework and detailing
 ### Milestone 3
 We used the visitor pattern to refactor the Milestone 2 code, and then proceeded to   
 use that visitor to implement the Sequence diagram code. The refactoring took most of the  
 time, however the sequence diagram code was difficult to debug.  
 ![UML Milestone 3](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM3.png)
-
+#### Completed by Jason Lane
+Util refactoring  
+Major Milestone 2 refactoring using visitor pattern  
+SDEdit visitor pattern framework and detailing  
+Auto generated testing for GraphViz and SDEdit  
+#### Completed by Sam Pastoriza
+Major Milestone 2 refactoring using visitor pattern  
+GraphViz and SDEdit framework, detailing and refactoring  
+Arrow Testing using reflection  
+Manual testing for SDEdit diagrams  
 
 #### Notes
 * framework = interfaces and basic class structures  
