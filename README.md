@@ -33,14 +33,14 @@ The above step can also be done from the command line, by running the command: '
 Download the sequence editor jar file from the SDEdit website
 From the command line, type the following command:  
 java -jar sdedit-3.0.jar -o /input_output/SDEoutput.png -t png /input_output/text.sd  
-In the input_output file, the png image should be generated. 
+In the input_output file, the png image should be generated.
 
 # Evolution of the Design
 ## Milestone 1
 We originally designed the tool around easily added support for new  
 features such as more complicated class analysis and support for other arrows  
 This translated pretty well into Milestone 2, where we needed to add support  
-for uses and association arrows  
+for uses and association arrows.  
 ![UML Milestone 1](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM1.png)  
 #### Completed by Jason Lane
 Class/Method/Field Representation framework  
