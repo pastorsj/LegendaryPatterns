@@ -78,16 +78,19 @@ Auto generated testing for GraphViz and SDEdit
 We originally designed the tool around easily added support for new  
 features such as more complicated class analysis and support for other arrows  
 This translated pretty well into Milestone 2, where we needed to add support  
-for uses and association arrows
+for uses and association arrows  
+![UML Milestone 1](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM1.png)
 ### Milestone 2
 When we add support for the uses and association arrows, we did not need to change  
 the overall design significantly. We added a class that when visiting methods, would  
 help discern the objects declared in each method. Much of the grunt work came from the parsing  
-of the class names and making it easier to run for another user.
+of the class names and making it easier to run for another user.  
+![UML Milestone 2](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM2.png)
 ### Milestone 3
 We used the visitor pattern to refactor the Milestone 2 code, and then proceeded to   
 use that visitor to implement the Sequence diagram code. The refactoring took most of the  
-time, however the sequence diagram code was difficult to debug.
+time, however the sequence diagram code was difficult to debug.  
+![UML Milestone 3](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM3.png)
 
 
 #### Notes

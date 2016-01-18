@@ -29,15 +29,8 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 			this.legendaryModel.addRelation(this.legendaryClass.getClassName(),
 					owner, Relations.USES);
 		}
-		// } else if(owner.startsWith(DesignParser.packageName)) {
 		if (owner.startsWith(DesignParser.packageName)) {
-			// System.out.println("\n======Class Name: "+
-			// this.legendaryClass.getClassName());
-			// System.out.println("======Method Insn Owner: " + owner);
-			// System.out.println("======Method description: " + desc);
 			String ownerClass = owner.substring(owner.lastIndexOf("/") + 1);
-			// System.out.println("======Owner Class: " + ownerClass);
-			// System.out.println("======Method Name: " + name);
 			this.legendaryMethod.addMethodToCallStack(
 					this.legendaryClass.getClassName(), ownerClass, name);
 		}
