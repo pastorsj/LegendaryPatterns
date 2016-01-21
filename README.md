@@ -74,7 +74,7 @@ Intra-method object declaration framework and detailing
 We used the visitor pattern to refactor the Milestone 2 code, and then proceeded to   
 use that visitor to implement the Sequence diagram code. The refactoring took most of the  
 time, however the sequence diagram code was difficult to debug.  
-![UML Milestone 3](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM3.png)
+![UML Milestone 3](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsM3.png)
 #### Completed by Jason Lane
 Util refactoring  
 Major Milestone 2 refactoring using visitor pattern  
