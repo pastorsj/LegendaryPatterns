@@ -3,6 +3,7 @@ package testingLegends;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class ArrowTests {
 		this.model = new LegendaryModel();
 		model.addClass(c1);
 		model.addClass(c2);
-		this.outputStream = new GraphVizOutputStream(new StringBuilder());
+		this.outputStream = new GraphVizOutputStream(new StringBuilder(), new HashMap<>());
 		this.arrowMethod = GraphVizOutputStream.class.getDeclaredMethod("addArrows", IModel.class);
 		this.arrowMethod.setAccessible(true);
 	}

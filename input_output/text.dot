@@ -32,10 +32,10 @@ ClassMethodVisitor [
 	]
 DesignParser [
 	label = "{DesignParser|
-	+ packageName: String\l
-	+ directories: String[]\l
+	+_ packageName: String\l
+	+_ directories: String[]\l
 	|
-	+ main(String[]) : void\l
+	+_ main(String[]) : void\l
 	}"
 	]
 LegendaryClassMethodVisitor [
@@ -51,25 +51,31 @@ LegendaryClassMethodVisitor [
 	}"
 	]
 ClassParser [
-	label = "{ClassParser|
-	+ instance: ClassParser\l
+	label = "{ClassParser\n\<\<Singleton\>\>|
+	-_ instance: ClassParser\l
+	- detectors: Map\<Pattern, IPatternDetector\>\l
+	- patterns: Map\<Pattern, Set\<IClass\>\>\l
 	|
-	+ getInstance() : ClassParser\l
+	+_ getInstance() : ClassParser\l
 	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
 	+ makeGraphViz(IModel, StringBuilder) : void\l
 	}"
-	]
+	, color = blue]
 GraphVizOutputStream [
 	label = "{GraphVizOutputStream|
 	- builder: StringBuilder\l
 	- relationRep: Map\<Relations, String\>\l
+	- patterns: Map\<IClass, Set\<Pattern\>\>\l
 	|
 	- addArrows(IModel) : String\l
+	- patternColor(IClass) : String\l
+	- invertPatternMap(Map\<Pattern, Set\<IClass\>\>) : Map\<Pattern, Set\<IClass\>\>, Map\<IClass, Set\<Pattern\>\>\l
 	+ postvisit(IClass) : void\l
 	+ previsit(IClass) : void\l
 	+ visit(IMethod) : void\l
 	+ initialize() : void\l
 	- write(String) : void\l
+	- addPatternTags(IClass) : void\l
 	}"
 	]
 LegendaryClass [
@@ -81,7 +87,7 @@ LegendaryClass [
 	- fields: List\<IField\>\l
 	- isInterface: boolean\l
 	- creationOrder: int\l
-	- count: int\l
+	-_ count: int\l
 	|
 	+ setInterfaces(List\<String\>) : void\l
 	+ getSuperName() : String\l
@@ -143,24 +149,36 @@ LegendaryModel [
 	label = "{LegendaryModel|
 	- classList: Set\<IClass\>\l
 	- relations: Map\<List\<String\>, List\<Relations\>\>\l
+	- patterns: Map\<Pattern, Set\<IClass\>\>\l
 	|
+	+ getPatterns() : Map\<Pattern, Set\<IClass\>\>\l
 	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
+	+ addPattern(Pattern, Set\<IClass\>) : void\l
 	+ addRelation(String, String, Relations) : void\l
 	+ getClasses() : Set\<IClass\>\l
 	+ addClass(IClass) : void\l
 	+ accept(IVisitor) : void\l
 	}"
 	]
+Pattern [
+	label = "{Pattern|
+	+_ SINGLETON: Pattern\l
+	-_ ENUM$VALUES: Pattern[]\l
+	|
+	+_ valueOf(String) : Pattern\l
+	+_ values() : Pattern\l
+	}"
+	]
 Relations [
 	label = "{Relations|
-	+ EXTENDS: Relations\l
-	+ IMPLEMENTS: Relations\l
-	+ USES: Relations\l
-	+ ASSOCIATES: Relations\l
-	- ENUM$VALUES: Relations[]\l
+	+_ EXTENDS: Relations\l
+	+_ IMPLEMENTS: Relations\l
+	+_ USES: Relations\l
+	+_ ASSOCIATES: Relations\l
+	-_ ENUM$VALUES: Relations[]\l
 	|
-	+ valueOf(String) : Relations\l
-	+ values() : Relations\l
+	+_ valueOf(String) : Relations\l
+	+_ values() : Relations\l
 	}"
 	]
 SDEditOutputStream [
@@ -176,6 +194,13 @@ SDEditOutputStream [
 	+ previsit(IMethod) : void\l
 	+ visit(IMethod) : void\l
 	+ write(String) : void\l
+	}"
+	]
+SingletonDetector [
+	label = "{SingletonDetector|
+	|
+	+ getCandidates(IModel) : Set\<IClass\>\l
+	+ detect(IModel) : Set\<IClass\>\l
 	}"
 	]
 IClass [
@@ -233,6 +258,13 @@ IModel [
 	+ addClass(IClass) : void\l
 	}"
 	]
+IPatternDetector [
+	label = "{\<\<interface\>\>\nIPatternDetector|
+	|
+	+ getCandidates(IModel) : Set\<IClass\>\l
+	+ detect(IModel) : Set\<IClass\>\l
+	}"
+	]
 ITraverser [
 	label = "{\<\<interface\>\>\nITraverser|
 	|
@@ -258,31 +290,31 @@ VisitorAdapter [
 GeneralUtil [
 	label = "{GeneralUtil|
 	|
-	+ getClassesFromDir(File) : List\<String\>\l
+	+_ getClassesFromDir(File) : List\<String\>\l
 	}"
 	]
 ParsingFieldUtil [
 	label = "{ParsingFieldUtil|
-	+ primCodes: Map\<String, String\>\l
+	+_ primCodes: Map\<String, String\>\l
 	|
-	+ getBaseFields(String) : Set\<String\>\l
-	+ typeCollections(String) : String\l
-	- replacePrims(String) : String\l
+	+_ getBaseFields(String) : Set\<String\>\l
+	+_ typeCollections(String) : String\l
+	-_ replacePrims(String) : String\l
 	}"
 	]
 ParsingMethodUtil [
 	label = "{ParsingMethodUtil|
-	+ returnPrimCheck: Map\<String, String\>\l
+	+_ returnPrimCheck: Map\<String, String\>\l
 	- usesClasses: List\<String\>\l
 	|
-	+ getCompleteCallStack(IModel, IMethod, int, int, StringBuilder, Set\<String\>) : void\l
-	- SDEditFormatClass(IClass) : String\l
+	+_ getCompleteCallStack(IModel, IMethod, int, int, StringBuilder, Set\<String\>) : void\l
+	-_ SDEditFormatClass(IClass) : String\l
 	+ typeCollections(String) : String\l
 	- convert(List\<String\>) : List\<String\>, List\<String\>\l
-	- parsePrimOut(String, List\<String\>) : void\l
+	-_ parsePrimOut(String, List\<String\>) : void\l
 	+ typeArgumentCollections(String) : List\<String\>\l
 	+ getPrimCheck() : Map\<String, String\>\l
-	- SDEditFormatMethod(List\<String\>) : List\<String\>, String\l
+	-_ SDEditFormatMethod(List\<String\>) : List\<String\>, String\l
 	}"
 	]
 	edge [style = "dashed"] [arrowhead = "open"]
@@ -293,66 +325,40 @@ ParsingMethodUtil [
 	LegendaryClass->IField
 	edge [style = "dashed"] [arrowhead = "open"]
 	LegendaryClass->IVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->IMethod
-	edge [style = "solid"] [arrowhead = "open"]
-	Relations->Relations
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryField->ITraverser
-	edge [style = "solid"] [arrowhead = "open"]
-	SDEditOutputStream->IModel
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryModel->IModel
 	edge [style = "dashed"] [arrowhead = "empty"]
 	LegendaryMethod->ITraverser
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->IField
+	IPatternDetector->IModel
 	edge [style = "dashed"] [arrowhead = "empty"]
 	VisitorAdapter->IVisitor
 	edge [style = "dashed"] [arrowhead = "empty"]
 	LegendaryField->IField
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassDeclarationVisitor->IModel
 	edge [style = "solid"] [arrowhead = "empty"]
 	SDEditOutputStream->VisitorAdapter
 	edge [style = "dashed"] [arrowhead = "open"]
 	SDEditOutputStream->VisitorAdapter
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassFieldVisitor->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->LegendaryClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	VisitorAdapter->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->ClassMethodVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	IModel->Relations
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IClass
 	edge [style = "solid"] [arrowhead = "open"]
 	GraphVizOutputStream->Relations
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassFieldVisitor->LegendaryField
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassMethodVisitor->ParsingMethodUtil
-	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->IField
 	edge [style = "solid"] [arrowhead = "open"]
 	LegendaryClass->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	VisitorAdapter->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	SDEditOutputStream->IMethod
-	edge [style = "solid"] [arrowhead = "empty"]
-	GraphVizOutputStream->VisitorAdapter
-	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "empty"]
+	SingletonDetector->IPatternDetector
 	edge [style = "solid"] [arrowhead = "open"]
 	ClassMethodVisitor->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	DesignParser->ClassFieldVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->LegendaryMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassMethodVisitor->LegendaryClassMethodVisitor
 	edge [style = "dashed"] [arrowhead = "empty"]
@@ -360,17 +366,11 @@ ParsingMethodUtil [
 	edge [style = "dashed"] [arrowhead = "open"]
 	LegendaryModel->Relations
 	edge [style = "dashed"] [arrowhead = "open"]
-	IClass->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
 	GraphVizOutputStream->IModel
 	edge [style = "dashed"] [arrowhead = "open"]
 	ParsingMethodUtil->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	IClass->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	VisitorAdapter->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassParser->IClass
 	edge [style = "dashed"] [arrowhead = "empty"]
 	LegendaryClass->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
@@ -378,22 +378,20 @@ ParsingMethodUtil [
 	edge [style = "solid"] [arrowhead = "open"]
 	ClassMethodVisitor->IModel
 	edge [style = "solid"] [arrowhead = "open"]
-	ClassParser->ClassParser
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassDeclarationVisitor->IClass
+	GraphVizOutputStream->Pattern
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassParser->IModel
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassParser->Pattern
 	edge [style = "dashed"] [arrowhead = "open"]
 	IVisitor->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryModel->IVisitor
 	edge [style = "dashed"] [arrowhead = "open"]
 	ClassParser->GraphVizOutputStream
 	edge [style = "solid"] [arrowhead = "open"]
 	ClassFieldVisitor->IClass
 	edge [style = "dashed"] [arrowhead = "empty"]
 	LegendaryClass->ITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
+	edge [style = "solid"] [arrowhead = "open"]
 	GraphVizOutputStream->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
 	GraphVizOutputStream->IMethod
@@ -404,17 +402,11 @@ ParsingMethodUtil [
 	edge [style = "solid"] [arrowhead = "open"]
 	LegendaryClassMethodVisitor->IClass
 	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->LegendaryModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	IModel->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
 	ParsingMethodUtil->IMethod
 	edge [style = "dashed"] [arrowhead = "empty"]
 	LegendaryMethod->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
 	ITraverser->IVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryMethod->IVisitor
 	edge [style = "solid"] [arrowhead = "open"]
 	LegendaryClassMethodVisitor->IMethod
 	edge [style = "dashed"] [arrowhead = "open"]
@@ -423,6 +415,70 @@ ParsingMethodUtil [
 	ClassParser->SDEditOutputStream
 	edge [style = "solid"] [arrowhead = "open"]
 	LegendaryModel->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->IMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	LegendaryModel->Pattern
+	edge [style = "solid"] [arrowhead = "open"]
+	Relations->Relations
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryField->ITraverser
+	edge [style = "solid"] [arrowhead = "open"]
+	SDEditOutputStream->IModel
+	edge [style = "dashed"] [arrowhead = "empty"]
+	LegendaryModel->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassFieldVisitor->IField
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassDeclarationVisitor->IModel
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassFieldVisitor->IModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IModel->Relations
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	IPatternDetector->IClass
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassMethodVisitor->ParsingMethodUtil
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassParser->SingletonDetector
+	edge [style = "solid"] [arrowhead = "empty"]
+	GraphVizOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	GraphVizOutputStream->VisitorAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	ClassMethodVisitor->LegendaryMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	SingletonDetector->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	IClass->IMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassParser->IPatternDetector
+	edge [style = "dashed"] [arrowhead = "open"]
+	IClass->IField
+	edge [style = "dashed"] [arrowhead = "open"]
+	VisitorAdapter->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	IVisitor->IMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassParser->ClassParser
+	edge [style = "dashed"] [arrowhead = "open"]
+	SingletonDetector->IModel
+	edge [style = "solid"] [arrowhead = "open"]
+	ClassDeclarationVisitor->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryModel->IVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	DesignParser->LegendaryModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	IModel->IClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	LegendaryMethod->IVisitor
+	edge [style = "solid"] [arrowhead = "open"]
+	Pattern->Pattern
 	edge [style = "dashed"] [arrowhead = "open"]
 	LegendaryField->IVisitor
 }

@@ -24,26 +24,21 @@ public class ClassFieldVisitor extends ClassVisitor {
 		super(api);
 	}
 
-	public ClassFieldVisitor(int api, ClassVisitor decorated,
-			IClass legendaryClass, IModel legendaryModel) {
+	public ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel) {
 		super(api, decorated);
 		this.legendaryClass = legendaryClass;
 		this.legendaryModel = legendaryModel;
 	}
 
-	public FieldVisitor visitField(int access, String name, String desc,
-			String signature, Object value) {
-		FieldVisitor toDecorate = super.visitField(access, name, desc,
-				signature, value);
+	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
+		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		IField field = new LegendaryField();
 		addAccessLevel(access, field);
 		field.setFieldName(name);
-		field.setType((signature == null) ? Type.getType(desc).toString()
-				: signature);
+		field.setType((signature == null) ? Type.getType(desc).toString() : signature);
 		legendaryClass.addField(field);
 		for (String s : field.getBaseTypes()) {
-			legendaryModel.addRelation(legendaryClass.getClassName(), s,
-					Relations.ASSOCIATES);
+			legendaryModel.addRelation(legendaryClass.getClassName(), s, Relations.ASSOCIATES);
 		}
 		return toDecorate;
 	};
@@ -59,6 +54,8 @@ public class ClassFieldVisitor extends ClassVisitor {
 		} else {
 			level = "";
 		}
+		if ((access & Opcodes.ACC_STATIC) != 0)
+			level += "_";
 		field.setAccess(level);
 	}
 }

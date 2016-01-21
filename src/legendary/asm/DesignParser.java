@@ -23,9 +23,9 @@ public class DesignParser {
 
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
-			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	// "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"
-	// };
+//			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"
+	 };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.

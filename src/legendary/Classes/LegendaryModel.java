@@ -17,6 +17,8 @@ public class LegendaryModel implements IModel, ITraverser {
 
 	private Set<IClass> classList;
 	private Map<List<String>, List<Relations>> relations;
+	private Map<Pattern, Set<IClass>> patterns;
+
 
 	public LegendaryModel() {
 		this.classList = new TreeSet<IClass>();
@@ -36,6 +38,17 @@ public class LegendaryModel implements IModel, ITraverser {
 	@Override
 	public Map<List<String>, List<Relations>> getRelations() {
 		return relations;
+	}
+	
+	public void addPattern(Pattern pat, Set<IClass> classes){
+		if(!this.patterns.containsKey(pat)){
+			patterns.put(pat, new HashSet<IClass>());
+		}
+		patterns.get(pat).addAll(classes);		
+	}
+	
+	public Map<Pattern, Set<IClass>> getPatterns() {
+		return patterns;
 	}
 
 	@Override

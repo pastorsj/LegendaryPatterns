@@ -3,8 +3,10 @@ package legendary.Classes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
@@ -15,11 +17,26 @@ import legendary.Interfaces.VisitorAdapter;
 public class GraphVizOutputStream extends VisitorAdapter {
 	private final StringBuilder builder;
 	private final Map<Relations, String> relationRep;
+	private Map<IClass, Set<Pattern>> patterns;
 
-	public GraphVizOutputStream(StringBuilder builder) {
+	public GraphVizOutputStream(StringBuilder builder, Map<Pattern, Set<IClass>> patterns) {
 		this.builder = builder;
 		this.relationRep = new HashMap<>();
 		this.initialize();
+		this.patterns = invertPatternMap(patterns);
+	}
+
+	private Map<IClass, Set<Pattern>> invertPatternMap(Map<Pattern, Set<IClass>> in) {
+		Map<IClass, Set<Pattern>> res = new HashMap<>();
+		for (Pattern p : in.keySet()) {
+			for (IClass c : in.get(p)) {
+				if (!res.containsKey(c)) {
+					res.put(c, new HashSet<Pattern>());
+				}
+				res.get(c).add(p);
+			}
+		}
+		return res;
 	}
 
 	private void write(String s) {
@@ -66,9 +83,12 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void previsit(IClass c) {
-		String line = String.format("%s [\n\tlabel = \"{%s%s|\n\t", c.getClassName(),
+		String line = String.format("%s [\n\tlabel = \"{%s%s", c.getClassName(),
 				(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
 		this.write(line);
+		if (this.patterns.containsKey(c))
+			addPatternTags(c);
+		this.write("|\n\t");
 	}
 
 	@Override
@@ -76,9 +96,26 @@ public class GraphVizOutputStream extends VisitorAdapter {
 		this.write("|\n");
 	}
 
+	private void addPatternTags(IClass c) {
+		this.write("\\n");
+		if (patterns.get(c).contains(Pattern.SINGLETON)) {
+			this.write("\\<\\<Singleton\\>\\>");
+		}
+		// this.write("\\n");
+	}
+
 	@Override
 	public void postvisit(IClass c) {
-		this.write("\t}\"\n\t]\n");
+		this.write(String.format("\t}\"\n\t%s]\n", patternColor(c)));
+	}
+
+	private String patternColor(IClass c) {
+		if (patterns.containsKey(c)) {
+			if (patterns.get(c).contains(Pattern.SINGLETON)) {
+				return ", color = blue";
+			}
+		}
+		return "";
 	}
 
 	@Override

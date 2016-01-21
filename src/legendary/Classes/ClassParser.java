@@ -4,12 +4,15 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.Interfaces.IPatternDetector;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
 
@@ -17,9 +20,14 @@ import legendary.Interfaces.IVisitor;
  * Author: Sam Pastoriza
  */
 public class ClassParser {
-	public static ClassParser instance;
+	private static ClassParser instance;
+	private final Map<Pattern, IPatternDetector> detectors;
+	private final Map<Pattern, Set<IClass>> patterns;
 
 	private ClassParser() {
+		this.detectors = new HashMap<>();
+		this.patterns = new HashMap<>();
+		this.detectors.put(Pattern.SINGLETON, new SingletonDetector());
 	}
 
 	public static ClassParser getInstance() {
@@ -34,7 +42,7 @@ public class ClassParser {
 		methodname = methodname.substring(0, methodname.indexOf("("));
 		String[] paramTypeSplit;
 		List<String> paramTypes = new ArrayList<>();
-		if(params.length() != 0) {
+		if (params.length() != 0) {
 			paramTypeSplit = params.split(", ");
 			for (String s : paramTypeSplit) {
 				paramTypes.add((s.contains(" ") ? s.substring(0, s.indexOf(" ")) : s));
@@ -62,22 +70,26 @@ public class ClassParser {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.sd"));
 		writer.write(builder.toString());
 		writer.close();
-//		Runtime rt = Runtime.getRuntime();
-//		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o ./input_output/SDEoutput.png -t png ./input_output/text.sd");
+		// Runtime rt = Runtime.getRuntime();
+		// rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o
+		// ./input_output/SDEoutput.png -t png ./input_output/text.sd");
 		// Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
 		// System.out.println(builder.toString());
 	}
 
 	public void makeGraphViz(IModel m, StringBuilder builder) throws IOException {
-		IVisitor dotVisitor = new GraphVizOutputStream(builder);
+		for (Pattern p : Pattern.values()) {
+			this.patterns.put(p, this.detectors.get(p).detect(m));
+		}
+		IVisitor dotVisitor = new GraphVizOutputStream(builder, patterns);
 		ITraverser t = (ITraverser) m;
 		t.accept(dotVisitor);
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
 		writer.write(builder.toString());
 		writer.close();
-		// Runtime rt = Runtime.getRuntime();
-		// rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o
-		// ./input_output/GraphVizoutput.png");
+		 Runtime rt = Runtime.getRuntime();
+		 rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o" +
+		 "./input_output/GraphVizoutput.png");
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));
 		// System.out.println(builder.toString());
