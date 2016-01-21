@@ -1,10 +1,11 @@
-package legendary.Classes;
+package legendary.detectors;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
@@ -25,7 +26,6 @@ public class SingletonDetector implements IPatternDetector {
 							if (method.getReturnType().equals(candidate.getClassName())
 									&& method.getAccess().equals("+_")) {
 								singletons.add(candidate);
-								System.out.println(candidate.getClassName());
 							}
 						}
 					}

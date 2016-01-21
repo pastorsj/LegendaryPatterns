@@ -97,11 +97,13 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	}
 
 	private void addPatternTags(IClass c) {
-		this.write("\\n");
+		String s = "\\n\\<\\<";
 		if (patterns.get(c).contains(Pattern.SINGLETON)) {
-			this.write("\\<\\<Singleton\\>\\>");
+			s += ("Singleton, ");
 		}
-		// this.write("\\n");
+		s = s.substring(0, s.lastIndexOf(","));
+		s += "\\>\\>";
+		this.write(s);
 	}
 
 	@Override
@@ -120,16 +122,20 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void visit(IField f) {
-		String line = String.format("%s %s: %s\\l\n\t", f.getAccess(), f.getFieldName(), f.getType());
+		boolean isStatic = f.getAccess().endsWith("_");
+		String line = String.format("%s %s%s: %s%s\\l\n\t", f.getAccess().replace("_", ""), isStatic ? "_" : "",
+				f.getFieldName(), f.getType(), isStatic ? "_" : "");
 		this.write(line);
 	}
 
 	@Override
 	public void visit(IMethod m) {
 		if (!(m.getMethodName().equals("<init>") || m.getMethodName().equals("<clinit>"))) {
+			boolean isStatic = m.getAccess().endsWith("_");
 			String parameters = Arrays.toString(m.getParameters().toArray());
-			String line = String.format("\t%s %s(%s) : %s\\l\n", m.getAccess(), m.getMethodName(),
-					parameters.substring(1, parameters.length() - 1), m.getReturnType());
+			String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m.getAccess().replace("_", ""),
+					isStatic ? "_" : "", m.getMethodName(), parameters.substring(1, parameters.length() - 1),
+					m.getReturnType(), isStatic ? "_" : "");
 			this.write(line);
 		}
 	}

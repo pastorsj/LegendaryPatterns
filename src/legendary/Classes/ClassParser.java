@@ -15,6 +15,7 @@ import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
+import legendary.detectors.SingletonDetector;
 
 /*
  * Author: Sam Pastoriza
