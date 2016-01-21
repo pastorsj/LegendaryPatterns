@@ -101,7 +101,17 @@ public class SingletonPatternTest {
 	
 	
 	@Test
-	public void detectSingletonBaseCase() {
+	public void detectLazySingletonBaseCase() {
+		this.initializeSingleton();
+		this.testMethod.addMethodToCallStack("TestSingletonClass", "TestSingletonClass", "<init>");
+		IPatternDetector singletonDetector = new SingletonDetector();
+		Set<IClass> classDetected = new HashSet<>();
+		classDetected.add(testClass);
+		assertEquals(classDetected, singletonDetector.detect(testDetector));
+	}
+	
+	@Test
+	public void detectEagerSingletonBaseCase() {
 		this.initializeSingleton();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		Set<IClass> classDetected = new HashSet<>();
