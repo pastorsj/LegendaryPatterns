@@ -21,11 +21,11 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "headfirst";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
-//			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	 "C:/Users/Jason/Documents/374/Lab4-2-Singleton/src/headfirst/singleton/stat"
-	 };
+			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+//	 "C:/Users/Jason/Documents/374/Lab4-2-Singleton/src/headfirst/singleton/stat"
+//	 };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.

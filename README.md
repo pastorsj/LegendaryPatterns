@@ -85,6 +85,21 @@ Major Milestone 2 refactoring using visitor pattern
 GraphViz and SDEdit framework, detailing and refactoring  
 Arrow Testing using reflection  
 Manual testing for SDEdit diagrams  
+### Milestone 4
+We began to implement pattern detection by adding an interface that would allow for easy addition  
+of new detectors. We also added a Singleton Detector that implements that interface and detects  
+whether the current model has any type of singleton class.
+![UML Milestone 4](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM4.png)
+#### Completed by Jason Lane
+Pattern Detection framework and details  
+Refactoring in GraphViz output stream  
+Singleton pattern testing  
+Singleton detection implementation  
+#### Completed by Sam Pastoriza
+Added tests, both manually and automated that detected singleton classes  
+UML Generation  
+General refactoring  
+Design of milestone additions  
 
 #### Notes
 * framework = interfaces and basic class structures  

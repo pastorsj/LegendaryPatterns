@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.1">
-  <zoom_level>2</zoom_level>
+  <zoom_level>3</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>568</x>
-      <y>226</y>
-      <w>64</w>
-      <h>82</h>
+      <x>801</x>
+      <y>372</y>
+      <w>96</w>
+      <h>123</h>
     </coordinates>
     <panel_attributes>legendary.Classes::LegendaryClass
 --
@@ -40,10 +40,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>352</x>
-      <y>324</y>
-      <w>128</w>
-      <h>70</h>
+      <x>477</x>
+      <y>519</y>
+      <w>192</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>legendary.Classes::LegendaryMethod
 --
@@ -72,10 +72,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>828</x>
-      <y>232</y>
-      <w>74</w>
-      <h>58</h>
+      <x>1191</x>
+      <y>381</y>
+      <w>111</w>
+      <h>87</h>
     </coordinates>
     <panel_attributes>legendary.Classes::GraphVizOutputStream
 --
@@ -101,10 +101,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>526</x>
-      <y>324</y>
-      <w>58</w>
-      <h>56</h>
+      <x>738</x>
+      <y>519</y>
+      <w>87</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>legendary.Classes::LegendaryField
 --
@@ -129,10 +129,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>706</x>
-      <y>240</y>
-      <w>104</w>
-      <h>48</h>
+      <x>1008</x>
+      <y>393</y>
+      <w>156</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>legendary.Classes::SDEditOutputStream
 --
@@ -155,10 +155,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>564</x>
-      <y>150</y>
-      <w>76</w>
-      <h>38</h>
+      <x>795</x>
+      <y>258</y>
+      <w>114</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>legendary.Classes::LegendaryModel
 --
@@ -178,14 +178,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>752</x>
-      <y>180</y>
-      <w>116</w>
-      <h>30</h>
+      <x>1077</x>
+      <y>303</y>
+      <w>174</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>legendary.Classes::ClassParser
 --
-+instance: ClassParser
++ instance: ClassParser
+- detectors: Map&lt;Pattern, IPatternDetector&gt;
+- patterns: Map&lt;Pattern, Set&lt;IClass&gt;&gt;
 --
 -ClassParser(): ctor
 +getInstance(): ClassParser
@@ -198,10 +200,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>418</x>
-      <y>196</y>
-      <w>66</w>
-      <h>56</h>
+      <x>576</x>
+      <y>327</y>
+      <w>99</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 legendary.Interfaces::IClass
@@ -227,10 +229,10 @@ legendary.Interfaces::IClass
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>684</x>
-      <y>362</y>
-      <w>44</w>
-      <h>52</h>
+      <x>975</x>
+      <y>576</y>
+      <w>66</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 legendary.Interfaces::IVisitor
@@ -255,10 +257,10 @@ legendary.Interfaces::IVisitor
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>782</x>
-      <y>326</y>
-      <w>54</w>
-      <h>50</h>
+      <x>1122</x>
+      <y>522</y>
+      <w>81</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>/legendary.Interfaces::VisitorAdapter/
 --
@@ -282,10 +284,10 @@ legendary.Interfaces::IVisitor
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>308</x>
-      <y>264</y>
-      <w>130</w>
-      <h>46</h>
+      <x>411</x>
+      <y>429</y>
+      <w>195</w>
+      <h>69</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 legendary.Interfaces::IMethod
@@ -308,10 +310,10 @@ legendary.Interfaces::IMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>456</x>
-      <y>264</y>
-      <w>66</w>
-      <h>36</h>
+      <x>633</x>
+      <y>429</y>
+      <w>99</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 legendary.Interfaces::IField
@@ -331,10 +333,10 @@ legendary.Interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>396</x>
-      <y>158</y>
-      <w>78</w>
-      <h>26</h>
+      <x>543</x>
+      <y>270</y>
+      <w>117</w>
+      <h>39</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 legendary.Interfaces::IModel
@@ -351,10 +353,10 @@ legendary.Interfaces::IModel
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>618</x>
-      <y>382</y>
-      <w>48</w>
-      <h>18</h>
+      <x>876</x>
+      <y>606</y>
+      <w>72</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 legendary.Interfaces::ITraverser
@@ -368,10 +370,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
+      <x>492</x>
       <y>0</y>
-      <w>190</w>
-      <h>50</h>
+      <w>285</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>legendary.ParsingUtil::ParsingMethodUtil
 --
@@ -395,10 +397,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>466</y>
-      <w>56</w>
-      <h>24</h>
+      <x>744</x>
+      <y>732</y>
+      <w>84</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>legendary.ParsingUtil::ParsingFieldUtil
 --
@@ -414,10 +416,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>138</x>
-      <y>88</y>
-      <w>62</w>
-      <h>14</h>
+      <x>156</x>
+      <y>165</y>
+      <w>93</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>legendary.ParsingUtil::GeneralUtil
 --
@@ -430,10 +432,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>214</y>
-      <w>148</w>
-      <h>42</h>
+      <x>75</x>
+      <y>354</y>
+      <w>222</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>legendary.asm::ClassMethodVisitor
 --
@@ -455,10 +457,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>34</x>
-      <y>278</y>
-      <w>202</w>
-      <h>36</h>
+      <x>0</x>
+      <y>450</y>
+      <w>303</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>legendary.asm::LegendaryClassMethodVisitor
 --
@@ -478,10 +480,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>92</x>
-      <y>334</y>
-      <w>144</w>
-      <h>30</h>
+      <x>87</x>
+      <y>534</y>
+      <w>216</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>legendary.asm::ClassFieldVisitor
 --
@@ -499,10 +501,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>84</x>
-      <y>164</y>
-      <w>146</w>
-      <h>24</h>
+      <x>75</x>
+      <y>279</y>
+      <w>219</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>legendary.asm::ClassDeclarationVisitor
 --
@@ -518,10 +520,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>76</x>
-      <y>118</y>
-      <w>180</w>
-      <h>20</h>
+      <x>63</x>
+      <y>210</y>
+      <w>270</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>legendary.asm::DesignParser
 --
@@ -536,10 +538,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>308</y>
-      <w>6</w>
-      <h>20</h>
+      <x>519</x>
+      <y>495</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
@@ -547,10 +549,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>472</x>
-      <y>154</y>
-      <w>96</w>
-      <h>20</h>
+      <x>657</x>
+      <y>264</y>
+      <w>144</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;80.0;300.0;80.0;460.0;10.0</additional_attributes>
@@ -558,10 +560,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>512</x>
-      <y>298</y>
-      <w>18</w>
-      <h>46</h>
+      <x>717</x>
+      <y>480</y>
+      <w>27</w>
+      <h>69</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;210.0;70.0;210.0</additional_attributes>
@@ -569,10 +571,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>76</x>
-      <y>136</y>
-      <w>28</w>
-      <h>82</h>
+      <x>63</x>
+      <y>237</y>
+      <w>42</w>
+      <h>123</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>120.0;390.0;10.0;240.0;50.0;10.0</additional_attributes>
@@ -580,10 +582,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>94</x>
-      <y>136</y>
-      <w>8</w>
-      <h>32</h>
+      <x>90</x>
+      <y>237</y>
+      <w>12</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>20.0;140.0;10.0;10.0</additional_attributes>
@@ -591,10 +593,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>254</x>
-      <y>124</y>
-      <w>318</w>
-      <h>30</h>
+      <x>330</x>
+      <y>219</y>
+      <w>477</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>1570.0;130.0;1540.0;80.0;10.0;10.0</additional_attributes>
@@ -602,10 +604,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>254</x>
-      <y>130</y>
-      <w>318</w>
-      <h>100</h>
+      <x>330</x>
+      <y>228</y>
+      <w>477</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>1570.0;480.0;1470.0;110.0;10.0;10.0</additional_attributes>
@@ -613,10 +615,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>40</x>
-      <y>136</y>
-      <w>56</w>
-      <h>212</h>
+      <x>9</x>
+      <y>237</y>
+      <w>84</w>
+      <h>318</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>260.0;1040.0;10.0;900.0;10.0;660.0;190.0;10.0</additional_attributes>
@@ -624,10 +626,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>228</x>
-      <y>170</y>
-      <w>194</w>
-      <h>50</h>
+      <x>291</x>
+      <y>288</y>
+      <w>291</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>950.0;230.0;540.0;10.0;10.0;30.0</additional_attributes>
@@ -635,10 +637,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>228</x>
-      <y>164</y>
-      <w>172</w>
-      <h>12</h>
+      <x>291</x>
+      <y>279</y>
+      <w>258</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>840.0;10.0;10.0;40.0</additional_attributes>
@@ -646,10 +648,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>198</y>
-      <w>192</w>
-      <h>38</h>
+      <x>294</x>
+      <y>330</y>
+      <w>288</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>940.0;110.0;510.0;10.0;10.0;170.0</additional_attributes>
@@ -657,10 +659,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>170</y>
-      <w>170</w>
-      <h>62</h>
+      <x>294</x>
+      <y>288</y>
+      <w>255</w>
+      <h>93</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>830.0;10.0;10.0;290.0</additional_attributes>
@@ -668,21 +670,21 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>48</y>
-      <w>144</w>
-      <h>178</h>
+      <x>294</x>
+      <y>72</y>
+      <w>219</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>700.0;10.0;10.0;870.0</additional_attributes>
+    <additional_attributes>710.0;10.0;10.0;980.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>254</y>
-      <w>126</w>
-      <h>82</h>
+      <x>294</x>
+      <y>414</y>
+      <w>189</w>
+      <h>123</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>610.0;390.0;220.0;340.0;10.0;10.0</additional_attributes>
@@ -690,10 +692,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>138</x>
-      <y>254</y>
-      <w>34</w>
-      <h>28</h>
+      <x>156</x>
+      <y>414</y>
+      <w>51</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;120.0;150.0;10.0</additional_attributes>
@@ -701,10 +703,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>234</x>
-      <y>212</y>
-      <w>186</w>
-      <h>88</h>
+      <x>300</x>
+      <y>351</y>
+      <w>279</w>
+      <h>132</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>910.0;70.0;450.0;10.0;10.0;420.0</additional_attributes>
@@ -712,10 +714,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>234</x>
-      <y>296</y>
-      <w>78</w>
-      <h>12</h>
+      <x>300</x>
+      <y>477</y>
+      <w>117</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>370.0;10.0;10.0;40.0</additional_attributes>
@@ -723,10 +725,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>234</x>
-      <y>176</y>
-      <w>166</w>
-      <h>116</h>
+      <x>300</x>
+      <y>297</y>
+      <w>249</w>
+      <h>174</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>810.0;10.0;430.0;170.0;10.0;560.0</additional_attributes>
@@ -734,10 +736,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>234</x>
-      <y>234</y>
-      <w>188</w>
-      <h>124</h>
+      <x>300</x>
+      <y>384</y>
+      <w>282</w>
+      <h>186</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>920.0;10.0;470.0;20.0;10.0;600.0</additional_attributes>
@@ -745,10 +747,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>234</x>
-      <y>182</y>
-      <w>166</w>
-      <h>164</h>
+      <x>300</x>
+      <y>306</y>
+      <w>249</w>
+      <h>246</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>810.0;10.0;460.0;240.0;10.0;800.0</additional_attributes>
@@ -756,10 +758,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>212</x>
-      <y>298</y>
-      <w>278</w>
-      <h>142</h>
+      <x>267</x>
+      <y>480</y>
+      <w>417</w>
+      <h>213</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>1370.0;10.0;1370.0;690.0;10.0;690.0;10.0;330.0</additional_attributes>
@@ -767,10 +769,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>428</x>
-      <y>306</y>
-      <w>152</w>
-      <h>14</h>
+      <x>591</x>
+      <y>492</y>
+      <w>228</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;20.0;10.0;50.0;740.0;50.0;740.0;10.0</additional_attributes>
@@ -778,10 +780,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>472</x>
-      <y>176</y>
-      <w>100</w>
-      <h>68</h>
+      <x>657</x>
+      <y>297</y>
+      <w>150</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;300.0;10.0;480.0;320.0</additional_attributes>
@@ -789,10 +791,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>300</y>
-      <w>62</w>
-      <h>66</h>
+      <x>894</x>
+      <y>483</y>
+      <w>93</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>290.0;310.0;290.0;210.0;10.0;10.0</additional_attributes>
@@ -800,10 +802,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>624</x>
-      <y>306</y>
-      <w>14</w>
-      <h>80</h>
+      <x>885</x>
+      <y>492</y>
+      <w>21</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>50.0;380.0;10.0;10.0</additional_attributes>
@@ -811,10 +813,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>478</x>
-      <y>390</y>
-      <w>144</w>
-      <h>8</h>
+      <x>666</x>
+      <y>618</y>
+      <w>216</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>700.0;20.0;10.0;10.0</additional_attributes>
@@ -822,10 +824,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>638</x>
-      <y>186</y>
-      <w>16</w>
-      <h>200</h>
+      <x>906</x>
+      <y>312</y>
+      <w>24</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>60.0;980.0;10.0;10.0</additional_attributes>
@@ -833,10 +835,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>582</x>
-      <y>370</y>
-      <w>40</w>
-      <h>24</h>
+      <x>822</x>
+      <y>588</y>
+      <w>60</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>180.0;100.0;10.0;10.0</additional_attributes>
@@ -844,10 +846,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>474</x>
-      <y>392</y>
-      <w>214</w>
-      <h>24</h>
+      <x>660</x>
+      <y>621</y>
+      <w>321</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>1050.0;100.0;10.0;80.0;10.0;10.0</additional_attributes>
@@ -855,10 +857,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>638</x>
-      <y>168</y>
-      <w>78</w>
-      <h>198</h>
+      <x>906</x>
+      <y>285</y>
+      <w>117</w>
+      <h>297</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>370.0;970.0;370.0;860.0;110.0;210.0;10.0;10.0</additional_attributes>
@@ -866,10 +868,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>182</y>
-      <w>6</w>
-      <h>86</h>
+      <x>549</x>
+      <y>306</y>
+      <w>9</w>
+      <h>129</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;410.0;10.0;10.0</additional_attributes>
@@ -877,10 +879,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>744</x>
-      <y>208</y>
-      <w>22</w>
-      <h>36</h>
+      <x>1065</x>
+      <y>345</y>
+      <w>33</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;160.0;90.0;10.0</additional_attributes>
@@ -888,10 +890,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>844</x>
-      <y>208</y>
-      <w>30</w>
-      <h>28</h>
+      <x>1215</x>
+      <y>345</y>
+      <w>45</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>130.0;120.0;10.0;10.0</additional_attributes>
@@ -899,10 +901,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>778</x>
-      <y>286</y>
-      <w>30</w>
-      <h>44</h>
+      <x>1116</x>
+      <y>462</y>
+      <w>45</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>130.0;200.0;10.0;10.0</additional_attributes>
@@ -910,10 +912,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>822</x>
-      <y>288</y>
-      <w>24</w>
-      <h>42</h>
+      <x>1182</x>
+      <y>465</y>
+      <w>36</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;190.0;100.0;10.0</additional_attributes>
@@ -921,10 +923,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>784</x>
-      <y>286</y>
-      <w>28</w>
-      <h>44</h>
+      <x>1125</x>
+      <y>462</y>
+      <w>42</w>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>120.0;200.0;10.0;10.0</additional_attributes>
@@ -932,10 +934,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>816</x>
-      <y>288</y>
-      <w>24</w>
-      <h>42</h>
+      <x>1173</x>
+      <y>465</y>
+      <w>36</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;190.0;100.0;10.0</additional_attributes>
@@ -943,10 +945,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>468</x>
-      <y>70</y>
-      <w>258</w>
-      <h>174</h>
+      <x>651</x>
+      <y>138</y>
+      <w>387</w>
+      <h>261</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;440.0;330.0;10.0;1140.0;10.0;1270.0;850.0</additional_attributes>
@@ -954,10 +956,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>446</x>
-      <y>286</y>
-      <w>304</w>
-      <h>166</h>
+      <x>618</x>
+      <y>462</y>
+      <w>456</w>
+      <h>249</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;540.0;10.0;800.0;1500.0;810.0;1500.0;10.0</additional_attributes>
@@ -965,10 +967,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>56</y>
-      <w>454</w>
-      <h>180</h>
+      <x>621</x>
+      <y>117</y>
+      <w>681</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;510.0;370.0;10.0;1260.0;10.0;2150.0;520.0;2250.0;880.0</additional_attributes>
@@ -976,10 +978,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>482</x>
-      <y>84</y>
-      <w>416</w>
-      <h>150</h>
+      <x>672</x>
+      <y>159</y>
+      <w>624</w>
+      <h>225</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;560.0;320.0;20.0;1230.0;10.0;1950.0;380.0;2060.0;730.0</additional_attributes>
@@ -987,10 +989,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>504</x>
-      <y>94</y>
-      <w>386</w>
-      <h>176</h>
+      <x>705</x>
+      <y>174</y>
+      <w>579</w>
+      <h>264</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;860.0;20.0;440.0;240.0;40.0;1120.0;10.0;1810.0;360.0;1910.0;690.0</additional_attributes>
@@ -998,10 +1000,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>458</x>
-      <y>62</y>
-      <w>298</w>
-      <h>122</h>
+      <x>636</x>
+      <y>126</y>
+      <w>447</w>
+      <h>183</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;480.0;350.0;20.0;1200.0;10.0;1290.0;520.0;1470.0;590.0</additional_attributes>
@@ -1009,32 +1011,32 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>548</x>
-      <y>40</y>
-      <w>52</w>
-      <h>114</h>
+      <x>774</x>
+      <y>60</y>
+      <w>75</w>
+      <h>204</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>240.0;550.0;200.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>230.0;660.0;190.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
-      <y>48</y>
-      <w>24</w>
-      <h>114</h>
+      <x>579</x>
+      <y>72</y>
+      <w>39</w>
+      <h>204</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;550.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;660.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>168</x>
-      <y>100</y>
-      <w>6</w>
-      <h>20</h>
+      <x>201</x>
+      <y>183</y>
+      <w>9</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
@@ -1042,10 +1044,10 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>378</y>
-      <w>6</w>
-      <h>92</h>
+      <x>789</x>
+      <y>600</y>
+      <w>9</w>
+      <h>138</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;440.0;10.0;10.0</additional_attributes>
@@ -1053,21 +1055,21 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>548</x>
-      <y>36</y>
-      <w>102</w>
-      <h>210</h>
+      <x>774</x>
+      <y>54</y>
+      <w>150</w>
+      <h>348</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>420.0;1030.0;490.0;1030.0;470.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>410.0;1140.0;480.0;1140.0;460.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>218</x>
-      <y>362</y>
-      <w>338</w>
-      <h>70</h>
+      <x>276</x>
+      <y>576</y>
+      <w>507</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>1670.0;90.0;1670.0;330.0;10.0;330.0;10.0;10.0</additional_attributes>
@@ -1075,12 +1077,91 @@ legendary.Interfaces::ITraverser
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>482</x>
-      <y>242</y>
-      <w>90</w>
-      <h>6</h>
+      <x>672</x>
+      <y>396</y>
+      <w>135</w>
+      <h>9</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;430.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1434</x>
+      <y>408</y>
+      <w>87</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::SingletonDetector
+--
+--
++detect(IModel m): Set&lt;IClass&gt;
++getCandidates(IModel m): Set&lt;IClass&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1434</x>
+      <y>309</y>
+      <w>84</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IPatternDetector
+--
+--
++detect(IModel m): Set&lt;IClass&gt;
++getCandidates(IModel m): Set&lt;IClass&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1473</x>
+      <y>339</y>
+      <w>9</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1173</x>
+      <y>279</y>
+      <w>276</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>900.0;100.0;900.0;20.0;10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>612</x>
+      <y>102</y>
+      <w>879</w>
+      <h>213</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;560.0;380.0;10.0;1290.0;10.0;2910.0;610.0;2910.0;690.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>168</y>
+      <w>813</w>
+      <h>183</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;590.0;340.0;30.0;1490.0;10.0;2690.0;400.0;2690.0;470.0</additional_attributes>
   </element>
 </diagram>
