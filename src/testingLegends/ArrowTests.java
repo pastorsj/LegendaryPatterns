@@ -50,6 +50,7 @@ public class ArrowTests {
 	@Test
 	public void testAssociateArrow() throws Exception {
 		this.model.addRelation(c1.getClassName(), c2.getClassName(), Relations.ASSOCIATES);
+		model.convertToGraph();
 		String arrowRet = (String) arrowMethod.invoke(outputStream, model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}
@@ -57,6 +58,7 @@ public class ArrowTests {
 	@Test
 	public void testUsesArrow() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
+		model.convertToGraph();
 		String arrowRet = (String) arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}
@@ -65,6 +67,7 @@ public class ArrowTests {
 	public void testUseBeforeAssociate() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
+		model.convertToGraph();
 		String arrowRet = (String) arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}
@@ -73,6 +76,7 @@ public class ArrowTests {
 	public void testAssociateBeforeUse() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}
@@ -80,6 +84,7 @@ public class ArrowTests {
 	@Test
 	public void testExtendsArrow() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.EXTENDS);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}
@@ -87,6 +92,7 @@ public class ArrowTests {
 	@Test
 	public void testImplementsArrow() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.IMPLEMENTS);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}
@@ -95,6 +101,7 @@ public class ArrowTests {
 	public void testExtendsBeforeUses() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.EXTENDS);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -104,6 +111,7 @@ public class ArrowTests {
 	public void testExtendsAfterUses() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.EXTENDS);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -113,6 +121,7 @@ public class ArrowTests {
 	public void testExtendsBeforeAssociates() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.EXTENDS);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -122,6 +131,7 @@ public class ArrowTests {
 	public void testExtendsAfterAssociates() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.EXTENDS);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -131,6 +141,7 @@ public class ArrowTests {
 	public void testImplementsBeforeUses() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.IMPLEMENTS);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -140,6 +151,7 @@ public class ArrowTests {
 	public void testImplementsAfterUses() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.IMPLEMENTS);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -149,6 +161,7 @@ public class ArrowTests {
 	public void testImplementsBeforeAssociates() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.IMPLEMENTS);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
@@ -158,8 +171,9 @@ public class ArrowTests {
 	public void testImplementsAfterAssociates() throws Exception {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.IMPLEMENTS);
+		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
-		System.out.println(arrowRet);
+//		System.out.println(arrowRet);
 		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n"
 				+ "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
 	}

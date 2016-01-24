@@ -190,6 +190,7 @@ public class GraphVizTest {
 		this.testModel.addRelation(this.testClass2.getClassName(), this.testClass3.getClassName(),
 				Relations.IMPLEMENTS);
 		this.testModel.addRelation(this.testClass3.getClassName(), this.testClass4.getClassName(), Relations.USES);
+		testModel.convertToGraph();
 		this.parser.makeGraphViz(testModel, builder);
 		String formattedOutput = String.format(
 				"digraph G{node [shape = \"record\"]%s [label = \"{%s|%s %s: %s\\l|%s %s() : %s\\l}\"]"

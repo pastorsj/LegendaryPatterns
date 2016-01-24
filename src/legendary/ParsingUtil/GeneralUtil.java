@@ -123,8 +123,6 @@ public class GeneralUtil {
 	}
 
 	public static Set<String> getBaseFields(String in) {
-		if(in.equals("Ljava/util/Set<Llegendary/Interfaces/IClass;>;"))
-			System.out.println();
 		Set<String> res = new HashSet<>();
 		if (in.contains("<")) {
 			String split1, split2;

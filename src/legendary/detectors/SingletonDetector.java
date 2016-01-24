@@ -60,16 +60,9 @@ public class SingletonDetector implements IPatternDetector {
 	@Override
 	public Set<IClass> getCandidates(IModel m) {
 		Set<IClass> candidates = new HashSet<>();
-		for (IClass c : m.getClasses()) {
-			List<String> pair = new ArrayList<>();
-			pair.add(c.getClassName());
-			pair.add(c.getClassName());
-			if (m.getRelations().containsKey(pair)
-					&& m.getRelations().get(pair)
-							.contains(Relations.ASSOCIATES)) {
+		for(IClass c: m.getRelGraph().keySet())
+			if(m.getRelGraph().get(c).get(Relations.ASSOCIATES).contains(c))
 				candidates.add(c);
-			}
-		}
 		return candidates;
 	}
 

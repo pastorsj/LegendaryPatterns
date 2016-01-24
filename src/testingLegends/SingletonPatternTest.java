@@ -105,6 +105,7 @@ public class SingletonPatternTest {
 	public void detectLazySingletonBaseCase() {
 		this.initializeSingleton();
 		this.testMethod.addMethodToCallStack("TestSingletonClass", "TestSingletonClass", "<init>");
+		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		Set<IClass> classDetected = new HashSet<>();
 		classDetected.add(testClass);
@@ -114,6 +115,7 @@ public class SingletonPatternTest {
 	@Test
 	public void detectEagerSingletonBaseCase() {
 		this.initializeSingleton();
+		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		Set<IClass> classDetected = new HashSet<>();
 		classDetected.add(testClass);
@@ -123,6 +125,7 @@ public class SingletonPatternTest {
 	@Test
 	public void detectNonSingletonBaseCase() {
 		this.initializeNonSingletonBase();
+		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
@@ -130,6 +133,7 @@ public class SingletonPatternTest {
 	@Test
 	public void detectNonSingletonEdgeCase() {
 		this.initializeNonSingletonEdge();
+		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
@@ -138,6 +142,7 @@ public class SingletonPatternTest {
 	public void detectNonSingletonEdgeCase2() {
 		this.initializeNonSingletonEdge();
 		this.testMethod.setReturnType("String");
+		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
@@ -146,6 +151,7 @@ public class SingletonPatternTest {
 	public void detectNonSingletonEdgeCase3() {
 		this.initializeNonSingletonEdge();
 		this.testField.setAccess("+_");
+		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}

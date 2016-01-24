@@ -1,135 +1,37 @@
 digraph G{
 	node [shape = "record"]
-Beverage [
-	label = "{Beverage|
-	 description: String\l
+TestClass1 [
+	label = "{TestClass1|
+	+ TestField1: void\l
 	|
-	+ cost() : double\l
-	+ getDescription() : String\l
+	public testOwnerMethod() : boolean\l
 	}"
 	]
-CondimentDecorator [
-	label = "{CondimentDecorator|
+TestClass2 [
+	label = "{TestClass2|
+	+ TestField1: void\l
+	# TestField2: short\l
 	|
-	+ getDescription() : String\l
+	public testCallMethod1() : int\l
 	}"
 	]
-DarkRoast [
-	label = "{DarkRoast|
+TestClass3 [
+	label = "{TestClass3|
+	+ TestField1: void\l
+	# TestField2: short\l
+	- TestField3: boolean\l
 	|
-	+ cost() : double\l
+	public testCallMethod2() : double\l
 	}"
 	]
-Decaf [
-	label = "{Decaf|
+TestClass4 [
+	label = "{TestClass4|
+	+ TestField1: void\l
+	# TestField2: short\l
+	- TestField3: boolean\l
+	 TestField4: int\l
 	|
-	+ cost() : double\l
+	public testCallMethod3() : List<String>\l
 	}"
 	]
-Espresso [
-	label = "{Espresso|
-	|
-	+ cost() : double\l
-	}"
-	]
-HouseBlend [
-	label = "{HouseBlend|
-	|
-	+ cost() : double\l
-	}"
-	]
-Milk [
-	label = "{Milk|
-	 beverage: Beverage\l
-	|
-	+ cost() : double\l
-	+ getDescription() : String\l
-	}"
-	]
-Mocha [
-	label = "{Mocha|
-	 beverage: Beverage\l
-	|
-	+ cost() : double\l
-	+ getDescription() : String\l
-	}"
-	]
-Soy [
-	label = "{Soy|
-	 beverage: Beverage\l
-	|
-	+ cost() : double\l
-	+ getDescription() : String\l
-	}"
-	]
-StarbuzzCoffee [
-	label = "{StarbuzzCoffee|
-	|
-	+ _main(String[]) : void_\l
-	}"
-	]
-Whip [
-	label = "{Whip|
-	 beverage: Beverage\l
-	|
-	+ cost() : double\l
-	+ getDescription() : String\l
-	}"
-	]
-	edge [style = "solid"] [arrowhead = "empty"]
-	CondimentDecorator->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	CondimentDecorator->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	StarbuzzCoffee->Whip
-	edge [style = "dashed"] [arrowhead = "open"]
-	StarbuzzCoffee->Soy
-	edge [style = "dashed"] [arrowhead = "open"]
-	StarbuzzCoffee->Espresso
-	edge [style = "dashed"] [arrowhead = "open"]
-	StarbuzzCoffee->Mocha
-	edge [style = "solid"] [arrowhead = "empty"]
-	Whip->CondimentDecorator
-	edge [style = "dashed"] [arrowhead = "open"]
-	Whip->CondimentDecorator
-	edge [style = "dashed"] [arrowhead = "open"]
-	StarbuzzCoffee->HouseBlend
-	edge [style = "solid"] [arrowhead = "empty"]
-	Espresso->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	Espresso->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	StarbuzzCoffee->DarkRoast
-	edge [style = "solid"] [arrowhead = "empty"]
-	Milk->CondimentDecorator
-	edge [style = "dashed"] [arrowhead = "open"]
-	Milk->CondimentDecorator
-	edge [style = "solid"] [arrowhead = "open"]
-	Soy->Beverage
-	edge [style = "solid"] [arrowhead = "empty"]
-	Mocha->CondimentDecorator
-	edge [style = "dashed"] [arrowhead = "open"]
-	Mocha->CondimentDecorator
-	edge [style = "solid"] [arrowhead = "empty"]
-	Decaf->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	Decaf->Beverage
-	edge [style = "solid"] [arrowhead = "open"]
-	Milk->Beverage
-	edge [style = "solid"] [arrowhead = "empty"]
-	Soy->CondimentDecorator
-	edge [style = "dashed"] [arrowhead = "open"]
-	Soy->CondimentDecorator
-	edge [style = "solid"] [arrowhead = "open"]
-	Mocha->Beverage
-	edge [style = "solid"] [arrowhead = "open"]
-	Whip->Beverage
-	edge [style = "solid"] [arrowhead = "empty"]
-	DarkRoast->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	DarkRoast->Beverage
-	edge [style = "solid"] [arrowhead = "empty"]
-	HouseBlend->Beverage
-	edge [style = "dashed"] [arrowhead = "open"]
-	HouseBlend->Beverage
 }

@@ -1,10 +1,8 @@
 package legendary.Classes;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -62,25 +60,46 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	private String addArrows(IModel m) {
 		StringBuilder sb = new StringBuilder();
-		Map<List<String>, List<Relations>> relMap = m.getRelations();
-		List<String> classNames = new ArrayList<>();
-		for (IClass c : m.getClasses()) {
-			classNames.add(c.getClassName());
-		}
-		outer: for (List<String> al : relMap.keySet()) {
-			if (!classNames.contains(al.get(1))) {
-				continue;
-			}
-			for (Relations r : relMap.get(al)) {
-				if (!this.relationRep.containsKey(r)) {
-					System.out.println("null relation for classes " + al.get(0)
-							+ " and " + al.get(1));
-					break outer;
+		Map<IClass, Map<Relations, Set<IClass>>> graph = m.getRelGraph();
+		outer: for (IClass c : graph.keySet()) {
+			for (Relations r : graph.get(c).keySet()) {
+				for (IClass c2 : graph.get(c).get(r)) {
+					if (!this.relationRep.containsKey(r)) {
+						System.out.println("null relation for classes "
+								+ c.getClassName() + " and "
+								+ c2.getClassName());
+						break outer;
+					}
+					if (!this.relationRep.get(r).equals("")) {
+						sb.append(this.relationRep.get(r));
+						sb.append(c.getClassName() + "->" + c2.getClassName()
+								+ "\n");
+					}
 				}
-				sb.append(this.relationRep.get(r));
-				sb.append(al.get(0) + "->" + al.get(1) + "\n");
 			}
 		}
+
+		// Map<List<String>, List<Relations>> relMap = m.getRelations();
+		// List<String> classNames = new ArrayList<>();
+		// for (IClass c : m.getClasses()) {
+		// classNames.add(c.getClassName());
+		// }
+		// outer: for (List<String> al : relMap.keySet()) {
+		// if (!classNames.contains(al.get(1))) {
+		// continue;
+		// }
+		// for (Relations r : relMap.get(al)) {
+		// if (!this.relationRep.containsKey(r)) {
+		// System.out.println("null relation for classes " + al.get(0)
+		// + " and " + al.get(1));
+		// break outer;
+		// }
+		// if (!this.relationRep.get(r).equals("")) {
+		// sb.append(this.relationRep.get(r));
+		// sb.append(al.get(0) + "->" + al.get(1) + "\n");
+		// }
+		// }
+		// }
 		return sb.toString();
 	}
 
@@ -161,5 +180,9 @@ public class GraphVizOutputStream extends VisitorAdapter {
 				"\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
 		this.relationRep.put(Relations.USES,
 				"\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.REV_ASSOCIATES, "");
+		this.relationRep.put(Relations.REV_EXTENDS, "");
+		this.relationRep.put(Relations.REV_IMPLEMENTS, "");
+		this.relationRep.put(Relations.REV_USES, "");
 	}
 }
