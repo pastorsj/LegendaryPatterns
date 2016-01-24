@@ -1,8 +1,0 @@
-TestClass4:TestClass4
-TestClass3:TestClass3
-TestClass2:TestClass2
-TestClass1:TestClass1
-
-TestClass1:int=TestClass2.testCallMethod1()
-TestClass1:double=TestClass3.testCallMethod2()
-TestClass1:List<String>=TestClass4.testCallMethod3()

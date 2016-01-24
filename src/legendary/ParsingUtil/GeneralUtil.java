@@ -2,11 +2,165 @@ package legendary.ParsingUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import legendary.asm.DesignParser;
 
 public class GeneralUtil {
+	
+	public static Map<String, String> primCodes;
+
+	/*
+	 * Primitive Representations for ASM 5 Primitive representations: 'V' - void
+	 * 'Z' - boolean 'C' - char 'B' - byte 'S' - short 'I' - int 'F' - float 'J'
+	 * - long 'D' - double
+	 */
+	static {
+		primCodes = new HashMap<>();
+		primCodes.put("V", "void");
+		primCodes.put("Z", "boolean");
+		primCodes.put("C", "char");
+		primCodes.put("B", "byte");
+		primCodes.put("S", "short");
+		primCodes.put("I", "int");
+		primCodes.put("F", "float");
+		primCodes.put("J", "long");
+		primCodes.put("D", "double");
+	}
+	
+	public static List<String> typeArgumentCollections(String in) {
+		String s = in;
+		if (s.isEmpty()) {
+			return new ArrayList<String>();
+		}
+		String args = s.contains(")") ? s.substring(1, s.lastIndexOf(")")) : s.substring(1);
+		if (args.length() < 1) {
+			return new ArrayList<String>();
+		}
+		String argSet[] = args.split(";");
+		List<String> finalArgSet = new LinkedList<>();
+		for (int i = 0; i < argSet.length; i++) {
+			String argVal = argSet[i];
+			if (argVal.equals("java/lang/String")) {
+				finalArgSet.add(argVal);
+			} else if (argVal.startsWith("L")) {
+				finalArgSet.add(argVal.substring(1));
+			} else if (argVal.startsWith("[L")) {
+				finalArgSet.add("[" + argVal.substring(2));
+			} else {
+				parsePrimOut(argVal, finalArgSet);
+			}
+		}
+		return convert(finalArgSet);
+	}
+
+	private static List<String> convert(List<String> argSet) {
+		List<String> finalArgSet = new LinkedList<>();
+		int argSize = argSet.size();
+		for (int i = 0; i < argSize; i++) {
+			String arg = argSet.get(i);
+			if (arg.equals(">")) {
+				String argGet = finalArgSet.get(i - 1) + "\\>";
+				argSet.remove(i);
+				argSet.remove(i - 1);
+				argSet.add(i - 1, argGet);
+				finalArgSet.set(i - 1, argGet);
+				i--;
+				argSize--;
+				continue;
+			}
+			if (primCodes.containsKey(arg)) {
+				finalArgSet.add(primCodes.get(arg));
+			} else if (arg.startsWith("[")) {
+				finalArgSet.add(typeMethodCollections(arg.substring(1) + "[]", new ArrayList<>()));
+			} else {
+				finalArgSet.add(typeMethodCollections(arg, new ArrayList<>()));
+			}
+		}
+		return finalArgSet;
+	}
+
+	public static String typeMethodCollections(String in, List<String> usesClasses) {
+		String s = in;
+		if (in.contains("<")) {
+			String split1 = s.substring(0, s.indexOf("<"));
+			usesClasses.add(split1);
+			String split2 = s.substring(s.indexOf("<") + 1);
+			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
+			String[] split = split2.split(";");
+			for (int i = 0; i < split.length; i++) {
+				String s2 = split[i];
+				s += typeMethodCollections(s2, usesClasses);
+				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
+					s += ", ";
+			}
+		} else
+			usesClasses.add(s.substring(s.lastIndexOf("/") + 1).replace(";", ""));
+		s = s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\")
+				.replace(";", "");
+		return s;
+	}
+
+	private static void parsePrimOut(String arg, List<String> argSet) {
+		argSet.add(String.valueOf(arg.charAt(0)));
+		arg = arg.substring(1);
+		if (arg.length() == 0) {
+			return;
+		}
+		if (arg.startsWith("L")) {
+			argSet.add(arg.substring(1));
+			return;
+		} else if (arg.startsWith("[L")) {
+			argSet.add("[" + arg.substring(2));
+		} else {
+			parsePrimOut(arg, argSet);
+		}
+	}
+
+	public static Set<String> getBaseFields(String in) {
+		if(in.equals("Ljava/util/Set<Llegendary/Interfaces/IClass;>;"))
+			System.out.println();
+		Set<String> res = new HashSet<>();
+		if (in.contains("<")) {
+			String split1, split2;
+			split1 = in.substring(0, in.indexOf("<"));
+			split2 = in.substring(in.indexOf("<") + 1, (in.contains(">") ? in.indexOf(">") : in.length()));
+			res.add(split1.substring(split1.lastIndexOf("/")));
+			for (String s : split2.split(";")) {
+				res.addAll(getBaseFields(s));
+			}
+		} else {
+			if (in.contains("/")) {
+				res.add(in.substring(in.lastIndexOf("/") + 1).replace(";", ""));
+			} else
+				res.add(in);
+		}
+		return res;
+	}
+
+	public static String typeFieldCollections(String in) {
+		String s = in;
+		if (in.contains("<")) {
+			String split1 = s.substring(0, s.indexOf("<"));
+			String split2 = s.substring(s.indexOf("<") + 1);
+			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
+			String[] split = split2.split(";");
+			for (int i = 0; i < split.length; i++) {
+				String s2 = split[i];
+				s += typeFieldCollections(s2);
+				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
+					s += ", ";
+			}
+		}
+		return s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\")
+				.replace(";", "");
+	}
+	
 	public static List<String> getClassesFromDir(File dir) {
 		ArrayList<String> res = new ArrayList<String>();
 		ArrayList<String> res2 = new ArrayList<String>();

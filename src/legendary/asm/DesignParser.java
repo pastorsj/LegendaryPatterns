@@ -22,10 +22,10 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "legendary";
+	public static final String packageName = "headfirst";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	 "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
+	 "C:/Users/Administrator/Documents/CSSE374/Lab2-1/src/headfirst" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -51,6 +51,7 @@ public class DesignParser {
 			IClass legendaryClass = new LegendaryClass();
 			// ASM's ClassReader does the heavy lifting of parsing the compiled
 			// Java class
+			System.out.println(className);
 			ClassReader reader = new ClassReader(className);
 			// make class declaration visitor to get superclass and interfaces
 			ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, legendaryClass, legendaryModel);

@@ -1,492 +1,135 @@
 digraph G{
 	node [shape = "record"]
-ClassDeclarationVisitor [
-	label = "{ClassDeclarationVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
+Beverage [
+	label = "{Beverage|
+	 description: String\l
 	|
-	+ visit(int, int, String, String, String, String[]) : void\l
+	+ cost() : double\l
+	+ getDescription() : String\l
 	}"
 	]
-ClassFieldVisitor [
-	label = "{ClassFieldVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
+CondimentDecorator [
+	label = "{CondimentDecorator|
 	|
-	+ visitField(int, String, String, String, Object) : FieldVisitor\l
-	 addAccessLevel(int, IField) : void\l
+	+ getDescription() : String\l
 	}"
 	]
-ClassMethodVisitor [
-	label = "{ClassMethodVisitor|
-	- usesClasses: List\<String\>\l
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	- util: ParsingMethodUtil\l
+DarkRoast [
+	label = "{DarkRoast|
 	|
-	 addArguments(String, IMethod) : void\l
-	 addAccessLevel(int, IMethod) : void\l
-	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
-	 addReturnType(String, IMethod) : void\l
+	+ cost() : double\l
 	}"
 	]
-DesignParser [
-	label = "{DesignParser|
-	+ _packageName: String_\l
-	+ _directories: String[]_\l
+Decaf [
+	label = "{Decaf|
+	|
+	+ cost() : double\l
+	}"
+	]
+Espresso [
+	label = "{Espresso|
+	|
+	+ cost() : double\l
+	}"
+	]
+HouseBlend [
+	label = "{HouseBlend|
+	|
+	+ cost() : double\l
+	}"
+	]
+Milk [
+	label = "{Milk|
+	 beverage: Beverage\l
+	|
+	+ cost() : double\l
+	+ getDescription() : String\l
+	}"
+	]
+Mocha [
+	label = "{Mocha|
+	 beverage: Beverage\l
+	|
+	+ cost() : double\l
+	+ getDescription() : String\l
+	}"
+	]
+Soy [
+	label = "{Soy|
+	 beverage: Beverage\l
+	|
+	+ cost() : double\l
+	+ getDescription() : String\l
+	}"
+	]
+StarbuzzCoffee [
+	label = "{StarbuzzCoffee|
 	|
 	+ _main(String[]) : void_\l
 	}"
 	]
-LegendaryClassMethodVisitor [
-	label = "{LegendaryClassMethodVisitor|
-	 legendaryClass: IClass\l
-	 legendaryModel: IModel\l
-	 legendaryMethod: IMethod\l
+Whip [
+	label = "{Whip|
+	 beverage: Beverage\l
 	|
-	+ visitTypeInsn(int, String) : void\l
-	+ visitVarInsn(int, int) : void\l
-	+ visitMethodInsn(int, String, String, String, boolean) : void\l
-	+ visitFieldInsn(int, String, String, String) : void\l
+	+ cost() : double\l
+	+ getDescription() : String\l
 	}"
 	]
-ClassParser [
-	label = "{ClassParser\n\<\<Singleton\>\>|
-	- _instance: ClassParser_\l
-	- detect: IPatternDetector\l
-	|
-	+ _getInstance() : ClassParser_\l
-	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
-	+ addDetector(IPatternDetector) : void\l
-	+ makeGraphViz(IModel, StringBuilder) : void\l
-	}"
-	color = blue]
-GraphVizOutputStream [
-	label = "{GraphVizOutputStream|
-	- builder: StringBuilder\l
-	- relationRep: Map\<Relations, String\>\l
-	- patterns: Map\<IClass, Set\<IPattern\>\>\l
-	|
-	- addArrows(IModel) : String\l
-	- patternColor(IClass) : String\l
-	- invertPatternMap(Map\<Class\<IPattern\>, Set\<IClass\>\>) : Map\<Class\<IPattern\>, Set\<IClass\>\>, Map\<IClass, Set\<IPattern\>\>\l
-	+ postvisit(IClass) : void\l
-	+ previsit(IClass) : void\l
-	+ visit(IMethod) : void\l
-	+ initialize() : void\l
-	- write(String) : void\l
-	- addPatternTags(IClass) : void\l
-	}"
-	]
-LegendaryClass [
-	label = "{LegendaryClass|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\<String\>\l
-	- methods: Map\<String, IMethod\>\l
-	- fields: List\<IField\>\l
-	- isInterface: boolean\l
-	- creationOrder: int\l
-	- _count: int_\l
-	|
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ compareTo(Object) : int\l
-	+ setSuper(String) : void\l
-	+ accept(IVisitor) : void\l
-	+ getFields() : List\<IField\>\l
-	+ getCreationOrder() : int\l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ getMethods() : Map\<String, IMethod\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-LegendaryField [
-	label = "{LegendaryField|
-	- fieldAccessType: String\l
-	- fieldName: String\l
-	- fieldType: String\l
-	- baseFields: Set\<String\>\l
-	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-LegendaryMethod [
-	label = "{LegendaryMethod|
-	- methodAccess: String\l
-	- methodName: String\l
-	- parameters: List\<String\>\l
-	- methodCallStack: Queue\<List\<String\>\>\l
-	- methodReturnType: String\l
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<String\>\>\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-LegendaryModel [
-	label = "{LegendaryModel|
-	- classList: Set\<IClass\>\l
-	- relations: Map\<List\<String\>, List\<Relations\>\>\l
-	- patterns: Map\<IPattern, Set\<IClass\>\>\l
-	|
-	+ getPatterns() : Map\<IPattern, Set\<IClass\>\>\l
-	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
-	+ addPattern(IPattern, Set\<IClass\>) : void\l
-	+ addRelation(String, String, Relations) : void\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-Relations [
-	label = "{Relations|
-	+ _EXTENDS: Relations_\l
-	+ _IMPLEMENTS: Relations_\l
-	+ _USES: Relations_\l
-	+ _ASSOCIATES: Relations_\l
-	- _ENUM$VALUES: Relations[]_\l
-	|
-	+ _valueOf(String) : Relations_\l
-	+ _values() : Relations_\l
-	}"
-	]
-SDEditOutputStream [
-	label = "{SDEditOutputStream|
-	- model: IModel\l
-	- builder: StringBuilder\l
-	- classes: Set\<String\>\l
-	- methodCalls: List\<String\>\l
-	- depth: int\l
-	- origDepth: int\l
-	|
-	+ postvisit(IMethod) : void\l
-	+ previsit(IMethod) : void\l
-	+ visit(IMethod) : void\l
-	+ write(String) : void\l
-	}"
-	]
-SingletonDetector [
-	label = "{SingletonDetector|
-	- next: IPatternDetector\l
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>, Set\<IClass\>\>\l
-	}"
-	]
-SingletonPattern [
-	label = "{SingletonPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	}"
-	]
-IClass [
-	label = "{\<\<interface\>\>\nIClass|
-	|
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ getFields() : List\<IField\>\l
-	+ getCreationOrder() : int\l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ getMethods() : Map\<String, IMethod\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-IField [
-	label = "{\<\<interface\>\>\nIField|
-	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	}"
-	]
-IMethod [
-	label = "{\<\<interface\>\>\nIMethod|
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<String\>\>\l
-	}"
-	]
-IModel [
-	label = "{\<\<interface\>\>\nIModel|
-	|
-	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	}"
-	]
-IPattern [
-	label = "{\<\<interface\>\>\nIPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	}"
-	]
-IPatternDetector [
-	label = "{\<\<interface\>\>\nIPatternDetector|
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>, Set\<IClass\>\>\l
-	}"
-	]
-ITraverser [
-	label = "{\<\<interface\>\>\nITraverser|
-	|
-	+ accept(IVisitor) : void\l
-	}"
-	]
-IVisitor [
-	label = "{\<\<interface\>\>\nIVisitor|
-	|
-	+ postvisit(IField) : void\l
-	+ previsit(IField) : void\l
-	+ visit(IField) : void\l
-	}"
-	]
-VisitorAdapter [
-	label = "{VisitorAdapter|
-	|
-	+ postvisit(IField) : void\l
-	+ previsit(IField) : void\l
-	+ visit(IField) : void\l
-	}"
-	]
-GeneralUtil [
-	label = "{GeneralUtil|
-	|
-	+ _getClassesFromDir(File) : List\<String\>_\l
-	}"
-	]
-ParsingFieldUtil [
-	label = "{ParsingFieldUtil|
-	+ _primCodes: Map\<String, String\>_\l
-	|
-	+ _getBaseFields(String) : Set\<String\>_\l
-	+ _typeCollections(String) : String_\l
-	- _replacePrims(String) : String_\l
-	}"
-	]
-ParsingMethodUtil [
-	label = "{ParsingMethodUtil|
-	+ _returnPrimCheck: Map\<String, String\>_\l
-	- usesClasses: List\<String\>\l
-	|
-	+ _getCompleteCallStack(IModel, IMethod, int, int, StringBuilder, Set\<String\>) : void_\l
-	- _SDEditFormatClass(IClass) : String_\l
-	+ typeCollections(String) : String\l
-	- convert(List\<String\>) : List\<String\>, List\<String\>\l
-	- _parsePrimOut(String, List\<String\>) : void_\l
-	+ typeArgumentCollections(String) : List\<String\>\l
-	+ getPrimCheck() : Map\<String, String\>\l
-	- _SDEditFormatMethod(List\<String\>) : List\<String\>, String_\l
-	}"
-	]
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	VisitorAdapter->IField
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClass->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryClass->IVisitor
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryMethod->ITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
-	IPatternDetector->IModel
-	edge [style = "dashed"] [arrowhead = "empty"]
-	VisitorAdapter->IVisitor
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryField->IField
 	edge [style = "solid"] [arrowhead = "empty"]
-	SDEditOutputStream->VisitorAdapter
+	CondimentDecorator->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	SDEditOutputStream->VisitorAdapter
+	CondimentDecorator->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->LegendaryClass
+	StarbuzzCoffee->Whip
 	edge [style = "dashed"] [arrowhead = "open"]
-	IPatternDetector->IPattern
+	StarbuzzCoffee->Soy
 	edge [style = "dashed"] [arrowhead = "open"]
-	VisitorAdapter->IMethod
+	StarbuzzCoffee->Espresso
 	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->SingletonDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->ClassMethodVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	GraphVizOutputStream->Relations
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->LegendaryField
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClass->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	VisitorAdapter->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	SDEditOutputStream->IMethod
-	edge [style = "dashed"] [arrowhead = "empty"]
-	SingletonDetector->IPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	SingletonDetector->IPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassMethodVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->ClassFieldVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->LegendaryClassMethodVisitor
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryModel->ITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryModel->Relations
-	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	ParsingMethodUtil->IModel
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryClass->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryClass->IClass
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassMethodVisitor->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassParser->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassParser->GraphVizOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassFieldVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryClass->ITraverser
-	edge [style = "solid"] [arrowhead = "open"]
-	GraphVizOutputStream->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	ParsingMethodUtil->IClass
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClassMethodVisitor->IModel
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClassMethodVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	ParsingMethodUtil->IMethod
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryMethod->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	ITraverser->IVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClassMethodVisitor->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->ClassDeclarationVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassParser->SDEditOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryModel->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->IMethod
-	edge [style = "solid"] [arrowhead = "open"]
-	Relations->Relations
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryField->ITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
-	SingletonDetector->IPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	SDEditOutputStream->IModel
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryModel->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->IField
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassDeclarationVisitor->IModel
-	edge [style = "dashed"] [arrowhead = "empty"]
-	SingletonPattern->IPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassFieldVisitor->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	IModel->Relations
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	IPatternDetector->IClass
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassMethodVisitor->ParsingMethodUtil
-	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->IField
+	StarbuzzCoffee->Mocha
 	edge [style = "solid"] [arrowhead = "empty"]
-	GraphVizOutputStream->VisitorAdapter
+	Whip->CondimentDecorator
 	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->VisitorAdapter
+	Whip->CondimentDecorator
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->LegendaryMethod
+	StarbuzzCoffee->HouseBlend
+	edge [style = "solid"] [arrowhead = "empty"]
+	Espresso->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	SingletonDetector->IClass
+	Espresso->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	IClass->IMethod
+	StarbuzzCoffee->DarkRoast
+	edge [style = "solid"] [arrowhead = "empty"]
+	Milk->CondimentDecorator
+	edge [style = "dashed"] [arrowhead = "open"]
+	Milk->CondimentDecorator
 	edge [style = "solid"] [arrowhead = "open"]
-	ClassParser->IPatternDetector
+	Soy->Beverage
+	edge [style = "solid"] [arrowhead = "empty"]
+	Mocha->CondimentDecorator
 	edge [style = "dashed"] [arrowhead = "open"]
-	IClass->IField
+	Mocha->CondimentDecorator
+	edge [style = "solid"] [arrowhead = "empty"]
+	Decaf->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	VisitorAdapter->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IMethod
+	Decaf->Beverage
 	edge [style = "solid"] [arrowhead = "open"]
-	ClassParser->ClassParser
+	Milk->Beverage
+	edge [style = "solid"] [arrowhead = "empty"]
+	Soy->CondimentDecorator
 	edge [style = "dashed"] [arrowhead = "open"]
-	SingletonDetector->IModel
+	Soy->CondimentDecorator
 	edge [style = "solid"] [arrowhead = "open"]
-	ClassDeclarationVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryModel->IVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->LegendaryModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	IModel->IClass
+	Mocha->Beverage
 	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryModel->IPattern
+	Whip->Beverage
+	edge [style = "solid"] [arrowhead = "empty"]
+	DarkRoast->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryMethod->IVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	GraphVizOutputStream->IPattern
+	DarkRoast->Beverage
+	edge [style = "solid"] [arrowhead = "empty"]
+	HouseBlend->Beverage
 	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryField->IVisitor
+	HouseBlend->Beverage
 }

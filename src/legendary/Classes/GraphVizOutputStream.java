@@ -39,7 +39,7 @@ public class GraphVizOutputStream extends VisitorAdapter {
 				try {
 					res.get(c).add((IPattern) p.newInstance());
 				} catch (Exception e) {
-					System.err.println("how on earth do you think that was supposed to work");
+					e.printStackTrace();
 				}
 			}
 		}
