@@ -12,12 +12,13 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
+import legendary.Interfaces.IPattern;
 
 public class LegendaryModel implements IModel, ITraverser {
 
 	private Set<IClass> classList;
 	private Map<List<String>, List<Relations>> relations;
-	private Map<Pattern, Set<IClass>> patterns;
+	private Map<IPattern, Set<IClass>> patterns;
 
 
 	public LegendaryModel() {
@@ -40,14 +41,14 @@ public class LegendaryModel implements IModel, ITraverser {
 		return relations;
 	}
 	
-	public void addPattern(Pattern pat, Set<IClass> classes){
+	public void addPattern(IPattern pat, Set<IClass> classes){
 		if(!this.patterns.containsKey(pat)){
 			patterns.put(pat, new HashSet<IClass>());
 		}
 		patterns.get(pat).addAll(classes);		
 	}
 	
-	public Map<Pattern, Set<IClass>> getPatterns() {
+	public Map<IPattern, Set<IClass>> getPatterns() {
 		return patterns;
 	}
 

@@ -42,11 +42,11 @@ public class LegendaryField implements IField, ITraverser{
 			if(ParsingFieldUtil.primCodes.containsKey(String.valueOf(s.charAt(1)))) {
 				this.fieldType = ParsingFieldUtil.primCodes.get(String.valueOf(s.charAt(1))) + "[]";
 			} else {
-				this.fieldType = ParsingFieldUtil.typeCollections(s.substring(1)) + "[]";
+				this.fieldType = ParsingFieldUtil.typeFieldCollections(s.substring(1)) + "[]";
 			}
 		} else {
 			if (fieldType != null) {
-				s = ParsingFieldUtil.typeCollections(fieldType);			
+				s = ParsingFieldUtil.typeFieldCollections(fieldType);			
 			}
 			this.fieldType = s;
 		}

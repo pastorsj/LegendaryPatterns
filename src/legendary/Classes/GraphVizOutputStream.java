@@ -12,28 +12,35 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.Interfaces.IPattern;
 import legendary.Interfaces.VisitorAdapter;
 
 public class GraphVizOutputStream extends VisitorAdapter {
 	private final StringBuilder builder;
 	private final Map<Relations, String> relationRep;
-	private Map<IClass, Set<Pattern>> patterns;
+	private Map<IClass, Set<IPattern>> patterns;
 
-	public GraphVizOutputStream(StringBuilder builder, Map<Pattern, Set<IClass>> patterns) {
+	public GraphVizOutputStream(StringBuilder builder,
+			Map<Class<? extends IPattern>, Set<IClass>> map) {
 		this.builder = builder;
 		this.relationRep = new HashMap<>();
 		this.initialize();
-		this.patterns = invertPatternMap(patterns);
+		this.patterns = invertPatternMap(map);
 	}
 
-	private Map<IClass, Set<Pattern>> invertPatternMap(Map<Pattern, Set<IClass>> in) {
-		Map<IClass, Set<Pattern>> res = new HashMap<>();
-		for (Pattern p : in.keySet()) {
+	private Map<IClass, Set<IPattern>> invertPatternMap(
+			Map<Class<? extends IPattern>, Set<IClass>> in) {
+		Map<IClass, Set<IPattern>> res = new HashMap<>();
+		for (Class<? extends IPattern> p : in.keySet()) {
 			for (IClass c : in.get(p)) {
 				if (!res.containsKey(c)) {
-					res.put(c, new HashSet<Pattern>());
+					res.put(c, new HashSet<IPattern>());
 				}
-				res.get(c).add(p);
+				try {
+					res.get(c).add((IPattern) p.newInstance());
+				} catch (Exception e) {
+					System.err.println("how on earth do you think that was supposed to work");
+				}
 			}
 		}
 		return res;
@@ -66,7 +73,8 @@ public class GraphVizOutputStream extends VisitorAdapter {
 			}
 			for (Relations r : relMap.get(al)) {
 				if (!this.relationRep.containsKey(r)) {
-					System.out.println("null relation for classes " + al.get(0) + " and " + al.get(1));
+					System.out.println("null relation for classes " + al.get(0)
+							+ " and " + al.get(1));
 					break outer;
 				}
 				sb.append(this.relationRep.get(r));
@@ -83,8 +91,9 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void previsit(IClass c) {
-		String line = String.format("%s [\n\tlabel = \"{%s%s", c.getClassName(),
-				(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
+		String line = String.format("%s [\n\tlabel = \"{%s%s",
+				c.getClassName(), (c.isInterface() ? "\\<\\<interface\\>\\>\\n"
+						: ""), c.getClassName());
 		this.write(line);
 		if (this.patterns.containsKey(c))
 			addPatternTags(c);
@@ -98,9 +107,9 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	private void addPatternTags(IClass c) {
 		String s = "\\n\\<\\<";
-		if (patterns.get(c).contains(Pattern.SINGLETON)) {
-			s += ("Singleton, ");
-		}
+		if (patterns.containsKey(c))
+			for (IPattern p : patterns.get(c))
+				s += p.tag();
 		s = s.substring(0, s.lastIndexOf(","));
 		s += "\\>\\>";
 		this.write(s);
@@ -112,38 +121,45 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	}
 
 	private String patternColor(IClass c) {
-		if (patterns.containsKey(c)) {
-			if (patterns.get(c).contains(Pattern.SINGLETON)) {
-				return ", color = blue";
+		if (patterns.containsKey(c))
+			for (IPattern p : patterns.get(c)) {
+				return p.color();
 			}
-		}
 		return "";
 	}
 
 	@Override
 	public void visit(IField f) {
 		boolean isStatic = f.getAccess().endsWith("_");
-		String line = String.format("%s %s%s: %s%s\\l\n\t", f.getAccess().replace("_", ""), isStatic ? "_" : "",
-				f.getFieldName(), f.getType(), isStatic ? "_" : "");
+		String line = String.format("%s %s%s: %s%s\\l\n\t", f.getAccess()
+				.replace("_", ""), isStatic ? "_" : "", f.getFieldName(), f
+				.getType(), isStatic ? "_" : "");
 		this.write(line);
 	}
 
 	@Override
 	public void visit(IMethod m) {
-		if (!(m.getMethodName().equals("<init>") || m.getMethodName().equals("<clinit>"))) {
+		if (!(m.getMethodName().equals("<init>") || m.getMethodName().equals(
+				"<clinit>"))) {
 			boolean isStatic = m.getAccess().endsWith("_");
 			String parameters = Arrays.toString(m.getParameters().toArray());
-			String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m.getAccess().replace("_", ""),
-					isStatic ? "_" : "", m.getMethodName(), parameters.substring(1, parameters.length() - 1),
-					m.getReturnType(), isStatic ? "_" : "");
+			String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m
+					.getAccess().replace("_", ""), isStatic ? "_" : "", m
+					.getMethodName(), parameters.substring(1,
+					parameters.length() - 1), m.getReturnType(), isStatic ? "_"
+					: "");
 			this.write(line);
 		}
 	}
 
 	public void initialize() {
-		this.relationRep.put(Relations.ASSOCIATES, "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
-		this.relationRep.put(Relations.EXTENDS, "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.IMPLEMENTS, "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.USES, "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.ASSOCIATES,
+				"\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.EXTENDS,
+				"\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.IMPLEMENTS,
+				"\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.USES,
+				"\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 	}
 }

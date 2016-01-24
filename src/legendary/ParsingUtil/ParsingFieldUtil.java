@@ -47,7 +47,7 @@ public class ParsingFieldUtil {
 		return res;
 	}
 
-	public static String typeCollections(String in) {
+	public static String typeFieldCollections(String in) {
 		String s = in;
 		s = replacePrims(s);
 		if (in.contains("<")) {
@@ -57,7 +57,7 @@ public class ParsingFieldUtil {
 			String[] split = split2.split(";");
 			for (int i = 0; i < split.length; i++) {
 				String s2 = split[i];
-				s += typeCollections(s2);
+				s += typeFieldCollections(s2);
 				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
 					s += ", ";
 			}

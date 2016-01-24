@@ -5,10 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import legendary.Classes.LegendaryClass;
 import legendary.Classes.LegendaryField;
 import legendary.Classes.LegendaryMethod;
@@ -20,6 +16,11 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
 import legendary.detectors.SingletonDetector;
+import legendary.patterns.SingletonPattern;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class SingletonPatternTest {
 
@@ -107,7 +108,7 @@ public class SingletonPatternTest {
 		IPatternDetector singletonDetector = new SingletonDetector();
 		Set<IClass> classDetected = new HashSet<>();
 		classDetected.add(testClass);
-		assertEquals(classDetected, singletonDetector.detect(testDetector));
+		assertEquals(classDetected, singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
 	
 	@Test
@@ -116,21 +117,21 @@ public class SingletonPatternTest {
 		IPatternDetector singletonDetector = new SingletonDetector();
 		Set<IClass> classDetected = new HashSet<>();
 		classDetected.add(testClass);
-		assertEquals(classDetected, singletonDetector.detect(testDetector));
+		assertEquals(classDetected, singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
 	
 	@Test
 	public void detectNonSingletonBaseCase() {
 		this.initializeNonSingletonBase();
 		IPatternDetector singletonDetector = new SingletonDetector();
-		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector));
+		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
 	
 	@Test
 	public void detectNonSingletonEdgeCase() {
 		this.initializeNonSingletonEdge();
 		IPatternDetector singletonDetector = new SingletonDetector();
-		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector));
+		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
 	
 	@Test
@@ -138,7 +139,7 @@ public class SingletonPatternTest {
 		this.initializeNonSingletonEdge();
 		this.testMethod.setReturnType("String");
 		IPatternDetector singletonDetector = new SingletonDetector();
-		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector));
+		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
 	
 	@Test
@@ -146,7 +147,7 @@ public class SingletonPatternTest {
 		this.initializeNonSingletonEdge();
 		this.testField.setAccess("+_");
 		IPatternDetector singletonDetector = new SingletonDetector();
-		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector));
+		assertEquals(new HashSet<IClass>(), singletonDetector.detect(testDetector).get(SingletonPattern.class));
 	}
 	
 	

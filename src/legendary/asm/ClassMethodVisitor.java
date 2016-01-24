@@ -77,7 +77,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			if (retSub.charAt(0) == ')' && ParsingMethodUtil.returnPrimCheck.containsKey(val)) {
 				method.setReturnType(ParsingMethodUtil.returnPrimCheck.get(val));
 			} else {
-				returnType = this.util.typeCollections(desc);
+				returnType = this.util.typeMethodCollections(desc);
 				method.setReturnType(returnType);
 			}
 		}

@@ -4,10 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
@@ -15,26 +12,25 @@ import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
-import legendary.detectors.SingletonDetector;
 
 /*
  * Author: Sam Pastoriza
  */
 public class ClassParser {
 	private static ClassParser instance;
-	private final Map<Pattern, IPatternDetector> detectors;
-	private final Map<Pattern, Set<IClass>> patterns;
+	private IPatternDetector detect;
 
 	private ClassParser() {
-		this.detectors = new HashMap<>();
-		this.patterns = new HashMap<>();
-		this.detectors.put(Pattern.SINGLETON, new SingletonDetector());
 	}
 
 	public static ClassParser getInstance() {
 		if (instance == null)
 			instance = new ClassParser();
 		return instance;
+	}
+	
+	public void addDetector(IPatternDetector detect){
+		this.detect = detect;
 	}
 
 	public void makeSDEdit(String classname, String methodname, int depth, IModel model, StringBuilder builder)
@@ -79,10 +75,7 @@ public class ClassParser {
 	}
 
 	public void makeGraphViz(IModel m, StringBuilder builder) throws IOException {
-		for (Pattern p : Pattern.values()) {
-			this.patterns.put(p, this.detectors.get(p).detect(m));
-		}
-		IVisitor dotVisitor = new GraphVizOutputStream(builder, patterns);
+		IVisitor dotVisitor = new GraphVizOutputStream(builder, this.detect.detect(m));
 		ITraverser t = (ITraverser) m;
 		t.accept(dotVisitor);
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));

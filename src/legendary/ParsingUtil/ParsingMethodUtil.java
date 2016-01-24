@@ -79,15 +79,15 @@ public class ParsingMethodUtil {
 			if (returnPrimCheck.containsKey(arg)) {
 				finalArgSet.add(returnPrimCheck.get(arg));
 			} else if (arg.startsWith("[")) {
-				finalArgSet.add(this.typeCollections(arg.substring(1)) + "[]");
+				finalArgSet.add(this.typeMethodCollections(arg.substring(1)) + "[]");
 			} else {
-				finalArgSet.add(this.typeCollections(arg));
+				finalArgSet.add(this.typeMethodCollections(arg));
 			}
 		}
 		return finalArgSet;
 	}
 
-	public String typeCollections(String in) {
+	public String typeMethodCollections(String in) {
 		String s = in;
 		if (in.contains("<")) {
 			String split1 = s.substring(0, s.indexOf("<"));
@@ -97,7 +97,7 @@ public class ParsingMethodUtil {
 			String[] split = split2.split(";");
 			for (int i = 0; i < split.length; i++) {
 				String s2 = split[i];
-				s += typeCollections(s2);
+				s += typeMethodCollections(s2);
 				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
 					s += ", ";
 			}

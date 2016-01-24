@@ -11,6 +11,7 @@ import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
+import legendary.detectors.SingletonDetector;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -21,10 +22,10 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "headfirst";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	 "C:/Users/Jason/Documents/374/Lab4-2-Singleton/src/headfirst/singleton/chocolate" };
+	 "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -37,6 +38,7 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
+		legendaryParser.addDetector(new SingletonDetector());
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
 		for (String dir : directories) {
