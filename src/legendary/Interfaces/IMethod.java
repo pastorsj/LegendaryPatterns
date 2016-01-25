@@ -12,11 +12,11 @@ public interface IMethod {
 	public void setMethodName(String methodName);
 	public void setParameters(List<String> parameters);
 	public void setReturnType(String returnType);
-	public void addMethodToCallStack(String methodOwner, String className, String methodName);
 	
 	public String getAccess();
 	public String getMethodName();
 	public List<String> getParameters();
 	public String getReturnType();
-	public Queue<List<String>> getCallStack();
+	public Queue<List<List<String>>> getCallStack();
+	public void addMethodToCallStack(String methodOwner, String className, String methodName, List<String> params);
 }

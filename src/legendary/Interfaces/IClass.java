@@ -17,7 +17,7 @@ public interface IClass {
 	public String getClassName();
 	public String getSuperName();
 	public List<String> getInterfaces();
-	public Map<String, IMethod> getMethods();
+	public Map<String, Map<List<String>, IMethod>> getMethods();
 	public List<IField> getFields();
 	public void setIsInterface(boolean isInterface);
 	public boolean isInterface();

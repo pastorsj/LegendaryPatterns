@@ -1,9 +1,7 @@
 package legendary.detectors;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,13 +30,15 @@ public class SingletonDetector implements IPatternDetector {
 		Set<IClass> singletons = new HashSet<>();
 		Set<IClass> candidates = getCandidates(m);
 		for (IClass candidate : candidates) {
-			if (candidate.getMethods().get("<init>").getAccess().equals("-")) {
+			boolean privCtorsOnly = true;
+			for (IMethod method : candidate.getMethods().get("<init>").values()) {
+				privCtorsOnly = privCtorsOnly && method.getAccess().equals("-");
+			}
+			if (privCtorsOnly) {
 				for (IField f : candidate.getFields()) {
-					if (f.getAccess().equals("-_")
-							&& f.getType().equals(candidate.getClassName())) {
-						for (IMethod method : candidate.getMethods().values()) {
-							if (method.getReturnType().equals(
-									candidate.getClassName())
+					if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
+						for (IMethod method : candidate.getMethodObjects()) {
+							if (method.getReturnType().equals(candidate.getClassName())
 									&& method.getAccess().equals("+_")) {
 								singletons.add(candidate);
 							}
@@ -60,8 +60,8 @@ public class SingletonDetector implements IPatternDetector {
 	@Override
 	public Set<IClass> getCandidates(IModel m) {
 		Set<IClass> candidates = new HashSet<>();
-		for(IClass c: m.getRelGraph().keySet())
-			if(m.getRelGraph().get(c).get(Relations.ASSOCIATES).contains(c))
+		for (IClass c : m.getRelGraph().keySet())
+			if (m.getRelGraph().get(c).get(Relations.ASSOCIATES).contains(c))
 				candidates.add(c);
 		return candidates;
 	}

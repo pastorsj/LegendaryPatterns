@@ -5,17 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+
 import legendary.Classes.ClassParser;
 import legendary.Classes.LegendaryClass;
 import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
+import legendary.Interfaces.IPatternDetector;
 import legendary.ParsingUtil.GeneralUtil;
 import legendary.detectors.SingletonDetector;
-
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
 
 /*
  * Modification made by Sam Pastoriza and Jason Lane
@@ -25,7 +26,7 @@ public class DesignParser {
 	public static final String packageName = "legendary";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	 "C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary" };
+	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary" };
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
@@ -38,7 +39,8 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
-		legendaryParser.addDetector(new SingletonDetector());
+		IPatternDetector detector = new SingletonDetector();
+		legendaryParser.addDetector(detector);
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
 		for (String dir : directories) {

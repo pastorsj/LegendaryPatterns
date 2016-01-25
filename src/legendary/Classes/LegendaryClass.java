@@ -19,7 +19,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 	private String className;
 	private String superClassName;
 	private List<String> interfaces;
-	private Map<String, IMethod> methods;
+	private Map<String, Map<List<String>, IMethod>> methods;
 	private List<IField> fields;
 	private boolean isInterface;
 	private int creationOrder;
@@ -29,7 +29,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 		this.className = "";
 		this.superClassName = "";
 		this.interfaces = new ArrayList<String>();
-		this.methods = new HashMap<String, IMethod>();
+		this.methods = new HashMap<String, Map<List<String>, IMethod>>();
 		this.fields = new ArrayList<IField>();
 		this.isInterface = false;
 		creationOrder = ++count;
@@ -53,7 +53,13 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 
 	@Override
 	public void addMethod(IMethod method) {
-		this.methods.put(method.getMethodName(), method);
+		if (this.methods.containsKey(method.getMethodName())) {
+			methods.get(method.getMethodName()).put(method.getParameters(), method);
+		} else {
+			Map<List<String>, IMethod> val = new HashMap<>();
+			val.put(method.getParameters(), method);
+			this.methods.put(method.getMethodName(), val);
+		}
 	}
 
 	@Override
@@ -77,7 +83,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 	}
 
 	@Override
-	public Map<String, IMethod> getMethods() {
+	public Map<String, Map<List<String>, IMethod>> getMethods() {
 		return this.methods;
 	}
 
@@ -99,28 +105,29 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 	@Override
 	public void accept(IVisitor v) {
 		v.previsit(this);
-		for(IField f : this.fields) {
+		for (IField f : this.fields) {
 			ITraverser t = (ITraverser) f;
 			t.accept(v);
 		}
 		v.visit(this);
-		for(IMethod m : this.methods.values()) {
+		for (IMethod m : this.getMethodObjects()) {
 			ITraverser t = (ITraverser) m;
 			t.accept(v);
 		}
-		v.postvisit(this);		
+		v.postvisit(this);
 	}
 
 	@Override
 	public List<IMethod> getMethodObjects() {
-		// TODO Auto-generated method stub
 		List<IMethod> methodSet = new ArrayList<>();
-		for(IMethod method : this.getMethods().values()) {
-			methodSet.add(method);
+		for (Map<List<String>, IMethod> method : this.getMethods().values()) {
+			for (IMethod method2 : method.values()) {
+				methodSet.add(method2);
+			}
 		}
 		return methodSet;
 	}
-	
+
 	@Override
 	public int getCreationOrder() {
 		return this.creationOrder;

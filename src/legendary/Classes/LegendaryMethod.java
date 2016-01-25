@@ -17,7 +17,7 @@ public class LegendaryMethod implements IMethod, ITraverser {
 	private String methodAccess;
 	private String methodName;
 	private List<String> parameters;
-	private Queue<List<String>> methodCallStack;
+	private Queue<List<List<String>>> methodCallStack;
 	private String methodReturnType;
 
 	public LegendaryMethod() {
@@ -78,16 +78,19 @@ public class LegendaryMethod implements IMethod, ITraverser {
 
 	@Override
 	public void addMethodToCallStack(String methodOwner, String className,
-			String methodName) {
+			String methodName, List<String> params) {
 		List<String> classToMethod = new ArrayList<>();
 		classToMethod.add(methodOwner);
 		classToMethod.add(className);
 		classToMethod.add(methodName);
-		this.methodCallStack.add(classToMethod);
+		List<List<String>> res = new ArrayList<>();
+		res.add(classToMethod);
+		res.add(params);
+		this.methodCallStack.add(res);
 	}
 
 	@Override
-	public Queue<List<String>> getCallStack() {
+	public Queue<List<List<String>>> getCallStack() {
 		return this.methodCallStack;
 	}
 

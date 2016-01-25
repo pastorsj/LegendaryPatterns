@@ -4,6 +4,7 @@ import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.ParsingUtil.GeneralUtil;
 
 import org.objectweb.asm.MethodVisitor;
 
@@ -32,7 +33,7 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 		if (owner.startsWith(DesignParser.packageName)) {
 			String ownerClass = owner.substring(owner.lastIndexOf("/") + 1);
 			this.legendaryMethod.addMethodToCallStack(
-					this.legendaryClass.getClassName(), ownerClass, name);
+					this.legendaryClass.getClassName(), ownerClass, name, GeneralUtil.typeArgumentCollections(desc));
 		}
 	}
 

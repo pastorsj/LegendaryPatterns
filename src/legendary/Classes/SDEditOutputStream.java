@@ -42,10 +42,10 @@ public class SDEditOutputStream extends VisitorAdapter {
 		if (this.depth <= 0) {
 			return;
 		}
-		Queue<List<String>> callStack = m.getCallStack();
+		Queue<List<List<String>>> callStack = m.getCallStack();
 		if (!callStack.isEmpty() && !callStack.peek().isEmpty()
-				&& !this.classes.contains("/" + callStack.peek().get(0))) {
-			this.classes.add(callStack.peek().get(0));
+				&& !this.classes.contains("/" + callStack.peek().get(0).get(0))) {
+			this.classes.add(callStack.peek().get(0).get(0));
 		}
 	}
 
@@ -53,12 +53,14 @@ public class SDEditOutputStream extends VisitorAdapter {
 	public void visit(IMethod m) {
 		if (this.depth <= 0)
 			return;
-		Queue<List<String>> callStack = m.getCallStack();
-//		System.out.println("Size of Call Stack: " + callStack.size());
-		for (List<String> mDetails : callStack) {
+		Queue<List<List<String>>> callStack = m.getCallStack();
+		// System.out.println("Size of Call Stack: " + callStack.size());
+		for (List<List<String>> methodDetails : callStack) {
+			List<String> mDetails = methodDetails.get(0);
+			List<String> params = methodDetails.get(1);
 			String className = mDetails.get(1);
 			for (IClass c : this.model.getClasses()) {
-				if (c.getClassName().equals(className)) {					
+				if (c.getClassName().equals(className)) {
 					if (mDetails.get(2).contains("<init>") && !classes.contains(className)) {
 						if (classes.contains("/" + className))
 							continue;
@@ -66,16 +68,14 @@ public class SDEditOutputStream extends VisitorAdapter {
 					} else if (!classes.contains("/" + className)) {
 						classes.add(className);
 					}
-					IMethod method = c.getMethods().get(mDetails.get(2));
+					IMethod method = c.getMethods().get(mDetails.get(2)).get(params);
+					if(method == null)
+						continue;
 					String s;
-
-					String params = "[]";
-					if (method.getParameters().size() != 0) {
-						params = Arrays.toString(method.getParameters().toArray());
-					}
+					String paramString = Arrays.toString(params.toArray()); 
 					s = String.format("%s:%s=%s.%s(%s)\n", mDetails.get(0), method.getReturnType(), mDetails.get(1),
 							(mDetails.get(2).contains("<init>") ? "new" : mDetails.get(2)),
-							params.substring(1, params.length() - 1));
+							paramString.substring(1, paramString.length() - 1));
 
 					if (mDetails.get(0).equals(mDetails.get(1))) {
 						if (mDetails.get(2).contains("<init>"))

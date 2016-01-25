@@ -56,7 +56,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		return toDecorateMore;
 	}
 
-	void addAccessLevel(int access, IMethod method) {
+	private void addAccessLevel(int access, IMethod method) {
 		String level = "";
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			level = "+";
@@ -72,7 +72,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		method.setAccess(level);
 	}
 
-	void addReturnType(String desc, IMethod method) {
+	private void addReturnType(String desc, IMethod method) {
 		String returnType = desc;
 		if (desc != null) {
 			String retSub = desc.substring(desc.length() - 2, desc.length());
@@ -87,7 +87,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		}
 	}
 
-	void addArguments(String desc, IMethod method) {
+	private void addArguments(String desc, IMethod method) {
 		String s = desc;
 		List<String> arguments = new ArrayList<>();
 		List<String> out = GeneralUtil.typeArgumentCollections(s);

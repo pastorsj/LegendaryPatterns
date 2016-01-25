@@ -51,7 +51,7 @@ public class ClassParser {
 		}
 		outerloop: for (IClass c : model.getClasses()) {
 			if (c.getClassName().equals(classname)) {
-				for (IMethod method : c.getMethods().values()) {
+				for (IMethod method : c.getMethodObjects()) {
 					List<String> genParams = new ArrayList<>();
 					for (String s : method.getParameters()) {
 						genParams.add((s.contains("<") ? (s.substring(0,
@@ -74,9 +74,9 @@ public class ClassParser {
 				"./input_output/text.sd"));
 		writer.write(builder.toString());
 		writer.close();
-		// Runtime rt = Runtime.getRuntime();
-		// rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o
-		// ./input_output/SDEoutput.png -t png ./input_output/text.sd");
+		 Runtime rt = Runtime.getRuntime();
+		 rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o"
+		 +"./input_output/SDEoutput.png -t png ./input_output/text.sd");
 		// Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
 		// System.out.println(builder.toString());
 	}
