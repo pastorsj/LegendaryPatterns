@@ -45,8 +45,7 @@ public class LegendaryMethod implements IMethod, ITraverser {
 
 	@Override
 	public void setReturnType(String returnType) {
-		this.methodReturnType = returnType.substring(returnType
-				.lastIndexOf(".") + 1);
+		this.methodReturnType = returnType;
 	}
 
 	@Override

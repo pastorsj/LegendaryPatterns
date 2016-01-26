@@ -10,6 +10,7 @@ import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
+import legendary.asm.DesignParser;
 
 /*
  * Author: Jason Lane
@@ -37,8 +38,10 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 
 	@Override
 	public void setClassName(String className) {
-		// TODO Auto-generated method stub
-		this.className = className.substring(className.lastIndexOf("/") + 1);
+		String name = className.substring(className.lastIndexOf(DesignParser.packageName)).replace("/", ".");
+//		name = name.substring(0, name.lastIndexOf(".")) + "::"
+//				+ name.substring(name.lastIndexOf(".") + 1, name.length());
+		this.className = name;
 	}
 
 	@Override

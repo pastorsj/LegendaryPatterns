@@ -38,6 +38,7 @@ public class SingletonDetector implements IPatternDetector {
 				for (IField f : candidate.getFields()) {
 					if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
 						for (IMethod method : candidate.getMethodObjects()) {
+//							System.out.println(method.getReturnType());
 							if (method.getReturnType().equals(candidate.getClassName())
 									&& method.getAccess().equals("+_")) {
 								singletons.add(candidate);

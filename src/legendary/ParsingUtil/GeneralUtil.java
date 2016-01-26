@@ -12,7 +12,7 @@ import java.util.Set;
 import legendary.asm.DesignParser;
 
 public class GeneralUtil {
-	
+
 	public static Map<String, String> primCodes;
 
 	/*
@@ -32,7 +32,7 @@ public class GeneralUtil {
 		primCodes.put("J", "long");
 		primCodes.put("D", "double");
 	}
-	
+
 	public static List<String> typeArgumentCollections(String in) {
 		String s = in;
 		if (s.isEmpty()) {
@@ -43,7 +43,7 @@ public class GeneralUtil {
 			return new ArrayList<String>();
 		}
 		String argSet[] = args.split(";");
-		List<String> finalArgSet = new LinkedList<>();
+		List<String> finalArgSet = new ArrayList<>();
 		for (int i = 0; i < argSet.length; i++) {
 			String argVal = argSet[i];
 			if (argVal.equals("java/lang/String")) {
@@ -65,7 +65,7 @@ public class GeneralUtil {
 		for (int i = 0; i < argSize; i++) {
 			String arg = argSet.get(i);
 			if (arg.equals(">")) {
-				String argGet = finalArgSet.get(i - 1) + "\\>";
+				String argGet = finalArgSet.get(i - 1) + ">";
 				argSet.remove(i);
 				argSet.remove(i - 1);
 				argSet.add(i - 1, argGet);
@@ -87,23 +87,35 @@ public class GeneralUtil {
 
 	public static String typeMethodCollections(String in, List<String> usesClasses) {
 		String s = in;
-		if (in.contains("<")) {
-			String split1 = s.substring(0, s.indexOf("<"));
-			usesClasses.add(split1);
-			String split2 = s.substring(s.indexOf("<") + 1);
-			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
-			String[] split = split2.split(";");
-			for (int i = 0; i < split.length; i++) {
-				String s2 = split[i];
-				s += typeMethodCollections(s2, usesClasses);
-				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
-					s += ", ";
+		String res = "";
+		if (s.contains(")")) {
+			s = s.substring(s.lastIndexOf(")") + 1);
+		}
+		if (s.charAt(0) == 'L') {
+			s = s.substring(1);
+		}
+		String[] split = s.split(";");
+		String split1 = split[0];
+		if (split1.contains("<")) {
+			res += split1.substring(0, split1.indexOf("<") + 1).replace("/", ".");
+			res = res.substring(0, res.lastIndexOf(".")) + "::" + (res.substring(res.lastIndexOf(".") + 1));
+			split[0] = split1.substring(split1.indexOf("<") + 1);
+			for (String s2 : split) {
+				if (!s2.equals(">"))
+					res += typeMethodCollections(s2, usesClasses) + ", ";
+				else {
+					if(res.endsWith(", "))
+						res = res.substring(0, res.lastIndexOf(", "));
+					res += ">";
+				}
 			}
-		} else
-			usesClasses.add(s.substring(s.lastIndexOf("/") + 1).replace(";", ""));
-		s = s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\")
-				.replace(";", "");
-		return s;
+		} else {
+			res = split1.replace("/", ".");
+			res = res.substring(0, res.lastIndexOf(".")) + "::" + (res.substring(res.lastIndexOf(".") + 1));
+		}
+		if(res.endsWith(", "))
+			res = res.substring(0, res.lastIndexOf(", "));
+		return res.replace(", >", ">");
 	}
 
 	private static void parsePrimOut(String arg, List<String> argSet) {
@@ -124,41 +136,56 @@ public class GeneralUtil {
 
 	public static Set<String> getBaseFields(String in) {
 		Set<String> res = new HashSet<>();
-		if (in.contains("<")) {
+		String s = in;
+		if (primCodes.containsKey(s)) {
+			res.add(primCodes.get(s));
+			return res;
+		}
+		if (s.startsWith("L"))
+			s = s.substring(1);
+		if (!s.contains("::")) {
+			s = s.replace("/", ".");
+			s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
+		}
+		if (s.contains("<")) {
 			String split1, split2;
-			split1 = in.substring(0, in.indexOf("<"));
-			split2 = in.substring(in.indexOf("<") + 1, (in.contains(">") ? in.indexOf(">") : in.length()));
-			res.add(split1.substring(split1.lastIndexOf("/")));
-			for (String s : split2.split(";")) {
-				res.addAll(getBaseFields(s));
+			split1 = s.substring(0, s.indexOf("<"));
+			split2 = s.substring(s.indexOf("<") + 1, (s.contains(">") ? s.indexOf(">") : s.length()));
+			res.add(split1);
+			for (String s2 : split2.split(";")) {
+				res.addAll(getBaseFields(s2));
 			}
 		} else {
-			if (in.contains("/")) {
-				res.add(in.substring(in.lastIndexOf("/") + 1).replace(";", ""));
+			if (s.contains("/")) {
+				res.add(s.substring(s.lastIndexOf("/") + 1).replace(";", ""));
 			} else
-				res.add(in);
+				res.add(s.replace(";", ""));
 		}
 		return res;
 	}
 
 	public static String typeFieldCollections(String in) {
-		String s = in;
-		if (in.contains("<")) {
-			String split1 = s.substring(0, s.indexOf("<"));
-			String split2 = s.substring(s.indexOf("<") + 1);
-			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
-			String[] split = split2.split(";");
-			for (int i = 0; i < split.length; i++) {
-				String s2 = split[i];
-				s += typeFieldCollections(s2);
-				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
-					s += ", ";
-			}
-		}
-		return s.substring(s.lastIndexOf("/") + 1).replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\")
-				.replace(";", "");
+//		String s = in;
+//		if (s.contains(DesignParser.packageName)) {
+//			s = s.substring(s.lastIndexOf(DesignParser.packageName)).replace("/", ".");
+//			s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
+//		}
+//		if (s.contains("<")) {
+//			String split1 = s.substring(0, s.indexOf("<"));
+//			String split2 = s.substring(s.indexOf("<") + 1);
+//			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
+//			String[] split = split2.split(";");
+//			for (int i = 0; i < split.length; i++) {
+//				String s2 = split[i];
+//				s += typeFieldCollections(s2);
+//				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
+//					s += ", ";
+//			}
+//		}
+//		return s.replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
+		return typeMethodCollections(in, new ArrayList<>());
 	}
-	
+
 	public static List<String> getClassesFromDir(File dir) {
 		ArrayList<String> res = new ArrayList<String>();
 		ArrayList<String> res2 = new ArrayList<String>();
@@ -173,7 +200,7 @@ public class GeneralUtil {
 				res.add(r);
 			}
 
-		} else if(dir.toString().endsWith(".java")) {
+		} else if (dir.toString().endsWith(".java")) {
 			res.add(dir.toString());
 		}
 		return res;

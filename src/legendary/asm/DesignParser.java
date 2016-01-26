@@ -68,8 +68,6 @@ public class DesignParser {
 		legendaryModel.convertToGraph();
 		if (args.length > 0) {
 			if (args.length != 3 && args.length != 2) {
-				// legendaryParser.makeSDEdit("DesignParser", "main", 5,
-				// legendaryModel);
 				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
 			}
 			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));

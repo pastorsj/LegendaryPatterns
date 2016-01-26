@@ -1,176 +1,176 @@
 digraph G{
 	node [shape = "record"]
-ClassDeclarationVisitor [
-	label = "{ClassDeclarationVisitor|
+legendaryasmClassDeclarationVisitor [
+	label = "{legendary.asm::ClassDeclarationVisitor|
 	- legendaryClass: IClass\l
 	- legendaryModel: IModel\l
 	|
-	+ visit(int, int, String, String, String, String[]) : void\l
+	+ visit(, , String, String, String, String[]) : \l
 	}"
 	]
-ClassFieldVisitor [
-	label = "{ClassFieldVisitor|
+legendaryasmClassFieldVisitor [
+	label = "{legendary.asm::ClassFieldVisitor|
 	- legendaryClass: IClass\l
 	- legendaryModel: IModel\l
 	|
-	+ visitField(int, String, String, String, Object) : FieldVisitor\l
-	 addAccessLevel(int, IField) : void\l
+	+ visitField(, String, String, String, Object) : FieldVisitor\l
+	 addAccessLevel(, IField) : \l
 	}"
 	]
-ClassMethodVisitor [
-	label = "{ClassMethodVisitor|
+legendaryasmClassMethodVisitor [
+	label = "{legendary.asm::ClassMethodVisitor|
 	- usesClasses: List\<String\>\l
 	- legendaryClass: IClass\l
 	- legendaryModel: IModel\l
 	|
-	- addArguments(String, IMethod) : void\l
-	- addAccessLevel(int, IMethod) : void\l
-	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
-	- addReturnType(String, IMethod) : void\l
+	- addArguments(String, IMethod) : \l
+	- addAccessLevel(, IMethod) : \l
+	+ visitMethod(, String, String, String, String[]) : MethodVisitor\l
+	- addReturnType(String, IMethod) : \l
 	}"
 	]
-DesignParser [
-	label = "{DesignParser|
+legendaryasmDesignParser [
+	label = "{legendary.asm::DesignParser|
 	+ _packageName: String_\l
 	+ _directories: String[]_\l
 	|
-	+ _main(String[]) : void_\l
+	+ _main(String[]) : _\l
 	}"
 	]
-LegendaryClassMethodVisitor [
-	label = "{LegendaryClassMethodVisitor|
+legendaryasmLegendaryClassMethodVisitor [
+	label = "{legendary.asm::LegendaryClassMethodVisitor|
 	 legendaryClass: IClass\l
 	 legendaryModel: IModel\l
 	 legendaryMethod: IMethod\l
 	|
-	+ visitTypeInsn(int, String) : void\l
-	+ visitVarInsn(int, int) : void\l
-	+ visitMethodInsn(int, String, String, String, boolean) : void\l
-	+ visitFieldInsn(int, String, String, String) : void\l
+	+ visitTypeInsn(, String) : \l
+	+ visitVarInsn(, ) : \l
+	+ visitMethodInsn(, String, String, String, ) : \l
+	+ visitFieldInsn(, String, String, String) : \l
 	}"
 	]
-ClassParser [
-	label = "{ClassParser\n\<\<Singleton\>\>|
+legendaryClassesClassParser [
+	label = "{legendary.Classes::ClassParser\n\<\<Singleton\>\>|
 	- _instance: ClassParser_\l
 	- detect: IPatternDetector\l
 	|
 	+ _getInstance() : ClassParser_\l
-	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
-	+ addDetector(IPatternDetector) : void\l
-	+ makeGraphViz(IModel, StringBuilder) : void\l
+	+ makeSDEdit(String, String, , IModel, StringBuilder) : \l
+	+ addDetector(IPatternDetector) : \l
+	+ makeGraphViz(IModel, StringBuilder) : \l
 	}"
 	color = blue]
-GraphVizOutputStream [
-	label = "{GraphVizOutputStream|
+legendaryClassesGraphVizOutputStream [
+	label = "{legendary.Classes::GraphVizOutputStream|
 	- builder: StringBuilder\l
 	- relationRep: Map\<Relations, String\>\l
 	- patterns: Map\<IClass, Set\<IPattern\>\>\l
 	|
 	- addArrows(IModel) : String\l
 	- patternColor(IClass) : String\l
-	- invertPatternMap(Map\<Class\<IPattern\>, Set\<IClass\>\>) : Map\<Class\<IPattern\>, Set\<IClass\>\>, Map\<IClass, Set\<IPattern\>\>\l
-	+ postvisit(IClass) : void\l
-	+ postvisit(IModel) : void\l
-	+ previsit(IClass) : void\l
-	+ previsit(IModel) : void\l
-	+ visit(IMethod) : void\l
-	+ visit(IClass) : void\l
-	+ visit(IModel) : void\l
-	+ visit(IField) : void\l
-	+ initialize() : void\l
-	- write(String) : void\l
-	- addPatternTags(IClass) : void\l
+	- invertPatternMap(Map\<Class\<IPattern\>, Set\<IClass\>\>) : Map\<IClass, Set\<IPattern\>\>\l
+	+ postvisit(IModel) : \l
+	+ postvisit(IClass) : \l
+	+ previsit(IModel) : \l
+	+ previsit(IClass) : \l
+	+ visit(IModel) : \l
+	+ visit(IClass) : \l
+	+ visit(IField) : \l
+	+ visit(IMethod) : \l
+	+ initialize() : \l
+	- write(String) : \l
+	- addPatternTags(IClass) : \l
 	}"
 	]
-LegendaryClass [
-	label = "{LegendaryClass|
+legendaryClassesLegendaryClass [
+	label = "{legendary.Classes::LegendaryClass|
 	- className: String\l
 	- superClassName: String\l
 	- interfaces: List\<String\>\l
-	- methods: Map\<String, Map\<List\<String\>, IMethod\>\>\l
+	- methods: Map\<String, Map\<List\<String\>IMethod\>\>\l
 	- fields: List\<IField\>\l
-	- isInterface: boolean\l
-	- creationOrder: int\l
-	- _count: int_\l
+	- isInterface: \l
+	- creationOrder: \l
+	- _count: _\l
 	|
-	+ setInterfaces(List\<String\>) : void\l
+	+ setInterfaces(List\<String\>) : \l
 	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
+	+ setIsInterface() : \l
+	+ addField(IField) : \l
 	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ compareTo(IClass) : int\l
-	+ compareTo(Object) : int\l
-	+ setSuper(String) : void\l
-	+ accept(IVisitor) : void\l
+	+ setClassName(String) : \l
+	+ compareTo(IClass) : \l
+	+ compareTo(Object) : \l
+	+ setSuper(String) : \l
+	+ accept(IVisitor) : \l
 	+ getFields() : List\<IField\>\l
-	+ getCreationOrder() : int\l
+	+ getCreationOrder() : \l
 	+ getMethodObjects() : List\<IMethod\>\l
 	+ getClassName() : String\l
-	+ getMethods() : Map\<String, Map\<List\<String\>, IMethod\>\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
+	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
+	+ isInterface() : \l
+	+ addMethod(IMethod) : \l
 	}"
 	]
-LegendaryField [
-	label = "{LegendaryField|
+legendaryClassesLegendaryField [
+	label = "{legendary.Classes::LegendaryField|
 	- fieldAccessType: String\l
 	- fieldName: String\l
 	- fieldType: String\l
 	- baseFields: Set\<String\>\l
 	|
-	+ setAccess(String) : void\l
+	+ setAccess(String) : \l
 	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
+	+ setFieldName(String) : \l
 	+ getAccess() : String\l
 	+ getType() : String\l
-	+ setType(String) : void\l
+	+ setType(String) : \l
 	+ getFieldName() : String\l
-	+ accept(IVisitor) : void\l
+	+ accept(IVisitor) : \l
 	}"
 	]
-LegendaryMethod [
-	label = "{LegendaryMethod|
+legendaryClassesLegendaryMethod [
+	label = "{legendary.Classes::LegendaryMethod|
 	- methodAccess: String\l
 	- methodName: String\l
 	- parameters: List\<String\>\l
 	- methodCallStack: Queue\<List\<List\<String\>\>\>\l
 	- methodReturnType: String\l
 	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
+	+ setParameters(List\<String\>) : \l
+	+ addMethodToCallStack(String, String, String, List\<String\>) : \l
+	+ setAccess(String) : \l
+	+ setMethodName(String) : \l
 	+ getAccess() : String\l
 	+ getMethodName() : String\l
 	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
+	+ setReturnType(String) : \l
 	+ getParameters() : List\<String\>\l
 	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	+ accept(IVisitor) : void\l
+	+ accept(IVisitor) : \l
 	}"
 	]
-LegendaryModel [
-	label = "{LegendaryModel|
+legendaryClassesLegendaryModel [
+	label = "{legendary.Classes::LegendaryModel|
 	- classList: Set\<IClass\>\l
 	- relGraph: Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	- relations: Map\<List\<String\>, List\<Relations\>\>\l
+	- relations: Map\<List\<String\>List\<Relations\>\>\l
 	- patterns: Map\<IPattern, Set\<IClass\>\>\l
 	|
-	+ convertToGraph() : void\l
+	+ convertToGraph() : \l
 	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
 	+ getPatterns() : Map\<IPattern, Set\<IClass\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : void\l
-	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
-	+ addPattern(IPattern, Set\<IClass\>) : void\l
-	+ addRelation(String, String, Relations) : void\l
+	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : \l
+	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
+	+ addPattern(IPattern, Set\<IClass\>) : \l
+	+ addRelation(String, String, Relations) : \l
 	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	+ accept(IVisitor) : void\l
+	+ addClass(IClass) : \l
+	+ accept(IVisitor) : \l
 	}"
 	]
-Relations [
-	label = "{Relations|
+legendaryClassesRelations [
+	label = "{legendary.Classes::Relations|
 	+ _EXTENDS: Relations_\l
 	+ _IMPLEMENTS: Relations_\l
 	+ _USES: Relations_\l
@@ -185,314 +185,308 @@ Relations [
 	+ _values() : Relations_\l
 	}"
 	]
-SDEditOutputStream [
-	label = "{SDEditOutputStream|
+legendaryClassesSDEditOutputStream [
+	label = "{legendary.Classes::SDEditOutputStream|
 	- model: IModel\l
 	- builder: StringBuilder\l
 	- classes: Set\<String\>\l
 	- methodCalls: List\<String\>\l
-	- depth: int\l
-	- origDepth: int\l
+	- depth: \l
+	- origDepth: \l
 	|
-	+ postvisit(IMethod) : void\l
-	+ previsit(IMethod) : void\l
-	+ visit(IMethod) : void\l
-	+ write(String) : void\l
+	+ postvisit(IMethod) : \l
+	+ previsit(IMethod) : \l
+	+ visit(IMethod) : \l
+	+ write(String) : \l
 	}"
 	]
-AdapterDetector [
-	label = "{AdapterDetector|
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>, Set\<IClass\>\>\l
-	}"
-	]
-DecoratorDetector [
-	label = "{DecoratorDetector|
+legendarydetectorsAdapterDetector [
+	label = "{legendary.detectors::AdapterDetector|
 	|
 	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>, Set\<IClass\>\>\l
+	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
 	}"
 	]
-SingletonDetector [
-	label = "{SingletonDetector|
+legendarydetectorsDecoratorDetector [
+	label = "{legendary.detectors::DecoratorDetector|
+	|
+	+ getCandidates(IModel) : Set\<IClass\>\l
+	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
+	}"
+	]
+legendarydetectorsSingletonDetector [
+	label = "{legendary.detectors::SingletonDetector|
 	- next: IPatternDetector\l
 	|
 	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>, Set\<IClass\>\>\l
+	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
 	}"
 	]
-IClass [
-	label = "{\<\<interface\>\>\nIClass|
+legendaryInterfacesIClass [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IClass|
 	|
-	+ setInterfaces(List\<String\>) : void\l
+	+ setInterfaces(List\<String\>) : \l
 	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
+	+ setIsInterface() : \l
+	+ addField(IField) : \l
 	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
+	+ setClassName(String) : \l
+	+ setSuper(String) : \l
 	+ getFields() : List\<IField\>\l
-	+ getCreationOrder() : int\l
+	+ getCreationOrder() : \l
 	+ getMethodObjects() : List\<IMethod\>\l
 	+ getClassName() : String\l
-	+ getMethods() : Map\<String, Map\<List\<String\>, IMethod\>\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
+	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
+	+ isInterface() : \l
+	+ addMethod(IMethod) : \l
 	}"
 	]
-IField [
-	label = "{\<\<interface\>\>\nIField|
+legendaryInterfacesIField [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IField|
 	|
-	+ setAccess(String) : void\l
+	+ setAccess(String) : \l
 	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
+	+ setFieldName(String) : \l
 	+ getAccess() : String\l
 	+ getType() : String\l
-	+ setType(String) : void\l
+	+ setType(String) : \l
 	+ getFieldName() : String\l
 	}"
 	]
-IMethod [
-	label = "{\<\<interface\>\>\nIMethod|
+legendaryInterfacesIMethod [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IMethod|
 	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
+	+ setParameters(List\<String\>) : \l
+	+ addMethodToCallStack(String, String, String, List\<String\>) : \l
+	+ setAccess(String) : \l
+	+ setMethodName(String) : \l
 	+ getAccess() : String\l
 	+ getMethodName() : String\l
 	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
+	+ setReturnType(String) : \l
 	+ getParameters() : List\<String\>\l
 	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
 	}"
 	]
-IModel [
-	label = "{\<\<interface\>\>\nIModel|
+legendaryInterfacesIModel [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IModel|
 	|
-	+ convertToGraph() : void\l
+	+ convertToGraph() : \l
 	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : void\l
-	+ getRelations() : Map\<List\<String\>, List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
+	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : \l
+	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
+	+ addRelation(String, String, Relations) : \l
 	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
+	+ addClass(IClass) : \l
 	}"
 	]
-IPattern [
-	label = "{\<\<interface\>\>\nIPattern|
+legendaryInterfacesIPattern [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
 	|
 	+ color() : String\l
 	+ tag() : String\l
 	}"
 	]
-IPatternDetector [
-	label = "{\<\<interface\>\>\nIPatternDetector|
+legendaryInterfacesIPatternDetector [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPatternDetector|
 	|
 	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>, Set\<IClass\>\>\l
+	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
 	}"
 	]
-ITraverser [
-	label = "{\<\<interface\>\>\nITraverser|
+legendaryInterfacesITraverser [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::ITraverser|
 	|
-	+ accept(IVisitor) : void\l
+	+ accept(IVisitor) : \l
 	}"
 	]
-IVisitor [
-	label = "{\<\<interface\>\>\nIVisitor|
+legendaryInterfacesIVisitor [
+	label = "{\<\<interface\>\>\nlegendary.Interfaces::IVisitor|
 	|
-	+ postvisit(IMethod) : void\l
-	+ postvisit(IClass) : void\l
-	+ postvisit(IModel) : void\l
-	+ postvisit(IField) : void\l
-	+ previsit(IMethod) : void\l
-	+ previsit(IClass) : void\l
-	+ previsit(IModel) : void\l
-	+ previsit(IField) : void\l
-	+ visit(IMethod) : void\l
-	+ visit(IClass) : void\l
-	+ visit(IModel) : void\l
-	+ visit(IField) : void\l
+	+ postvisit(IModel) : \l
+	+ postvisit(IClass) : \l
+	+ postvisit(IField) : \l
+	+ postvisit(IMethod) : \l
+	+ previsit(IModel) : \l
+	+ previsit(IClass) : \l
+	+ previsit(IField) : \l
+	+ previsit(IMethod) : \l
+	+ visit(IModel) : \l
+	+ visit(IClass) : \l
+	+ visit(IField) : \l
+	+ visit(IMethod) : \l
 	}"
 	]
-VisitorAdapter [
-	label = "{VisitorAdapter|
+legendaryInterfacesVisitorAdapter [
+	label = "{legendary.Interfaces::VisitorAdapter|
 	|
-	+ postvisit(IMethod) : void\l
-	+ postvisit(IClass) : void\l
-	+ postvisit(IModel) : void\l
-	+ postvisit(IField) : void\l
-	+ previsit(IMethod) : void\l
-	+ previsit(IClass) : void\l
-	+ previsit(IModel) : void\l
-	+ previsit(IField) : void\l
-	+ visit(IMethod) : void\l
-	+ visit(IClass) : void\l
-	+ visit(IModel) : void\l
-	+ visit(IField) : void\l
+	+ postvisit(IModel) : \l
+	+ postvisit(IClass) : \l
+	+ postvisit(IField) : \l
+	+ postvisit(IMethod) : \l
+	+ previsit(IModel) : \l
+	+ previsit(IClass) : \l
+	+ previsit(IField) : \l
+	+ previsit(IMethod) : \l
+	+ visit(IModel) : \l
+	+ visit(IClass) : \l
+	+ visit(IField) : \l
+	+ visit(IMethod) : \l
 	}"
 	]
-GeneralUtil [
-	label = "{GeneralUtil|
+legendaryParsingUtilGeneralUtil [
+	label = "{legendary.ParsingUtil::GeneralUtil|
 	+ _primCodes: Map\<String, String\>_\l
 	|
 	+ _getBaseFields(String) : Set\<String\>_\l
-	+ _typeMethodCollections(String, List\<String\>) : List\<String\>, String_\l
-	- _convert(List\<String\>) : List\<String\>, List\<String\>_\l
-	- _parsePrimOut(String, List\<String\>) : void_\l
+	+ _typeMethodCollections(String, List\<String\>) : String_\l
+	- _convert(List\<String\>) : List\<String\>_\l
+	- _parsePrimOut(String, List\<String\>) : _\l
 	+ _typeArgumentCollections(String) : List\<String\>_\l
 	+ _getClassesFromDir(File) : List\<String\>_\l
 	+ _typeFieldCollections(String) : String_\l
 	}"
 	]
-DecoratorPattern [
-	label = "{DecoratorPattern|
+legendarypatternsDecoratorPattern [
+	label = "{legendary.patterns::DecoratorPattern|
 	|
 	+ color() : String\l
 	+ tag() : String\l
 	}"
 	]
-SingletonPattern [
-	label = "{SingletonPattern|
+legendarypatternsSingletonPattern [
+	label = "{legendary.patterns::SingletonPattern|
 	|
 	+ color() : String\l
 	+ tag() : String\l
 	}"
 	]
 	edge [style = "dashed"] [arrowhead = "open"]
-	SDEditOutputStream->VisitorAdapter
+	legendaryInterfacesIPatternDetector->legendaryInterfacesIModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryClassesLegendaryClass->legendaryInterfacesIClass
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendaryClassesLegendaryClass->legendaryInterfacesIClass
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendaryClassesLegendaryClass->legendaryInterfacesITraverser
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesLegendaryClass->legendaryInterfacesIField
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmClassDeclarationVisitor->legendaryInterfacesIModel
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmClassDeclarationVisitor->legendaryInterfacesIClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryInterfacesIClass->legendaryInterfacesIMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryInterfacesIClass->legendaryInterfacesIField
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryClassesSDEditOutputStream->legendaryInterfacesVisitorAdapter
 	edge [style = "solid"] [arrowhead = "empty"]
-	SDEditOutputStream->IMethod
+	legendaryClassesSDEditOutputStream->legendaryInterfacesVisitorAdapter
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesSDEditOutputStream->legendaryInterfacesIModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryasmDesignParser->legendaryasmClassDeclarationVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryasmDesignParser->legendaryClassesLegendaryClass
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryasmDesignParser->legendaryClassesLegendaryModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryasmDesignParser->legendaryasmClassFieldVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryasmDesignParser->legendarydetectorsSingletonDetector
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryasmDesignParser->legendaryasmClassMethodVisitor
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendarydetectorsDecoratorDetector->legendaryInterfacesIPatternDetector
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendarypatternsSingletonPattern->legendaryInterfacesIPattern
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendaryInterfacesVisitorAdapter->legendaryInterfacesIVisitor
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryInterfacesIVisitor->legendaryInterfacesIMethod
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryInterfacesIVisitor->legendaryInterfacesIModel
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryInterfacesIVisitor->legendaryInterfacesIField
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryInterfacesIVisitor->legendaryInterfacesIClass
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendaryClassesLegendaryField->legendaryInterfacesIField
+	edge [style = "dashed"] [arrowhead = "empty"]
+	legendaryClassesLegendaryField->legendaryInterfacesITraverser
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesRelations->legendaryClassesRelations
+	edge [style = "dashed"] [arrowhead = "open"]
+	legendaryClassesGraphVizOutputStream->legendaryInterfacesVisitorAdapter
 	edge [style = "solid"] [arrowhead = "empty"]
-	SDEditOutputStream->VisitorAdapter
+	legendaryClassesGraphVizOutputStream->legendaryInterfacesVisitorAdapter
 	edge [style = "solid"] [arrowhead = "open"]
-	SDEditOutputStream->IModel
+	legendaryClassesGraphVizOutputStream->legendaryInterfacesIClass
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesGraphVizOutputStream->legendaryInterfacesIPattern
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesGraphVizOutputStream->legendaryClassesRelations
 	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IModel
+	legendaryInterfacesIModel->legendaryInterfacesIClass
 	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	IVisitor->IMethod
+	legendaryInterfacesIModel->legendaryClassesRelations
 	edge [style = "dashed"] [arrowhead = "empty"]
-	SingletonDetector->IPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	SingletonDetector->IPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->SingletonDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->ClassMethodVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->LegendaryModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->ClassDeclarationVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->LegendaryClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	DesignParser->ClassFieldVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClassMethodVisitor->IModel
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClassMethodVisitor->IClass
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClassMethodVisitor->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	IClass->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	IClass->IMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	ITraverser->IVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	LegendaryClass->IClass
+	legendaryClassesLegendaryModel->legendaryInterfacesIModel
 	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryClass->IClass
+	legendaryClassesLegendaryModel->legendaryInterfacesITraverser
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesLegendaryModel->legendaryInterfacesIClass
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesLegendaryModel->legendaryInterfacesIPattern
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesLegendaryModel->legendaryClassesRelations
 	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryClass->ITraverser
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryClass->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->IField
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassFieldVisitor->LegendaryField
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassFieldVisitor->IModel
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassFieldVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassParser->SDEditOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassParser->IModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	ClassParser->GraphVizOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassParser->IPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassParser->ClassParser
+	legendaryClassesLegendaryMethod->legendaryInterfacesIMethod
 	edge [style = "dashed"] [arrowhead = "empty"]
-	DecoratorDetector->IPatternDetector
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryMethod->IMethod
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryMethod->ITraverser
+	legendaryClassesLegendaryMethod->legendaryInterfacesITraverser
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIMethod
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIModel
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIClass
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->LegendaryMethod
+	legendaryasmClassFieldVisitor->legendaryInterfacesIField
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->LegendaryClassMethodVisitor
+	legendaryasmClassFieldVisitor->legendaryClassesLegendaryField
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmClassFieldVisitor->legendaryInterfacesIModel
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryasmClassFieldVisitor->legendaryInterfacesIClass
 	edge [style = "dashed"] [arrowhead = "open"]
-	ClassMethodVisitor->IMethod
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassMethodVisitor->IModel
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassMethodVisitor->IClass
+	legendaryClassesClassParser->legendaryClassesGraphVizOutputStream
 	edge [style = "dashed"] [arrowhead = "open"]
-	IModel->IClass
+	legendaryClassesClassParser->legendaryInterfacesIModel
 	edge [style = "dashed"] [arrowhead = "open"]
-	IModel->Relations
+	legendaryClassesClassParser->legendaryClassesSDEditOutputStream
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesClassParser->legendaryInterfacesIPatternDetector
+	edge [style = "solid"] [arrowhead = "open"]
+	legendaryClassesClassParser->legendaryClassesClassParser
 	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryModel->IModel
+	legendarypatternsDecoratorPattern->legendaryInterfacesIPattern
 	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryModel->ITraverser
+	legendarydetectorsSingletonDetector->legendaryInterfacesIPatternDetector
 	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryModel->IClass
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryModel->IPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	LegendaryModel->Relations
+	legendarydetectorsSingletonDetector->legendaryInterfacesIPatternDetector
 	edge [style = "dashed"] [arrowhead = "empty"]
-	DecoratorPattern->IPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassDeclarationVisitor->IModel
-	edge [style = "solid"] [arrowhead = "open"]
-	ClassDeclarationVisitor->IClass
-	edge [style = "dashed"] [arrowhead = "empty"]
-	AdapterDetector->IPatternDetector
+	legendarydetectorsAdapterDetector->legendaryInterfacesIPatternDetector
 	edge [style = "dashed"] [arrowhead = "open"]
-	IPatternDetector->IModel
+	legendaryInterfacesITraverser->legendaryInterfacesIVisitor
 	edge [style = "dashed"] [arrowhead = "open"]
-	IPatternDetector->IPattern
+	legendaryasmClassMethodVisitor->legendaryInterfacesIMethod
 	edge [style = "dashed"] [arrowhead = "open"]
-	IPatternDetector->IClass
+	legendaryasmClassMethodVisitor->legendaryClassesLegendaryMethod
 	edge [style = "dashed"] [arrowhead = "open"]
-	GraphVizOutputStream->VisitorAdapter
-	edge [style = "solid"] [arrowhead = "empty"]
-	GraphVizOutputStream->VisitorAdapter
+	legendaryasmClassMethodVisitor->legendaryasmLegendaryClassMethodVisitor
 	edge [style = "solid"] [arrowhead = "open"]
-	GraphVizOutputStream->IClass
+	legendaryasmClassMethodVisitor->legendaryInterfacesIModel
 	edge [style = "solid"] [arrowhead = "open"]
-	GraphVizOutputStream->IPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	GraphVizOutputStream->Relations
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryField->IField
-	edge [style = "dashed"] [arrowhead = "empty"]
-	LegendaryField->ITraverser
-	edge [style = "dashed"] [arrowhead = "empty"]
-	SingletonPattern->IPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	Relations->Relations
-	edge [style = "dashed"] [arrowhead = "empty"]
-	VisitorAdapter->IVisitor
+	legendaryasmClassMethodVisitor->legendaryInterfacesIClass
 }

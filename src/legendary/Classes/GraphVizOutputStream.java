@@ -1,6 +1,5 @@
 package legendary.Classes;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -18,16 +17,14 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	private final Map<Relations, String> relationRep;
 	private Map<IClass, Set<IPattern>> patterns;
 
-	public GraphVizOutputStream(StringBuilder builder,
-			Map<Class<? extends IPattern>, Set<IClass>> map) {
+	public GraphVizOutputStream(StringBuilder builder, Map<Class<? extends IPattern>, Set<IClass>> map) {
 		this.builder = builder;
 		this.relationRep = new HashMap<>();
 		this.initialize();
 		this.patterns = invertPatternMap(map);
 	}
 
-	private Map<IClass, Set<IPattern>> invertPatternMap(
-			Map<Class<? extends IPattern>, Set<IClass>> in) {
+	private Map<IClass, Set<IPattern>> invertPatternMap(Map<Class<? extends IPattern>, Set<IClass>> in) {
 		Map<IClass, Set<IPattern>> res = new HashMap<>();
 		for (Class<? extends IPattern> p : in.keySet()) {
 			for (IClass c : in.get(p)) {
@@ -65,41 +62,18 @@ public class GraphVizOutputStream extends VisitorAdapter {
 			for (Relations r : graph.get(c).keySet()) {
 				for (IClass c2 : graph.get(c).get(r)) {
 					if (!this.relationRep.containsKey(r)) {
-						System.out.println("null relation for classes "
-								+ c.getClassName() + " and "
-								+ c2.getClassName());
+						System.out
+								.println("null relation for classes " + c.getClassName() + " and " + c2.getClassName());
 						break outer;
 					}
 					if (!this.relationRep.get(r).equals("")) {
 						sb.append(this.relationRep.get(r));
-						sb.append(c.getClassName() + "->" + c2.getClassName()
-								+ "\n");
+						sb.append(c.getClassName().replace(".", "").replace(":", "") + "->"
+								+ c2.getClassName().replace(".", "").replace(":", "") + "\n");
 					}
 				}
 			}
 		}
-
-		// Map<List<String>, List<Relations>> relMap = m.getRelations();
-		// List<String> classNames = new ArrayList<>();
-		// for (IClass c : m.getClasses()) {
-		// classNames.add(c.getClassName());
-		// }
-		// outer: for (List<String> al : relMap.keySet()) {
-		// if (!classNames.contains(al.get(1))) {
-		// continue;
-		// }
-		// for (Relations r : relMap.get(al)) {
-		// if (!this.relationRep.containsKey(r)) {
-		// System.out.println("null relation for classes " + al.get(0)
-		// + " and " + al.get(1));
-		// break outer;
-		// }
-		// if (!this.relationRep.get(r).equals("")) {
-		// sb.append(this.relationRep.get(r));
-		// sb.append(al.get(0) + "->" + al.get(1) + "\n");
-		// }
-		// }
-		// }
 		return sb.toString();
 	}
 
@@ -110,9 +84,8 @@ public class GraphVizOutputStream extends VisitorAdapter {
 
 	@Override
 	public void previsit(IClass c) {
-		String line = String.format("%s [\n\tlabel = \"{%s%s",
-				c.getClassName(), (c.isInterface() ? "\\<\\<interface\\>\\>\\n"
-						: ""), c.getClassName());
+		String line = String.format("%s [\n\tlabel = \"{%s%s", c.getClassName().replace(".", "").replace(":", ""),
+				(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
 		this.write(line);
 		if (this.patterns.containsKey(c))
 			addPatternTags(c);
@@ -150,36 +123,72 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	@Override
 	public void visit(IField f) {
 		boolean isStatic = f.getAccess().endsWith("_");
-		String line = String.format("%s %s%s: %s%s\\l\n\t", f.getAccess()
-				.replace("_", ""), isStatic ? "_" : "", f.getFieldName(), f
-				.getType(), isStatic ? "_" : "");
+		String ret = "";
+		boolean include = false;
+		for (char c : f.getType().toCharArray()) {
+			if (c == ':')
+				include = true;
+			if (c == '<' || c == '>' || c == ' ') {
+				include = false;
+				ret += c;
+			}
+			if (include)
+				ret += c;
+		}
+		ret = ret.replace("<", "\\<").replace(">", "\\>").replace(":", "");
+		String line = String.format("%s %s%s: %s%s\\l\n\t", f.getAccess().replace("_", ""), isStatic ? "_" : "",
+				f.getFieldName(), ret, isStatic ? "_" : "");
 		this.write(line);
 	}
 
 	@Override
 	public void visit(IMethod m) {
-		if (!(m.getMethodName().equals("<init>") || m.getMethodName().equals(
-				"<clinit>"))) {
+		if (!(m.getMethodName().equals("<init>") || m.getMethodName().equals("<clinit>"))) {
 			boolean isStatic = m.getAccess().endsWith("_");
-			String parameters = Arrays.toString(m.getParameters().toArray());
-			String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m
-					.getAccess().replace("_", ""), isStatic ? "_" : "", m
-					.getMethodName(), parameters.substring(1,
-					parameters.length() - 1), m.getReturnType(), isStatic ? "_"
-					: "");
+			String parameters = "";
+			boolean include = false;
+			for (String s : m.getParameters()) {
+				include = false;
+				for (char c : s.toCharArray()) {
+					if (c == ':')
+						include = true;
+					if (c == '<' || c == '>' || c == ' ' || c == ',') {
+						include = false;
+						parameters += c;
+					}
+					if (include)
+						parameters += c;
+				}
+				parameters += ", ";
+			}
+			if(parameters.contains(", ")){
+				parameters = parameters.substring(0, parameters.lastIndexOf(", "));
+			}
+			parameters = parameters.replace(":", "").replace("<", "\\<").replace(">", "\\>");
+			String ret = "";
+			include = false;
+			for (char c : m.getReturnType().toCharArray()) {
+				if (c == ':')
+					include = true;
+				if (c == '<' || c == '>' || c == ' ') {
+					include = false;
+					ret += c;
+				}
+				if (include)
+					ret += c;
+			}
+			ret = ret.replace("<", "\\<").replace(">", "\\>");
+			String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m.getAccess().replace("_", ""),
+					isStatic ? "_" : "", m.getMethodName(), parameters, ret.replace(":", ""), isStatic ? "_" : "");
 			this.write(line);
 		}
 	}
 
 	public void initialize() {
-		this.relationRep.put(Relations.ASSOCIATES,
-				"\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
-		this.relationRep.put(Relations.EXTENDS,
-				"\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.IMPLEMENTS,
-				"\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.USES,
-				"\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.ASSOCIATES, "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.EXTENDS, "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.IMPLEMENTS, "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.USES, "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 		this.relationRep.put(Relations.REV_ASSOCIATES, "");
 		this.relationRep.put(Relations.REV_EXTENDS, "");
 		this.relationRep.put(Relations.REV_IMPLEMENTS, "");

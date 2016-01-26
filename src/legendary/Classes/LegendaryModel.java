@@ -100,18 +100,18 @@ public class LegendaryModel implements IModel, ITraverser {
 			}
 			temp.put(c, initTemp);
 		}
-		 removeDupArrows(temp);
+		removeDupArrows(temp);
 	}
 
 	@Override
 	public void removeDupArrows(Map<IClass, Map<Relations, Set<IClass>>> temp) {
 		for (IClass c : this.relGraph.keySet()) {
 			for (IClass sup : this.relGraph.get(c).get(Relations.EXTENDS)) {
-//				if (relGraph.containsKey(sup) && !sup.isInterface())
+				if (!sup.isInterface())
 					temp.get(c).get(Relations.EXTENDS).add(sup);
 			}
 			for (IClass sup : this.relGraph.get(c).get(Relations.IMPLEMENTS)) {
-//				if (relGraph.containsKey(sup) && sup.isInterface())
+				if (sup.isInterface())
 					temp.get(c).get(Relations.IMPLEMENTS).add(sup);
 			}
 			for (IClass c2 : this.relGraph.get(c).get(Relations.ASSOCIATES)) {
@@ -119,14 +119,13 @@ public class LegendaryModel implements IModel, ITraverser {
 				for (IClass sup : this.relGraph.get(c).get(Relations.EXTENDS)) {
 					if (!this.relGraph.containsKey(sup))
 						continue;
-					if (this.relGraph.get(sup).get(Relations.ASSOCIATES)
-							.contains(c2)) {
+					if (this.relGraph.get(sup).get(Relations.ASSOCIATES).contains(c2)) {
 						add = false;
 						break;
 					}
 				}
-				 if (add)
-				 temp.get(c).get(Relations.ASSOCIATES).add(c2);
+				if (add)
+					temp.get(c).get(Relations.ASSOCIATES).add(c2);
 			}
 			for (IClass c2 : this.relGraph.get(c).get(Relations.USES)) {
 				boolean add = true;
@@ -138,12 +137,11 @@ public class LegendaryModel implements IModel, ITraverser {
 						break;
 					}
 				}
-				for (IClass sup : this.relGraph.get(c)
-						.get(Relations.IMPLEMENTS)) {
+				for (IClass sup : this.relGraph.get(c).get(Relations.IMPLEMENTS)) {
 					if (!this.relGraph.containsKey(sup))
 						continue;
 					if (this.relGraph.get(sup).get(Relations.USES).contains(c2)) {
-//						System.out.println(sup.getClassName());
+						// System.out.println(sup.getClassName());
 						add = false;
 						break;
 					}
@@ -152,7 +150,7 @@ public class LegendaryModel implements IModel, ITraverser {
 					temp.get(c).get(Relations.USES).add(c2);
 			}
 		}
-//		System.out.println(temp.equals(this.relGraph));
+		// System.out.println(temp.equals(this.relGraph));
 		this.relGraph = temp;
 	}
 
@@ -166,6 +164,7 @@ public class LegendaryModel implements IModel, ITraverser {
 		List<String> al = new ArrayList<String>();
 		al.add(c1.substring(c1.lastIndexOf("/") + 1));
 		al.add(c2.substring(c2.lastIndexOf("/") + 1));
+		// System.out.println(al+", "+r);
 		if (relations.containsKey(al)) {
 			List<Relations> lr = relations.get(al);
 			if (relations.get(al).contains(r))
