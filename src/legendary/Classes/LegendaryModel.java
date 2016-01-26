@@ -100,6 +100,7 @@ public class LegendaryModel implements IModel, ITraverser {
 			}
 			temp.put(c, initTemp);
 		}
+		System.out.println(this.relGraph.isEmpty());
 		removeDupArrows(temp);
 	}
 
@@ -164,7 +165,7 @@ public class LegendaryModel implements IModel, ITraverser {
 		List<String> al = new ArrayList<String>();
 		al.add(c1.substring(c1.lastIndexOf("/") + 1));
 		al.add(c2.substring(c2.lastIndexOf("/") + 1));
-		// System.out.println(al+", "+r);
+		 System.out.println(al+", "+r);
 		if (relations.containsKey(al)) {
 			List<Relations> lr = relations.get(al);
 			if (relations.get(al).contains(r))

@@ -56,6 +56,7 @@ public class GraphVizOutputStream extends VisitorAdapter {
 	}
 
 	private String addArrows(IModel m) {
+		System.out.println(m.getRelGraph().keySet());
 		StringBuilder sb = new StringBuilder();
 		Map<IClass, Map<Relations, Set<IClass>>> graph = m.getRelGraph();
 		outer: for (IClass c : graph.keySet()) {

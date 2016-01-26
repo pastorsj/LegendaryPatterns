@@ -1,492 +1,429 @@
 digraph G{
 	node [shape = "record"]
-legendaryasmClassDeclarationVisitor [
-	label = "{legendary.asm::ClassDeclarationVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
+problemDecryptionInputStream [
+	label = "{problem::DecryptionInputStream|
+	- decryptor: IDecryption\l
 	|
-	+ visit(, , String, String, String, String[]) : \l
+	+ read(, , , ) : \l
+	+ read() : \l
 	}"
 	]
-legendaryasmClassFieldVisitor [
-	label = "{legendary.asm::ClassFieldVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
+javaioFilterInputStream [
+	label = "{java.io::FilterInputStream|
+	# in: InputStream\l
 	|
-	+ visitField(, String, String, String, Object) : FieldVisitor\l
-	 addAccessLevel(, IField) : \l
+	+ read(, , , ) : \l
+	+ read() : \l
+	+ read(, ) : \l
+	+ markSupported() : \l
+	+ available() : \l
+	+ reset() : \l
+	+ skip() : \l
+	+ close() : \l
+	+ mark() : \l
 	}"
 	]
-legendaryasmClassMethodVisitor [
-	label = "{legendary.asm::ClassMethodVisitor|
-	- usesClasses: List\<String\>\l
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
+javaioInputStream [
+	label = "{java.io::InputStream|
+	- _MAX_SKIP_BUFFER_SIZE: _\l
 	|
-	- addArguments(String, IMethod) : \l
-	- addAccessLevel(, IMethod) : \l
-	+ visitMethod(, String, String, String, String[]) : MethodVisitor\l
-	- addReturnType(String, IMethod) : \l
+	+ read(, , , ) : \l
+	+ read() : \l
+	+ read(, ) : \l
+	+ markSupported() : \l
+	+ available() : \l
+	+ reset() : \l
+	+ skip() : \l
+	+ close() : \l
+	+ mark() : \l
 	}"
 	]
-legendaryasmDesignParser [
-	label = "{legendary.asm::DesignParser|
-	+ _packageName: String_\l
-	+ _directories: String[]_\l
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+javaioCloseable [
+	label = "{\<\<interface\>\>\njava.io::Closeable|
+	|
+	+ close() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+javalangAutoCloseable [
+	label = "{\<\<interface\>\>\njava.lang::AutoCloseable|
+	|
+	+ close() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemEncryptionOutputStream [
+	label = "{problem::EncryptionOutputStream|
+	- encryptor: IEncryption\l
+	|
+	+ write() : \l
+	}"
+	]
+javaioFilterOutputStream [
+	label = "{java.io::FilterOutputStream|
+	# out: OutputStream\l
+	|
+	+ flush() : \l
+	+ write(, , , ) : \l
+	+ write(, ) : \l
+	+ write() : \l
+	+ close() : \l
+	}"
+	]
+javaioOutputStream [
+	label = "{java.io::OutputStream|
+	|
+	+ flush() : \l
+	+ write(, , , ) : \l
+	+ write(, ) : \l
+	+ write() : \l
+	+ close() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+javaioCloseable [
+	label = "{\<\<interface\>\>\njava.io::Closeable|
+	|
+	+ close() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+javalangAutoCloseable [
+	label = "{\<\<interface\>\>\njava.lang::AutoCloseable|
+	|
+	+ close() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+javaioFlushable [
+	label = "{\<\<interface\>\>\njava.io::Flushable|
+	|
+	+ flush() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemIDecryption [
+	label = "{\<\<interface\>\>\nproblem::IDecryption|
+	|
+	+ decrypt() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemIEncryption [
+	label = "{\<\<interface\>\>\nproblem::IEncryption|
+	|
+	+ encrypt() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemSubstitutionCipher [
+	label = "{problem::SubstitutionCipher|
+	- encryptionKey: \l
+	- decryptionKey: \l
+	|
+	+ encrypt() : \l
+	+ decrypt() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemIEncryption [
+	label = "{\<\<interface\>\>\nproblem::IEncryption|
+	|
+	+ encrypt() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemIDecryption [
+	label = "{\<\<interface\>\>\nproblem::IDecryption|
+	|
+	+ decrypt() : \l
+	}"
+	]
+javalangObject [
+	label = "{java.lang::Object|
+	|
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
+	}"
+	]
+problemTextEditorApp [
+	label = "{problem::TextEditorApp|
 	|
 	+ _main(String[]) : _\l
 	}"
 	]
-legendaryasmLegendaryClassMethodVisitor [
-	label = "{legendary.asm::LegendaryClassMethodVisitor|
-	 legendaryClass: IClass\l
-	 legendaryModel: IModel\l
-	 legendaryMethod: IMethod\l
+javalangObject [
+	label = "{java.lang::Object|
 	|
-	+ visitTypeInsn(, String) : \l
-	+ visitVarInsn(, ) : \l
-	+ visitMethodInsn(, String, String, String, ) : \l
-	+ visitFieldInsn(, String, String, String) : \l
+	+ getClass() : Class\<\>\l
+	+ wait() : \l
+	+ wait(, ) : \l
+	+ wait() : \l
+	+ hashCode() : \l
+	+ equals(Object) : \l
+	+ notifyAll() : \l
+	# clone() : Object\l
+	- _registerNatives() : _\l
+	+ toString() : String\l
+	# finalize() : \l
+	+ notify() : \l
 	}"
 	]
-legendaryClassesClassParser [
-	label = "{legendary.Classes::ClassParser\n\<\<Singleton\>\>|
-	- _instance: ClassParser_\l
-	- detect: IPatternDetector\l
-	|
-	+ _getInstance() : ClassParser_\l
-	+ makeSDEdit(String, String, , IModel, StringBuilder) : \l
-	+ addDetector(IPatternDetector) : \l
-	+ makeGraphViz(IModel, StringBuilder) : \l
-	}"
-	color = blue]
-legendaryClassesGraphVizOutputStream [
-	label = "{legendary.Classes::GraphVizOutputStream|
-	- builder: StringBuilder\l
-	- relationRep: Map\<Relations, String\>\l
-	- patterns: Map\<IClass, Set\<IPattern\>\>\l
-	|
-	- addArrows(IModel) : String\l
-	- patternColor(IClass) : String\l
-	- invertPatternMap(Map\<Class\<IPattern\>, Set\<IClass\>\>) : Map\<IClass, Set\<IPattern\>\>\l
-	+ postvisit(IModel) : \l
-	+ postvisit(IClass) : \l
-	+ previsit(IModel) : \l
-	+ previsit(IClass) : \l
-	+ visit(IModel) : \l
-	+ visit(IClass) : \l
-	+ visit(IField) : \l
-	+ visit(IMethod) : \l
-	+ initialize() : \l
-	- write(String) : \l
-	- addPatternTags(IClass) : \l
-	}"
-	]
-legendaryClassesLegendaryClass [
-	label = "{legendary.Classes::LegendaryClass|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\<String\>\l
-	- methods: Map\<String, Map\<List\<String\>IMethod\>\>\l
-	- fields: List\<IField\>\l
-	- isInterface: \l
-	- creationOrder: \l
-	- _count: _\l
-	|
-	+ setInterfaces(List\<String\>) : \l
-	+ getSuperName() : String\l
-	+ setIsInterface() : \l
-	+ addField(IField) : \l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : \l
-	+ compareTo(IClass) : \l
-	+ compareTo(Object) : \l
-	+ setSuper(String) : \l
-	+ accept(IVisitor) : \l
-	+ getFields() : List\<IField\>\l
-	+ getCreationOrder() : \l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
-	+ isInterface() : \l
-	+ addMethod(IMethod) : \l
-	}"
-	]
-legendaryClassesLegendaryField [
-	label = "{legendary.Classes::LegendaryField|
-	- fieldAccessType: String\l
-	- fieldName: String\l
-	- fieldType: String\l
-	- baseFields: Set\<String\>\l
-	|
-	+ setAccess(String) : \l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : \l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : \l
-	+ getFieldName() : String\l
-	+ accept(IVisitor) : \l
-	}"
-	]
-legendaryClassesLegendaryMethod [
-	label = "{legendary.Classes::LegendaryMethod|
-	- methodAccess: String\l
-	- methodName: String\l
-	- parameters: List\<String\>\l
-	- methodCallStack: Queue\<List\<List\<String\>\>\>\l
-	- methodReturnType: String\l
-	|
-	+ setParameters(List\<String\>) : \l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : \l
-	+ setAccess(String) : \l
-	+ setMethodName(String) : \l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : \l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	+ accept(IVisitor) : \l
-	}"
-	]
-legendaryClassesLegendaryModel [
-	label = "{legendary.Classes::LegendaryModel|
-	- classList: Set\<IClass\>\l
-	- relGraph: Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	- relations: Map\<List\<String\>List\<Relations\>\>\l
-	- patterns: Map\<IPattern, Set\<IClass\>\>\l
-	|
-	+ convertToGraph() : \l
-	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ getPatterns() : Map\<IPattern, Set\<IClass\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : \l
-	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
-	+ addPattern(IPattern, Set\<IClass\>) : \l
-	+ addRelation(String, String, Relations) : \l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : \l
-	+ accept(IVisitor) : \l
-	}"
-	]
-legendaryClassesRelations [
-	label = "{legendary.Classes::Relations|
-	+ _EXTENDS: Relations_\l
-	+ _IMPLEMENTS: Relations_\l
-	+ _USES: Relations_\l
-	+ _ASSOCIATES: Relations_\l
-	+ _REV_EXTENDS: Relations_\l
-	+ _REV_IMPLEMENTS: Relations_\l
-	+ _REV_USES: Relations_\l
-	+ _REV_ASSOCIATES: Relations_\l
-	- _ENUM$VALUES: Relations[]_\l
-	|
-	+ _valueOf(String) : Relations_\l
-	+ _values() : Relations_\l
-	}"
-	]
-legendaryClassesSDEditOutputStream [
-	label = "{legendary.Classes::SDEditOutputStream|
-	- model: IModel\l
-	- builder: StringBuilder\l
-	- classes: Set\<String\>\l
-	- methodCalls: List\<String\>\l
-	- depth: \l
-	- origDepth: \l
-	|
-	+ postvisit(IMethod) : \l
-	+ previsit(IMethod) : \l
-	+ visit(IMethod) : \l
-	+ write(String) : \l
-	}"
-	]
-legendarydetectorsAdapterDetector [
-	label = "{legendary.detectors::AdapterDetector|
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendarydetectorsDecoratorDetector [
-	label = "{legendary.detectors::DecoratorDetector|
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendarydetectorsSingletonDetector [
-	label = "{legendary.detectors::SingletonDetector|
-	- next: IPatternDetector\l
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendaryInterfacesIClass [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IClass|
-	|
-	+ setInterfaces(List\<String\>) : \l
-	+ getSuperName() : String\l
-	+ setIsInterface() : \l
-	+ addField(IField) : \l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : \l
-	+ setSuper(String) : \l
-	+ getFields() : List\<IField\>\l
-	+ getCreationOrder() : \l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
-	+ isInterface() : \l
-	+ addMethod(IMethod) : \l
-	}"
-	]
-legendaryInterfacesIField [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IField|
-	|
-	+ setAccess(String) : \l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : \l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : \l
-	+ getFieldName() : String\l
-	}"
-	]
-legendaryInterfacesIMethod [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IMethod|
-	|
-	+ setParameters(List\<String\>) : \l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : \l
-	+ setAccess(String) : \l
-	+ setMethodName(String) : \l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : \l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	}"
-	]
-legendaryInterfacesIModel [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IModel|
-	|
-	+ convertToGraph() : \l
-	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : \l
-	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : \l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : \l
-	}"
-	]
-legendaryInterfacesIPattern [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	}"
-	]
-legendaryInterfacesIPatternDetector [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPatternDetector|
-	|
-	+ getCandidates(IModel) : Set\<IClass\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendaryInterfacesITraverser [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::ITraverser|
-	|
-	+ accept(IVisitor) : \l
-	}"
-	]
-legendaryInterfacesIVisitor [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IVisitor|
-	|
-	+ postvisit(IModel) : \l
-	+ postvisit(IClass) : \l
-	+ postvisit(IField) : \l
-	+ postvisit(IMethod) : \l
-	+ previsit(IModel) : \l
-	+ previsit(IClass) : \l
-	+ previsit(IField) : \l
-	+ previsit(IMethod) : \l
-	+ visit(IModel) : \l
-	+ visit(IClass) : \l
-	+ visit(IField) : \l
-	+ visit(IMethod) : \l
-	}"
-	]
-legendaryInterfacesVisitorAdapter [
-	label = "{legendary.Interfaces::VisitorAdapter|
-	|
-	+ postvisit(IModel) : \l
-	+ postvisit(IClass) : \l
-	+ postvisit(IField) : \l
-	+ postvisit(IMethod) : \l
-	+ previsit(IModel) : \l
-	+ previsit(IClass) : \l
-	+ previsit(IField) : \l
-	+ previsit(IMethod) : \l
-	+ visit(IModel) : \l
-	+ visit(IClass) : \l
-	+ visit(IField) : \l
-	+ visit(IMethod) : \l
-	}"
-	]
-legendaryParsingUtilGeneralUtil [
-	label = "{legendary.ParsingUtil::GeneralUtil|
-	+ _primCodes: Map\<String, String\>_\l
-	|
-	+ _getBaseFields(String) : Set\<String\>_\l
-	+ _typeMethodCollections(String, List\<String\>) : String_\l
-	- _convert(List\<String\>) : List\<String\>_\l
-	- _parsePrimOut(String, List\<String\>) : _\l
-	+ _typeArgumentCollections(String) : List\<String\>_\l
-	+ _getClassesFromDir(File) : List\<String\>_\l
-	+ _typeFieldCollections(String) : String_\l
-	}"
-	]
-legendarypatternsDecoratorPattern [
-	label = "{legendary.patterns::DecoratorPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	}"
-	]
-legendarypatternsSingletonPattern [
-	label = "{legendary.patterns::SingletonPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	}"
-	]
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIPatternDetector->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryClassesLegendaryClass->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryClass->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryClass->legendaryInterfacesITraverser
 	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesLegendaryClass->legendaryInterfacesIField
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmClassDeclarationVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmClassDeclarationVisitor->legendaryInterfacesIClass
+	problemDecryptionInputStream->problemIDecryption
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIClass->legendaryInterfacesIMethod
+	problemDecryptionInputStream->javaioInputStream
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIClass->legendaryInterfacesIField
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryClassesSDEditOutputStream->legendaryInterfacesVisitorAdapter
+	problemDecryptionInputStream->javaioFilterInputStream
 	edge [style = "solid"] [arrowhead = "empty"]
-	legendaryClassesSDEditOutputStream->legendaryInterfacesVisitorAdapter
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesSDEditOutputStream->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmDesignParser->legendaryasmClassDeclarationVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmDesignParser->legendaryClassesLegendaryClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmDesignParser->legendaryClassesLegendaryModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmDesignParser->legendaryasmClassFieldVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmDesignParser->legendarydetectorsSingletonDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmDesignParser->legendaryasmClassMethodVisitor
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendarydetectorsDecoratorDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendarypatternsSingletonPattern->legendaryInterfacesIPattern
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryInterfacesVisitorAdapter->legendaryInterfacesIVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIVisitor->legendaryInterfacesIMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIVisitor->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIVisitor->legendaryInterfacesIField
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIVisitor->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryField->legendaryInterfacesIField
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryField->legendaryInterfacesITraverser
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesRelations->legendaryClassesRelations
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryClassesGraphVizOutputStream->legendaryInterfacesVisitorAdapter
+	problemDecryptionInputStream->javaioInputStream
 	edge [style = "solid"] [arrowhead = "empty"]
-	legendaryClassesGraphVizOutputStream->legendaryInterfacesVisitorAdapter
+	problemDecryptionInputStream->javaioFilterInputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemIDecryption->javalangObject
 	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesGraphVizOutputStream->legendaryInterfacesIClass
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesGraphVizOutputStream->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesGraphVizOutputStream->legendaryClassesRelations
+	javaioFilterInputStream->javaioInputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	javaioFilterInputStream->javaioInputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	javaioFlushable->javalangObject
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIModel->legendaryInterfacesIClass
+	problemTextEditorApp->problemDecryptionInputStream
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesIModel->legendaryClassesRelations
+	problemTextEditorApp->problemEncryptionOutputStream
+	edge [style = "dashed"] [arrowhead = "open"]
+	problemTextEditorApp->problemSubstitutionCipher
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemTextEditorApp->problemDecryptionInputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemTextEditorApp->problemEncryptionOutputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemTextEditorApp->problemSubstitutionCipher
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemTextEditorApp->javalangObject
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemIEncryption->javalangObject
 	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryModel->legendaryInterfacesIModel
+	javaioCloseable->javalangAutoCloseable
+	edge [style = "solid"] [arrowhead = "empty"]
+	javaioCloseable->javalangObject
+	edge [style = "solid"] [arrowhead = "open"]
+	javaioFilterOutputStream->javaioOutputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	javaioFilterOutputStream->javaioOutputStream
 	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryModel->legendaryInterfacesITraverser
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesLegendaryModel->legendaryInterfacesIClass
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesLegendaryModel->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesLegendaryModel->legendaryClassesRelations
+	javaioInputStream->javaioCloseable
+	edge [style = "solid"] [arrowhead = "empty"]
+	javaioInputStream->javalangObject
 	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryMethod->legendaryInterfacesIMethod
+	problemSubstitutionCipher->problemIDecryption
 	edge [style = "dashed"] [arrowhead = "empty"]
-	legendaryClassesLegendaryMethod->legendaryInterfacesITraverser
+	problemSubstitutionCipher->problemIEncryption
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemSubstitutionCipher->javalangObject
 	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIMethod
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIClass
+	problemEncryptionOutputStream->problemIEncryption
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmClassFieldVisitor->legendaryInterfacesIField
+	problemEncryptionOutputStream->javaioFilterOutputStream
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmClassFieldVisitor->legendaryClassesLegendaryField
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmClassFieldVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmClassFieldVisitor->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryClassesClassParser->legendaryClassesGraphVizOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryClassesClassParser->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryClassesClassParser->legendaryClassesSDEditOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesClassParser->legendaryInterfacesIPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryClassesClassParser->legendaryClassesClassParser
+	problemEncryptionOutputStream->javaioOutputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	problemEncryptionOutputStream->javaioFilterOutputStream
+	edge [style = "solid"] [arrowhead = "empty"]
+	javalangAutoCloseable->javalangObject
 	edge [style = "dashed"] [arrowhead = "empty"]
-	legendarypatternsDecoratorPattern->legendaryInterfacesIPattern
+	javaioOutputStream->javaioCloseable
 	edge [style = "dashed"] [arrowhead = "empty"]
-	legendarydetectorsSingletonDetector->legendaryInterfacesIPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	legendarydetectorsSingletonDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "empty"]
-	legendarydetectorsAdapterDetector->legendaryInterfacesIPatternDetector
+	javaioOutputStream->javaioFlushable
+	edge [style = "solid"] [arrowhead = "empty"]
+	javaioOutputStream->javalangObject
 	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryInterfacesITraverser->legendaryInterfacesIVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmClassMethodVisitor->legendaryInterfacesIMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmClassMethodVisitor->legendaryClassesLegendaryMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	legendaryasmClassMethodVisitor->legendaryasmLegendaryClassMethodVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmClassMethodVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	legendaryasmClassMethodVisitor->legendaryInterfacesIClass
+	javalangObject->javalangObject
 }

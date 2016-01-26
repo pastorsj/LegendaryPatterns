@@ -4,6 +4,8 @@ import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 
+import java.io.IOException;
+
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -35,14 +37,25 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				s = s.replace("/", ".");
 				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 			}
+			try {
+				DesignParser.executeASM(superName, legendaryModel, false);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			this.legendaryModel.addRelation(n, s, Relations.EXTENDS);
-			System.out.println(n + " " + s);
 		}
 		for (String i : interfaces) {
 			String s = i;
 			if (s.contains("/")) {
 				s = s.replace("/", ".");
 				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
+			}
+			try {
+				DesignParser.executeASM(i, legendaryModel, false);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			this.legendaryModel.addRelation(n, s, Relations.IMPLEMENTS);
 		}

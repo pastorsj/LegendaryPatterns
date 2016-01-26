@@ -104,16 +104,17 @@ public class GeneralUtil {
 				if (!s2.equals(">"))
 					res += typeMethodCollections(s2, usesClasses) + ", ";
 				else {
-					if(res.endsWith(", "))
+					if (res.endsWith(", "))
 						res = res.substring(0, res.lastIndexOf(", "));
 					res += ">";
 				}
 			}
 		} else {
 			res = split1.replace("/", ".");
-			res = res.substring(0, res.lastIndexOf(".")) + "::" + (res.substring(res.lastIndexOf(".") + 1));
+			if (res.contains("."))
+				res = res.substring(0, res.lastIndexOf(".")) + "::" + (res.substring(res.lastIndexOf(".") + 1));
 		}
-		if(res.endsWith(", "))
+		if (res.endsWith(", "))
 			res = res.substring(0, res.lastIndexOf(", "));
 		return res.replace(", >", ">");
 	}
@@ -145,7 +146,8 @@ public class GeneralUtil {
 			s = s.substring(1);
 		if (!s.contains("::")) {
 			s = s.replace("/", ".");
-			s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
+			if (s.contains("."))
+				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 		}
 		if (s.contains("<")) {
 			String split1, split2;
@@ -165,24 +167,6 @@ public class GeneralUtil {
 	}
 
 	public static String typeFieldCollections(String in) {
-//		String s = in;
-//		if (s.contains(DesignParser.packageName)) {
-//			s = s.substring(s.lastIndexOf(DesignParser.packageName)).replace("/", ".");
-//			s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
-//		}
-//		if (s.contains("<")) {
-//			String split1 = s.substring(0, s.indexOf("<"));
-//			String split2 = s.substring(s.indexOf("<") + 1);
-//			s = split1.substring(split1.lastIndexOf("/") + 1) + "<";
-//			String[] split = split2.split(";");
-//			for (int i = 0; i < split.length; i++) {
-//				String s2 = split[i];
-//				s += typeFieldCollections(s2);
-//				if ((i < split.length - 1) && (!split[i + 1].equals(">")))
-//					s += ", ";
-//			}
-//		}
-//		return s.replace("<", "\\<").replace(">", "\\>").replace("\\\\", "\\").replace(";", "");
 		return typeMethodCollections(in, new ArrayList<>());
 	}
 

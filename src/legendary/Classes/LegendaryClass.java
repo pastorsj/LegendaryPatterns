@@ -10,7 +10,6 @@ import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.ITraverser;
 import legendary.Interfaces.IVisitor;
-import legendary.asm.DesignParser;
 
 /*
  * Author: Jason Lane
@@ -24,6 +23,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 	private List<IField> fields;
 	private boolean isInterface;
 	private int creationOrder;
+	private boolean drawable;
 	private static int count;
 
 	public LegendaryClass() {
@@ -38,9 +38,9 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 
 	@Override
 	public void setClassName(String className) {
-		String name = className.substring(className.lastIndexOf(DesignParser.packageName)).replace("/", ".");
-//		name = name.substring(0, name.lastIndexOf(".")) + "::"
-//				+ name.substring(name.lastIndexOf(".") + 1, name.length());
+		String name = className.replace("/", ".");
+		// name = name.substring(0, name.lastIndexOf(".")) + "::"
+		// + name.substring(name.lastIndexOf(".") + 1, name.length());
 		this.className = name;
 	}
 
@@ -140,6 +140,16 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 	public int compareTo(IClass o) {
 		// TODO Auto-generated method stub
 		return (this.getCreationOrder() > o.getCreationOrder()) ? 1 : 0;
+	}
+
+	@Override
+	public void setDrawable(boolean drawable) {
+		this.drawable = drawable;
+	}
+
+	@Override
+	public boolean isDrawable() {
+		return this.drawable;
 	}
 
 }

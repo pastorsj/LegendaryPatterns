@@ -23,4 +23,6 @@ public interface IClass {
 	public boolean isInterface();
 	public List<IMethod> getMethodObjects();
 	public int getCreationOrder();
+	public void setDrawable(boolean drawable);
+	public boolean isDrawable();
 };
