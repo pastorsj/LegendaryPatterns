@@ -14,4 +14,5 @@ public interface IModel {
 	public void convertToGraph();
 	public Map<IClass, Map<Relations, Set<IClass>>> getRelGraph();
 	public void removeDupArrows(Map<IClass, Map<Relations, Set<IClass>>> tempMap);
+	public boolean containsClass(String i);
 }

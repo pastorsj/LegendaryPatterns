@@ -22,10 +22,10 @@ import org.objectweb.asm.Opcodes;
  */
 public class DesignParser {
 
-	public static final String packageName = "problem";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	"C:/Users/Jason/Documents/374/Lab2-1-Solution/src/problem/" };
+	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary/" };
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	/**

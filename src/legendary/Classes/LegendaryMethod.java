@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Queue;
 
 import legendary.Interfaces.IMethod;
-import legendary.Interfaces.ITraverser;
-import legendary.Interfaces.IVisitor;
+import legendary.visitor.ITraverser;
+import legendary.visitor.IVisitor;
 
 /*
  * Author: Jason Lane
@@ -70,9 +70,9 @@ public class LegendaryMethod implements IMethod, ITraverser {
 
 	@Override
 	public void accept(IVisitor v) {
-		v.previsit(this);
+		v.preVisit(this);
 		v.visit(this);
-		v.postvisit(this);
+		v.postVisit(this);
 	}
 
 	@Override

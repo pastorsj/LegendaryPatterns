@@ -8,8 +8,8 @@ import java.util.Map;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
-import legendary.Interfaces.ITraverser;
-import legendary.Interfaces.IVisitor;
+import legendary.visitor.ITraverser;
+import legendary.visitor.IVisitor;
 
 /*
  * Author: Jason Lane
@@ -107,7 +107,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 
 	@Override
 	public void accept(IVisitor v) {
-		v.previsit(this);
+		v.preVisit(this);
 		for (IField f : this.fields) {
 			ITraverser t = (ITraverser) f;
 			t.accept(v);
@@ -117,7 +117,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 			ITraverser t = (ITraverser) m;
 			t.accept(v);
 		}
-		v.postvisit(this);
+		v.postVisit(this);
 	}
 
 	@Override

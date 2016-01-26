@@ -1,51 +1,50 @@
-package legendary.Interfaces;
+package legendary.visitor;
 
-public abstract class VisitorAdapter implements IVisitor {
-	@Override
-	public void previsit(IModel m) {
-	};
+import java.util.HashMap;
+import java.util.Map;
 
-	@Override
-	public void visit(IModel m) {
-	};
-
-	@Override
-	public void postvisit(IModel m) {
-	};
+public class VisitorAdapter implements IVisitor {
+	public Map<LookupKey, IVisitMethod> keyToVisitMethodMap;
 	
-	@Override
-	public void previsit(IClass c) {
-	};
+	public VisitorAdapter() {
+		this.keyToVisitMethodMap = new HashMap<>();
+	}
 
 	@Override
-	public void visit(IClass c) {
-	};
+	public void preVisit(ITraverser t) {
+		this.doVisit(VisitType.PreVisit, t);
+	}
 
 	@Override
-	public void postvisit(IClass c) {
-	};
+	public void visit(ITraverser t) {
+		this.doVisit(VisitType.Visit, t);
+	}
 
 	@Override
-	public void previsit(IMethod m) {
-	};
+	public void postVisit(ITraverser t) {
+		this.doVisit(VisitType.PostVisit, t);
+	}
+	
+	private void doVisit(VisitType vType, ITraverser t) {
+		LookupKey key = new LookupKey(vType, t.getClass());
+		IVisitMethod m = this.keyToVisitMethodMap.get(key);
+		if(m != null)
+			m.execute(t);
+	}
 
 	@Override
-	public void visit(IMethod m) {
-	};
+	public void addVisit(VisitType visitType, Class<?> clazz, IVisitMethod m) {
+		LookupKey key = new LookupKey(visitType, clazz);
+		this.keyToVisitMethodMap.put(key, m);
+	}
+	
+	public Map<LookupKey, IVisitMethod> getMap() {
+		return this.keyToVisitMethodMap;
+	}
 
 	@Override
-	public void postvisit(IMethod m) {
-	};
-
-	@Override
-	public void previsit(IField f) {
-	};
-
-	@Override
-	public void visit(IField f) {
-	};
-
-	@Override
-	public void postvisit(IField f) {
-	};
+	public void removeVisit(VisitType visitType, Class<?> clazz) {
+		LookupKey key = new LookupKey(visitType, clazz);
+		this.keyToVisitMethodMap.remove(key);
+	}
 }

@@ -37,11 +37,13 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				s = s.replace("/", ".");
 				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 			}
-			try {
-				DesignParser.executeASM(superName, legendaryModel, false);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (!(this.legendaryModel.containsClass(s) || s.equals("java.lang::Object"))) {
+				try {
+					DesignParser.executeASM(superName, legendaryModel, false);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			this.legendaryModel.addRelation(n, s, Relations.EXTENDS);
 		}
@@ -51,11 +53,13 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				s = s.replace("/", ".");
 				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 			}
-			try {
-				DesignParser.executeASM(i, legendaryModel, false);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (!(this.legendaryModel.containsClass(i) || i.startsWith(DesignParser.packageName))) {
+				try {
+					DesignParser.executeASM(i, legendaryModel, false);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			this.legendaryModel.addRelation(n, s, Relations.IMPLEMENTS);
 		}

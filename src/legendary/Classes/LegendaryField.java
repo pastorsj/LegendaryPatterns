@@ -3,9 +3,9 @@ package legendary.Classes;
 import java.util.Set;
 
 import legendary.Interfaces.IField;
-import legendary.Interfaces.ITraverser;
-import legendary.Interfaces.IVisitor;
 import legendary.ParsingUtil.GeneralUtil;
+import legendary.visitor.ITraverser;
+import legendary.visitor.IVisitor;
 
 /*
  * Authors: Jason Lane, Sam Pastoriza
@@ -75,8 +75,8 @@ public class LegendaryField implements IField, ITraverser{
 
 	@Override
 	public void accept(IVisitor v) {
-		v.previsit(this);
+		v.preVisit(this);
 		v.visit(this);
-		v.postvisit(this);
+		v.postVisit(this);
 	}
 }
