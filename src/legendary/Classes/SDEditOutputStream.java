@@ -65,7 +65,7 @@ public class SDEditOutputStream {
 				}
 			}
 		};
-		this.visitor.addVisit(VisitType.Visit, IMethod.class, command);
+		this.visitor.addVisit(VisitType.PreVisit, IMethod.class, command);
 	}
 
 	public void visitMethod() {

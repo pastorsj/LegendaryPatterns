@@ -23,11 +23,11 @@ import legendary.detectors.SingletonDetector;
  */
 public class DesignParser {
 
-	public static final String packageName = "problem";
+	public static final String packageName = "legendary";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	"C:/Users/Jason/Documents/374/Lab2-1-Solution/src/problem" };
-//	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
+//	"C:/Users/Jason/Documents/374/Lab2-1-Solution/src/problem" };
+	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	/**
@@ -56,7 +56,7 @@ public class DesignParser {
 		}
 		legendaryModel.convertToGraph();
 		StringBuilder builder = new StringBuilder();
-		legendaryParser.makeGraphViz(legendaryModel, new StringBuilder());
+		legendaryParser.makeGraphViz(legendaryModel, builder);
 		GeneralUtil.writeAndExecGraphViz(builder);
 		if (args.length > 0) {
 			if (args.length != 3 && args.length != 2) {
@@ -68,7 +68,7 @@ public class DesignParser {
 			String arg2 = args[0].substring(args[0].lastIndexOf(".") + 1);
 			builder = new StringBuilder();
 			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5), legendaryModel,
-					new StringBuilder());
+					builder);
 			GeneralUtil.writeAndExecSDEdit(builder);
 		}
 	}

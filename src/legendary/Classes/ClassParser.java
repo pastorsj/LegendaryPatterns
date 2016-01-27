@@ -1,7 +1,5 @@
 package legendary.Classes;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +47,8 @@ public class ClassParser {
 				for (IMethod method : c.getMethodObjects()) {
 					List<String> genParams = new ArrayList<>();
 					for (String s : method.getParameters()) {
+						if (s.contains(":"))
+							s = s.substring(s.lastIndexOf(":")+1);
 						genParams.add(
 								(s.contains("<") ? (s.substring(0, s.indexOf("<") + 1).replace("\\", "") + "?>") : s));
 					}
