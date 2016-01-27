@@ -28,20 +28,22 @@ public class SingletonDetector implements IPatternDetector {
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
 		Set<IClass> singletons = new HashSet<>();
-		Set<IClass> candidates = getCandidates(m);
-		for (IClass candidate : candidates) {
-			boolean privCtorsOnly = true;
-			for (IMethod method : candidate.getMethods().get("<init>").values()) {
-				privCtorsOnly = privCtorsOnly && method.getAccess().equals("-");
-			}
-			if (privCtorsOnly) {
-				for (IField f : candidate.getFields()) {
-					if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
-						for (IMethod method : candidate.getMethodObjects()) {
-//							System.out.println(method.getReturnType());
-							if (method.getReturnType().equals(candidate.getClassName())
-									&& method.getAccess().equals("+_")) {
-								singletons.add(candidate);
+		Set<Set<IClass>> candidates = getCandidates(m);
+		for (Set<IClass> candidateSet : candidates) {
+			for (IClass candidate : candidateSet) {
+				boolean privCtorsOnly = true;
+				for (IMethod method : candidate.getMethods().get("<init>").values()) {
+					privCtorsOnly = privCtorsOnly && method.getAccess().equals("-");
+				}
+				if (privCtorsOnly) {
+					for (IField f : candidate.getFields()) {
+						if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
+							for (IMethod method : candidate.getMethodObjects()) {
+								// System.out.println(method.getReturnType());
+								if (method.getReturnType().equals(candidate.getClassName())
+										&& method.getAccess().equals("+_")) {
+									singletons.add(candidate);
+								}
 							}
 						}
 					}
@@ -59,12 +61,16 @@ public class SingletonDetector implements IPatternDetector {
 	}
 
 	@Override
-	public Set<IClass> getCandidates(IModel m) {
-		Set<IClass> candidates = new HashSet<>();
-		for (IClass c : m.getRelGraph().keySet())
-			if (m.getRelGraph().get(c).get(Relations.ASSOCIATES).contains(c))
+	public Set<Set<IClass>> getCandidates(IModel m) {
+		Set<Set<IClass>> res = new HashSet<>();
+		for (IClass c : m.getRelGraph().keySet()) {
+			Set<IClass> candidates = new HashSet<>();
+			if (m.getRelGraph().get(c).get(Relations.ASSOCIATES).contains(c)) {
 				candidates.add(c);
-		return candidates;
+				res.add(candidates);
+			}
+		}
+		return res;
 	}
 
 }

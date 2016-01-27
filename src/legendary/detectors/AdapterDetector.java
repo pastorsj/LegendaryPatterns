@@ -17,7 +17,7 @@ public class AdapterDetector implements IPatternDetector{
 	}
 
 	@Override
-	public Set<IClass> getCandidates(IModel m) {
+	public Set<Set<IClass>> getCandidates(IModel m) {
 		// TODO Auto-generated method stub
 		return null;
 	}

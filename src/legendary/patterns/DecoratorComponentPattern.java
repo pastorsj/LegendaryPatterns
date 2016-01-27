@@ -2,11 +2,11 @@ package legendary.patterns;
 
 import legendary.Interfaces.IPattern;
 
-public class DecoratorPattern implements IPattern{
+public class DecoratorComponentPattern implements IPattern {
 
 	@Override
 	public String tag() {
-		return "decorator, ";
+		return "component, ";
 	}
 
 	@Override

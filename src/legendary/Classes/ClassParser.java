@@ -11,7 +11,6 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
-import legendary.visitor.ITraverser;
 
 /*
  * Author: Sam Pastoriza
@@ -81,7 +80,7 @@ public class ClassParser {
 		writer.write(builder.toString());
 		writer.close();
 		Runtime rt = Runtime.getRuntime();
-		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o" + "./input_output/GraphVizoutput.png");
+		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));
 	}

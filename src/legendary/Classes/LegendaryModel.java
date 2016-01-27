@@ -97,7 +97,7 @@ public class LegendaryModel implements IModel, ITraverser {
 			// + this.relGraph.get(c1));
 		}
 		Map<IClass, Map<Relations, Set<IClass>>> temp = new HashMap<>();
-		for (IClass c : this.relGraph.keySet()) {
+		for (IClass c : this.getClasses()) {
 			Map<Relations, Set<IClass>> initTemp = new HashMap<>();
 			for (Relations r : Relations.values()) {
 				initTemp.put(r, new HashSet<>());
@@ -112,12 +112,14 @@ public class LegendaryModel implements IModel, ITraverser {
 		for (IClass c : this.relGraph.keySet()) {
 			for (IClass sup : this.relGraph.get(c).get(Relations.EXTENDS)) {
 				// System.err.println(sup.getClassName());
-//				if (!sup.isInterface())
-					temp.get(c).get(Relations.EXTENDS).add(sup);
+				// if (!sup.isInterface())
+				temp.get(c).get(Relations.EXTENDS).add(sup);
+				temp.get(sup).get(Relations.REV_EXTENDS).add(c);
 			}
 			for (IClass sup : this.relGraph.get(c).get(Relations.IMPLEMENTS)) {
-//				if (sup.isInterface())
-					temp.get(c).get(Relations.IMPLEMENTS).add(sup);
+				// if (sup.isInterface())
+				temp.get(c).get(Relations.IMPLEMENTS).add(sup);
+				temp.get(sup).get(Relations.REV_IMPLEMENTS).add(c);
 			}
 			for (IClass c2 : this.relGraph.get(c).get(Relations.ASSOCIATES)) {
 				boolean add = true;
@@ -129,8 +131,10 @@ public class LegendaryModel implements IModel, ITraverser {
 						break;
 					}
 				}
-				if (add)
+				if (add) {
 					temp.get(c).get(Relations.ASSOCIATES).add(c2);
+					temp.get(c2).get(Relations.REV_ASSOCIATES).add(c);
+				}
 			}
 			for (IClass c2 : this.relGraph.get(c).get(Relations.USES)) {
 				boolean add = true;
@@ -151,8 +155,10 @@ public class LegendaryModel implements IModel, ITraverser {
 						break;
 					}
 				}
-				if (add && !temp.get(c).get(Relations.ASSOCIATES).contains(c2))
+				if (add && !temp.get(c).get(Relations.ASSOCIATES).contains(c2)) {
 					temp.get(c).get(Relations.USES).add(c2);
+					temp.get(c2).get(Relations.REV_USES).add(c);
+				}
 			}
 		}
 		// System.out.println(temp.equals(this.relGraph));
