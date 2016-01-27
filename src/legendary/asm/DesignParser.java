@@ -55,7 +55,9 @@ public class DesignParser {
 			executeASM(className, legendaryModel, true);
 		}
 		legendaryModel.convertToGraph();
+		StringBuilder builder = new StringBuilder();
 		legendaryParser.makeGraphViz(legendaryModel, new StringBuilder());
+		GeneralUtil.writeAndExecGraphViz(builder);
 		if (args.length > 0) {
 			if (args.length != 3 && args.length != 2) {
 				// legendaryParser.makeSDEdit("DesignParser", "main", 5,
@@ -64,9 +66,10 @@ public class DesignParser {
 			}
 			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));
 			String arg2 = args[0].substring(args[0].lastIndexOf(".") + 1);
-			arg1 = arg1.substring(arg1.lastIndexOf(".") + 1);
+			builder = new StringBuilder();
 			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5), legendaryModel,
 					new StringBuilder());
+			GeneralUtil.writeAndExecSDEdit(builder);
 		}
 	}
 	

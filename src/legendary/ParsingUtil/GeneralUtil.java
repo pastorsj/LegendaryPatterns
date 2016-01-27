@@ -1,6 +1,9 @@
 package legendary.ParsingUtil;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -188,5 +191,26 @@ public class GeneralUtil {
 			res.add(dir.toString());
 		}
 		return res;
+	}
+	
+	public static void writeAndExecGraphViz(StringBuilder builder) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
+		writer.write(builder.toString());
+		writer.close();
+		Runtime rt = Runtime.getRuntime();
+		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
+		// Desktop.getDesktop().open(new
+		// File("./input_output/GraphVizoutput.png"));
+	}
+	
+	public static void writeAndExecSDEdit(StringBuilder builder) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.sd"));
+		writer.write(builder.toString());
+		writer.close();
+		Runtime rt = Runtime.getRuntime();
+		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o"
+				+ "./input_output/SDEoutput.png -t png ./input_output/text.sd");
+		// Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
+		// System.out.println(builder.toString());
 	}
 }

@@ -2,6 +2,7 @@ package testingLegends;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -104,7 +105,7 @@ public class SingletonPatternTest {
 	@Test
 	public void detectLazySingletonBaseCase() {
 		this.initializeSingleton();
-		this.testMethod.addMethodToCallStack("TestSingletonClass", "TestSingletonClass", "<init>");
+		this.testMethod.addMethodToCallStack("TestSingletonClass", "TestSingletonClass", "<init>", new ArrayList<String>());
 		testDetector.convertToGraph();
 		IPatternDetector singletonDetector = new SingletonDetector();
 		Set<IClass> classDetected = new HashSet<>();

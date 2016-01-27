@@ -1,174 +1,37 @@
 digraph G{
 	node [shape = "record"]
-problemDecryptionInputStream [
-	label = "{problem::DecryptionInputStream\n\<\<decorator\>\>|
-	- decryptor: IDecryption\l
+TestClass1 [
+	label = "{TestClass1|
+	+ TestField1: void\l
 	|
-	+ read(byte[], int, int) : int\l
-	+ read() : int\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-javaioFilterInputStream [
-	label = "{java.io::FilterInputStream\n\<\<decorator\>\>|
-	# in: InputStream\l
-	|
-	+ read(byte[], int, int) : int\l
-	+ read() : int\l
-	+ read(byte[]) : int\l
-	+ markSupported() : boolean\l
-	+ available() : int\l
-	+ reset() : void\l
-	+ skip(long) : long\l
-	+ close() : void\l
-	+ mark(int) : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-javaioInputStream [
-	label = "{java.io::InputStream\n\<\<component\>\>|
-	- _MAX_SKIP_BUFFER_SIZE: int_\l
-	|
-	+ read(byte[], int, int) : int\l
-	+ read() : int\l
-	+ read(byte[]) : int\l
-	+ markSupported() : boolean\l
-	+ available() : int\l
-	+ reset() : void\l
-	+ skip(long) : long\l
-	+ close() : void\l
-	+ mark(int) : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-javaioCloseable [
-	label = "{\<\<interface\>\>\njava.io::Closeable|
-	|
-	+ close() : void\l
+	public testOwnerMethod() : boolean\l
 	}"
 	]
-javalangAutoCloseable [
-	label = "{\<\<interface\>\>\njava.lang::AutoCloseable|
+TestClass2 [
+	label = "{TestClass2|
+	+ TestField1: void\l
+	# TestField2: short\l
 	|
-	+ close() : void\l
+	public testCallMethod1() : int\l
 	}"
 	]
-problemEncryptionOutputStream [
-	label = "{problem::EncryptionOutputStream\n\<\<decorator\>\>|
-	- encryptor: IEncryption\l
+TestClass3 [
+	label = "{TestClass3|
+	+ TestField1: void\l
+	# TestField2: short\l
+	- TestField3: boolean\l
 	|
-	+ write(int) : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-javaioFilterOutputStream [
-	label = "{java.io::FilterOutputStream\n\<\<decorator\>\>|
-	# out: OutputStream\l
-	|
-	+ flush() : void\l
-	+ write(byte[], int, int) : void\l
-	+ write(byte[]) : void\l
-	+ write(int) : void\l
-	+ close() : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-javaioOutputStream [
-	label = "{java.io::OutputStream\n\<\<component\>\>|
-	|
-	+ flush() : void\l
-	+ write(byte[], int, int) : void\l
-	+ write(byte[]) : void\l
-	+ write(int) : void\l
-	+ close() : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-javaioCloseable [
-	label = "{\<\<interface\>\>\njava.io::Closeable|
-	|
-	+ close() : void\l
+	public testCallMethod2() : double\l
 	}"
 	]
-javalangAutoCloseable [
-	label = "{\<\<interface\>\>\njava.lang::AutoCloseable|
+TestClass4 [
+	label = "{TestClass4|
+	+ TestField1: void\l
+	# TestField2: short\l
+	- TestField3: boolean\l
+	 TestField4: int\l
 	|
-	+ close() : void\l
+	public testCallMethod3() : \<\>\l
 	}"
 	]
-javaioFlushable [
-	label = "{\<\<interface\>\>\njava.io::Flushable|
-	|
-	+ flush() : void\l
-	}"
-	]
-problemIDecryption [
-	label = "{\<\<interface\>\>\nproblem::IDecryption|
-	|
-	+ decrypt(char) : char\l
-	}"
-	]
-problemIEncryption [
-	label = "{\<\<interface\>\>\nproblem::IEncryption|
-	|
-	+ encrypt(char) : char\l
-	}"
-	]
-problemSubstitutionCipher [
-	label = "{problem::SubstitutionCipher|
-	- encryptionKey: char[]\l
-	- decryptionKey: char[]\l
-	|
-	+ encrypt(char) : char\l
-	+ decrypt(char) : char\l
-	}"
-	]
-problemTextEditorApp [
-	label = "{problem::TextEditorApp|
-	|
-	+ _main(String[]) : void_\l
-	}"
-	]
-	edge [style = "solid"] [arrowhead = "empty"]
-	problemDecryptionInputStream->javaioFilterInputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemDecryptionInputStream->javaioFilterInputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemDecryptionInputStream->javaioInputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	problemDecryptionInputStream->problemIDecryption
-	edge [style = "dashed"] [arrowhead = "empty"]
-	javaioInputStream->javaioCloseable
-	edge [style = "solid"] [arrowhead = "empty"]
-	problemEncryptionOutputStream->javaioFilterOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemEncryptionOutputStream->javaioFilterOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemEncryptionOutputStream->javaioOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	problemEncryptionOutputStream->problemIEncryption
-	edge [style = "dashed"] [arrowhead = "empty"]
-	javaioOutputStream->javaioCloseable
-	edge [style = "dashed"] [arrowhead = "empty"]
-	javaioOutputStream->javaioFlushable
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemTextEditorApp->problemDecryptionInputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemTextEditorApp->problemEncryptionOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	problemTextEditorApp->problemSubstitutionCipher
-	edge [style = "dashed"] [arrowhead = "empty"]
-	javaioCloseable->javalangAutoCloseable
-	edge [style = "solid"] [arrowhead = "empty"]
-	javaioFilterInputStream->javaioInputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	javaioFilterInputStream->javaioInputStream
-	edge [style = "solid"] [arrowhead = "empty"]
-	javaioFilterOutputStream->javaioOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	javaioFilterOutputStream->javaioOutputStream
-	edge [style = "dashed"] [arrowhead = "empty"]
-	problemSubstitutionCipher->problemIDecryption
-	edge [style = "dashed"] [arrowhead = "empty"]
-	problemSubstitutionCipher->problemIEncryption
 }

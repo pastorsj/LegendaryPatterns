@@ -14,9 +14,9 @@ public class CollectionParseTest {
 	@Test
 	public void testBasic() {
 		String s = "Ljava/lang/String;";
-		assertEquals("String", GeneralUtil.typeFieldCollections(s));
+		assertEquals("java.lang::String", GeneralUtil.typeFieldCollections(s));
 		Set<String> test = new HashSet<>();
-		test.add("IClass");
+		test.add("legendary.Interfaces::IClass");
 		assertEquals(test, GeneralUtil.getBaseFields("Llegendary/Interfaces/IClass;"));
 	}
 
@@ -24,14 +24,14 @@ public class CollectionParseTest {
 	public void testBrackets() {
 		// ASM signature for List<Integer>
 		String s = "Ljava/util/List<Ljava/lang/Integer;>;";
-		assertEquals("List\\<Integer\\>", GeneralUtil.typeFieldCollections(s));
+		assertEquals("java.util::List<java.lang::Integer>", GeneralUtil.typeFieldCollections(s));
 	}
 
 	@Test
 	public void testBracketsCommas() {
 		// ASM signature for Map<Integer, String>
 		String s = "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/String>;";
-		assertEquals("Map\\<Integer, String\\>", GeneralUtil.typeFieldCollections(s));
+		assertEquals("java.util::Map<java.lang::Integer, java.lang::String>", GeneralUtil.typeFieldCollections(s));
 
 	}
 
@@ -40,7 +40,7 @@ public class CollectionParseTest {
 		// ASM signature for Map<List<List<List<Map<String, Integer>>>>, String>
 		String s = "Ljava/util/Map<Ljava/util/List<Ljava/util/List<Ljava/util/L"
 				+ "ist<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;>;>;>;Ljava/lang/String;>;";
-		assertEquals("Map\\<List\\<List\\<List\\<Map\\<String, Integer\\>\\>\\>\\>, String\\>",
+		assertEquals("java.util::Map<java.util::List<java.util::List<java.util::List<java.util::Map<java.lang::String, java.lang::Integer>>>>, java.lang::String>",
 				GeneralUtil.typeFieldCollections(s));
 	}
 }

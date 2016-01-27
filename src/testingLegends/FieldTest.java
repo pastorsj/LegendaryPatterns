@@ -41,6 +41,6 @@ public class FieldTest {
 	public void testReturnType() {
 		this.field.setType("java/lang/String");
 		String testReturn = this.field.getType();
-		assertEquals("String", testReturn);
+		assertEquals("java.lang::String", testReturn);
 	}
 }

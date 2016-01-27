@@ -1,9 +1,11 @@
 package testingLegends;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -50,6 +52,7 @@ public class SDEditTest {
 		this.testModel.addClass(testClass2);
 		this.testModel.addClass(testClass3);
 		this.testModel.addClass(testClass4);
+		this.testModel.convertToGraph();
 	}
 	
 	@After
@@ -94,76 +97,104 @@ public class SDEditTest {
 	
 	@Test
 	public void testCallStack() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName());
-		assertEquals("[TestClass1, TestClass2, testCallMethod1]", Arrays.toString(this.testMethod.getCallStack().peek().toArray()));
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName(), new ArrayList<String>());
+		List<List<String>> res = this.testMethod.getCallStack().peek();
+		assertEquals("[TestClass1, TestClass2, testCallMethod1]", Arrays.toString(res.get(0).toArray()));
 	}
 	
 	@Test
 	public void testBaseCaseSDEdit() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName(), new ArrayList<String>());
 		this.parser.makeSDEdit("TestClass1", "testOwnerMethod()", 5, this.testModel, this.builder);
-		assertEquals("TestClass3:TestClass3\n"
-				+ "TestClass2:TestClass2\n"
-				+ "TestClass1:TestClass1\n\n"
-				+ "TestClass1:int=TestClass2.testCallMethod1()\n"
-				+ "TestClass1:double=TestClass3.testCallMethod2()\n", this.builder.toString());
+		List<String> out = new ArrayList<>();
+		out.add("TestClass3:TestClass3\n");
+		out.add("TestClass2:TestClass2\n");
+		out.add("TestClass1:TestClass1\n");
+		out.add("TestClass1:int=TestClass2.testCallMethod1()\n");
+		out.add("TestClass1:double=TestClass3.testCallMethod2()\n");
+		assertTrue(this.builder.toString().contains(out.get(0)));
+		assertTrue(this.builder.toString().contains(out.get(1)));
+		assertTrue(this.builder.toString().contains(out.get(2)));
+		assertTrue(this.builder.toString().contains(out.get(3)));
+		assertTrue(this.builder.toString().contains(out.get(4)));
 	}
 	
 	@Test
 	public void testCaseSDEdit1() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName(), new ArrayList<String>());
 		this.parser.makeSDEdit("TestClass1", "testOwnerMethod()", 5, this.testModel, this.builder);
-		assertEquals("TestClass4:TestClass4\n"
-				+ "TestClass3:TestClass3\n"
-				+ "TestClass2:TestClass2\n"
-				+ "TestClass1:TestClass1\n\n"
-				+ "TestClass1:int=TestClass2.testCallMethod1()\n"
-				+ "TestClass1:double=TestClass3.testCallMethod2()\n"
-				+ "TestClass1:List<String>=TestClass4.testCallMethod3()\n", this.builder.toString());
+		System.out.println(this.builder);
+		List<String> out = new ArrayList<>();
+		out.add("TestClass4:TestClass4\n");
+		out.add("TestClass3:TestClass3\n");
+		out.add("TestClass2:TestClass2\n");
+		out.add("TestClass1:TestClass1\n");
+		out.add("TestClass1:int=TestClass2.testCallMethod1()\n");
+		out.add("TestClass1:double=TestClass3.testCallMethod2()\n");
+		out.add("TestClass1:List<String>=TestClass4.testCallMethod3()\n");
+		assertTrue(this.builder.toString().contains(out.get(0)));
+		assertTrue(this.builder.toString().contains(out.get(1)));
+		assertTrue(this.builder.toString().contains(out.get(2)));
+		assertTrue(this.builder.toString().contains(out.get(3)));
+		assertTrue(this.builder.toString().contains(out.get(4)));
+		assertTrue(this.builder.toString().contains(out.get(5)));
+		assertTrue(this.builder.toString().contains(out.get(6)));
 	}
 	
 	@Test
 	public void testCaseSDEditDifferentDepth() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName(), new ArrayList<String>());
 		this.parser.makeSDEdit("TestClass1", "testOwnerMethod()", 10, this.testModel, this.builder);
-		assertEquals("TestClass4:TestClass4\n"
-				+ "TestClass3:TestClass3\n"
-				+ "TestClass2:TestClass2\n"
-				+ "TestClass1:TestClass1\n\n"
-				+ "TestClass1:int=TestClass2.testCallMethod1()\n"
-				+ "TestClass1:double=TestClass3.testCallMethod2()\n"
-				+ "TestClass1:List<String>=TestClass4.testCallMethod3()\n", this.builder.toString());
+		List<String> out = new ArrayList<>();
+		out.add("TestClass4:TestClass4\n");
+		out.add("TestClass3:TestClass3\n");
+		out.add("TestClass2:TestClass2\n");
+		out.add("TestClass1:TestClass1\n");
+		out.add("TestClass1:int=TestClass2.testCallMethod1()\n");
+		out.add("TestClass1:double=TestClass3.testCallMethod2()\n");
+		out.add("TestClass1:List<String>=TestClass4.testCallMethod3()\n");
+		assertTrue(this.builder.toString().contains(out.get(0)));
+		assertTrue(this.builder.toString().contains(out.get(1)));
+		assertTrue(this.builder.toString().contains(out.get(2)));
+		assertTrue(this.builder.toString().contains(out.get(3)));
+		assertTrue(this.builder.toString().contains(out.get(4)));
+		assertTrue(this.builder.toString().contains(out.get(5)));
+		assertTrue(this.builder.toString().contains(out.get(6)));
 	}
 	
 	@Test
 	public void testBaseCaseSDEdit1() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName(), new ArrayList<String>());
 		this.parser.makeSDEdit("TestClass1", "testOwnerMethod()", 10, this.testModel, this.builder);
-		assertEquals("TestClass4:TestClass4\n"
-				+ "TestClass1:TestClass1\n\n"
-				+ "TestClass1:List<String>=TestClass4.testCallMethod3()\n", this.builder.toString());
+		List<String> out = new ArrayList<>();
+		out.add("TestClass4:TestClass4\n");
+		out.add("TestClass1:TestClass1\n");
+		out.add("TestClass1:List<String>=TestClass4.testCallMethod3()\n");
+		assertTrue(this.builder.toString().contains(out.get(0)));
+		assertTrue(this.builder.toString().contains(out.get(1)));
+		assertTrue(this.builder.toString().contains(out.get(2)));
 	}
 	
 	@Test
 	public void testCaseSDEditEdgeDepth0() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName(), new ArrayList<String>());
 		this.parser.makeSDEdit("TestClass1", "testOwnerMethod()", 0, this.testModel, this.builder);
 		assertEquals("\n", this.builder.toString());
 	}
 	
 	@Test
 	public void testCaseSDEditEdgeDepth1() throws IOException {
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName());
-		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass2.getClassName(), this.callMethod1.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass3.getClassName(), this.callMethod2.getMethodName(), new ArrayList<String>());
+		this.testMethod.addMethodToCallStack(this.testClass1.getClassName(), this.testClass4.getClassName(), this.callMethod3.getMethodName(), new ArrayList<String>());
 		this.parser.makeSDEdit("TestClass1", "testOwnerMethod()", 1, this.testModel, this.builder);
 		assertEquals("\n", this.builder.toString());
 	}
