@@ -71,7 +71,7 @@ public class GraphVizOutputStream {
 			this.write("digraph G{\n\tnode [shape = \"record\"]\n");
 		});
 	}
-	
+
 	private void visitModel() {
 		this.visitor.addVisit(VisitType.Visit, IModel.class, (ITraverser t) -> {
 			this.write(this.addArrows((IModel) t));
@@ -84,6 +84,7 @@ public class GraphVizOutputStream {
 		outer: for (IClass c : graph.keySet()) {
 			for (Relations r : graph.get(c).keySet()) {
 				for (IClass c2 : graph.get(c).get(r)) {
+//					System.out.println(c2.getClassName());
 					if (!this.relationRep.containsKey(r)) {
 						System.out
 								.println("null relation for classes " + c.getClassName() + " and " + c2.getClassName());
@@ -94,7 +95,9 @@ public class GraphVizOutputStream {
 						sb.append(c.getClassName().replace(".", "").replace(":", "") + "->"
 								+ c2.getClassName().replace(".", "").replace(":", "") + "\n");
 					}
+
 				}
+
 			}
 		}
 		return sb.toString();
@@ -105,19 +108,21 @@ public class GraphVizOutputStream {
 			this.write("}");
 		});
 	}
-	
+
 	private void previsitClass() {
-		
+
 		IVisitMethod command = new IVisitMethod() {
 			@Override
 			public void execute(ITraverser t) {
 				IClass c = (IClass) t;
-				String line = String.format("%s [\n\tlabel = \"{%s%s", c.getClassName().replace(".", "").replace(":", ""),
+				String line = String.format("%s [\n\tlabel = \"{%s%s",
+						c.getClassName().replace(".", "").replace(":", ""),
 						(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
 				write(line);
 				if (patterns.containsKey(c))
 					addPatternTags(c);
 				write("|\n\t");
+
 			}
 		};
 		this.visitor.addVisit(VisitType.PreVisit, IClass.class, command);
@@ -141,7 +146,7 @@ public class GraphVizOutputStream {
 
 	private void postvisitClass() {
 		this.visitor.addVisit(VisitType.PostVisit, IClass.class, (ITraverser t) -> {
-			this.write(String.format("\t}\"\n\t%s]\n", patternColor((IClass)t)));
+			this.write(String.format("\t}\"\n\t%s]\n", patternColor((IClass) t)));
 		});
 	}
 
@@ -152,7 +157,7 @@ public class GraphVizOutputStream {
 			}
 		return "";
 	}
-	
+
 	private void visitField() {
 		IVisitMethod command = new IVisitMethod() {
 			@Override
@@ -162,7 +167,7 @@ public class GraphVizOutputStream {
 				String ret = "";
 				boolean include = false;
 				for (char c : f.getType().toCharArray()) {
-					if(GeneralUtil.primCodes.containsValue(f.getType().replace("[]", ""))){
+					if (GeneralUtil.primCodes.containsValue(f.getType().replace("[]", ""))) {
 						ret = f.getType();
 						break;
 					}
@@ -185,9 +190,9 @@ public class GraphVizOutputStream {
 	}
 
 	public void visit(IMethod m) {
-		
+
 	}
-	
+
 	private void visitMethod() {
 		IVisitMethod command = new IVisitMethod() {
 			@Override
@@ -200,11 +205,11 @@ public class GraphVizOutputStream {
 					int dimensions = 0;
 					for (String s : m.getParameters()) {
 						include = false;
-						if(s.equals("[]")){
+						if (s.equals("[]")) {
 							dimensions++;
 							continue;
 						}
-						if(GeneralUtil.primCodes.containsValue(s.replace("[]", ""))){
+						if (GeneralUtil.primCodes.containsValue(s.replace("[]", ""))) {
 							include = true;
 						}
 						for (char c : s.toCharArray()) {
@@ -217,8 +222,8 @@ public class GraphVizOutputStream {
 							if (include)
 								parameters += c;
 						}
-						for(int i = 0; i < dimensions; i++){
-							parameters+="[]";
+						for (int i = 0; i < dimensions; i++) {
+							parameters += "[]";
 						}
 						dimensions = 0;
 						parameters += ", ";
@@ -230,7 +235,7 @@ public class GraphVizOutputStream {
 					String ret = "";
 					include = false;
 					for (char c : m.getReturnType().toCharArray()) {
-						if(GeneralUtil.primCodes.containsValue(m.getReturnType().replace("[]", ""))){
+						if (GeneralUtil.primCodes.containsValue(m.getReturnType().replace("[]", ""))) {
 							ret = m.getReturnType();
 							break;
 						}
@@ -245,7 +250,8 @@ public class GraphVizOutputStream {
 					}
 					ret = ret.replace("<", "\\<").replace(">", "\\>");
 					String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m.getAccess().replace("_", ""),
-							isStatic ? "_" : "", m.getMethodName(), parameters, ret.replace(":", ""), isStatic ? "_" : "");
+							isStatic ? "_" : "", m.getMethodName(), parameters, ret.replace(":", ""),
+							isStatic ? "_" : "");
 					write(line);
 				}
 			}

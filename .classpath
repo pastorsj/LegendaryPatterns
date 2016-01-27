@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Lab1-3"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Lab2-3"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Lab2-1-Solution"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lab5-1-Solution"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

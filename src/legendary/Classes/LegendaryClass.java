@@ -33,6 +33,7 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 		this.methods = new HashMap<String, Map<List<String>, IMethod>>();
 		this.fields = new ArrayList<IField>();
 		this.isInterface = false;
+		this.drawable = false;
 		creationOrder = ++count;
 	}
 
@@ -107,17 +108,19 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 
 	@Override
 	public void accept(IVisitor v) {
-		v.preVisit(this);
-		for (IField f : this.fields) {
-			ITraverser t = (ITraverser) f;
-			t.accept(v);
+		if (this.isDrawable()) {
+			v.preVisit(this);
+			for (IField f : this.fields) {
+				ITraverser t = (ITraverser) f;
+				t.accept(v);
+			}
+			v.visit(this);
+			for (IMethod m : this.getMethodObjects()) {
+				ITraverser t = (ITraverser) m;
+				t.accept(v);
+			}
+			v.postVisit(this);
 		}
-		v.visit(this);
-		for (IMethod m : this.getMethodObjects()) {
-			ITraverser t = (ITraverser) m;
-			t.accept(v);
-		}
-		v.postVisit(this);
 	}
 
 	@Override

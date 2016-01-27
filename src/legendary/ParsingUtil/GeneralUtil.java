@@ -91,6 +91,9 @@ public class GeneralUtil {
 	public static String typeMethodCollections(String in, List<String> usesClasses) {
 		String s = in;
 		String res = "";
+		if(primCodes.containsKey(s)){
+			return primCodes.get(s);
+		}
 		if (s.contains(")")) {
 			s = s.substring(s.lastIndexOf(")") + 1);
 		}
@@ -195,7 +198,7 @@ public class GeneralUtil {
 	
 	public static void writeAndExecGraphViz(StringBuilder builder) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
-		writer.write(builder.toString());
+		writer.write(builder.toString().replace("$", "\\$"));
 		writer.close();
 		Runtime rt = Runtime.getRuntime();
 		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");

@@ -15,6 +15,7 @@ import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
+import legendary.detectors.AdapterDetector;
 import legendary.detectors.DecoratorDetector;
 import legendary.detectors.SingletonDetector;
 
@@ -23,11 +24,11 @@ import legendary.detectors.SingletonDetector;
  */
 public class DesignParser {
 
-	public static final String packageName = "legendary";
+	public static final String packageName = "problem";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-//	"C:/Users/Jason/Documents/374/Lab2-1-Solution/src/problem" };
-	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
+	"C:/Users/Jason/Documents/374/Lab5-1-Solution/src/problem" };
+//	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	/**
@@ -41,7 +42,7 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
-		legendaryParser.addDetector(new SingletonDetector(new DecoratorDetector()));
+		legendaryParser.addDetector(new SingletonDetector(new DecoratorDetector(new AdapterDetector())));
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
 		for (String dir : directories) {

@@ -10,6 +10,7 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
+import legendary.asm.DesignParser;
 import legendary.patterns.DecoratorComponentPattern;
 import legendary.patterns.DecoratorPattern;
 
@@ -42,9 +43,6 @@ public class DecoratorDetector implements IPatternDetector {
 						for (IClass c3 : m.getRelGraph().get(c2).get(Relations.REV_IMPLEMENTS)) {
 							if (!m.getRelGraph().get(c3).get(Relations.ASSOCIATES).contains(c)) {
 								add = false;
-							} else {
-								System.out.println(c3.getClassName());
-								System.out.println(m.getRelGraph().get(c3).get(Relations.ASSOCIATES));
 							}
 						}
 					} else if (!m.getRelGraph().get(c2).get(Relations.ASSOCIATES).contains(c)) {
@@ -68,6 +66,27 @@ public class DecoratorDetector implements IPatternDetector {
 		} else {
 			res = this.detect.detect(m);
 		}
+		boolean draw = false;
+		for (IClass c : decSet) {
+			if (c.getClassName().contains(DesignParser.packageName)) {
+				draw = true;
+				break;
+			}
+		}
+		for (IClass c : compSet) {
+			if (c.getClassName().contains(DesignParser.packageName)) {
+				draw = true;
+				break;
+			}
+		}
+		if (draw) {
+			for (IClass c : decSet) {
+				c.setDrawable(true);
+			}
+			for (IClass c : compSet) {
+				c.setDrawable(true);
+			}
+		}
 		res.put(DecoratorPattern.class, decSet);
 		res.put(DecoratorComponentPattern.class, compSet);
 		return res;
@@ -77,13 +96,11 @@ public class DecoratorDetector implements IPatternDetector {
 	public Set<Set<IClass>> getCandidates(IModel m) {
 		Set<Set<IClass>> candidates = new HashSet<>();
 		Set<IClass> candSet = new HashSet<>();
-		Set<IClass> supers = new HashSet<>();
 		for (IClass c : m.getClasses()) {
 			if (!m.getRelGraph().containsKey(c))
 				continue;
 			Map<Relations, Set<IClass>> temp = m.getRelGraph().get(c);
 			if (temp.get(Relations.REV_IMPLEMENTS).size() + temp.get(Relations.REV_EXTENDS).size() > 0) {
-				supers.add(c);
 				for (IClass c2 : temp.get(c.isInterface() ? Relations.REV_IMPLEMENTS : Relations.REV_EXTENDS)) {
 					Map<Relations, Set<IClass>> temp2 = m.getRelGraph().get(c2);
 					if (temp2.get(Relations.REV_IMPLEMENTS).size() + temp2.get(Relations.REV_EXTENDS).size() > 0) {
