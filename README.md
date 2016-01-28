@@ -115,7 +115,7 @@ pattern. We had to change much of the code structure to accomplish the additions
 easier to add more patterns. We first added support for more visitors by converting our existing code  
 into lambda expressions. This will allow for more easier additions to the visiting code if required.  
 The next major step was that we converted the current model into a graph, where we can visit nodes,   
-which are classes, and if a node/class has a relation to another class, we can add a back arrow for that  relation. This allows for much easier traversal, especially when detecting patterns. The last major piece  in this milestone that we worked on was the pattern detection. We now allow for multiple patterns to be detected by adding IPatternDetectors to a complicated data structure that we parse to figure out which  
+which are classes, and if a node/class has a relation to another class, we can add a back arrow for that  relation. This allows for much easier traversal, especially when detecting patterns. The last major piece   in this milestone that we worked on was the pattern detection. We now allow for multiple patterns to be detected by adding IPatternDetectors to a complicated data structure that we parse to figure out which  
 patterns we want to detect. This method follows to Open-Closed Principle, where we can add patterns without changing the framework we developed.  
 ![UML Milestone 5](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM4.png)
 #### Completed by Jason Lane
