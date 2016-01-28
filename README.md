@@ -119,15 +119,15 @@ which are classes, and if a node/class has a relation to another class, we can a
 patterns we want to detect. This method follows to Open-Closed Principle, where we can add patterns without changing the framework we developed.  
 ![UML Milestone 5](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM4.png)
 #### Completed by Jason Lane
-Adapter Pattern and Decorator Pattern framework
-Adapter Pattern and Decorator Pattern details
-Model to Graph Refactoring
-Refactor of General Util
+Adapter Pattern and Decorator Pattern framework  
+Adapter Pattern and Decorator Pattern details  
+Model to Graph Refactoring  
+Refactor of General Util  
 #### Completed by Sam Pastoriza
-Lambda Refactor for Visiting SDEdit class and GraphViz class
-Unit Tests for Adapter and Decorator pattern framework and details
-Adapter and Decorator pattern specifics/details
-Recursive search for classes extends/implements/associated by other classes
+Lambda Refactor for Visiting SDEdit class and GraphViz class  
+Unit Tests for Adapter and Decorator pattern framework and details  
+Adapter and Decorator pattern specifics/details  
+Recursive search for classes extends/implements/associated by other classes  
 
 #### Notes
 * framework = interfaces and basic class structures  
