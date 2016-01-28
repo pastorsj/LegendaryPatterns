@@ -11,7 +11,7 @@ public class AdapterPattern implements IPattern{
 
 	@Override
 	public String color() {
-		return "style = \"filled\" fillcolor = red";
+		return "style = \"filled\"\nfillcolor = red";
 	}
 
 }

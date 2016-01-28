@@ -20,6 +20,7 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IField;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.asm.DesignParser;
 
 public class GraphVizTest {
 
@@ -42,6 +43,7 @@ public class GraphVizTest {
 
 	@Before
 	public void setUp() {
+		DesignParser.packageName = "testingLegends";
 		this.testModel = new LegendaryModel();
 		this.testClass1 = new LegendaryClass();
 		this.testClass2 = new LegendaryClass();
@@ -135,6 +137,7 @@ public class GraphVizTest {
 	@Test
 	public void testBaseCaseGraphViz() throws IOException {
 		this.testModel.addClass(testClass1);
+		this.testModel.convertToGraph();
 		this.parser.makeGraphViz(testModel, builder);
 		String formattedOutput = String.format(
 				"digraph G{node [shape = \"record\"]%s [label = \"{%s|%s %s: %s\\l|%s %s() : %s\\l}\"]}",
@@ -151,6 +154,7 @@ public class GraphVizTest {
 		this.testModel.addClass(testClass2);
 		this.testModel.addClass(testClass3);
 		this.testModel.addClass(testClass4);
+		this.testModel.convertToGraph();
 		this.parser.makeGraphViz(testModel, builder);
 		String formattedOutput = String.format(
 				"digraph G{node [shape = \"record\"]%s [label = \"{%s|%s %s: %s\\l|%s %s() : %s\\l}\"]"
@@ -190,7 +194,7 @@ public class GraphVizTest {
 		this.testModel.addRelation(this.testClass2.getClassName(), this.testClass3.getClassName(),
 				Relations.IMPLEMENTS);
 		this.testModel.addRelation(this.testClass3.getClassName(), this.testClass4.getClassName(), Relations.USES);
-		testModel.convertToGraph();
+		this.testModel.convertToGraph();
 		this.parser.makeGraphViz(testModel, builder);
 		String formattedOutput = String.format(
 				"digraph G{node [shape = \"record\"]%s [label = \"{%s|%s %s: %s\\l|%s %s() : %s\\l}\"]"
