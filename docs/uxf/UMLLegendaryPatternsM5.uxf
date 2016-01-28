@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>606</y>
+      <w>438</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassMethodVisitor
+--
+-usesClasses: List&lt;String&gt;
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassMethodVisitor(int api): ctor
++ClassMethodVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel): ctor
++visitMethod(int access, String name, String desc, String signature, String[] exceptions): MethodVisitor
+-addAccessLevel(int access, IMethod method): void
+-addReturnType(String desc, IMethod method): void
+-addArguments(String desc, IMethod method): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>762</y>
+      <w>600</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::LegendaryClassMethodVisitor
+--
+~legendaryClass: IClass
+~legendaryModel: IModel
+~legendaryMethod: IMethod
+--
++LegendaryClassMethodVisitor(int api, MethodVisitor decorated, IClass legendaryClass, IModel legendaryModel, IMethod legendaryMethod): ctor
++visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf): void
++visitFieldInsn(int opcode, String owner, String name, String desc): void
++visitTypeInsn(int opcode, String type): void
++visitVarInsn(int opcode, int var): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>912</y>
+      <w>426</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassFieldVisitor
+--
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassFieldVisitor(int api): ctor
++ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel): ctor
++visitField(int access, String name, String desc, String signature, Object value): FieldVisitor
+~addAccessLevel(int access, IField field): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>342</y>
+      <w>360</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::DesignParser
+--
++packageName = "legendary": String
++directories = { //	"C:/Users/Jason/Documents/374/Lab5-1-Solution/src/problem" };
+"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary" }: String[]
++classesSeen = new ArrayList&lt;String&gt;(): ArrayList&lt;String&gt;
+--
++main(String[] args): void
++executeASM(String className, IModel legendaryModel, boolean drawable): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>498</y>
+      <w>432</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassDeclarationVisitor
+--
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassDeclarationVisitor(int api, IClass legendaryClass, IModel legendaryModel): ctor
++visit(int version, int access, String name, String signature, String superName, String[] interfaces): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1878</x>
+      <y>828</y>
+      <w>258</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryClass
+--
+-className: String
+-superClassName: String
+-interfaces: List&lt;String&gt;
+-methods: Map&lt;String, Map&lt;List&lt;String&gt;, IMethod&gt;&gt;
+-fields: List&lt;IField&gt;
+-isInterface: boolean
+-creationOrder: int
+-drawable: boolean
+-count: int
+--
++LegendaryClass(): ctor
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): Map&lt;String, Map&lt;List&lt;String&gt;, IMethod&gt;&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
++accept(IVisitor v): void
++getMethodObjects(): List&lt;IMethod&gt;
++getCreationOrder(): int
++setDrawable(boolean drawable): void
++isDrawable(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3090</x>
+      <y>1728</y>
+      <w>480</w>
+      <h>246</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::GraphVizOutputStream
+--
+-builder: StringBuilder
+-visitor: IVisitor
+-relationRep: Map&lt;Relations, String&gt;
+-patterns: Map&lt;IClass, Set&lt;IPattern&gt;&gt;
+--
++GraphVizOutputStream(StringBuilder builder, Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt; map, IModel m): ctor
+-initializeVisitors(): void
+-invertPatternMap(Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt; in): Map&lt;IClass, Set&lt;IPattern&gt;&gt;
+-write(String s): void
+-previsitModel(): void
+-visitModel(): void
+-addArrows(IModel m): String
+-postvisitModel(): void
+-previsitClass(): void
+-visitClass(): void
+-addPatternTags(IClass c): void
+-postvisitClass(): void
+-patternColor(IClass c): String
+-visitField(): void
++visit(IMethod m): void
+-visitMethod(): void
++initialize(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1506</x>
+      <y>1374</y>
+      <w>474</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryMethod
+--
+-methodAccess: String
+-methodName: String
+-parameters: List&lt;String&gt;
+-methodCallStack: Queue&lt;List&lt;List&lt;String&gt;&gt;&gt;
+-methodReturnType: String
+--
++LegendaryMethod(): ctor
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++accept(IVisitor v): void
++addMethodToCallStack(String methodOwner, String className, String methodName, List&lt;String&gt; params): void
++getCallStack(): Queue&lt;List&lt;List&lt;String&gt;&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1854</x>
+      <y>582</y>
+      <w>324</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryModel
+--
+-classList: Set&lt;IClass&gt;
+-relGraph: Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt;
+-relations: Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
+-patterns: Map&lt;IPattern, Set&lt;IClass&gt;&gt;
+--
++LegendaryModel(): ctor
++getClasses(): Set&lt;IClass&gt;
++addClass(IClass c): void
++getRelations(): Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
++addPattern(IPattern pat, Set&lt;IClass&gt; classes): void
++getPatterns(): Map&lt;IPattern, Set&lt;IClass&gt;&gt;
++convertToGraph(): void
++removeDupArrows(Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt; temp): void
++getRelGraph(): Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt;
++addRelation(String c1, String c2, Relations r): void
++accept(IVisitor v): void
++containsClass(String i): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1068</x>
+      <y>1374</y>
+      <w>174</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryField
+--
+-fieldAccessType: String
+-fieldName: String
+-fieldType: String
+-baseFields: Set&lt;String&gt;
+--
++LegendaryField(): ctor
++setAccess(String fieldAccessType): void
++setFieldName(String fieldName): void
++setType(String fieldType): void
++getAccess(): String
++getFieldName(): String
++getType(): String
++getBaseTypes(): Set&lt;String&gt;
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2622</x>
+      <y>1746</y>
+      <w>312</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::SDEditOutputStream
+--
+-visitor: IVisitor
+-model: IModel
+-builder: StringBuilder
+-classes: Set&lt;String&gt;
+-methodCalls: List&lt;String&gt;
+-depth: int
+-origDepth: int
+--
++SDEditOutputStream(IModel model, int depth, StringBuilder builder): ctor
+-initializeVisitors(): void
++write(String s): void
++previsitMethod(): void
++visitMethod(): void
++postvisitMethod(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2814</x>
+      <y>1494</y>
+      <w>438</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::ClassParser
+&lt;&lt;Singleton&gt;&gt;
+--
+-instance: ClassParser
+-detect: IPatternDetector
+--
+-ClassParser(): ctor
++getInstance(): ClassParser
++addDetector(IPatternDetector detect): void
++makeSDEdit(String classname, String methodname, int depth, IModel model, StringBuilder builder): void
++makeGraphViz(IModel m, StringBuilder builder): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2268</x>
+      <y>1050</y>
+      <w>282</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::AdapterDetector
+--
+-detector: IPatternDetector
+--
++AdapterDetector(): ctor
++AdapterDetector(IPatternDetector detector): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2268</x>
+      <y>1188</y>
+      <w>282</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::DecoratorDetector
+--
+-detect: IPatternDetector
+--
++DecoratorDetector(): ctor
++DecoratorDetector(IPatternDetector detect): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2274</x>
+      <y>900</y>
+      <w>282</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::SingletonDetector
+--
+-next: IPatternDetector
+--
++SingletonDetector(): ctor
++SingletonDetector(IPatternDetector next): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1248</x>
+      <y>846</y>
+      <w>258</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IClass
+--
+--
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): Map&lt;String, Map&lt;List&lt;String&gt;, IMethod&gt;&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
++getMethodObjects(): List&lt;IMethod&gt;
++getCreationOrder(): int
++setDrawable(boolean drawable): void
++isDrawable(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1338</x>
+      <y>1140</y>
+      <w>474</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IMethod
+--
+--
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++getCallStack(): Queue&lt;List&lt;List&lt;String&gt;&gt;&gt;
++addMethodToCallStack(String methodOwner, String className, String methodName, List&lt;String&gt; params): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1224</x>
+      <y>636</y>
+      <w>342</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IModel
+--
+--
++getClasses(): Set&lt;IClass&gt;
++addClass(IClass c): void
++getRelations(): Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
++addRelation(String c1, String c2, Relations r): void
++convertToGraph(): void
++getRelGraph(): Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt;
++removeDupArrows(Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt; tempMap): void
++containsClass(String i): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1152</y>
+      <w>192</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IField
+--
+--
++setAccess(String methodAccessType): void
++setFieldName(String methodName): void
++setType(String methodReturnType): void
++getAccess(): String
++getFieldName(): String
++getType(): String
+~getBaseTypes(): Set&lt;String&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2928</x>
+      <y>786</y>
+      <w>126</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2280</x>
+      <y>756</y>
+      <w>282</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IPatternDetector
+--
+--
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1410</x>
+      <y>54</y>
+      <w>288</w>
+      <h>138</h>
+    </coordinates>
+    <panel_attributes>legendary.ParsingUtil::GeneralUtil
+--
++primCodes: Map&lt;String, String&gt;
+--
++typeArgumentCollections(String in): List&lt;String&gt;
+-convert(List&lt;String&gt; argSet): List&lt;String&gt;
++typeMethodCollections(String in, List&lt;String&gt; usesClasses): String
+-parsePrimOut(String arg, List&lt;String&gt; argSet): void
++getBaseFields(String in): Set&lt;String&gt;
++typeFieldCollections(String in): String
++getClassesFromDir(File dir): List&lt;String&gt;
++writeAndExecGraphViz(StringBuilder builder): void
++writeAndExecSDEdit(StringBuilder builder): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2670</x>
+      <y>954</y>
+      <w>186</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::AdapteePattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2910</x>
+      <y>954</y>
+      <w>150</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::AdapterPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3108</x>
+      <y>948</y>
+      <w>180</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::AdapterTargetPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2748</x>
+      <y>1056</y>
+      <w>210</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::DecoratorComponentPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3018</x>
+      <y>1056</y>
+      <w>162</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::DecoratorPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2916</x>
+      <y>1170</y>
+      <w>156</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::SingletonPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1878</x>
+      <y>2130</y>
+      <w>288</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>legendary.visitor::VisitorAdapter
+&lt;&lt;Adapter&gt;&gt;
+--
++keyToVisitMethodMap: Map&lt;LookupKey, IVisitMethod&gt;
+--
++VisitorAdapter(): ctor
++preVisit(ITraverser t): void
++visit(ITraverser t): void
++postVisit(ITraverser t): void
+-doVisit(VisitType vType, ITraverser t): void
++addVisit(VisitType visitType, Class&lt;?&gt; clazz, IVisitMethod m): void
++getMap(): Map&lt;LookupKey, IVisitMethod&gt;
++removeVisit(VisitType visitType, Class&lt;?&gt; clazz): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1530</x>
+      <y>1776</y>
+      <w>288</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.visitor::IVisitor
+&lt;&lt;Target&gt;&gt;
+--
+--
++preVisit(ITraverser t): void
++visit(ITraverser t): void
++postVisit(ITraverser t): void
++addVisit(VisitType visitType, Class&lt;?&gt; clazz, IVisitMethod m): void
++removeVisit(VisitType visitType, Class&lt;?&gt; clazz): void
++getMap(): Map&lt;LookupKey, IVisitMethod&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1914</x>
+      <y>1956</y>
+      <w>234</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary.visitor::LookupKey
+&lt;&lt;Adaptee&gt;&gt;
+--
+~visitType: VisitType
+~clazz: Class&lt;?&gt;
+--
++LookupKey(VisitType visitType, Class&lt;?&gt; clazz): ctor
++hashCode(): int
++equals(Object obj): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1956</x>
+      <y>1794</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.visitor::ITraverser
+--
+--
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2208</x>
+      <y>1794</y>
+      <w>132</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.visitor::IVisitMethod
+&lt;&lt;Adaptee&gt;&gt;
+--
+--
++execute(ITraverser t): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>2256</x>
+      <y>702</y>
+      <w>1110</w>
+      <h>594</h>
+    </coordinates>
+    <panel_attributes>PatternDetectionFramework
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>942</x>
+      <y>552</y>
+      <w>1278</w>
+      <h>1056</h>
+    </coordinates>
+    <panel_attributes>Model/Class/Method/Field Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>0</x>
+      <y>318</y>
+      <w>882</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>Class Analysis Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1458</x>
+      <y>1668</y>
+      <w>990</w>
+      <h>660</h>
+    </coordinates>
+    <panel_attributes>Visitor Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>2532</x>
+      <y>1416</y>
+      <w>1134</w>
+      <h>612</h>
+    </coordinates>
+    <panel_attributes>Visitor Analysis Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1560</x>
+      <y>696</y>
+      <w>306</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;490.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>948</y>
+      <w>390</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;630.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>1260</y>
+      <w>18</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1590</x>
+      <y>1278</y>
+      <w>18</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2754</x>
+      <y>816</y>
+      <w>186</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;10.0;10.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2982</x>
+      <y>846</y>
+      <w>18</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3048</x>
+      <y>816</y>
+      <w>162</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;250.0;10.0;250.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3048</x>
+      <y>816</y>
+      <w>288</w>
+      <h>282</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;460.0;10.0;460.0;450.0;220.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3048</x>
+      <y>816</y>
+      <w>288</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;460.0;10.0;460.0;630.0;40.0;630.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2634</x>
+      <y>816</y>
+      <w>306</w>
+      <h>282</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>490.0;10.0;10.0;10.0;10.0;450.0;190.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2424</x>
+      <y>816</y>
+      <w>18</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2544</x>
+      <y>792</y>
+      <w>54</w>
+      <h>318</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;10.0;70.0;10.0;70.0;510.0;10.0;510.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2544</x>
+      <y>792</y>
+      <w>54</w>
+      <h>456</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;10.0;70.0;10.0;70.0;740.0;10.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2430</x>
+      <y>726</y>
+      <w>582</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>950.0;100.0;950.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1410</x>
+      <y>396</y>
+      <w>1038</w>
+      <h>372</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;400.0;10.0;10.0;1710.0;10.0;1710.0;600.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2010</x>
+      <y>492</y>
+      <w>984</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1620.0;490.0;1620.0;10.0;10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>456</x>
+      <y>432</y>
+      <w>18</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>138</x>
+      <y>384</y>
+      <w>144</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>150.0;460.0;10.0;460.0;10.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>84</x>
+      <y>384</y>
+      <w>198</w>
+      <h>594</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>240.0;970.0;10.0;970.0;10.0;10.0;310.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>186</x>
+      <y>678</y>
+      <w>54</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>384</y>
+      <w>780</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1280.0;420.0;1280.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2160</x>
+      <y>1842</y>
+      <w>162</w>
+      <h>366</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;adapts&gt;&gt;</panel_attributes>
+    <additional_attributes>190.0;10.0;190.0;590.0;10.0;590.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1668</x>
+      <y>1878</y>
+      <w>222</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;520.0;350.0;520.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1146</x>
+      <y>1536</y>
+      <w>894</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>1470.0;430.0;1470.0;180.0;10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1974</x>
+      <y>1476</y>
+      <w>66</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>90.0;530.0;90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2022</x>
+      <y>1134</y>
+      <w>18</w>
+      <h>672</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;1100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2022</x>
+      <y>774</y>
+      <w>144</w>
+      <h>1032</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;1700.0;10.0;880.0;220.0;880.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1332</x>
+      <y>0</y>
+      <w>474</w>
+      <h>246</h>
+    </coordinates>
+    <panel_attributes>General Utility Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2232</x>
+      <y>786</y>
+      <w>822</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0;10.0;970.0;1350.0;970.0;1350.0;1180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3246</x>
+      <y>1518</y>
+      <w>60</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;80.0;90.0;80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2814</x>
+      <y>1596</y>
+      <w>114</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;250.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3132</x>
+      <y>1596</y>
+      <w>150</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>230.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1434</x>
+      <y>288</y>
+      <w>2064</w>
+      <h>1218</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;580.0;10.0;10.0;3420.0;20.0;3420.0;1800.0;2730.0;1800.0;2730.0;2010.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2028</x>
+      <y>2034</y>
+      <w>54</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;adapts&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1812</x>
+      <y>1818</y>
+      <w>408</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>660.0;10.0;590.0;10.0;590.0;150.0;140.0;150.0;140.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+</diagram>
