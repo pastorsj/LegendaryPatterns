@@ -46,7 +46,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		String s = GeneralUtil.typeFieldCollections(desc.replace("[", ""));
 		if (!GeneralUtil.primCodes.containsValue(s)) {
 			String sClass = s.replace(".", "/").replace("::", "/");
-			if (!(this.legendaryModel.containsClass(s) || s.equals("java.lang::Object"))) {
+			if (!(this.legendaryModel.containsClass(s) || s.startsWith("java.lang::"))) {
 				try {
 					DesignParser.executeASM(sClass, legendaryModel, false);
 				} catch (IOException e) {

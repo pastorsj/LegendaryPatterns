@@ -11,6 +11,7 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.ParsingUtil.GeneralUtil;
+import legendary.asm.DesignParser;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitMethod;
 import legendary.visitor.IVisitor;
@@ -82,20 +83,27 @@ public class GraphVizOutputStream {
 		StringBuilder sb = new StringBuilder();
 		Map<IClass, Map<Relations, Set<IClass>>> graph = m.getRelGraph();
 		outer: for (IClass c : graph.keySet()) {
-			for (Relations r : graph.get(c).keySet()) {
-				for (IClass c2 : graph.get(c).get(r)) {
-//					System.out.println(c2.getClassName());
-					if (!this.relationRep.containsKey(r)) {
-						System.out
-								.println("null relation for classes " + c.getClassName() + " and " + c2.getClassName());
-						break outer;
+			if(c.getClassName().startsWith(DesignParser.packageName))
+				c.setDrawable(true);
+			if (c.isDrawable()) {
+				for (Relations r : graph.get(c).keySet()) {
+					for (IClass c2 : graph.get(c).get(r)) {
+						if(c2.getClassName().startsWith(DesignParser.packageName))
+							c2.setDrawable(true);
+						if (c2.isDrawable()) {
+							// System.out.println(c2.getClassName());
+							if (!this.relationRep.containsKey(r)) {
+								System.out.println(
+										"null relation for classes " + c.getClassName() + " and " + c2.getClassName());
+								break outer;
+							}
+							if (!this.relationRep.get(r).equals("")) {
+								sb.append(this.relationRep.get(r));
+								sb.append(c.getClassName().replace(".", "").replace(":", "") + "->"
+										+ c2.getClassName().replace(".", "").replace(":", "") + "\n");
+							}
+						}
 					}
-					if (!this.relationRep.get(r).equals("")) {
-						sb.append(this.relationRep.get(r));
-						sb.append(c.getClassName().replace(".", "").replace(":", "") + "->"
-								+ c2.getClassName().replace(".", "").replace(":", "") + "\n");
-					}
-
 				}
 
 			}
@@ -115,14 +123,15 @@ public class GraphVizOutputStream {
 			@Override
 			public void execute(ITraverser t) {
 				IClass c = (IClass) t;
-				String line = String.format("%s [\n\tlabel = \"{%s%s",
-						c.getClassName().replace(".", "").replace(":", ""),
-						(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
-				write(line);
-				if (patterns.containsKey(c))
-					addPatternTags(c);
-				write("|\n\t");
-
+				if (c.isDrawable()) {
+					String line = String.format("%s [\n\tlabel = \"{%s%s",
+							c.getClassName().replace(".", "").replace(":", ""),
+							(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
+					write(line);
+					if (patterns.containsKey(c))
+						addPatternTags(c);
+					write("|\n\t");
+				}
 			}
 		};
 		this.visitor.addVisit(VisitType.PreVisit, IClass.class, command);
@@ -130,7 +139,8 @@ public class GraphVizOutputStream {
 
 	private void visitClass() {
 		this.visitor.addVisit(VisitType.Visit, IClass.class, (ITraverser t) -> {
-			this.write("|\n");
+			if (((IClass) t).isDrawable())
+				this.write("|\n");
 		});
 	}
 
@@ -146,7 +156,8 @@ public class GraphVizOutputStream {
 
 	private void postvisitClass() {
 		this.visitor.addVisit(VisitType.PostVisit, IClass.class, (ITraverser t) -> {
-			this.write(String.format("\t}\"\n\t%s]\n", patternColor((IClass) t)));
+			if (((IClass) t).isDrawable())
+				this.write(String.format("\t}\"\n\t%s]\n", patternColor((IClass) t)));
 		});
 	}
 

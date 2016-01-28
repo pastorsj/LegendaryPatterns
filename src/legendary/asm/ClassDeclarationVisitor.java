@@ -37,7 +37,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				s = s.replace("/", ".");
 				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 			}
-			if (!(this.legendaryModel.containsClass(s) || s.equals("java.lang::Object"))) {
+			if (!(this.legendaryModel.containsClass(s) || s.startsWith("java.lang::"))) {
 				try {
 					DesignParser.executeASM(superName, legendaryModel, false);
 				} catch (IOException e) {
@@ -53,7 +53,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				s = s.replace("/", ".");
 				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 			}
-			if (!(this.legendaryModel.containsClass(i) || i.startsWith(DesignParser.packageName))) {
+			if (!(this.legendaryModel.containsClass(i) || i.startsWith("java.lang::"))) {
 				try {
 					DesignParser.executeASM(i, legendaryModel, false);
 				} catch (IOException e) {
