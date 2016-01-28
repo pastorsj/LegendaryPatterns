@@ -178,6 +178,91 @@ public class DecoratorPatternTest {
 		this.testModel.addRelation("ConcreteDecorator2", "AbstractDecorator", Relations.EXTENDS);
 	}
 	
+	private void setUpInterfaceModel2() {
+		this.testModel.addClass(testConcreteComponent);
+		this.testModel.addClass(testIDecorator);
+		this.testModel.addClass(testConcreteDecorator1);
+		this.testModel.addClass(testIComponent);
+		this.addInterfaceRelations2();
+	}
+	
+	private void addInterfaceRelations2() {
+		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.IMPLEMENTS);
+		this.testModel.addRelation("IDecorator", "IComponent", Relations.EXTENDS);
+		this.testModel.addRelation("ConcreteDecorator1", "IDecorator", Relations.IMPLEMENTS);
+		this.testModel.addRelation("ConcreteDecorator1", "IComponent", Relations.ASSOCIATES);
+	}
+
+	private void setUpAbstractModel2() {
+		this.testModel.addClass(this.testAbstractDecorator);
+		this.testModel.addClass(this.testConcreteComponent);
+		this.testModel.addClass(this.testConcreteDecorator1);
+		this.testModel.addClass(this.testIComponent);
+		this.addAbstractRelations2();
+	}
+	
+	private void addAbstractRelations2() {
+		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.IMPLEMENTS);
+		this.testModel.addRelation("AbstractDecorator", "IComponent", Relations.ASSOCIATES);
+		this.testModel.addRelation("AbstractDecorator", "IComponent", Relations.IMPLEMENTS);
+		this.testModel.addRelation("ConcreteDecorator1", "AbstractDecorator", Relations.EXTENDS);
+	}
+	
+	private void setUpInterfaceModel3() {
+		this.testModel.addClass(testIDecorator);
+		this.testModel.addClass(testConcreteDecorator1);
+		this.testModel.addClass(testIComponent);
+		this.addInterfaceRelations3();
+	}
+	
+	private void addInterfaceRelations3() {
+		this.testModel.addRelation("ConcreteDecorator1", "IDecorator", Relations.ASSOCIATES);
+		this.testModel.addRelation("ConcreteDecorator1", "IComponent", Relations.ASSOCIATES);
+	}
+
+	private void setUpAbstractModel3() {
+		this.testModel.addClass(this.testConcreteComponent);
+		this.testModel.addClass(this.testConcreteDecorator1);
+		this.testModel.addClass(this.testIComponent);
+		this.addAbstractRelations3();
+	}
+	
+	private void addAbstractRelations3() {
+		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.IMPLEMENTS);
+		this.testModel.addRelation("AbstractDecorator", "IComponent", Relations.IMPLEMENTS);
+		this.testModel.addRelation("ConcreteDecorator1", "AbstractDecorator", Relations.EXTENDS);
+	}
+	
+	private void setUpInterfaceModel4() {
+		this.testModel.addClass(testConcreteComponent);
+		this.testModel.addClass(testIDecorator);
+		this.testModel.addClass(testConcreteDecorator1);
+		this.testModel.addClass(testIComponent);
+		this.addInterfaceRelations4();
+	}
+	
+	private void addInterfaceRelations4() {
+		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.EXTENDS);
+		this.testModel.addRelation("IDecorator", "IComponent", Relations.EXTENDS);
+		this.testModel.addRelation("ConcreteDecorator1", "IDecorator", Relations.ASSOCIATES);
+		this.testModel.addRelation("ConcreteDecorator1", "IComponent", Relations.ASSOCIATES);
+	}
+
+	private void setUpAbstractModel4() {
+		this.testModel.addClass(this.testAbstractDecorator);
+		this.testModel.addClass(this.testConcreteComponent);
+		this.testModel.addClass(this.testConcreteDecorator1);
+		this.testModel.addClass(this.testIComponent);
+		this.addAbstractRelations4();
+	}
+	
+	private void addAbstractRelations4() {
+		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.EXTENDS);
+		this.testModel.addRelation("AbstractDecorator", "IComponent", Relations.ASSOCIATES);
+		this.testModel.addRelation("AbstractDecorator", "IComponent", Relations.ASSOCIATES);
+		this.testModel.addRelation("ConcreteDecorator1", "AbstractDecorator", Relations.EXTENDS);
+	}
+	
 	@After
 	public void takeDown() {
 		this.testIComponent = null;
@@ -221,5 +306,69 @@ public class DecoratorPatternTest {
 		decorators.add(testConcreteDecorator2);
 		assertEquals(components, result.get(DecoratorComponentPattern.class));
 		assertEquals(decorators, result.get(DecoratorPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectAbstract2() {
+		this.setUpAbstractModel2();
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> decorators = new HashSet<>();
+		components.add(testIComponent);
+		decorators.add(testAbstractDecorator);
+		decorators.add(testConcreteDecorator1);
+		assertEquals(components, result.get(DecoratorComponentPattern.class));
+		assertEquals(decorators, result.get(DecoratorPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectInterface2() {
+		this.setUpInterfaceModel2();
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> decorators = new HashSet<>();
+		components.add(testIComponent);
+		decorators.add(testIDecorator);
+		decorators.add(testConcreteDecorator1);
+		assertEquals(components, result.get(DecoratorComponentPattern.class));
+		assertEquals(decorators, result.get(DecoratorPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectAbstractFail1() {
+		this.setUpAbstractModel3();
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorComponentPattern.class));
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectInterfaceFail1() {
+		this.setUpInterfaceModel3();
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorComponentPattern.class));
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectAbstractFail2() {
+		this.setUpAbstractModel4();
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorComponentPattern.class));
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectInterfaceFail2() {
+		this.setUpInterfaceModel4();
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorComponentPattern.class));
+		assertEquals(new HashSet<IClass>(), result.get(DecoratorPattern.class));
 	}
 }
