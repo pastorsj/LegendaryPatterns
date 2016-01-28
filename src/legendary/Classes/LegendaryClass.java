@@ -14,7 +14,7 @@ import legendary.visitor.IVisitor;
 /*
  * Author: Jason Lane
  */
-public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
+public class LegendaryClass implements IClass, ITraverser {
 
 	private String className;
 	private String superClassName;
@@ -137,12 +137,6 @@ public class LegendaryClass implements IClass, ITraverser, Comparable<IClass> {
 	@Override
 	public int getCreationOrder() {
 		return this.creationOrder;
-	}
-
-	@Override
-	public int compareTo(IClass o) {
-		// TODO Auto-generated method stub
-		return (this.getCreationOrder() > o.getCreationOrder()) ? 1 : 0;
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import legendary.detectors.SingletonDetector;
  */
 public class DesignParser {
 
-	public static final String packageName = "legendary";
+	public static String packageName = "legendary";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 //	"C:/Users/Jason/Documents/374/Lab5-1-Solution/src/problem" };

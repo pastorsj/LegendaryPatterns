@@ -5,12 +5,19 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import legendary.ParsingUtil.GeneralUtil;
+import legendary.asm.DesignParser;
 
 public class CollectionParseTest {
 
+	@Before
+	public void setUp() {
+		DesignParser.packageName = "";
+	}
+	
 	@Test
 	public void testBasic() {
 		String s = "Ljava/lang/String;";

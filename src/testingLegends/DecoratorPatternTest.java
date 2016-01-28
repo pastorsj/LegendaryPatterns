@@ -23,6 +23,7 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
+import legendary.asm.DesignParser;
 import legendary.detectors.DecoratorDetector;
 import legendary.patterns.DecoratorComponentPattern;
 import legendary.patterns.DecoratorPattern;
@@ -44,6 +45,7 @@ public class DecoratorPatternTest {
 	
 	@Before
 	public void setUp() {
+		DesignParser.packageName = "";
 		this.testIComponent = new LegendaryClass();
 		this.testConcreteComponent = new LegendaryClass();
 		this.testAbstractDecorator = new LegendaryClass();
@@ -71,6 +73,7 @@ public class DecoratorPatternTest {
 	private void setUpIComponent() {
 		this.testIComponent.setClassName("IComponent");
 		this.testIComponent.setDrawable(true);
+		this.testIComponent.setIsInterface(true);
 		this.testIComponent.addMethod(this.testMethod1);
 		this.testIComponent.addMethod(this.testMethod2);
 	}
@@ -139,15 +142,34 @@ public class DecoratorPatternTest {
 		this.testComponentField.setAccess("#");
 	}
 	
-	private void setUpAbstractModel() {
-		this.testModel.addClass(testAbstractDecorator);
+	
+	private void setUpInterfaceModel() {
 		this.testModel.addClass(testConcreteComponent);
+		this.testModel.addClass(testIDecorator);
 		this.testModel.addClass(testConcreteDecorator1);
 		this.testModel.addClass(testConcreteDecorator2);
 		this.testModel.addClass(testIComponent);
-		this.addAbstractRelations();
+		this.addInterfaceRelations();
+	}
+	
+	private void addInterfaceRelations() {
+		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.IMPLEMENTS);
+		this.testModel.addRelation("IDecorator", "IComponent", Relations.EXTENDS);
+		this.testModel.addRelation("ConcreteDecorator1", "IDecorator", Relations.IMPLEMENTS);
+		this.testModel.addRelation("ConcreteDecorator2", "IDecorator", Relations.IMPLEMENTS);
+		this.testModel.addRelation("ConcreteDecorator1", "IComponent", Relations.ASSOCIATES);
+		this.testModel.addRelation("ConcreteDecorator2", "IComponent", Relations.ASSOCIATES);
 	}
 
+	private void setUpAbstractModel() {
+		this.testModel.addClass(this.testAbstractDecorator);
+		this.testModel.addClass(this.testConcreteComponent);
+		this.testModel.addClass(this.testConcreteDecorator1);
+		this.testModel.addClass(this.testConcreteDecorator2);
+		this.testModel.addClass(this.testIComponent);
+		this.addAbstractRelations();
+	}
+	
 	private void addAbstractRelations() {
 		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.IMPLEMENTS);
 		this.testModel.addRelation("AbstractDecorator", "IComponent", Relations.ASSOCIATES);
@@ -156,24 +178,6 @@ public class DecoratorPatternTest {
 		this.testModel.addRelation("ConcreteDecorator2", "AbstractDecorator", Relations.EXTENDS);
 	}
 	
-	private void setUpInterfaceModel() {
-		this.testModel.addClass(testAbstractDecorator);
-		this.testModel.addClass(testIDecorator);
-		this.testModel.addClass(testConcreteDecorator1);
-		this.testModel.addClass(testConcreteDecorator2);
-		this.testModel.addClass(testIComponent);
-		this.addInterfaceRelations();
-	}
-
-	private void addInterfaceRelations() {
-		this.testModel.addRelation("ConcreteComponent", "IComponent", Relations.IMPLEMENTS);
-		this.testModel.addRelation("IDecorator", "IComponent", Relations.EXTENDS);
-		this.testModel.addRelation("ConcreteDecorator1", "IDecorator", Relations.IMPLEMENTS);
-		this.testModel.addRelation("ConcreteDecorator2", "IDecorator", Relations.IMPLEMENTS);
-		this.testModel.addRelation("ConcreteDecorator1", "IComponent", Relations.IMPLEMENTS);
-		this.testModel.addRelation("ConcreteDecorator2", "IComponent", Relations.IMPLEMENTS);
-	}
-
 	@After
 	public void takeDown() {
 		this.testIComponent = null;
@@ -209,7 +213,6 @@ public class DecoratorPatternTest {
 		this.setUpInterfaceModel();
 		this.testModel.convertToGraph();
 		Map<Class<? extends IPattern>, Set<IClass>> result = this.decoratorDetector.detect(testModel);
-		System.out.println(result);
 		Set<IClass> components = new HashSet<>();
 		Set<IClass> decorators = new HashSet<>();
 		components.add(testIComponent);

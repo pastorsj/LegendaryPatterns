@@ -43,7 +43,7 @@ public class GraphVizTest {
 
 	@Before
 	public void setUp() {
-		DesignParser.packageName = "testingLegends";
+		DesignParser.packageName = "";
 		this.testModel = new LegendaryModel();
 		this.testClass1 = new LegendaryClass();
 		this.testClass2 = new LegendaryClass();
@@ -108,7 +108,7 @@ public class GraphVizTest {
 		this.callMethod2.setReturnType("double");
 		this.callMethod2.setMethodName("testCallMethod2");
 		this.callMethod2.setAccess("public");
-		this.callMethod3.setReturnType("List<String>");
+		this.callMethod3.setReturnType("java.util::List<java.lang::String>");
 		this.callMethod3.setMethodName("testCallMethod3");
 		this.callMethod3.setAccess("public");
 	}
@@ -132,13 +132,17 @@ public class GraphVizTest {
 		this.testClass4.addField(testField2);
 		this.testClass4.addField(testField3);
 		this.testClass4.addField(testField4);
+		this.testClass1.setDrawable(true);
+		this.testClass2.setDrawable(true);
+		this.testClass3.setDrawable(true);
+		this.testClass4.setDrawable(true);
 	}
 
 	@Test
 	public void testBaseCaseGraphViz() throws IOException {
 		this.testModel.addClass(testClass1);
 		this.testModel.convertToGraph();
-		this.parser.makeGraphViz(testModel, builder);
+		this.parser.makeGraphViz(testModel, this.builder);
 		String formattedOutput = String.format(
 				"digraph G{node [shape = \"record\"]%s [label = \"{%s|%s %s: %s\\l|%s %s() : %s\\l}\"]}",
 				this.testClass1.getClassName(), this.testClass1.getClassName(), this.testField1.getAccess(),
@@ -177,7 +181,7 @@ public class GraphVizTest {
 				this.testField2.getFieldName(), this.testField2.getType(), this.testField3.getAccess(),
 				this.testField3.getFieldName(), this.testField3.getType(), this.testField4.getAccess(),
 				this.testField4.getFieldName(), this.testField4.getType(), this.callMethod3.getAccess(),
-				this.callMethod3.getMethodName(), this.callMethod3.getReturnType());
+				this.callMethod3.getMethodName(), "List\\<String\\>");
 		assertEquals(this.removeSpecialCharacters(formattedOutput),
 				this.removeSpecialCharacters(this.builder.toString()));
 	}
@@ -218,7 +222,7 @@ public class GraphVizTest {
 				this.testField2.getFieldName(), this.testField2.getType(), this.testField3.getAccess(),
 				this.testField3.getFieldName(), this.testField3.getType(), this.testField4.getAccess(),
 				this.testField4.getFieldName(), this.testField4.getType(), this.callMethod3.getAccess(),
-				this.callMethod3.getMethodName(), this.callMethod3.getReturnType(),
+				this.callMethod3.getMethodName(), "List\\<String\\>",
 				this.relationRep.get(Relations.ASSOCIATES), this.relationRep.get(Relations.EXTENDS),
 				this.relationRep.get(Relations.IMPLEMENTS), this.relationRep.get(Relations.USES));
 		assertEquals(this.removeSpecialCharacters(formattedOutput),

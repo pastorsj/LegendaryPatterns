@@ -22,7 +22,7 @@ public class LegendaryModel implements IModel, ITraverser {
 	private Map<IPattern, Set<IClass>> patterns;
 
 	public LegendaryModel() {
-		this.classList = new TreeSet<IClass>();
+		this.classList = new HashSet<IClass>();
 		this.relGraph = new HashMap<>();
 		this.relations = new HashMap<>();
 	}
@@ -34,7 +34,7 @@ public class LegendaryModel implements IModel, ITraverser {
 
 	@Override
 	public void addClass(IClass c) {
-		classList.add(c);
+		this.classList.add(c);
 	}
 
 	@Override
@@ -225,9 +225,13 @@ public class LegendaryModel implements IModel, ITraverser {
 
 	@Override
 	public boolean containsClass(String i) {
-		for (IClass c : this.classList)
-			if (c.getClassName().equals(i))
+		System.out.println(this.classList.size());
+		for (IClass c : this.classList) {
+			System.out.println("Class" + c.getClassName());
+			if (c.getClassName().equals(i)) {
 				return true;
+			}
+		}
 		return false;
 	}
 

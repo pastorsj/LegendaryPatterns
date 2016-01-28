@@ -18,6 +18,7 @@ import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.asm.DesignParser;
 
 public class SDEditTest {
 
@@ -35,6 +36,7 @@ public class SDEditTest {
 	
 	@Before
 	public void setUp() {
+		DesignParser.packageName = "";
 		this.testModel = new LegendaryModel();
 		this.testClass1 = new LegendaryClass();
 		this.testClass2 = new LegendaryClass();

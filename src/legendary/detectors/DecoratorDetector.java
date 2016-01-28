@@ -36,12 +36,16 @@ public class DecoratorDetector implements IPatternDetector {
 			tempSet = new HashSet<>();
 			add = true;
 			for (IClass c : set) {
-				for (IClass c2 : m.getRelGraph().get(c)
-						.get(c.isInterface() ? Relations.REV_IMPLEMENTS : Relations.REV_EXTENDS)) {
+				Set<IClass> all = new HashSet<>();
+				all.addAll(m.getRelGraph().get(c).get(Relations.REV_IMPLEMENTS));
+				all.addAll(m.getRelGraph().get(c).get(Relations.REV_EXTENDS));
+				for (IClass c2 : all) {
 					add = true;
 					if (c2.isInterface()) {
 						for (IClass c3 : m.getRelGraph().get(c2).get(Relations.REV_IMPLEMENTS)) {
 							if (!m.getRelGraph().get(c3).get(Relations.ASSOCIATES).contains(c)) {
+								System.out.println("Class 1" + c.getClassName());
+								System.out.println("Class 2" + c2.getClassName());
 								add = false;
 							}
 						}
@@ -52,11 +56,10 @@ public class DecoratorDetector implements IPatternDetector {
 						tempSet.add(c2);
 						tempSet.addAll(m.getRelGraph().get(c2)
 								.get(c2.isInterface() ? Relations.REV_IMPLEMENTS : Relations.REV_EXTENDS));
+						System.out.println(tempSet);
+						compSet.add(c);
+						decSet.addAll(tempSet);
 					}
-				}
-				if (add) {
-					compSet.add(c);
-					decSet.addAll(tempSet);
 				}
 			}
 		}
@@ -101,10 +104,14 @@ public class DecoratorDetector implements IPatternDetector {
 				continue;
 			Map<Relations, Set<IClass>> temp = m.getRelGraph().get(c);
 			if (temp.get(Relations.REV_IMPLEMENTS).size() + temp.get(Relations.REV_EXTENDS).size() > 0) {
-				for (IClass c2 : temp.get(c.isInterface() ? Relations.REV_IMPLEMENTS : Relations.REV_EXTENDS)) {
+				Set<IClass> all = new HashSet<>();
+				all.addAll(temp.get(Relations.REV_IMPLEMENTS));
+				all.addAll(temp.get(Relations.REV_EXTENDS));
+				for (IClass c2 : all) {
 					Map<Relations, Set<IClass>> temp2 = m.getRelGraph().get(c2);
 					if (temp2.get(Relations.REV_IMPLEMENTS).size() + temp2.get(Relations.REV_EXTENDS).size() > 0) {
-						candSet.add(c2);
+						System.out.println(c.getClassName());
+						candSet.add(c);
 						candidates.add(candSet);
 						candSet = new HashSet<>();
 					}

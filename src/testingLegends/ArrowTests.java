@@ -18,6 +18,7 @@ import legendary.Classes.LegendaryModel;
 import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
+import legendary.asm.DesignParser;
 
 public class ArrowTests {
 
@@ -29,6 +30,7 @@ public class ArrowTests {
 
 	@Before
 	public void setUp() throws NoSuchMethodException, SecurityException {
+		DesignParser.packageName = "";
 		this.c1 = new LegendaryClass();
 		this.c2 = new LegendaryClass();
 		c1.setClassName("Class 1");
