@@ -18,6 +18,15 @@ We use GraphViz to generate the pictorial version of the UML diagram after parsi
 classes and writing that to a .dot file. Once converted to a .dot file, a simple command can be run  
 from the command line (or terminal if on a Mac), to produce a .png output.
 We are also able to produce sequence diagrams through the command line given a method call depth, a method and the owner of the method. The default depth is 5, but any depth can be specified.
+We are also able to detect three types of software design patterns in the code, mainly the  
+Singleton pattern, the Decorator Pattern, and the Adapter Pattern. Any class that is a  
+Singleton class will have an association arrow pointing to itself, be outlined in blue, and  
+will have a <<Singleton>> tag under the name of the class. The Decorator pattern will consist of  
+four parts, the Component, the Abstract Decorator or Decorator Interface, the Concrete Decorators,  
+and the Concrete Component. Each of these will have their own unique tags and will have a fill  
+color of green. The Adapter Patter will consist of three parts, the Target, which can be  
+an interface, abstract class or regular class, the Adaptee, and the Adapter. Each of these classes  
+will be filled with a red color and have unique identifying tags.
 
 ## How to use the code
 Open DesignParser.java in an editor, probably Eclipse  
@@ -100,6 +109,25 @@ Added tests, both manually and automated that detected singleton classes
 UML Generation  
 General refactoring  
 Design of milestone additions  
+### Milestone 5
+We continued to implement pattern detection by adding support for the Adapter pattern and Decorator  
+pattern. We had to change much of the code structure to accomplish the additions and to make it  
+easier to add more patterns. We first added support for more visitors by converting our existing code  
+into lambda expressions. This will allow for more easier additions to the visiting code if required.  
+The next major step was that we converted the current model into a graph, where we can visit nodes,   
+which are classes, and if a node/class has a relation to another class, we can add a back arrow for that  relation. This allows for much easier traversal, especially when detecting patterns. The last major piece  in this milestone that we worked on was the pattern detection. We now allow for multiple patterns to be detected by adding IPatternDetectors to a complicated data structure that we parse to figure out which  
+patterns we want to detect. This method follows to Open-Closed Principle, where we can add patterns without changing the framework we developed.  
+![UML Milestone 5](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM4.png)
+#### Completed by Jason Lane
+Adapter Pattern and Decorator Pattern framework
+Adapter Pattern and Decorator Pattern details
+Model to Graph Refactoring
+Refactor of General Util
+#### Completed by Sam Pastoriza
+Lambda Refactor for Visiting SDEdit class and GraphViz class
+Unit Tests for Adapter and Decorator pattern framework and details
+Adapter and Decorator pattern specifics/details
+Recursive search for classes extends/implements/associated by other classes
 
 #### Notes
 * framework = interfaces and basic class structures  
