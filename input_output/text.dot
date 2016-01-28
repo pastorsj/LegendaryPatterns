@@ -1,136 +1,53 @@
 digraph G{
 	node [shape = "record"]
-javaioOutputStream [
-	label = "{java.io::OutputStream\n\<\<component\>\>|
+problemclientIteratorToEnumerationAdapter [
+	label = "{problem.client::IteratorToEnumerationAdapter\n\<\<adapter\>\>|
+	- itr: Iterator\<\>\l
 	|
-	+ flush() : void\l
-	+ write(byte[], int, int) : void\l
-	+ write(byte[]) : void\l
-	+ write(int) : void\l
-	+ close() : void\l
+	+ hasMoreElements() : boolean\l
+	+ nextElement() : \l
 	}"
 	style = "filled"
-fillcolor = "green"]
-problemIDecryption [
-	label = "{\<\<interface\>\>\nproblem::IDecryption|
+fillcolor = red]
+problemlibLinearTransformer [
+	label = "{problem.lib::LinearTransformer|
+	- enumTion: Enumeration\<\>\l
 	|
-	+ decrypt(char) : char\l
+	+ transform(OutputStream) : void\l
 	}"
 	]
-problemIEncryption [
-	label = "{\<\<interface\>\>\nproblem::IEncryption|
-	|
-	+ encrypt(char) : char\l
-	}"
-	]
-javaioInputStream [
-	label = "{java.io::InputStream\n\<\<component\>\>|
-	- _MAX_SKIP_BUFFER_SIZE: int_\l
-	|
-	+ read(byte[], int, int) : int\l
-	+ read() : int\l
-	+ read(byte[]) : int\l
-	+ markSupported() : boolean\l
-	+ available() : int\l
-	+ reset() : void\l
-	+ skip(long) : long\l
-	+ close() : void\l
-	+ mark(int) : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-problemDecryptionInputStream [
-	label = "{problem::DecryptionInputStream\n\<\<decorator\>\>|
-	- decryptor: IDecryption\l
-	|
-	+ read(byte[], int, int) : int\l
-	+ read() : int\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-problemSubstitutionCipher [
-	label = "{problem::SubstitutionCipher|
-	- encryptionKey: char[]\l
-	- decryptionKey: char[]\l
-	|
-	+ encrypt(char) : char\l
-	+ decrypt(char) : char\l
-	}"
-	]
-problemTextEditorApp [
-	label = "{problem::TextEditorApp|
+problemclientApp [
+	label = "{problem.client::App|
 	|
 	+ _main(String[]) : void_\l
 	}"
 	]
-problemEncryptionOutputStream [
-	label = "{problem::EncryptionOutputStream\n\<\<decorator\>\>|
-	- encryptor: IEncryption\l
+javautilEnumeration [
+	label = "{\<\<interface\>\>\njava.util::Enumeration\n\<\<target\>\>|
 	|
-	+ write(int) : void\l
+	+ hasMoreElements() : boolean\l
+	+ nextElement() : \l
 	}"
 	style = "filled"
-fillcolor = "green"]
-javaioFilterInputStream [
-	label = "{java.io::FilterInputStream\n\<\<decorator\>\>|
-	# in: InputStream\l
+fillcolor = red]
+javautilIterator [
+	label = "{\<\<interface\>\>\njava.util::Iterator\n\<\<adaptee\>\>|
 	|
-	+ read(byte[], int, int) : int\l
-	+ read() : int\l
-	+ read(byte[]) : int\l
-	+ markSupported() : boolean\l
-	+ available() : int\l
-	+ reset() : void\l
-	+ skip(long) : long\l
-	+ close() : void\l
-	+ mark(int) : void\l
+	+ next() : \l
+	+ hasNext() : boolean\l
+	+ forEachRemaining(Consumer\<\>) : void\l
+	+ remove() : void\l
 	}"
 	style = "filled"
-fillcolor = "green"]
-javaioFilterOutputStream [
-	label = "{java.io::FilterOutputStream\n\<\<decorator\>\>|
-	# out: OutputStream\l
-	|
-	+ flush() : void\l
-	+ write(byte[], int, int) : void\l
-	+ write(byte[]) : void\l
-	+ write(int) : void\l
-	+ close() : void\l
-	}"
-	style = "filled"
-fillcolor = "green"]
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemDecryptionInputStream->javaioInputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemDecryptionInputStream->javaioFilterInputStream
+fillcolor = red]
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemDecryptionInputStream->problemIDecryption
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemDecryptionInputStream->javaioFilterInputStream
+	[label = "\<\<adapts\>\>"]problemclientIteratorToEnumerationAdapter->javautilIterator
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]problemSubstitutionCipher->problemIEncryption
-	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]problemSubstitutionCipher->problemIDecryption
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemTextEditorApp->problemDecryptionInputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemTextEditorApp->problemSubstitutionCipher
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemTextEditorApp->problemEncryptionOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemEncryptionOutputStream->javaioOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemEncryptionOutputStream->javaioFilterOutputStream
+	[label = ""]problemclientIteratorToEnumerationAdapter->javautilEnumeration
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemEncryptionOutputStream->problemIEncryption
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemEncryptionOutputStream->javaioFilterOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<decorates\>\>"]javaioFilterInputStream->javaioInputStream
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]javaioFilterInputStream->javaioInputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<decorates\>\>"]javaioFilterOutputStream->javaioOutputStream
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]javaioFilterOutputStream->javaioOutputStream
+	[label = ""]problemlibLinearTransformer->javautilEnumeration
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemclientApp->problemclientIteratorToEnumerationAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemclientApp->problemlibLinearTransformer
 }

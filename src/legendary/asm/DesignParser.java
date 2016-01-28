@@ -27,7 +27,7 @@ public class DesignParser {
 	public static String packageName = "problem";
 	public static final String[] directories = {
 //			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	"C:/Users/Administrator/Documents/CSSE374/Lab2-1-Solution/src/problem" };
+	"C:/Users/Administrator/Documents/CSSE374/Lab5-1-Solution/src/problem" };
 //	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
