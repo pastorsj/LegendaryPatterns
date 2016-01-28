@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
@@ -225,9 +224,7 @@ public class LegendaryModel implements IModel, ITraverser {
 
 	@Override
 	public boolean containsClass(String i) {
-		System.out.println(this.classList.size());
 		for (IClass c : this.classList) {
-			System.out.println("Class" + c.getClassName());
 			if (c.getClassName().equals(i)) {
 				return true;
 			}

@@ -12,6 +12,10 @@ import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.ParsingUtil.GeneralUtil;
 import legendary.asm.DesignParser;
+import legendary.patterns.AdapteePattern;
+import legendary.patterns.AdapterPattern;
+import legendary.patterns.DecoratorComponentPattern;
+import legendary.patterns.DecoratorPattern;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitMethod;
 import legendary.visitor.IVisitor;
@@ -24,7 +28,8 @@ public class GraphVizOutputStream {
 	private final Map<Relations, String> relationRep;
 	private static Map<IClass, Set<IPattern>> patterns;
 
-	public GraphVizOutputStream(StringBuilder builder, Map<Class<? extends IPattern>, Set<IClass>> map, IModel m) {
+	public GraphVizOutputStream(StringBuilder builder,
+			Map<Class<? extends IPattern>, Set<IClass>> map, IModel m) {
 		this.builder = builder;
 		this.relationRep = new HashMap<>();
 		this.initialize();
@@ -46,7 +51,8 @@ public class GraphVizOutputStream {
 		this.visitMethod();
 	}
 
-	private Map<IClass, Set<IPattern>> invertPatternMap(Map<Class<? extends IPattern>, Set<IClass>> in) {
+	private Map<IClass, Set<IPattern>> invertPatternMap(
+			Map<Class<? extends IPattern>, Set<IClass>> in) {
 		Map<IClass, Set<IPattern>> res = new HashMap<>();
 		for (Class<? extends IPattern> p : in.keySet()) {
 			for (IClass c : in.get(p)) {
@@ -68,39 +74,84 @@ public class GraphVizOutputStream {
 	}
 
 	private void previsitModel() {
-		this.visitor.addVisit(VisitType.PreVisit, IModel.class, (ITraverser t) -> {
-			this.write("digraph G{\n\tnode [shape = \"record\"]\n");
-		});
+		this.visitor.addVisit(VisitType.PreVisit, IModel.class,
+				(ITraverser t) -> {
+					this.write("digraph G{\n\tnode [shape = \"record\"]\n");
+				});
 	}
 
 	private void visitModel() {
-		this.visitor.addVisit(VisitType.Visit, IModel.class, (ITraverser t) -> {
-			this.write(this.addArrows((IModel) t));
-		});
+		this.visitor.addVisit(VisitType.Visit, IModel.class,
+				(ITraverser t) -> {
+					this.write(this.addArrows((IModel) t));
+				});
 	}
 
 	private String addArrows(IModel m) {
 		StringBuilder sb = new StringBuilder();
 		Map<IClass, Map<Relations, Set<IClass>>> graph = m.getRelGraph();
 		outer: for (IClass c : graph.keySet()) {
-			if(c.getClassName().startsWith(DesignParser.packageName))
+			if (c.getClassName().startsWith(DesignParser.packageName))
 				c.setDrawable(true);
 			if (c.isDrawable()) {
 				for (Relations r : graph.get(c).keySet()) {
 					for (IClass c2 : graph.get(c).get(r)) {
-						if(c2.getClassName().startsWith(DesignParser.packageName))
+						if (c2.getClassName().startsWith(
+								DesignParser.packageName))
 							c2.setDrawable(true);
 						if (c2.isDrawable()) {
 							// System.out.println(c2.getClassName());
+
 							if (!this.relationRep.containsKey(r)) {
-								System.out.println(
-										"null relation for classes " + c.getClassName() + " and " + c2.getClassName());
+								System.out.println("null relation for classes "
+										+ c.getClassName() + " and "
+										+ c2.getClassName());
 								break outer;
 							}
 							if (!this.relationRep.get(r).equals("")) {
 								sb.append(this.relationRep.get(r));
-								sb.append(c.getClassName().replace(".", "").replace(":", "") + "->"
-										+ c2.getClassName().replace(".", "").replace(":", "") + "\n");
+								String label = "[label = \"\\<\\<";
+								boolean toLabel = false;
+								if (patterns.containsKey(c)
+										&& patterns.containsKey(c2)) {
+									if (r.equals(Relations.ASSOCIATES)) {
+										Set<IPattern> cPatterns = patterns
+												.get(c);
+										Set<IPattern> c2Patterns = patterns
+												.get(c2);
+										for (IPattern p : cPatterns) {
+											if (p instanceof AdapterPattern) {
+												for (IPattern p2 : c2Patterns) {
+													if (p2 instanceof AdapteePattern) {
+														toLabel = true;
+														label += "adapts, ";
+													}
+												}
+											}
+										}
+										for (IPattern p : cPatterns) {
+											if (p instanceof DecoratorPattern) {
+												for (IPattern p2 : c2Patterns) {
+													if (p2 instanceof DecoratorComponentPattern) {
+														toLabel = true;
+														label += "decorates, ";
+													}
+												}
+											}
+										}
+									}
+								}
+								if (toLabel) {
+									label = label.substring(0,
+											label.lastIndexOf(","));
+									sb.append(label + "\\>\\>\"]");
+								} else
+									sb.append("[label = \"\"]");
+								sb.append(c.getClassName().replace(".", "")
+										.replace(":", "")
+										+ "->"
+										+ c2.getClassName().replace(".", "")
+												.replace(":", "") + "\n");
 							}
 						}
 					}
@@ -112,9 +163,10 @@ public class GraphVizOutputStream {
 	}
 
 	private void postvisitModel() {
-		this.visitor.addVisit(VisitType.PostVisit, IModel.class, (ITraverser t) -> {
-			this.write("}");
-		});
+		this.visitor.addVisit(VisitType.PostVisit, IModel.class,
+				(ITraverser t) -> {
+					this.write("}");
+				});
 	}
 
 	private void previsitClass() {
@@ -124,9 +176,11 @@ public class GraphVizOutputStream {
 			public void execute(ITraverser t) {
 				IClass c = (IClass) t;
 				if (c.isDrawable()) {
-					String line = String.format("%s [\n\tlabel = \"{%s%s",
-							c.getClassName().replace(".", "").replace(":", ""),
-							(c.isInterface() ? "\\<\\<interface\\>\\>\\n" : ""), c.getClassName());
+					String line = String
+							.format("%s [\n\tlabel = \"{%s%s", c.getClassName()
+									.replace(".", "").replace(":", ""), (c
+									.isInterface() ? "\\<\\<interface\\>\\>\\n"
+									: ""), c.getClassName());
 					write(line);
 					if (patterns.containsKey(c))
 						addPatternTags(c);
@@ -138,10 +192,11 @@ public class GraphVizOutputStream {
 	}
 
 	private void visitClass() {
-		this.visitor.addVisit(VisitType.Visit, IClass.class, (ITraverser t) -> {
-			if (((IClass) t).isDrawable())
-				this.write("|\n");
-		});
+		this.visitor.addVisit(VisitType.Visit, IClass.class,
+				(ITraverser t) -> {
+					if (((IClass) t).isDrawable())
+						this.write("|\n");
+				});
 	}
 
 	private void addPatternTags(IClass c) {
@@ -155,10 +210,12 @@ public class GraphVizOutputStream {
 	}
 
 	private void postvisitClass() {
-		this.visitor.addVisit(VisitType.PostVisit, IClass.class, (ITraverser t) -> {
-			if (((IClass) t).isDrawable())
-				this.write(String.format("\t}\"\n\t%s]\n", patternColor((IClass) t)));
-		});
+		this.visitor.addVisit(VisitType.PostVisit, IClass.class,
+				(ITraverser t) -> {
+					if (((IClass) t).isDrawable())
+						this.write(String.format("\t}\"\n\t%s]\n",
+								patternColor((IClass) t)));
+				});
 	}
 
 	private String patternColor(IClass c) {
@@ -178,7 +235,8 @@ public class GraphVizOutputStream {
 				String ret = "";
 				boolean include = false;
 				for (char c : f.getType().toCharArray()) {
-					if (GeneralUtil.primCodes.containsValue(f.getType().replace("[]", ""))) {
+					if (GeneralUtil.primCodes.containsValue(f.getType()
+							.replace("[]", ""))) {
 						ret = f.getType();
 						break;
 					}
@@ -191,9 +249,11 @@ public class GraphVizOutputStream {
 					if (include)
 						ret += c;
 				}
-				ret = ret.replace("<", "\\<").replace(">", "\\>").replace(":", "");
-				String line = String.format("%s %s%s: %s%s\\l\n\t", f.getAccess().replace("_", ""), isStatic ? "_" : "",
-						f.getFieldName(), ret, isStatic ? "_" : "");
+				ret = ret.replace("<", "\\<").replace(">", "\\>")
+						.replace(":", "");
+				String line = String.format("%s %s%s: %s%s\\l\n\t", f
+						.getAccess().replace("_", ""), isStatic ? "_" : "", f
+						.getFieldName(), ret, isStatic ? "_" : "");
 				write(line);
 			}
 		};
@@ -209,7 +269,8 @@ public class GraphVizOutputStream {
 			@Override
 			public void execute(ITraverser t) {
 				IMethod m = (IMethod) t;
-				if (!(m.getMethodName().equals("<init>") || m.getMethodName().equals("<clinit>"))) {
+				if (!(m.getMethodName().equals("<init>") || m.getMethodName()
+						.equals("<clinit>"))) {
 					boolean isStatic = m.getAccess().endsWith("_");
 					String parameters = "";
 					boolean include = false;
@@ -220,7 +281,8 @@ public class GraphVizOutputStream {
 							dimensions++;
 							continue;
 						}
-						if (GeneralUtil.primCodes.containsValue(s.replace("[]", ""))) {
+						if (GeneralUtil.primCodes.containsValue(s.replace("[]",
+								""))) {
 							include = true;
 						}
 						for (char c : s.toCharArray()) {
@@ -240,13 +302,16 @@ public class GraphVizOutputStream {
 						parameters += ", ";
 					}
 					if (parameters.contains(", ")) {
-						parameters = parameters.substring(0, parameters.lastIndexOf(", "));
+						parameters = parameters.substring(0,
+								parameters.lastIndexOf(", "));
 					}
-					parameters = parameters.replace(":", "").replace("<", "\\<").replace(">", "\\>");
+					parameters = parameters.replace(":", "")
+							.replace("<", "\\<").replace(">", "\\>");
 					String ret = "";
 					include = false;
 					for (char c : m.getReturnType().toCharArray()) {
-						if (GeneralUtil.primCodes.containsValue(m.getReturnType().replace("[]", ""))) {
+						if (GeneralUtil.primCodes.containsValue(m
+								.getReturnType().replace("[]", ""))) {
 							ret = m.getReturnType();
 							break;
 						}
@@ -260,9 +325,11 @@ public class GraphVizOutputStream {
 							ret += c;
 					}
 					ret = ret.replace("<", "\\<").replace(">", "\\>");
-					String line = String.format("\t%s %s" + "%s(%s) : %s%s\\l\n", m.getAccess().replace("_", ""),
-							isStatic ? "_" : "", m.getMethodName(), parameters, ret.replace(":", ""),
-							isStatic ? "_" : "");
+					String line = String.format("\t%s %s"
+							+ "%s(%s) : %s%s\\l\n",
+							m.getAccess().replace("_", ""),
+							isStatic ? "_" : "", m.getMethodName(), parameters,
+							ret.replace(":", ""), isStatic ? "_" : "");
 					write(line);
 				}
 			}
@@ -271,10 +338,14 @@ public class GraphVizOutputStream {
 	}
 
 	public void initialize() {
-		this.relationRep.put(Relations.ASSOCIATES, "\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
-		this.relationRep.put(Relations.EXTENDS, "\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.IMPLEMENTS, "\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
-		this.relationRep.put(Relations.USES, "\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.ASSOCIATES,
+				"\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");
+		this.relationRep.put(Relations.EXTENDS,
+				"\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.IMPLEMENTS,
+				"\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t");
+		this.relationRep.put(Relations.USES,
+				"\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t");
 		this.relationRep.put(Relations.REV_ASSOCIATES, "");
 		this.relationRep.put(Relations.REV_EXTENDS, "");
 		this.relationRep.put(Relations.REV_IMPLEMENTS, "");
