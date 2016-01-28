@@ -117,7 +117,7 @@ into lambda expressions. This will allow for more easier additions to the visiti
 The next major step was that we converted the current model into a graph, where we can visit nodes,   
 which are classes, and if a node/class has a relation to another class, we can add a back arrow for that  relation. This allows for much easier traversal, especially when detecting patterns. The last major piece   in this milestone that we worked on was the pattern detection. We now allow for multiple patterns to be detected by adding IPatternDetectors to a complicated data structure that we parse to figure out which  
 patterns we want to detect. This method follows to Open-Closed Principle, where we can add patterns without changing the framework we developed.  
-![UML Milestone 5](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM4.png)
+![UML Milestone 5](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM5.png)
 #### Completed by Jason Lane
 Adapter Pattern and Decorator Pattern framework  
 Adapter Pattern and Decorator Pattern details  
