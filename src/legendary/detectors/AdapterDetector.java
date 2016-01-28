@@ -103,8 +103,9 @@ public class AdapterDetector implements IPatternDetector {
 			supers2.addAll(rels.get(c).get(Relations.IMPLEMENTS));
 			supers.addAll(supers2);
 			for (IClass c2 : supers2) {
-				if (rels.get(c2).get(Relations.REV_ASSOCIATES).isEmpty())
+				if (rels.get(c2).get(Relations.REV_ASSOCIATES).isEmpty()) {
 					supers.remove(c2);
+				}
 			}
 			if (!supers.isEmpty()) {
 				Set<IClass> assocs = new HashSet<>();
