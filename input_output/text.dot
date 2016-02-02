@@ -1,53 +1,210 @@
 digraph G{
 	node [shape = "record"]
-problemclientIteratorToEnumerationAdapter [
-	label = "{problem.client::IteratorToEnumerationAdapter\n\<\<adapter\>\>|
-	- itr: Iterator\<\>\l
+javaawtShape [
+	label = "{\<\<interface\>\>\njava.awt::Shape\n\<\<adaptee\>\>|
 	|
-	+ hasMoreElements() : boolean\l
-	+ nextElement() : \l
+	+ contains(double, double, double, double) : boolean\l
+	+ contains(Rectangle2D) : boolean\l
+	+ contains(Point2D) : boolean\l
+	+ contains(double, double) : boolean\l
+	+ getPathIterator(AffineTransform, double) : PathIterator\l
+	+ getPathIterator(AffineTransform) : PathIterator\l
+	+ intersects(double, double, double, double) : boolean\l
+	+ intersects(Rectangle2D) : boolean\l
+	+ getBounds2D() : Rectangle2D\l
+	+ getBounds() : Rectangle\l
 	}"
 	style = "filled"
 fillcolor = red]
-problemlibLinearTransformer [
-	label = "{problem.lib::LinearTransformer|
-	- enumTion: Enumeration\<\>\l
+problemspritesCompositeSprite [
+	label = "{problem.sprites::CompositeSprite\n\<\<Composite\>\>|
+	- spriteList: List\<ISprite\>\l
 	|
-	+ transform(OutputStream) : void\l
+	+ removeSprite(ISprite) : void\l
+	+ getChildren() : List\<ISprite\>\l
+	+ addSprite(ISprite) : void\l
+	+ move(Dimension) : void\l
+	}"
+	style = "filled"
+fillcolor = "yellow"]
+problemgraphicsMainWindow [
+	label = "{problem.graphics::MainWindow|
+	- frame: JFrame\l
+	- actionPanel: JPanel\l
+	- animationPanel: AnimationPanel\l
+	- moveButton: JButton\l
+	- createButton: JButton\l
+	- resetButton: JButton\l
+	|
+	- createWidgets(String, long) : void\l
+	+ show() : void\l
+	 _access2(MainWindow) : JButton_\l
+	 _access1(MainWindow) : JButton_\l
+	- assignActions() : void\l
+	 _access0(MainWindow) : AnimationPanel_\l
 	}"
 	]
-problemclientApp [
-	label = "{problem.client::App|
+problemclientAnimatorApp [
+	label = "{problem.client::AnimatorApp|
 	|
 	+ _main(String[]) : void_\l
 	}"
 	]
-javautilEnumeration [
-	label = "{\<\<interface\>\>\njava.util::Enumeration\n\<\<target\>\>|
+problemspritesISprite [
+	label = "{\<\<interface\>\>\nproblem.sprites::ISprite\n\<\<target, adaptee, Component\>\>|
 	|
-	+ hasMoreElements() : boolean\l
-	+ nextElement() : \l
+	+ getChildren() : List\<ISprite\>\l
+	+ move(Dimension) : void\l
+	+ getShape() : Shape\l
 	}"
 	style = "filled"
 fillcolor = red]
-javautilIterator [
-	label = "{\<\<interface\>\>\njava.util::Iterator\n\<\<adaptee\>\>|
+problemspritesAbstractSprite [
+	label = "{problem.sprites::AbstractSprite\n\<\<Component, adapter\>\>|
+	# dx: double\l
+	# dy: double\l
+	# shape: Shape\l
 	|
-	+ next() : \l
-	+ hasNext() : boolean\l
-	+ forEachRemaining(Consumer\<\>) : void\l
-	+ remove() : void\l
+	+ getChildren() : List\<ISprite\>\l
+	+ move(Dimension) : void\l
+	# computeNewBoundsAfterMoving(Dimension) : Rectangle2D\l
+	+ getShape() : Shape\l
+	}"
+	style = "filled"
+fillcolor = "yellow"]
+problemspritesMultiBoxSprite [
+	label = "{problem.sprites::MultiBoxSprite\n\<\<Leaf\>\>|
+	|
+	}"
+	style = "filled"
+fillcolor = "yellow"]
+javaxswingJPanel [
+	label = "{javax.swing::JPanel\n\<\<target\>\>|
+	- _uiClassID: String_\l
+	|
+	+ getUI() : PanelUI\l
+	# paramString() : String\l
+	+ setUI(PanelUI) : void\l
+	- writeObject(ObjectOutputStream) : void\l
+	+ updateUI() : void\l
+	+ getUIClassID() : String\l
+	+ getAccessibleContext() : AccessibleContext\l
 	}"
 	style = "filled"
 fillcolor = red]
+problemspritesISprite [
+	label = "{\<\<interface\>\>\nproblem.sprites::ISprite|
+	|
+	+ getChildren() : List\<ISprite\>\l
+	+ move(Dimension) : void\l
+	+ getShape() : Shape\l
+	}"
+	]
+problemspritesCompositeSprite [
+	label = "{problem.sprites::CompositeSprite|
+	- spriteList: List\<ISprite\>\l
+	|
+	+ removeSprite(ISprite) : void\l
+	+ getChildren() : List\<ISprite\>\l
+	+ addSprite(ISprite) : void\l
+	+ move(Dimension) : void\l
+	}"
+	]
+problemspritesCircleSprite [
+	label = "{problem.sprites::CircleSprite\n\<\<Leaf\>\>|
+	|
+	+ move(Dimension) : void\l
+	}"
+	style = "filled"
+fillcolor = "yellow"]
+problemspritesRectangleSprite [
+	label = "{problem.sprites::RectangleSprite\n\<\<Leaf\>\>|
+	|
+	+ move(Dimension) : void\l
+	}"
+	style = "filled"
+fillcolor = "yellow"]
+problemspritesSpriteFactory [
+	label = "{problem.sprites::SpriteFactory|
+	+ _DX: double_\l
+	+ _DY: double_\l
+	+ _WIDTH: double_\l
+	+ _HEIGHT: double_\l
+	- _random: Random_\l
+	- _sprites: List\<Class\<ISprite\>\>_\l
+	|
+	+ _createRandomSprite(Dimension) : ISprite_\l
+	+ _computeRandomLocation(Dimension) : Point2D_\l
+	}"
+	]
+problemgraphicsAnimationPanel [
+	label = "{problem.graphics::AnimationPanel\n\<\<adapter\>\>|
+	- _serialVersionUID: long_\l
+	- sprites: List\<ISprite\>\l
+	- animating: boolean\l
+	- sleepTime: long\l
+	|
+	+ add(ISprite) : void\l
+	+ getSize() : Dimension\l
+	# paintComponent(Graphics) : void\l
+	+ reset() : void\l
+	+ animate() : void\l
+	 _access2(AnimationPanel) : long_\l
+	 _access1(AnimationPanel) : List_\l
+	 _access0(AnimationPanel) : boolean_\l
+	}"
+	style = "filled"
+fillcolor = red]
+problemspritesCircleTrailSprite [
+	label = "{problem.sprites::CircleTrailSprite\n\<\<Leaf\>\>|
+	|
+	}"
+	style = "filled"
+fillcolor = "yellow"]
+	edge [style = "solid"] [arrowhead = "empty"]
+	[label = ""]problemspritesCompositeSprite->problemspritesAbstractSprite
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<adapts\>\>"]problemclientIteratorToEnumerationAdapter->javautilIterator
+	[label = ""]problemspritesCompositeSprite->problemspritesISprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemspritesCompositeSprite->problemspritesAbstractSprite
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = ""]problemgraphicsMainWindow->javaxswingJPanel
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = ""]problemgraphicsMainWindow->problemgraphicsAnimationPanel
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemgraphicsMainWindow->problemgraphicsMainWindow
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemclientAnimatorApp->problemgraphicsMainWindow
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = "\<\<adapts\>\>"]problemspritesAbstractSprite->javaawtShape
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]problemclientIteratorToEnumerationAdapter->javautilEnumeration
+	[label = ""]problemspritesAbstractSprite->problemspritesISprite
+	edge [style = "solid"] [arrowhead = "empty"]
+	[label = ""]problemspritesMultiBoxSprite->problemspritesCompositeSprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemspritesMultiBoxSprite->problemspritesCompositeSprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemspritesMultiBoxSprite->problemspritesRectangleSprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]javaxswingJPanel->javaxswingJPanel
+	edge [style = "solid"] [arrowhead = "empty"]
+	[label = ""]problemspritesCircleSprite->problemspritesAbstractSprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemspritesCircleSprite->problemspritesAbstractSprite
+	edge [style = "solid"] [arrowhead = "empty"]
+	[label = ""]problemspritesRectangleSprite->problemspritesAbstractSprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemspritesRectangleSprite->problemspritesAbstractSprite
+	edge [style = "solid"] [arrowhead = "empty"]
+	[label = ""]problemgraphicsAnimationPanel->javaxswingJPanel
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemlibLinearTransformer->javautilEnumeration
+	[label = "\<\<adapts\>\>"]problemgraphicsAnimationPanel->problemspritesISprite
 	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemclientApp->problemclientIteratorToEnumerationAdapter
+	[label = ""]problemgraphicsAnimationPanel->problemgraphicsAnimationPanel
+	edge [style = "solid"] [arrowhead = "empty"]
+	[label = ""]problemspritesCircleTrailSprite->problemspritesCompositeSprite
 	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemclientApp->problemlibLinearTransformer
+	[label = ""]problemspritesCircleTrailSprite->problemspritesCompositeSprite
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemspritesCircleTrailSprite->problemspritesCircleSprite
 }

@@ -89,6 +89,8 @@ public class GeneralUtil {
 	}
 
 	public static String typeMethodCollections(String in, List<String> usesClasses) {
+		if(in.length()<1)
+			return in;
 		String s = in;
 		String res = "";
 		if(primCodes.containsKey(s)){
@@ -182,6 +184,7 @@ public class GeneralUtil {
 		if (dir.isDirectory()) {
 			File[] dirFiles = dir.listFiles();
 			for (int i = 0; i < dirFiles.length; i++) {
+				System.out.println(dirFiles[i].toString());
 				res2.addAll(getClassesFromDir(dirFiles[i]));
 			}
 			for (String r : res2) {

@@ -16,6 +16,7 @@ import legendary.Interfaces.IClass;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
 import legendary.detectors.AdapterDetector;
+import legendary.detectors.CompositeDetector;
 import legendary.detectors.DecoratorDetector;
 import legendary.detectors.SingletonDetector;
 
@@ -24,11 +25,13 @@ import legendary.detectors.SingletonDetector;
  */
 public class DesignParser {
 
-	public static String packageName = "problem";
+	public static String packageName = "java";
 	public static final String[] directories = {
-//			"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-	"C:/Users/Administrator/Documents/CSSE374/Lab5-1-Solution/src/problem" };
-//	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
+			// "/Users/SamPastoriza/Documents/Programming/Java
+			// Development/LegendaryPatterns/src/legendary" };
+			"javax/swing/AbstractAction"};
+//			"C:/Users/Jason/Documents/374/Lab7-2/src/problem" };
+//	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	/**
@@ -42,13 +45,14 @@ public class DesignParser {
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
-		legendaryParser.addDetector(new SingletonDetector(new DecoratorDetector(new AdapterDetector())));
+		legendaryParser.addDetector(
+				new SingletonDetector(new DecoratorDetector(new AdapterDetector(new CompositeDetector()))));
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
 		for (String dir : directories) {
 			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
 		}
-		
+
 		// String[] classes = new String[] { "java/util/Collections",
 		// "java/util/Random", "java/lang/System",
 		// "java/util/concurrent/atomic/AtomicLong" };
@@ -73,11 +77,14 @@ public class DesignParser {
 			GeneralUtil.writeAndExecSDEdit(builder);
 		}
 	}
-	
+
 	public static void executeASM(String className, IModel legendaryModel, boolean drawable) throws IOException {
 		classesSeen.add(className);
 		IClass legendaryClass = new LegendaryClass();
-		legendaryClass.setDrawable(drawable);
+		if (className.startsWith(DesignParser.packageName))
+			legendaryClass.setDrawable(true);
+		else
+			legendaryClass.setDrawable(drawable);
 		legendaryModel.addClass(legendaryClass);
 		// ASM's ClassReader does the heavy lifting of parsing the compiled
 		// Java class
@@ -87,8 +94,7 @@ public class DesignParser {
 		// DECORATE declaration visitor with field visitor
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decVisitor, legendaryClass, legendaryModel);
 		// DECORATE field visitor with method visitor
-		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, legendaryClass,
-				legendaryModel);
+		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, legendaryClass, legendaryModel);
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
