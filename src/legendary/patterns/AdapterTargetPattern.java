@@ -1,15 +1,8 @@
 package legendary.patterns;
 
-import legendary.Interfaces.IPattern;
-
-public class AdapterTargetPattern implements IPattern{
+public class AdapterTargetPattern extends AbstractAdapterPattern{
 	@Override
 	public String tag() {
 		return "target, ";
-	}
-
-	@Override
-	public String color() {
-		return "style = \"filled\"\nfillcolor = red";
 	}
 }
