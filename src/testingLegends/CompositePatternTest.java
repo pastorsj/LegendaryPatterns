@@ -34,6 +34,7 @@ public class CompositePatternTest {
 	private IClass testLeafB;
 	private IClass testLeafC;
 	private IClass testLeafD;
+	private IClass IComponent;
 	private IMethod testMethod1;
 	private IMethod testMethod2;
 	private IMethod testMethod3;
@@ -50,6 +51,7 @@ public class CompositePatternTest {
 		this.testLeafB = new LegendaryClass();
 		this.testLeafC = new LegendaryClass();
 		this.testLeafD = new LegendaryClass();
+		this.IComponent = new LegendaryClass();
 		this.testMethod1 = new LegendaryMethod();
 		this.testMethod2 = new LegendaryMethod();
 		this.testMethod3 = new LegendaryMethod();
@@ -61,6 +63,7 @@ public class CompositePatternTest {
 		this.setUpLeafB();
 		this.setUpLeafC();
 		this.setUpLeafD();
+		this.setUpIComponent();
 		this.setUpTestMethod1();
 		this.setUpTestMethod2();
 		this.setUpTestMethod3();
@@ -107,6 +110,13 @@ public class CompositePatternTest {
 		this.testLeafD.setDrawable(true);
 		this.testLeafD.addMethod(this.testMethod3);
 	}
+	
+	private void setUpIComponent() {
+		this.IComponent.setClassName("IComponent");
+		this.IComponent.setDrawable(true);
+		this.IComponent.addMethod(this.testMethod1);
+		this.IComponent.setIsInterface(true);
+	}
 
 	private void setUpTestMethod1() {
 		this.testMethod1.setMethodName("method1");
@@ -139,132 +149,63 @@ public class CompositePatternTest {
 		this.testModel.addClass(this.testLeafD);
 		this.testModel.addClass(this.testComponent);
 		this.testModel.addClass(this.testComposite);
-		this.addRelations();
 	}
 
-	private void addRelations() {
+	private void addRelations(boolean nofail) {
+		this.testModel.addRelation("LeafA", "Component", Relations.EXTENDS);
+		this.testModel.addRelation("LeafB", "Component", Relations.EXTENDS);
+		this.testModel.addRelation("LeafC", "Composite", Relations.EXTENDS);
+		this.testModel.addRelation("LeafD", "Composite", Relations.EXTENDS);
+		if(nofail)
+			this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
+		this.testModel.addRelation("Composite", "Component", Relations.ASSOCIATES);
+	}
+
+	private void setUpModel2() {
+		this.testModel.addClass(this.testLeafA);
+		this.testModel.addClass(this.testLeafB);
+		this.testModel.addClass(this.testLeafC);
+		this.testModel.addClass(this.testLeafD);
+		this.testModel.addClass(this.testComponent);
+		this.testModel.addClass(this.testComposite);
+		this.testModel.addClass(this.IComponent);
+	}
+
+	private void addRelations2(boolean nofail) {
 		this.testModel.addRelation("LeafA", "Component", Relations.EXTENDS);
 		this.testModel.addRelation("LeafB", "Component", Relations.EXTENDS);
 		this.testModel.addRelation("LeafC", "Composite", Relations.EXTENDS);
 		this.testModel.addRelation("LeafD", "Composite", Relations.EXTENDS);
 		this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
-		this.testModel.addRelation("Composite", "Component", Relations.ASSOCIATES);
+		if(nofail)
+			this.testModel.addRelation("Composite", "IComponent", Relations.ASSOCIATES);
+		this.testModel.addRelation("Component", "IComponent", Relations.IMPLEMENTS);
+	}
+	
+	private void setUpModel3() {
+		this.testModel.addClass(this.testLeafA);
+		this.testModel.addClass(this.testLeafC);
+		this.testModel.addClass(this.testComponent);
+		this.testModel.addClass(this.testComposite);
 	}
 
-//	private void setUpAbstractModel() {
-//		this.testModel.addClass(this.testLeafD);
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testComposite);
-//		this.addAbstractRelations();
-//	}
-//
-//	private void addAbstractRelations() {
-//		this.testModel.addRelation("Client", "AbstractTarget", Relations.ASSOCIATES);
-//		this.testModel.addRelation("Adapter", "AbstractTarget", Relations.EXTENDS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//	
-//	private void setUpClassModel() {
-//		this.testModel.addClass(this.testLeafD);
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testLeafA);
-//		this.addClassRelations();
-//	}
-//	
-//	private void addClassRelations() {
-//		this.testModel.addRelation("Client", "Target", Relations.ASSOCIATES);
-//		this.testModel.addRelation("Adapter", "Target", Relations.EXTENDS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//	
-//	private void setUpInterfaceModel2() {
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testComponent);
-//		this.addInterfaceRelations2();
-//	}
-//
-//	private void addInterfaceRelations2() {
-//		this.testModel.addRelation("Adapter", "ITarget", Relations.IMPLEMENTS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//
-//	private void setUpAbstractModel2() {
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testComposite);
-//		this.addAbstractRelations2();
-//	}
-//
-//	private void addAbstractRelations2() {
-//		this.testModel.addRelation("Adapter", "AbstractTarget", Relations.EXTENDS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//	
-//	private void setUpClassModel2() {
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testLeafA);
-//		this.addClassRelations2();
-//	}
-//	
-//	private void addClassRelations2() {
-//		this.testModel.addRelation("Adapter", "Target", Relations.EXTENDS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//	
-//	private void setUpInterfaceModel3() {
-//		this.testModel.addClass(this.testLeafD);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testLeafC);
-//		this.testLeafC.setDrawable(false);
-//		this.testModel.addClass(this.testComponent);
-//		this.addInterfaceRelations3();
-//	}
-//
-//	private void addInterfaceRelations3() {
-//		this.testModel.addRelation("Client", "ITarget", Relations.ASSOCIATES);
-//		this.testModel.addRelation("Adapter", "ITarget", Relations.IMPLEMENTS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//
-//	private void setUpAbstractModel3() {
-//		this.testModel.addClass(this.testLeafD);
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testComposite);
-//		this.addAbstractRelations3();
-//	}
-//
-//	private void addAbstractRelations3() {
-//		this.testModel.addRelation("Client", "AbstractTarget", Relations.USES);
-//		this.testModel.addRelation("Adapter", "AbstractTarget", Relations.EXTENDS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.ASSOCIATES);
-//	}
-//	
-//	private void setUpClassModel3() {
-//		this.testModel.addClass(this.testLeafD);
-//		this.testModel.addClass(this.testLeafC);
-//		this.testModel.addClass(this.testLeafB);
-//		this.testModel.addClass(this.testLeafA);
-//		this.addClassRelations3();
-//	}
-//	
-//	private void addClassRelations3() {
-//		this.testModel.addRelation("Client", "Target", Relations.ASSOCIATES);
-//		this.testModel.addRelation("Adapter", "Target", Relations.EXTENDS);
-//		this.testModel.addRelation("Adapter", "Adaptee", Relations.USES);
-//	}
+	private void addRelations3(boolean nofail) {
+		this.testModel.addRelation("LeafA", "Component", Relations.EXTENDS);
+		this.testModel.addRelation("LeafC", "Composite", Relations.EXTENDS);
+		if(nofail)
+			this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
+		this.testModel.addRelation("Composite", "Component", Relations.ASSOCIATES);
+	}
 
 	@After
 	public void takeDown() {
 		this.testComponent = null;
 		this.testComposite = null;
+		this.IComponent = null;
 		this.testLeafA = null;
 		this.testLeafB = null;
 		this.testLeafC = null;
+		this.testLeafD = null;
 		this.testMethod1 = null;
 		this.testMethod2 = null;
 		this.testMethod3 = null;
@@ -275,6 +216,7 @@ public class CompositePatternTest {
 	@Test
 	public void testBaseCaseDetect() {
 		this.setUpModel();
+		this.addRelations(true);
 		this.testModel.convertToGraph();
 		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
 		Set<IClass> components = new HashSet<>();
@@ -290,96 +232,87 @@ public class CompositePatternTest {
 		assertEquals(composites, result.get(CompositePattern.class));
 		assertEquals(leaves, result.get(CompositeLeafPattern.class));
 	}
+	
+	@Test
+	public void testBaseCaseDetectWithInterface() {
+		this.setUpModel2();
+		this.addRelations2(true);
+		this.testField.setType("IComponent[]");
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> composites = new HashSet<>();
+		Set<IClass> leaves = new HashSet<>();
+		components.add(this.testComponent);
+		components.add(this.IComponent);
+		composites.add(this.testComposite);
+		composites.add(this.testLeafC);
+		composites.add(this.testLeafD);		
+		leaves.add(this.testLeafA);
+		leaves.add(this.testLeafB);
+		assertEquals(components, result.get(CompositeComponentPattern.class));
+		assertEquals(composites, result.get(CompositePattern.class));
+		assertEquals(leaves, result.get(CompositeLeafPattern.class));
+	}
 
-//	@Test
-//	public void testBaseCaseDetectInterface() {
-//		this.setUpInterfaceModel();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		Set<IClass> adapterTarget = new HashSet<>();
-//		Set<IClass> adapterAdaptee = new HashSet<>();
-//		Set<IClass> adapterAdapter = new HashSet<>();
-//		adapterTarget.add(this.testComponent);
-//		adapterAdaptee.add(this.testLeafB);
-//		adapterAdapter.add(this.testLeafC);
-//		assertEquals(adapterTarget, result.get(AdapterTargetPattern.class));
-//		assertEquals(adapterAdaptee, result.get(AdapteePattern.class));
-//		assertEquals(adapterAdapter, result.get(AdapterPattern.class));
-//	}
-//	
-//	@Test
-//	public void testBaseCaseDetectClass() {
-//		this.setUpClassModel();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		Set<IClass> adapterTarget = new HashSet<>();
-//		Set<IClass> adapterAdaptee = new HashSet<>();
-//		Set<IClass> adapterAdapter = new HashSet<>();
-//		adapterTarget.add(this.testLeafA);
-//		adapterAdaptee.add(this.testLeafB);
-//		adapterAdapter.add(this.testLeafC);
-//		assertEquals(adapterTarget, result.get(AdapterTargetPattern.class));
-//		assertEquals(adapterAdaptee, result.get(AdapteePattern.class));
-//		assertEquals(adapterAdapter, result.get(AdapterPattern.class));
-//	}
-//	
-//	@Test
-//	public void testBaseCaseDetectAbstractFail1() {
-//		this.setUpAbstractModel2();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		assertEquals(new HashSet<>(), result.get(AdapterTargetPattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapteePattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapterPattern.class));
-//	}
-//
-//	@Test
-//	public void testBaseCaseDetectInterfaceFail1() {
-//		this.setUpInterfaceModel2();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		assertEquals(new HashSet<>(), result.get(AdapterTargetPattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapteePattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapterPattern.class));
-//	}
-//	
-//	@Test
-//	public void testBaseCaseDetectClassFail1() {
-//		this.setUpClassModel2();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		assertEquals(new HashSet<>(), result.get(AdapterTargetPattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapteePattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapterPattern.class));
-//	}
-//	
-//	@Test
-//	public void testBaseCaseDetectAbstractFail2() {
-//		this.setUpAbstractModel3();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		assertEquals(new HashSet<>(), result.get(AdapterTargetPattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapteePattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapterPattern.class));
-//	}
-//
-//	@Test
-//	public void testBaseCaseDetectInterfaceFail2() {
-//		this.setUpInterfaceModel3();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		assertEquals(new HashSet<>(), result.get(AdapterTargetPattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapteePattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapterPattern.class));
-//	}
-//	
-//	@Test
-//	public void testBaseCaseDetectClassFail2() {
-//		this.setUpClassModel3();
-//		this.testModel.convertToGraph();
-//		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
-//		assertEquals(new HashSet<>(), result.get(AdapterTargetPattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapteePattern.class));
-//		assertEquals(new HashSet<>(), result.get(AdapterPattern.class));
-//	}
+	@Test
+	public void testEdgeCaseDetect() {
+		this.setUpModel3();
+		this.addRelations3(true);
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> composites = new HashSet<>();
+		Set<IClass> leaves = new HashSet<>();
+		components.add(this.testComponent);
+		composites.add(this.testComposite);
+		composites.add(this.testLeafC);
+		leaves.add(this.testLeafA);
+		assertEquals(components, result.get(CompositeComponentPattern.class));
+		assertEquals(composites, result.get(CompositePattern.class));
+		assertEquals(leaves, result.get(CompositeLeafPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectFail() {
+		this.setUpModel();
+		this.addRelations(false);
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> composites = new HashSet<>();
+		Set<IClass> leaves = new HashSet<>();
+		assertEquals(components, result.get(CompositeComponentPattern.class));
+		assertEquals(composites, result.get(CompositePattern.class));
+		assertEquals(leaves, result.get(CompositeLeafPattern.class));
+	}
+	
+	@Test
+	public void testBaseCaseDetectWithInterfaceFail() {
+		this.setUpModel2();
+		this.addRelations2(false);
+		this.testField.setType("IComponent[]");
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> composites = new HashSet<>();
+		Set<IClass> leaves = new HashSet<>();
+		assertEquals(components, result.get(CompositeComponentPattern.class));
+		assertEquals(composites, result.get(CompositePattern.class));
+		assertEquals(leaves, result.get(CompositeLeafPattern.class));
+	}
+
+	@Test
+	public void testEdgeCaseDetectFail() {
+		this.setUpModel3();
+		this.addRelations3(false);
+		this.testModel.convertToGraph();
+		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
+		Set<IClass> components = new HashSet<>();
+		Set<IClass> composites = new HashSet<>();
+		Set<IClass> leaves = new HashSet<>();
+		assertEquals(components, result.get(CompositeComponentPattern.class));
+		assertEquals(composites, result.get(CompositePattern.class));
+		assertEquals(leaves, result.get(CompositeLeafPattern.class));
+	}	
 }

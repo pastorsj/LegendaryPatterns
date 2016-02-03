@@ -88,7 +88,6 @@ public class CompositeDetector implements IPatternDetector {
 				}
 			}
 			for (IField f : compos.getFields()) {
-				System.out.println(f.getBaseTypes());
 				if (f.getBaseTypes().contains(compon.getClassName()) || f.getBaseTypes().contains(compon.getClassName()+"[]")) {
 					for (String s : f.getBaseTypes()) {
 						if (collectionExt.contains(s) || f.getType().endsWith("[]")) {
