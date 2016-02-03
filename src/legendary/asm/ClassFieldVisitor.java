@@ -15,18 +15,18 @@ import legendary.Interfaces.IField;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
 
-/**
- * The Class ClassFieldVisitor.
- */
 /*
+ * This class will be called when visiting the declaration of a field
+ * inside of another class
+ * 
  * Modifications made by Sam Pastoriza and Jason Lane
  */
 public class ClassFieldVisitor extends ClassVisitor {
 
-	/** The legendary class. */
+	/** Stores the current class being visited */
 	private IClass legendaryClass;
 	
-	/** The legendary model. */
+	/** Stores a representation of the project */
 	private IModel legendaryModel;
 
 	/**
@@ -41,10 +41,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 	/**
 	 * Instantiates a new class field visitor.
 	 *
-	 * @param api the api
-	 * @param decorated the decorated
-	 * @param legendaryClass the legendary class
-	 * @param legendaryModel the legendary model
+	 * @param api
+	 * @param decorated
+	 * @param legendaryClass
+	 * @param legendaryModel
 	 */
 	public ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel) {
 		super(api, decorated);
@@ -81,10 +81,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 	};
 
 	/**
-	 * Adds the access level.
+	 * Adds the visibility level of the field.
 	 *
-	 * @param access the access
-	 * @param field the field
+	 * @param access
+	 * @param field
 	 */
 	void addAccessLevel(int access, IField field) {
 		String level = "";

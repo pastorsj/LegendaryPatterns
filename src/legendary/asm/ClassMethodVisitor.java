@@ -14,22 +14,22 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.ParsingUtil.GeneralUtil;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ClassMethodVisitor.
- */
+
 /*
+ * This class will be called when visiting the declaration of a method
+ * inside of another class
+ * 
  * Modifications made by Sam Pastoriza and Jason Lane
  */
 public class ClassMethodVisitor extends ClassVisitor {
 
-	/** The uses classes. */
+	/** Stores the list of classes that this class uses. */
 	private List<String> usesClasses;
 	
-	/** The legendary class. */
+	/** Stores the current class being visited */
 	private IClass legendaryClass;
 	
-	/** The legendary model. */
+	/** Stores a representation of the project */
 	private IModel legendaryModel;
 
 	/**
@@ -44,10 +44,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 	/**
 	 * Instantiates a new class method visitor.
 	 *
-	 * @param api the api
-	 * @param decorated the decorated
-	 * @param legendaryClass the legendary class
-	 * @param legendaryModel the legendary model
+	 * @param api
+	 * @param decorated
+	 * @param legendaryClass
+	 * @param legendaryModel
 	 */
 	public ClassMethodVisitor(int api, ClassVisitor decorated,
 			IClass legendaryClass, IModel legendaryModel) {
@@ -82,10 +82,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 	}
 
 	/**
-	 * Adds the access level.
+	 * Adds the visibility level of the method
 	 *
-	 * @param access the access
-	 * @param method the method
+	 * @param access
+	 * @param method
 	 */
 	private void addAccessLevel(int access, IMethod method) {
 		String level = "";
@@ -104,10 +104,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 	}
 
 	/**
-	 * Adds the return type.
+	 * Adds the return type of the method.
 	 *
-	 * @param desc the desc
-	 * @param method the method
+	 * @param desc
+	 * @param method
 	 */
 	private void addReturnType(String desc, IMethod method) {
 		String returnType = desc;

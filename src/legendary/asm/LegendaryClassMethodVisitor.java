@@ -8,29 +8,29 @@ import legendary.ParsingUtil.GeneralUtil;
 
 import org.objectweb.asm.MethodVisitor;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class LegendaryClassMethodVisitor.
+ * This class is called whenever a method is called inside of another 
+ * method inside of the current class 
  */
 public class LegendaryClassMethodVisitor extends MethodVisitor {
 
-	/** The legendary class. */
+	/** The representation of the current class */
 	IClass legendaryClass;
 	
-	/** The legendary model. */
+	/** The representation of the current project */
 	IModel legendaryModel;
 	
-	/** The legendary method. */
+	/** The representation of the current method being analyzed */
 	IMethod legendaryMethod;
 
 	/**
 	 * Instantiates a new legendary class method visitor.
 	 *
 	 * @param api the api
-	 * @param decorated the decorated
-	 * @param legendaryClass the legendary class
-	 * @param legendaryModel the legendary model
-	 * @param legendaryMethod the legendary method
+	 * @param decorated The current Method Visitor being decorated
+	 * @param legendaryClass (see field)
+	 * @param legendaryModel (see field)
+	 * @param legendaryMethod (see field)
 	 */
 	public LegendaryClassMethodVisitor(int api, MethodVisitor decorated, IClass legendaryClass, IModel legendaryModel,
 			IMethod legendaryMethod) {
@@ -58,34 +58,5 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 			this.legendaryMethod.addMethodToCallStack(this.legendaryClass.getClassName(), ownerClass, name,
 					GeneralUtil.typeArgumentCollections(desc));
 		}
-	}
-
-	/* (non-Javadoc)
-	 * @see org.objectweb.asm.MethodVisitor#visitFieldInsn(int, java.lang.String, java.lang.String, java.lang.String)
-	 */
-	// For Milestone 3
-	@Override
-	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-		// Called whenever a field is accessed
-		// System.out.println("\n=======Field Accessed Owner: " + owner);
-		// System.out.println("=======Name of Field: " + name);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.objectweb.asm.MethodVisitor#visitTypeInsn(int, java.lang.String)
-	 */
-	@Override
-	public void visitTypeInsn(int opcode, String type) {
-		// Called whenever new is used
-		// System.out.println("\n=======New keyword was used: " + type);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.objectweb.asm.MethodVisitor#visitVarInsn(int, int)
-	 */
-	@Override
-	public void visitVarInsn(int opcode, int var) {
-		// Called whenever a parameter or local variable is accessed
-		// System.out.println("\n======Parameter accessed: " + var);
 	}
 }

@@ -10,22 +10,22 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 /**
- * The Class ClassDeclarationVisitor.
+ * This class will be called when visiting the declaration of another class
  */
 public class ClassDeclarationVisitor extends ClassVisitor {
 
-	/** The legendary class. */
+	/** Stores the current class being visited */
 	private IClass legendaryClass;
 	
-	/** The legendary model. */
+	/** Stores a representation of the project */
 	private IModel legendaryModel;
 
 	/**
 	 * Instantiates a new class declaration visitor.
 	 *
-	 * @param api the api
-	 * @param legendaryClass the legendary class
-	 * @param legendaryModel the legendary model
+	 * @param api
+	 * @param legendaryClass
+	 * @param legendaryModel
 	 */
 	public ClassDeclarationVisitor(int api, IClass legendaryClass, IModel legendaryModel) {
 		super(api);

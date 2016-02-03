@@ -20,11 +20,9 @@ import legendary.detectors.CompositeDetector;
 import legendary.detectors.DecoratorDetector;
 import legendary.detectors.SingletonDetector;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class DesignParser.
- */
 /*
+ * This runnable Design Parser class begins the java project 
+ * 
  * Modification made by Sam Pastoriza and Jason Lane
  */
 public class DesignParser {
@@ -32,12 +30,13 @@ public class DesignParser {
 	/** The package name. */
 	public static String packageName = "legendary";
 	
-	/** The Constant directories. */
+	/** The directory. */
 	public static final String[] directories = {
 			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 //			"javax/swing/AbstractAction"};
 //			"C:/Users/Jason/Documents/374/Lab7-2/src/problem" };
-/** The classes seen. */
+	
+/** The classes that have already been seen. */
 //	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
@@ -80,11 +79,11 @@ public class DesignParser {
 	}
 
 	/**
-	 * Execute asm.
+	 * Execute ASM library to read classes.
 	 *
-	 * @param className the class name
-	 * @param legendaryModel the legendary model
-	 * @param drawable the drawable
+	 * @param className
+	 * @param legendaryModel
+	 * @param drawable
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void executeASM(String className, IModel legendaryModel, boolean drawable) throws IOException {
@@ -95,14 +94,10 @@ public class DesignParser {
 		else
 			legendaryClass.setDrawable(drawable);
 		legendaryModel.addClass(legendaryClass);
-		// ASM's ClassReader does the heavy lifting of parsing the compiled
-		// Java class
+		
 		ClassReader reader = new ClassReader(className);
-		// make class declaration visitor to get superclass and interfaces
 		ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, legendaryClass, legendaryModel);
-		// DECORATE declaration visitor with field visitor
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decVisitor, legendaryClass, legendaryModel);
-		// DECORATE field visitor with method visitor
 		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, legendaryClass, legendaryModel);
 
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
