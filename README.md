@@ -127,7 +127,21 @@ Refactor of General Util
 Lambda Refactor for Visiting SDEdit class and GraphViz class  
 Unit Tests for Adapter and Decorator pattern framework and details  
 Adapter and Decorator pattern specifics/details  
-Recursive search for classes extends/implements/associated by other classes  
+Recursive search for classes extends/implements/associated by other classes
+###Milestone 6
+We add pattern detection support for the Composite Pattern. We did not change much of the overall  
+design, however, we changed the way we set up the colors and tags for patterns. We abstracted the color  
+since each pattern has the same color for the entire pattern, but different tags. This eliminated some  
+color duplication.
+![UML Milestone 6](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM6.png)  
+#### Completed by Jason Lane
+Composite Pattern framework  
+Composite Pattern details  
+Pattern color/tag framework refactor  
+#### Completed by Sam Pastoriza
+Composite Pattern details  
+Unit/Integration/Regression Tests for Composite Pattern  
+Massive documentation of entire project  
 
 #### Notes
 * framework = interfaces and basic class structures  
