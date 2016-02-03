@@ -16,9 +16,8 @@ import legendary.patterns.CompositeComponentPattern;
 import legendary.patterns.CompositeLeafPattern;
 import legendary.patterns.CompositePattern;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CompositeDetector.
+ * This class allows for the detection of the composite pattern
  */
 public class CompositeDetector implements IPatternDetector {
 
@@ -34,7 +33,7 @@ public class CompositeDetector implements IPatternDetector {
 	/**
 	 * Instantiates a new composite detector.
 	 *
-	 * @param detector the detector
+	 * @param detector The pattern detector
 	 */
 	public CompositeDetector(IPatternDetector detector) {
 		this.detector = detector;
@@ -173,11 +172,12 @@ public class CompositeDetector implements IPatternDetector {
 	}
 
 	/**
-	 * Gets the all supers.
+	 * Gets the all classes that extend or implement the 
+	 * class that was passed in.
 	 *
-	 * @param m the m
-	 * @param c the c
-	 * @return the all supers
+	 * @param m The current model
+	 * @param c The current class
+	 * @return all supers of the class
 	 */
 	private Set<IClass> getAllSupers(IModel m, IClass c) {
 		Set<IClass> result = new HashSet<>();

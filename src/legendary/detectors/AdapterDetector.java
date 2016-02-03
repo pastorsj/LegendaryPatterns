@@ -14,9 +14,8 @@ import legendary.patterns.AdapteePattern;
 import legendary.patterns.AdapterPattern;
 import legendary.patterns.AdapterTargetPattern;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AdapterDetector.
+ * This class allows for the detection of the Adapter pattern
  */
 public class AdapterDetector implements IPatternDetector {
 
@@ -32,7 +31,7 @@ public class AdapterDetector implements IPatternDetector {
 	/**
 	 * Instantiates a new adapter detector.
 	 *
-	 * @param detector the detector
+	 * @param detector The pattern detector
 	 */
 	public AdapterDetector(IPatternDetector detector) {
 		this.detector = detector;

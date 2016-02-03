@@ -14,13 +14,13 @@ import legendary.asm.DesignParser;
 import legendary.patterns.DecoratorComponentPattern;
 import legendary.patterns.DecoratorPattern;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class DecoratorDetector.
+ * This class allows for the detection of the decorator pattern
+ * with the given model.
  */
 public class DecoratorDetector implements IPatternDetector {
 
-	/** The detect. */
+	/** The detector. */
 	private IPatternDetector detect;
 
 	/**
@@ -32,7 +32,7 @@ public class DecoratorDetector implements IPatternDetector {
 	/**
 	 * Instantiates a new decorator detector.
 	 *
-	 * @param detect the detect
+	 * @param detect The pattern detector
 	 */
 	public DecoratorDetector(IPatternDetector detect) {
 		this.detect = detect;
