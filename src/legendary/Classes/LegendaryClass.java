@@ -11,11 +11,9 @@ import legendary.Interfaces.IMethod;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitor;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class LegendaryClass.
- */
 /*
+ * A structure that defined what a class in java should 
+ * look like
  * Author: Jason Lane
  */
 public class LegendaryClass implements IClass, ITraverser {
@@ -35,17 +33,12 @@ public class LegendaryClass implements IClass, ITraverser {
 	/** The fields. */
 	private List<IField> fields;
 	
-	/** The is interface. */
+	/** If the class is an interface. */
 	private boolean isInterface;
 	
-	/** The creation order. */
-	private int creationOrder;
-	
-	/** The drawable. */
+	/** Whether the class is drawable */
 	private boolean drawable;
-	
-	/** The count. */
-	private static int count;
+
 
 	/**
 	 * Instantiates a new legendary class.
@@ -58,7 +51,6 @@ public class LegendaryClass implements IClass, ITraverser {
 		this.fields = new ArrayList<IField>();
 		this.isInterface = false;
 		this.drawable = false;
-		creationOrder = ++count;
 	}
 
 	/* (non-Javadoc)
@@ -67,8 +59,6 @@ public class LegendaryClass implements IClass, ITraverser {
 	@Override
 	public void setClassName(String className) {
 		String name = className.replace("/", ".");
-		// name = name.substring(0, name.lastIndexOf(".")) + "::"
-		// + name.substring(name.lastIndexOf(".") + 1, name.length());
 		this.className = name;
 	}
 
@@ -198,14 +188,6 @@ public class LegendaryClass implements IClass, ITraverser {
 			}
 		}
 		return methodSet;
-	}
-
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IClass#getCreationOrder()
-	 */
-	@Override
-	public int getCreationOrder() {
-		return this.creationOrder;
 	}
 
 	/* (non-Javadoc)

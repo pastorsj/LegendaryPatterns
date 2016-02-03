@@ -7,16 +7,14 @@ import legendary.ParsingUtil.GeneralUtil;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitor;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class LegendaryField.
- */
 /*
+ * This is the structure of a field in java
+ * 
  * Authors: Jason Lane, Sam Pastoriza
  */
 public class LegendaryField implements IField, ITraverser{
 
-	/** The field access type. */
+	/** The field access type (visibility). */
 	private String fieldAccessType;
 	
 	/** The field name. */
@@ -25,6 +23,7 @@ public class LegendaryField implements IField, ITraverser{
 	/** The field type. */
 	private String fieldType;
 	
+	//TODO: Jason
 	/** The base fields. */
 	private Set<String> baseFields;
 

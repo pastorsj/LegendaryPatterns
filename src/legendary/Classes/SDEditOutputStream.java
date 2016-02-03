@@ -16,9 +16,10 @@ import legendary.visitor.IVisitor;
 import legendary.visitor.VisitType;
 import legendary.visitor.VisitorAdapter;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SDEditOutputStream.
+ * This class will traverse through the model and create a 
+ * sequence diagram representation of the model given a 
+ * starting point of a class and a method
  */
 public class SDEditOutputStream {
 
@@ -28,27 +29,27 @@ public class SDEditOutputStream {
 	/** The model. */
 	private IModel model;
 	
-	/** The builder. */
+	/** The builder containing the final representation of the sequence diagram. */
 	private StringBuilder builder;
 	
-	/** The classes. */
+	/** The classes using during the generation of the diagram. */
 	private Set<String> classes;
 	
-	/** The method calls. */
+	/** The method calls on the method stack. */
 	private List<String> methodCalls;
 	
 	/** The depth. */
 	private int depth;
 	
-	/** The orig depth. */
+	/** The orig depth, since depth can be modified. */
 	private final int origDepth;
 
 	/**
 	 * Instantiates a new SD edit output stream.
 	 *
-	 * @param model the model
-	 * @param depth the depth
-	 * @param builder the builder
+	 * @param model The current representation of the project
+	 * @param depth The depth at which the user wants to traverse
+	 * @param builder The final representation of the sequence diagram as a string
 	 */
 	public SDEditOutputStream(IModel model, int depth, StringBuilder builder) {
 		this.model = model;
@@ -73,9 +74,9 @@ public class SDEditOutputStream {
 	}
 
 	/**
-	 * Write.
+	 * Write to the string builder
 	 *
-	 * @param s the s
+	 * @param s a string
 	 */
 	public void write(String s) {
 		builder.append(s);

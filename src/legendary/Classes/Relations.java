@@ -1,32 +1,35 @@
 package legendary.Classes;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Enum Relations.
+ * The Enumeration for Relations.
  */
 public enum Relations {
 	
-	/** The extends. */
+	/** If a class extends another class. */
 	EXTENDS,
 	
-	/** The implements. */
+	/** If a class implements another class. */
 	IMPLEMENTS,
 	
-	/** The uses. */
+	/** If a class uses another class. */
 	USES,
 	
-	/** The associates. */
+	/** If a class associates another class. */
 	ASSOCIATES,
 	
-	/** The rev extends. */
+	/** If a class extends another class, add this reverse arrow to the 
+	 * graph so we can traverse backwards. */
 	REV_EXTENDS,
 	
-	/** The rev implements. */
+	/** If a class extends another class, add this reverse arrow to the 
+	 * graph so we can traverse backwards. */
 	REV_IMPLEMENTS,
 	
-	/** The rev uses. */
+	/** If a class extends another class, add this reverse arrow to the 
+	 * graph so we can traverse backwards. */
 	REV_USES,
 	
-	/** The rev associates. */
+	/** If a class extends another class, add this reverse arrow to the 
+	 * graph so we can traverse backwards. */
 	REV_ASSOCIATES
 }

@@ -13,22 +13,23 @@ import legendary.Interfaces.IPattern;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitor;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class LegendaryModel.
+ * This class is a representation of the structure that any java project 
+ * should have. A java project should have a set of classes, relations between
+ * classes, and inside of those classes should be methods and fields
  */
 public class LegendaryModel implements IModel, ITraverser {
 
 	/** The class list. */
 	private Set<IClass> classList;
 	
-	/** The rel graph. */
+	/** A relations graph. */
 	private Map<IClass, Map<Relations, Set<IClass>>> relGraph;
 	
-	/** The relations. */
+	/** A map of relations. */
 	private Map<List<String>, List<Relations>> relations;
 	
-	/** The patterns. */
+	/** The patterns that are employed in the model. */
 	private Map<IPattern, Set<IClass>> patterns;
 
 	/**
@@ -65,10 +66,11 @@ public class LegendaryModel implements IModel, ITraverser {
 	}
 
 	/**
-	 * Adds the pattern.
+	 * Adds a pattern if it was found by one of the
+	 * pattern detectors.
 	 *
-	 * @param pat the pat
-	 * @param classes the classes
+	 * @param pat The pattern found
+	 * @param classes The classes involved in the pattern
 	 */
 	public void addPattern(IPattern pat, Set<IClass> classes) {
 		if (!this.patterns.containsKey(pat)) {
@@ -78,7 +80,7 @@ public class LegendaryModel implements IModel, ITraverser {
 	}
 
 	/**
-	 * Gets the patterns.
+	 * Gets the set patterns.
 	 *
 	 * @return the patterns
 	 */

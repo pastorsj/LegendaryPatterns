@@ -9,16 +9,14 @@ import legendary.Interfaces.IMethod;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitor;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class LegendaryMethod.
- */
+
 /*
+ * This is the structure of a method in java
  * Author: Jason Lane
  */
 public class LegendaryMethod implements IMethod, ITraverser {
 
-	/** The method access. */
+	/** The method access/visibility. */
 	private String methodAccess;
 	
 	/** The method name. */
@@ -27,7 +25,10 @@ public class LegendaryMethod implements IMethod, ITraverser {
 	/** The parameters. */
 	private List<String> parameters;
 	
-	/** The method call stack. */
+	/** The method call stack.
+	 * This means these are the methods that are called inside of the 
+	 * method currently being assessed
+	 */
 	private Queue<List<List<String>>> methodCallStack;
 	
 	/** The method return type. */

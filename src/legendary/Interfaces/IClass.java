@@ -105,13 +105,6 @@ public interface IClass {
 	public List<IMethod> getMethodObjects();
 	
 	/**
-	 * Gets the creation order.
-	 *
-	 * @return the creation order
-	 */
-	public int getCreationOrder();
-	
-	/**
 	 * Sets the drawable.
 	 *
 	 * @param drawable the new drawable

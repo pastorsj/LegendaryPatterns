@@ -22,30 +22,36 @@ import legendary.visitor.IVisitor;
 import legendary.visitor.VisitType;
 import legendary.visitor.VisitorAdapter;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GraphVizOutputStream.
+ * This class goes through the model and sets up a convienent way to parse
+ * the model into the appropriate representation.
+ * This is done using the Visitor Pattern
  */
 public class GraphVizOutputStream {
 	
-	/** The builder. */
+	/** The string builder that will contain the final 
+	 * representation of the uml diagram
+	 */
 	private final StringBuilder builder;
 	
-	/** The visitor. */
+	/** The visitor will traverse the model and call
+	 * the defined functions in the right order to produce the correct uml
+	 * representation of the model
+	 */
 	private final IVisitor visitor;
 	
-	/** The relation rep. */
+	/** The set of relations defined in the model between classes in the model */
 	private final Map<Relations, String> relationRep;
 	
-	/** The patterns. */
+	/** The patterns found in the model */
 	private static Map<IClass, Set<IPattern>> patterns;
 
 	/**
 	 * Instantiates a new graph viz output stream.
 	 *
-	 * @param builder the builder
-	 * @param map the map
-	 * @param m the m
+	 * @param builder (see field)
+	 * @param map (the map contains a representation of the patterns)
+	 * @param m (the model, see field)
 	 */
 	public GraphVizOutputStream(StringBuilder builder,
 			Map<Class<? extends IPattern>, Set<IClass>> map, IModel m) {
@@ -98,9 +104,9 @@ public class GraphVizOutputStream {
 	}
 
 	/**
-	 * Write.
+	 * Write to the string builder
 	 *
-	 * @param s the s
+	 * @param s a string
 	 */
 	private void write(String s) {
 		this.builder.append(s);
@@ -127,7 +133,7 @@ public class GraphVizOutputStream {
 	}
 
 	/**
-	 * Adds the arrows.
+	 * Adds the arrows for the relations.
 	 *
 	 * @param m the m
 	 * @return the string
@@ -256,7 +262,7 @@ public class GraphVizOutputStream {
 	/**
 	 * Adds the pattern tags.
 	 *
-	 * @param c the c
+	 * @param c The class containing a part of a pattern
 	 */
 	private void addPatternTags(IClass c) {
 		String s = "\\n\\<\\<";
@@ -281,10 +287,10 @@ public class GraphVizOutputStream {
 	}
 
 	/**
-	 * Pattern color.
+	 * Gets pattern color of a class.
 	 *
-	 * @param c the c
-	 * @return the string
+	 * @param c A class
+	 * @return the color of the class
 	 */
 	private String patternColor(IClass c) {
 		if (patterns.containsKey(c))
@@ -329,15 +335,6 @@ public class GraphVizOutputStream {
 			}
 		};
 		this.visitor.addVisit(VisitType.Visit, IField.class, command);
-	}
-
-	/**
-	 * Visit.
-	 *
-	 * @param m the m
-	 */
-	public void visit(IMethod m) {
-
 	}
 
 	/**
@@ -417,7 +414,7 @@ public class GraphVizOutputStream {
 	}
 
 	/**
-	 * Initialize.
+	 * Initialize relationship map for simpler code.
 	 */
 	public void initialize() {
 		this.relationRep.put(Relations.ASSOCIATES,
