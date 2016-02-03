@@ -6,7 +6,7 @@ public abstract class AbstractAdapterPattern implements IPattern{
 
 	@Override
 	public String color(){
-		return "style = \"filled\"\nfillcolor = red";
+		return "style = \"filled\"\nfillcolor = \"red\"";
 		
 	}
 	

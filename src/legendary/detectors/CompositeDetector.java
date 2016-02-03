@@ -88,9 +88,10 @@ public class CompositeDetector implements IPatternDetector {
 				}
 			}
 			for (IField f : compos.getFields()) {
-				if (f.getBaseTypes().contains(compon.getClassName())) {
+				System.out.println(f.getBaseTypes());
+				if (f.getBaseTypes().contains(compon.getClassName()) || f.getBaseTypes().contains(compon.getClassName()+"[]")) {
 					for (String s : f.getBaseTypes()) {
-						if (collectionExt.contains(s)) {
+						if (collectionExt.contains(s) || f.getType().endsWith("[]")) {
 							if (!compos.isDrawable())
 								continue outer;
 							composites.add(compos);
@@ -98,7 +99,7 @@ public class CompositeDetector implements IPatternDetector {
 							components.add(mid);
 							leaves.addAll(mid.isInterface() ? rels.get(mid).get(Relations.REV_IMPLEMENTS)
 									: rels.get(mid).get(Relations.REV_EXTENDS));
-							leaves.addAll(mid.isInterface() ? rels.get(compos).get(Relations.REV_IMPLEMENTS)
+							composites.addAll(mid.isInterface() ? rels.get(compos).get(Relations.REV_IMPLEMENTS)
 									: rels.get(compos).get(Relations.REV_EXTENDS));
 							leaves.removeAll(composites);
 							leaves.removeAll(components);

@@ -21,21 +21,21 @@ public class PatternColorTest {
 	public void testAdapteePattern() {
 		this.testPattern = new AdapteePattern();
 		assertEquals("adaptee, ", this.testPattern.tag());
-		assertEquals("style = \"filled\"\nfillcolor = red", this.testPattern.color());
+		assertEquals("style = \"filled\"\nfillcolor = \"red\"", this.testPattern.color());
 	}
 	
 	@Test
 	public void testAdapterPattern() {
 		this.testPattern = new AdapterPattern();
 		assertEquals("adapter, ", this.testPattern.tag());
-		assertEquals("style = \"filled\"\nfillcolor = red", this.testPattern.color());
+		assertEquals("style = \"filled\"\nfillcolor = \"red\"", this.testPattern.color());
 	}
 	
 	@Test
 	public void testAdapterTargetPattern() {
 		this.testPattern = new AdapterTargetPattern();
 		assertEquals("target, ", this.testPattern.tag());
-		assertEquals("style = \"filled\"\nfillcolor = red", this.testPattern.color());
+		assertEquals("style = \"filled\"\nfillcolor = \"red\"", this.testPattern.color());
 	}
 	
 	@Test
@@ -57,6 +57,27 @@ public class PatternColorTest {
 		this.testPattern = new SingletonPattern();
 		assertEquals("Singleton, ", this.testPattern.tag());
 		assertEquals("color = blue", this.testPattern.color());
+	}
+	
+	@Test
+	public void testCompositeComponentPattern() {
+		this.testPattern = new CompositeComponentPattern();
+		assertEquals("Component, ", this.testPattern.tag());
+		assertEquals("style = \"filled\"\nfillcolor = \"yellow\"", this.testPattern.color());
+	}
+	
+	@Test
+	public void testCompositeLeafPattern() {
+		this.testPattern = new CompositeLeafPattern();
+		assertEquals("Leaf, ", this.testPattern.tag());
+		assertEquals("style = \"filled\"\nfillcolor = \"yellow\"", this.testPattern.color());
+	}
+	
+	@Test
+	public void testCompositeCompositePattern() {
+		this.testPattern = new CompositePattern();
+		assertEquals("Composite, ", this.testPattern.tag());
+		assertEquals("style = \"filled\"\nfillcolor = \"yellow\"", this.testPattern.color());
 	}
 	
 	
