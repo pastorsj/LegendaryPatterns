@@ -13,34 +13,63 @@ import legendary.Interfaces.IPattern;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LegendaryModel.
+ */
 public class LegendaryModel implements IModel, ITraverser {
 
+	/** The class list. */
 	private Set<IClass> classList;
+	
+	/** The rel graph. */
 	private Map<IClass, Map<Relations, Set<IClass>>> relGraph;
+	
+	/** The relations. */
 	private Map<List<String>, List<Relations>> relations;
+	
+	/** The patterns. */
 	private Map<IPattern, Set<IClass>> patterns;
 
+	/**
+	 * Instantiates a new legendary model.
+	 */
 	public LegendaryModel() {
 		this.classList = new HashSet<IClass>();
 		this.relGraph = new HashMap<>();
 		this.relations = new HashMap<>();
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#getClasses()
+	 */
 	@Override
 	public Set<IClass> getClasses() {
 		return this.classList;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#addClass(legendary.Interfaces.IClass)
+	 */
 	@Override
 	public void addClass(IClass c) {
 		this.classList.add(c);
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#getRelations()
+	 */
 	@Override
 	public Map<List<String>, List<Relations>> getRelations() {
 		return relations;
 	}
 
+	/**
+	 * Adds the pattern.
+	 *
+	 * @param pat the pat
+	 * @param classes the classes
+	 */
 	public void addPattern(IPattern pat, Set<IClass> classes) {
 		if (!this.patterns.containsKey(pat)) {
 			patterns.put(pat, new HashSet<IClass>());
@@ -48,10 +77,18 @@ public class LegendaryModel implements IModel, ITraverser {
 		patterns.get(pat).addAll(classes);
 	}
 
+	/**
+	 * Gets the patterns.
+	 *
+	 * @return the patterns
+	 */
 	public Map<IPattern, Set<IClass>> getPatterns() {
 		return patterns;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#convertToGraph()
+	 */
 	@Override
 	public void convertToGraph() {
 		for (List<String> al : this.relations.keySet()) {
@@ -106,6 +143,9 @@ public class LegendaryModel implements IModel, ITraverser {
 		removeDupArrows(temp);
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#removeDupArrows(java.util.Map)
+	 */
 	@Override
 	public void removeDupArrows(Map<IClass, Map<Relations, Set<IClass>>> temp) {
 		for (IClass c : this.relGraph.keySet()) {
@@ -164,11 +204,17 @@ public class LegendaryModel implements IModel, ITraverser {
 		this.relGraph = temp;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#getRelGraph()
+	 */
 	@Override
 	public Map<IClass, Map<Relations, Set<IClass>>> getRelGraph() {
 		return this.relGraph;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#addRelation(java.lang.String, java.lang.String, legendary.Classes.Relations)
+	 */
 	@Override
 	public void addRelation(String c1, String c2, Relations r) {
 		List<String> al = new ArrayList<String>();
@@ -211,6 +257,9 @@ public class LegendaryModel implements IModel, ITraverser {
 		relations.put(al, rl);
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.visitor.ITraverser#accept(legendary.visitor.IVisitor)
+	 */
 	@Override
 	public void accept(IVisitor v) {
 		v.preVisit(this);
@@ -222,6 +271,9 @@ public class LegendaryModel implements IModel, ITraverser {
 		v.postVisit(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IModel#containsClass(java.lang.String)
+	 */
 	@Override
 	public boolean containsClass(String i) {
 		for (IClass c : this.classList) {

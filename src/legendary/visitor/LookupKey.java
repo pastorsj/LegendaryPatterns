@@ -1,14 +1,31 @@
 package legendary.visitor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LookupKey.
+ */
 class LookupKey {
+	
+	/** The visit type. */
 	VisitType visitType;
+	
+	/** The clazz. */
 	Class<?> clazz;
 	
+	/**
+	 * Instantiates a new lookup key.
+	 *
+	 * @param visitType the visit type
+	 * @param clazz the clazz
+	 */
 	public LookupKey(VisitType visitType, Class<?> clazz) {
 		this.visitType = visitType;
 		this.clazz = clazz;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -17,6 +34,9 @@ class LookupKey {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

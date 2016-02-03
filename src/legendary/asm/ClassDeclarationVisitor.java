@@ -9,20 +9,33 @@ import java.io.IOException;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-/*
- * Modification made by Sam Pastoriza
+/**
+ * The Class ClassDeclarationVisitor.
  */
 public class ClassDeclarationVisitor extends ClassVisitor {
 
+	/** The legendary class. */
 	private IClass legendaryClass;
+	
+	/** The legendary model. */
 	private IModel legendaryModel;
 
+	/**
+	 * Instantiates a new class declaration visitor.
+	 *
+	 * @param api the api
+	 * @param legendaryClass the legendary class
+	 * @param legendaryModel the legendary model
+	 */
 	public ClassDeclarationVisitor(int api, IClass legendaryClass, IModel legendaryModel) {
 		super(api);
 		this.legendaryClass = legendaryClass;
 		this.legendaryModel = legendaryModel;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.objectweb.asm.ClassVisitor#visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])
+	 */
 	@Override
 	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
 		String n = name;

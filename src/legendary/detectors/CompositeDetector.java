@@ -16,17 +16,33 @@ import legendary.patterns.CompositeComponentPattern;
 import legendary.patterns.CompositeLeafPattern;
 import legendary.patterns.CompositePattern;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CompositeDetector.
+ */
 public class CompositeDetector implements IPatternDetector {
 
+	/** The detector. */
 	private IPatternDetector detector;
 
+	/**
+	 * Instantiates a new composite detector.
+	 */
 	public CompositeDetector() {
 	}
 
+	/**
+	 * Instantiates a new composite detector.
+	 *
+	 * @param detector the detector
+	 */
 	public CompositeDetector(IPatternDetector detector) {
 		this.detector = detector;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
 		Map<Class<? extends IPattern>, Set<IClass>> res;
@@ -125,6 +141,9 @@ public class CompositeDetector implements IPatternDetector {
 		return res;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
 		Set<Set<IClass>> result = new HashSet<>();
@@ -153,6 +172,13 @@ public class CompositeDetector implements IPatternDetector {
 		return result;
 	}
 
+	/**
+	 * Gets the all supers.
+	 *
+	 * @param m the m
+	 * @param c the c
+	 * @return the all supers
+	 */
 	private Set<IClass> getAllSupers(IModel m, IClass c) {
 		Set<IClass> result = new HashSet<>();
 		Set<IClass> supers = new HashSet<>();

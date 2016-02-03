@@ -14,17 +14,33 @@ import legendary.asm.DesignParser;
 import legendary.patterns.DecoratorComponentPattern;
 import legendary.patterns.DecoratorPattern;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DecoratorDetector.
+ */
 public class DecoratorDetector implements IPatternDetector {
 
+	/** The detect. */
 	private IPatternDetector detect;
 
+	/**
+	 * Instantiates a new decorator detector.
+	 */
 	public DecoratorDetector() {
 	}
 
+	/**
+	 * Instantiates a new decorator detector.
+	 *
+	 * @param detect the detect
+	 */
 	public DecoratorDetector(IPatternDetector detect) {
 		this.detect = detect;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
 		Set<IClass> decSet = new HashSet<>();
@@ -92,6 +108,9 @@ public class DecoratorDetector implements IPatternDetector {
 		return res;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
 		Set<Set<IClass>> candidates = new HashSet<>();

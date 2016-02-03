@@ -20,27 +20,34 @@ import legendary.detectors.CompositeDetector;
 import legendary.detectors.DecoratorDetector;
 import legendary.detectors.SingletonDetector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DesignParser.
+ */
 /*
  * Modification made by Sam Pastoriza and Jason Lane
  */
 public class DesignParser {
 
+	/** The package name. */
 	public static String packageName = "legendary";
+	
+	/** The Constant directories. */
 	public static final String[] directories = {
 			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 //			"javax/swing/AbstractAction"};
 //			"C:/Users/Jason/Documents/374/Lab7-2/src/problem" };
+/** The classes seen. */
 //	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
 	 *
-	 * @param args
-	 *            : the names of the classes, separated by spaces. For example:
+	 * @param args            : the names of the classes, separated by spaces. For example:
 	 *            java DesignParser java.lang.String
 	 *            edu.rosehulman.csse374.ClassFieldVisitor java.lang.Math
-	 * @throws IOException
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
@@ -52,9 +59,6 @@ public class DesignParser {
 			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
 		}
 
-		// String[] classes = new String[] { "java/util/Collections",
-		// "java/util/Random", "java/lang/System",
-		// "java/util/concurrent/atomic/AtomicLong" };
 		for (String className : classes) {
 			executeASM(className, legendaryModel, true);
 		}
@@ -64,8 +68,6 @@ public class DesignParser {
 		GeneralUtil.writeAndExecGraphViz(builder);
 		if (args.length > 0) {
 			if (args.length != 3 && args.length != 2) {
-				// legendaryParser.makeSDEdit("DesignParser", "main", 5,
-				// legendaryModel);
 				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
 			}
 			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));
@@ -77,6 +79,14 @@ public class DesignParser {
 		}
 	}
 
+	/**
+	 * Execute asm.
+	 *
+	 * @param className the class name
+	 * @param legendaryModel the legendary model
+	 * @param drawable the drawable
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void executeASM(String className, IModel legendaryModel, boolean drawable) throws IOException {
 		classesSeen.add(className);
 		IClass legendaryClass = new LegendaryClass();

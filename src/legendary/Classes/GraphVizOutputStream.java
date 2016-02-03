@@ -22,12 +22,31 @@ import legendary.visitor.IVisitor;
 import legendary.visitor.VisitType;
 import legendary.visitor.VisitorAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GraphVizOutputStream.
+ */
 public class GraphVizOutputStream {
+	
+	/** The builder. */
 	private final StringBuilder builder;
+	
+	/** The visitor. */
 	private final IVisitor visitor;
+	
+	/** The relation rep. */
 	private final Map<Relations, String> relationRep;
+	
+	/** The patterns. */
 	private static Map<IClass, Set<IPattern>> patterns;
 
+	/**
+	 * Instantiates a new graph viz output stream.
+	 *
+	 * @param builder the builder
+	 * @param map the map
+	 * @param m the m
+	 */
 	public GraphVizOutputStream(StringBuilder builder,
 			Map<Class<? extends IPattern>, Set<IClass>> map, IModel m) {
 		this.builder = builder;
@@ -40,6 +59,9 @@ public class GraphVizOutputStream {
 		t.accept(this.visitor);
 	}
 
+	/**
+	 * Initialize visitors.
+	 */
 	private void initializeVisitors() {
 		this.previsitModel();
 		this.visitModel();
@@ -51,6 +73,12 @@ public class GraphVizOutputStream {
 		this.visitMethod();
 	}
 
+	/**
+	 * Invert pattern map.
+	 *
+	 * @param in the in
+	 * @return the map
+	 */
 	private Map<IClass, Set<IPattern>> invertPatternMap(
 			Map<Class<? extends IPattern>, Set<IClass>> in) {
 		Map<IClass, Set<IPattern>> res = new HashMap<>();
@@ -69,10 +97,18 @@ public class GraphVizOutputStream {
 		return res;
 	}
 
+	/**
+	 * Write.
+	 *
+	 * @param s the s
+	 */
 	private void write(String s) {
 		this.builder.append(s);
 	}
 
+	/**
+	 * Previsit model.
+	 */
 	private void previsitModel() {
 		this.visitor.addVisit(VisitType.PreVisit, IModel.class,
 				(ITraverser t) -> {
@@ -80,6 +116,9 @@ public class GraphVizOutputStream {
 				});
 	}
 
+	/**
+	 * Visit model.
+	 */
 	private void visitModel() {
 		this.visitor.addVisit(VisitType.Visit, IModel.class,
 				(ITraverser t) -> {
@@ -87,6 +126,12 @@ public class GraphVizOutputStream {
 				});
 	}
 
+	/**
+	 * Adds the arrows.
+	 *
+	 * @param m the m
+	 * @return the string
+	 */
 	private String addArrows(IModel m) {
 		StringBuilder sb = new StringBuilder();
 		Map<IClass, Map<Relations, Set<IClass>>> graph = m.getRelGraph();
@@ -162,6 +207,9 @@ public class GraphVizOutputStream {
 		return sb.toString();
 	}
 
+	/**
+	 * Postvisit model.
+	 */
 	private void postvisitModel() {
 		this.visitor.addVisit(VisitType.PostVisit, IModel.class,
 				(ITraverser t) -> {
@@ -169,6 +217,9 @@ public class GraphVizOutputStream {
 				});
 	}
 
+	/**
+	 * Previsit class.
+	 */
 	private void previsitClass() {
 
 		IVisitMethod command = new IVisitMethod() {
@@ -191,6 +242,9 @@ public class GraphVizOutputStream {
 		this.visitor.addVisit(VisitType.PreVisit, IClass.class, command);
 	}
 
+	/**
+	 * Visit class.
+	 */
 	private void visitClass() {
 		this.visitor.addVisit(VisitType.Visit, IClass.class,
 				(ITraverser t) -> {
@@ -199,6 +253,11 @@ public class GraphVizOutputStream {
 				});
 	}
 
+	/**
+	 * Adds the pattern tags.
+	 *
+	 * @param c the c
+	 */
 	private void addPatternTags(IClass c) {
 		String s = "\\n\\<\\<";
 		if (patterns.containsKey(c))
@@ -209,6 +268,9 @@ public class GraphVizOutputStream {
 		this.write(s);
 	}
 
+	/**
+	 * Postvisit class.
+	 */
 	private void postvisitClass() {
 		this.visitor.addVisit(VisitType.PostVisit, IClass.class,
 				(ITraverser t) -> {
@@ -218,6 +280,12 @@ public class GraphVizOutputStream {
 				});
 	}
 
+	/**
+	 * Pattern color.
+	 *
+	 * @param c the c
+	 * @return the string
+	 */
 	private String patternColor(IClass c) {
 		if (patterns.containsKey(c))
 			for (IPattern p : patterns.get(c)) {
@@ -226,6 +294,9 @@ public class GraphVizOutputStream {
 		return "";
 	}
 
+	/**
+	 * Visit field.
+	 */
 	private void visitField() {
 		IVisitMethod command = new IVisitMethod() {
 			@Override
@@ -260,10 +331,18 @@ public class GraphVizOutputStream {
 		this.visitor.addVisit(VisitType.Visit, IField.class, command);
 	}
 
+	/**
+	 * Visit.
+	 *
+	 * @param m the m
+	 */
 	public void visit(IMethod m) {
 
 	}
 
+	/**
+	 * Visit method.
+	 */
 	private void visitMethod() {
 		IVisitMethod command = new IVisitMethod() {
 			@Override
@@ -337,6 +416,9 @@ public class GraphVizOutputStream {
 		this.visitor.addVisit(VisitType.Visit, IMethod.class, command);
 	}
 
+	/**
+	 * Initialize.
+	 */
 	public void initialize() {
 		this.relationRep.put(Relations.ASSOCIATES,
 				"\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t");

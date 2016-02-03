@@ -16,16 +16,40 @@ import legendary.visitor.IVisitor;
 import legendary.visitor.VisitType;
 import legendary.visitor.VisitorAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SDEditOutputStream.
+ */
 public class SDEditOutputStream {
 
+	/** The visitor. */
 	private final IVisitor visitor;
+	
+	/** The model. */
 	private IModel model;
+	
+	/** The builder. */
 	private StringBuilder builder;
+	
+	/** The classes. */
 	private Set<String> classes;
+	
+	/** The method calls. */
 	private List<String> methodCalls;
+	
+	/** The depth. */
 	private int depth;
+	
+	/** The orig depth. */
 	private final int origDepth;
 
+	/**
+	 * Instantiates a new SD edit output stream.
+	 *
+	 * @param model the model
+	 * @param depth the depth
+	 * @param builder the builder
+	 */
 	public SDEditOutputStream(IModel model, int depth, StringBuilder builder) {
 		this.model = model;
 		this.builder = builder;
@@ -39,16 +63,27 @@ public class SDEditOutputStream {
 		t.accept(visitor);
 	}
 
+	/**
+	 * Initialize visitors.
+	 */
 	private void initializeVisitors() {
 		this.previsitMethod();
 		this.visitMethod();
 		this.postvisitMethod();
 	}
 
+	/**
+	 * Write.
+	 *
+	 * @param s the s
+	 */
 	public void write(String s) {
 		builder.append(s);
 	}
 
+	/**
+	 * Previsit method.
+	 */
 	public void previsitMethod() {
 		IVisitMethod command = new IVisitMethod() {
 			@Override
@@ -68,6 +103,9 @@ public class SDEditOutputStream {
 		this.visitor.addVisit(VisitType.PreVisit, IMethod.class, command);
 	}
 
+	/**
+	 * Visit method.
+	 */
 	public void visitMethod() {
 		SDEditOutputStream that = this;
 		IVisitMethod command = new IVisitMethod() {
@@ -118,6 +156,9 @@ public class SDEditOutputStream {
 		this.visitor.addVisit(VisitType.Visit, IMethod.class, command);
 	}
 
+	/**
+	 * Postvisit method.
+	 */
 	public void postvisitMethod() {
 		IVisitMethod command = new IVisitMethod() {
 			@Override

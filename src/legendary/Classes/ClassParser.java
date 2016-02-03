@@ -10,26 +10,57 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClassParser.
+ */
 /*
  * Author: Sam Pastoriza
  */
 public class ClassParser {
+	
+	/** The instance. */
 	private static ClassParser instance;
+	
+	/** The detect. */
 	private IPatternDetector detect;
 
+	/**
+	 * Instantiates a new class parser.
+	 */
 	private ClassParser() {
 	}
 
+	/**
+	 * Gets the single instance of ClassParser.
+	 *
+	 * @return single instance of ClassParser
+	 */
 	public static ClassParser getInstance() {
 		if (instance == null)
 			instance = new ClassParser();
 		return instance;
 	}
 
+	/**
+	 * Adds the detector.
+	 *
+	 * @param detect the detect
+	 */
 	public void addDetector(IPatternDetector detect) {
 		this.detect = detect;
 	}
 
+	/**
+	 * Make sd edit.
+	 *
+	 * @param classname the classname
+	 * @param methodname the methodname
+	 * @param depth the depth
+	 * @param model the model
+	 * @param builder the builder
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void makeSDEdit(String classname, String methodname, int depth, IModel model, StringBuilder builder)
 			throws IOException {
 		String params = methodname.substring(methodname.indexOf("(") + 1, methodname.indexOf(")"));
@@ -64,6 +95,13 @@ public class ClassParser {
 		}
 	}
 
+	/**
+	 * Make graph viz.
+	 *
+	 * @param m the m
+	 * @param builder the builder
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void makeGraphViz(IModel m, StringBuilder builder) throws IOException {
 		@SuppressWarnings("unused")
 		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(builder,

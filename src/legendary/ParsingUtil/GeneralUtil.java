@@ -14,8 +14,13 @@ import java.util.Set;
 
 import legendary.asm.DesignParser;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GeneralUtil.
+ */
 public class GeneralUtil {
 
+	/** The prim codes. */
 	public static Map<String, String> primCodes;
 
 	/*
@@ -36,6 +41,12 @@ public class GeneralUtil {
 		primCodes.put("D", "double");
 	}
 
+	/**
+	 * Type argument collections.
+	 *
+	 * @param in the in
+	 * @return the list
+	 */
 	public static List<String> typeArgumentCollections(String in) {
 		String s = in;
 		if (s.isEmpty()) {
@@ -62,6 +73,12 @@ public class GeneralUtil {
 		return convert(finalArgSet);
 	}
 
+	/**
+	 * Convert.
+	 *
+	 * @param argSet the arg set
+	 * @return the list
+	 */
 	private static List<String> convert(List<String> argSet) {
 		List<String> finalArgSet = new LinkedList<>();
 		int argSize = argSet.size();
@@ -88,6 +105,13 @@ public class GeneralUtil {
 		return finalArgSet;
 	}
 
+	/**
+	 * Type method collections.
+	 *
+	 * @param in the in
+	 * @param usesClasses the uses classes
+	 * @return the string
+	 */
 	public static String typeMethodCollections(String in, List<String> usesClasses) {
 		if(in.length()<1)
 			return in;
@@ -127,6 +151,12 @@ public class GeneralUtil {
 		return res.replace(", >", ">");
 	}
 
+	/**
+	 * Parses the prim out.
+	 *
+	 * @param arg the arg
+	 * @param argSet the arg set
+	 */
 	private static void parsePrimOut(String arg, List<String> argSet) {
 		argSet.add(String.valueOf(arg.charAt(0)));
 		arg = arg.substring(1);
@@ -143,6 +173,12 @@ public class GeneralUtil {
 		}
 	}
 
+	/**
+	 * Gets the base fields.
+	 *
+	 * @param in the in
+	 * @return the base fields
+	 */
 	public static Set<String> getBaseFields(String in) {
 		Set<String> res = new HashSet<>();
 		String s = in;
@@ -174,10 +210,22 @@ public class GeneralUtil {
 		return res;
 	}
 
+	/**
+	 * Type field collections.
+	 *
+	 * @param in the in
+	 * @return the string
+	 */
 	public static String typeFieldCollections(String in) {
 		return typeMethodCollections(in, new ArrayList<>());
 	}
 
+	/**
+	 * Gets the classes from dir.
+	 *
+	 * @param dir the dir
+	 * @return the classes from dir
+	 */
 	public static List<String> getClassesFromDir(File dir) {
 		ArrayList<String> res = new ArrayList<String>();
 		ArrayList<String> res2 = new ArrayList<String>();
@@ -199,23 +247,35 @@ public class GeneralUtil {
 		return res;
 	}
 	
+	/**
+	 * Write and exec graph viz.
+	 *
+	 * @param builder the builder
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void writeAndExecGraphViz(StringBuilder builder) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
 		writer.write(builder.toString().replace("$", ""));
 		writer.close();
-		Runtime rt = Runtime.getRuntime();
-		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
+//		Runtime rt = Runtime.getRuntime();
+//		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));
 	}
 	
+	/**
+	 * Write and exec sd edit.
+	 *
+	 * @param builder the builder
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void writeAndExecSDEdit(StringBuilder builder) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.sd"));
 		writer.write(builder.toString());
 		writer.close();
-		Runtime rt = Runtime.getRuntime();
-		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o"
-				+ "./input_output/SDEoutput.png -t png ./input_output/text.sd");
+//		Runtime rt = Runtime.getRuntime();
+//		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o"
+//				+ "./input_output/SDEoutput.png -t png ./input_output/text.sd");
 		// Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
 		// System.out.println(builder.toString());
 	}

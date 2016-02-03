@@ -14,17 +14,33 @@ import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
 import legendary.patterns.SingletonPattern;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SingletonDetector.
+ */
 public class SingletonDetector implements IPatternDetector {
 
+	/** The next. */
 	private IPatternDetector next;
 
+	/**
+	 * Instantiates a new singleton detector.
+	 */
 	public SingletonDetector() {
 	}
 
+	/**
+	 * Instantiates a new singleton detector.
+	 *
+	 * @param next the next
+	 */
 	public SingletonDetector(IPatternDetector next) {
 		this.next = next;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
 		Set<IClass> singletons = new HashSet<>();
@@ -60,6 +76,9 @@ public class SingletonDetector implements IPatternDetector {
 		return res;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
 		Set<Set<IClass>> res = new HashSet<>();

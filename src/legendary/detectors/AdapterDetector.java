@@ -14,17 +14,33 @@ import legendary.patterns.AdapteePattern;
 import legendary.patterns.AdapterPattern;
 import legendary.patterns.AdapterTargetPattern;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdapterDetector.
+ */
 public class AdapterDetector implements IPatternDetector {
 
+	/** The detector. */
 	private IPatternDetector detector;
 
+	/**
+	 * Instantiates a new adapter detector.
+	 */
 	public AdapterDetector() {
 	}
 
+	/**
+	 * Instantiates a new adapter detector.
+	 *
+	 * @param detector the detector
+	 */
 	public AdapterDetector(IPatternDetector detector) {
 		this.detector = detector;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
 		Map<IClass, Map<Relations, Set<IClass>>> rels = m.getRelGraph();
@@ -89,6 +105,9 @@ public class AdapterDetector implements IPatternDetector {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
 		Map<IClass, Map<Relations, Set<IClass>>> rels = m.getRelGraph();

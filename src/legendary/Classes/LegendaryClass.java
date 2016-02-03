@@ -11,21 +11,45 @@ import legendary.Interfaces.IMethod;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LegendaryClass.
+ */
 /*
  * Author: Jason Lane
  */
 public class LegendaryClass implements IClass, ITraverser {
 
+	/** The class name. */
 	private String className;
+	
+	/** The super class name. */
 	private String superClassName;
+	
+	/** The interfaces. */
 	private List<String> interfaces;
+	
+	/** The methods. */
 	private Map<String, Map<List<String>, IMethod>> methods;
+	
+	/** The fields. */
 	private List<IField> fields;
+	
+	/** The is interface. */
 	private boolean isInterface;
+	
+	/** The creation order. */
 	private int creationOrder;
+	
+	/** The drawable. */
 	private boolean drawable;
+	
+	/** The count. */
 	private static int count;
 
+	/**
+	 * Instantiates a new legendary class.
+	 */
 	public LegendaryClass() {
 		this.className = "";
 		this.superClassName = "";
@@ -37,6 +61,9 @@ public class LegendaryClass implements IClass, ITraverser {
 		creationOrder = ++count;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#setClassName(java.lang.String)
+	 */
 	@Override
 	public void setClassName(String className) {
 		String name = className.replace("/", ".");
@@ -45,16 +72,25 @@ public class LegendaryClass implements IClass, ITraverser {
 		this.className = name;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#setSuper(java.lang.String)
+	 */
 	@Override
 	public void setSuper(String superClassName) {
 		this.superClassName = superClassName.substring(superClassName.lastIndexOf("/") + 1);
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#setInterfaces(java.util.List)
+	 */
 	@Override
 	public void setInterfaces(List<String> interfaces) {
 		this.interfaces = interfaces;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#addMethod(legendary.Interfaces.IMethod)
+	 */
 	@Override
 	public void addMethod(IMethod method) {
 		if (this.methods.containsKey(method.getMethodName())) {
@@ -66,46 +102,73 @@ public class LegendaryClass implements IClass, ITraverser {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#addField(legendary.Interfaces.IField)
+	 */
 	@Override
 	public void addField(IField field) {
 		this.fields.add(field);
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getClassName()
+	 */
 	@Override
 	public String getClassName() {
 		return this.className;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getSuperName()
+	 */
 	@Override
 	public String getSuperName() {
 		return this.superClassName;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getInterfaces()
+	 */
 	@Override
 	public List<String> getInterfaces() {
 		return this.interfaces;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getMethods()
+	 */
 	@Override
 	public Map<String, Map<List<String>, IMethod>> getMethods() {
 		return this.methods;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getFields()
+	 */
 	@Override
 	public List<IField> getFields() {
 		return this.fields;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#setIsInterface(boolean)
+	 */
 	@Override
 	public void setIsInterface(boolean isInterface) {
 		this.isInterface = isInterface;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#isInterface()
+	 */
 	@Override
 	public boolean isInterface() {
 		return this.isInterface;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.visitor.ITraverser#accept(legendary.visitor.IVisitor)
+	 */
 	@Override
 	public void accept(IVisitor v) {
 		if (this.isDrawable()) {
@@ -123,6 +186,9 @@ public class LegendaryClass implements IClass, ITraverser {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getMethodObjects()
+	 */
 	@Override
 	public List<IMethod> getMethodObjects() {
 		List<IMethod> methodSet = new ArrayList<>();
@@ -134,16 +200,25 @@ public class LegendaryClass implements IClass, ITraverser {
 		return methodSet;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#getCreationOrder()
+	 */
 	@Override
 	public int getCreationOrder() {
 		return this.creationOrder;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#setDrawable(boolean)
+	 */
 	@Override
 	public void setDrawable(boolean drawable) {
 		this.drawable = drawable;
 	}
 
+	/* (non-Javadoc)
+	 * @see legendary.Interfaces.IClass#isDrawable()
+	 */
 	@Override
 	public boolean isDrawable() {
 		return this.drawable;
