@@ -19,7 +19,7 @@ import legendary.patterns.AdapterTargetPattern;
  */
 public class AdapterDetector implements IPatternDetector {
 
-	/** The detector. */
+	/** The next detector to run. */
 	private IPatternDetector detector;
 
 	/**

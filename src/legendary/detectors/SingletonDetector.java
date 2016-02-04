@@ -20,7 +20,7 @@ import legendary.patterns.SingletonPattern;
  */
 public class SingletonDetector implements IPatternDetector {
 
-	/** The detector. */
+	/** The next detector to run. */
 	private IPatternDetector detector;
 
 	/**

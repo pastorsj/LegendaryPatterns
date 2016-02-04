@@ -68,6 +68,8 @@ public class LegendaryModel implements IModel, ITraverser {
 	/**
 	 * Adds a pattern if it was found by one of the
 	 * pattern detectors.
+	 * 
+	 * Not used in current implementation.
 	 *
 	 * @param pat The pattern found
 	 * @param classes The classes involved in the pattern

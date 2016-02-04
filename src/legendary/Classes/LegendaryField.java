@@ -12,19 +12,22 @@ import legendary.visitor.IVisitor;
  * 
  * Authors: Jason Lane, Sam Pastoriza
  */
-public class LegendaryField implements IField, ITraverser{
+public class LegendaryField implements IField, ITraverser {
 
 	/** The field access type (visibility). */
 	private String fieldAccessType;
-	
+
 	/** The field name. */
 	private String fieldName;
-	
+
 	/** The field type. */
 	private String fieldType;
-	
-	//TODO: Jason
-	/** The base fields. */
+
+	/**
+	 * The base fields. This is a set of the names of all types associated with
+	 * by the class; i.e. if the class contains a List<String>, baseFields will
+	 * contain List and String
+	 */
 	private Set<String> baseFields;
 
 	/**
@@ -36,7 +39,9 @@ public class LegendaryField implements IField, ITraverser{
 		this.fieldType = "";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#setAccess(java.lang.String)
 	 */
 	@Override
@@ -44,15 +49,19 @@ public class LegendaryField implements IField, ITraverser{
 		this.fieldAccessType = fieldAccessType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#setFieldName(java.lang.String)
 	 */
 	@Override
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#setType(java.lang.String)
 	 */
 	@Override
@@ -60,22 +69,24 @@ public class LegendaryField implements IField, ITraverser{
 		String s = fieldType;
 		if (GeneralUtil.primCodes.containsKey(s)) {
 			this.fieldType = GeneralUtil.primCodes.get(s);
-		} else if(s.charAt(0) == '[') {
-			if(GeneralUtil.primCodes.containsKey(String.valueOf(s.charAt(1)))) {
+		} else if (s.charAt(0) == '[') {
+			if (GeneralUtil.primCodes.containsKey(String.valueOf(s.charAt(1)))) {
 				this.fieldType = GeneralUtil.primCodes.get(String.valueOf(s.charAt(1))) + "[]";
 			} else {
 				this.fieldType = GeneralUtil.typeFieldCollections(s.substring(1)) + "[]";
 			}
 		} else {
 			if (fieldType != null) {
-				s = GeneralUtil.typeFieldCollections(fieldType);			
+				s = GeneralUtil.typeFieldCollections(fieldType);
 			}
 			this.fieldType = s;
 		}
 		this.baseFields = GeneralUtil.getBaseFields(fieldType);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#getAccess()
 	 */
 	@Override
@@ -83,7 +94,9 @@ public class LegendaryField implements IField, ITraverser{
 		return this.fieldAccessType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#getFieldName()
 	 */
 	@Override
@@ -91,7 +104,9 @@ public class LegendaryField implements IField, ITraverser{
 		return this.fieldName;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#getType()
 	 */
 	@Override
@@ -99,7 +114,9 @@ public class LegendaryField implements IField, ITraverser{
 		return this.fieldType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IField#getBaseTypes()
 	 */
 	@Override
@@ -107,7 +124,9 @@ public class LegendaryField implements IField, ITraverser{
 		return this.baseFields;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.visitor.ITraverser#accept(legendary.visitor.IVisitor)
 	 */
 	@Override

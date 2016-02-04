@@ -20,7 +20,7 @@ import legendary.patterns.DecoratorPattern;
  */
 public class DecoratorDetector implements IPatternDetector {
 
-	/** The detector. */
+	/** The next detector to run. */
 	private IPatternDetector detect;
 
 	/**

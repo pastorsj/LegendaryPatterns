@@ -21,7 +21,7 @@ import legendary.patterns.CompositePattern;
  */
 public class CompositeDetector implements IPatternDetector {
 
-	/** The detector. */
+	/** The next detector to run. */
 	private IPatternDetector detector;
 
 	/**

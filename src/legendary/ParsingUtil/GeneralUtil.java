@@ -41,9 +41,18 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * TODO: Jason
+	 * Takes the types of the arguments of a method as a string and returns a
+	 * list containing readable representations of each.
+	 * 
+	 * In this case, readable refers to how the type would be declared in
+	 * standard code.
+	 * 
+	 * For example,
+	 * "Ljava/util/List<Ljava/lang/String;>;Ljava/util/List<Ljava/lang/Integer;>;"
+	 * would be returned as "[List<String>, List<Integer>]"
 	 *
-	 * @param in A string containing the arguments
+	 * @param in
+	 *            A string containing the arguments
 	 * @return the list of arguments
 	 */
 	public static List<String> typeArgumentCollections(String in) {
@@ -73,10 +82,13 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * TODO: Jason
+	 * Helper function for typeArgumentsCollection
+	 * 
+	 * Converts a list of input types from raw form to readable form
 	 *
-	 * @param argSet A set of arguments
-	 * @return TODO: what does it convert to?
+	 * @param argSet
+	 *            A set of arguments
+	 * @return a readable set of arguments
 	 */
 	private static List<String> convert(List<String> argSet) {
 		List<String> finalArgSet = new LinkedList<>();
@@ -105,18 +117,29 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * Type method collections.
+	 * Converts a raw string of types to a readable one, and modifies a given
+	 * list to include the names of all classes used by the method
+	 * 
+	 * In this case, readable refers to how the type would be declared in
+	 * standard code.
+	 * 
+	 * For example,
+	 * "Ljava/util/List<Ljava/lang/String;>;Ljava/util/List<Ljava/lang/Integer;>;"
+	 * is returned as "List<String>, List<Integer>"
 	 *
-	 * @param in the in
-	 * @param usesClasses the uses classes
-	 * @return the string
+	 * @param in
+	 *            the raw string representation of the types of a method's args
+	 * @param usesClasses
+	 *            an arraylist in which to store the names of all classes used
+	 *            by the method
+	 * @return a readable string representation of the classes
 	 */
 	public static String typeMethodCollections(String in, List<String> usesClasses) {
-		if(in.length()<1)
+		if (in.length() < 1)
 			return in;
 		String s = in;
 		String res = "";
-		if(primCodes.containsKey(s)){
+		if (primCodes.containsKey(s)) {
 			return primCodes.get(s);
 		}
 		if (s.contains(")")) {
@@ -153,8 +176,10 @@ public class GeneralUtil {
 	/**
 	 * Parses the primitives out of the argument set
 	 *
-	 * @param arg the argument
-	 * @param argSet the argument set
+	 * @param arg
+	 *            the argument
+	 * @param argSet
+	 *            the argument set
 	 */
 	private static void parsePrimOut(String arg, List<String> argSet) {
 		argSet.add(String.valueOf(arg.charAt(0)));
@@ -173,10 +198,15 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * TODO: Jason
+	 * Converts a string of input types to a list of readable strings of the
+	 * associated classes.
+	 * 
+	 * For example, input Ljava/util/List<Ljava/lang/String;>; becomes
+	 * [java.util::List, java.lang::String]
 	 *
-	 * @param in The string containing the field
-	 * @return TODO: what does this return?
+	 * @param in
+	 *            The string containing the field
+	 * @return the base fields of the input string
 	 */
 	public static Set<String> getBaseFields(String in) {
 		Set<String> res = new HashSet<>();
@@ -210,10 +240,12 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * TODO: Jason
+	 * The same as type method collections, but does not require or modify a
+	 * list. Intended to be used with the single type of a field.
 	 *
-	 * @param in The field collection
-	 * @return TODO: what does this return?
+	 * @param in
+	 *            The field collection
+	 * @return a readable string representation of the type of a field
 	 */
 	public static String typeFieldCollections(String in) {
 		return typeMethodCollections(in, new ArrayList<>());
@@ -222,8 +254,9 @@ public class GeneralUtil {
 	/**
 	 * Gets the classes from given directory.
 	 *
-	 * @param dir the directory
-	 * @return the classes from directory
+	 * @param dir
+	 *            the directory
+	 * @return paths to the classes in the directory
 	 */
 	public static List<String> getClassesFromDir(File dir) {
 		ArrayList<String> res = new ArrayList<String>();
@@ -245,36 +278,41 @@ public class GeneralUtil {
 		}
 		return res;
 	}
-	
+
 	/**
 	 * Write and exec graph viz.
 	 *
-	 * @param builder the builder
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param builder
+	 *            the builder
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public static void writeAndExecGraphViz(StringBuilder builder) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.dot"));
 		writer.write(builder.toString().replace("$", ""));
 		writer.close();
-//		Runtime rt = Runtime.getRuntime();
-//		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o ./input_output/GraphVizoutput.png");
+		// Runtime rt = Runtime.getRuntime();
+		// rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o
+		// ./input_output/GraphVizoutput.png");
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));
 	}
-	
+
 	/**
 	 * Write and exec sd dit.
 	 *
-	 * @param builder the builder
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param builder
+	 *            the builder
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public static void writeAndExecSDEdit(StringBuilder builder) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.sd"));
 		writer.write(builder.toString());
 		writer.close();
-//		Runtime rt = Runtime.getRuntime();
-//		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o"
-//				+ "./input_output/SDEoutput.png -t png ./input_output/text.sd");
+		// Runtime rt = Runtime.getRuntime();
+		// rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o"
+		// + "./input_output/SDEoutput.png -t png ./input_output/text.sd");
 		// Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
 		// System.out.println(builder.toString());
 	}
