@@ -1,17 +1,17 @@
 package legendary.visitor;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IVisitMethod.
+ * This class allows for methods to be executed within lambda blacks
+ * during the visiting of the different class
  */
 @FunctionalInterface
 public interface IVisitMethod {
 	
 	/**
-	 * Execute.
+	 * The execute method.
 	 *
-	 * @param t the t
+	 * @param t the traverser
 	 */
 	public void execute(ITraverser t);
 }

@@ -3,9 +3,8 @@ package legendary.visitor;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class VisitorAdapter.
+ * This class initializes a map of visit types with the classes being visited
  */
 public class VisitorAdapter implements IVisitor {
 	
@@ -44,7 +43,7 @@ public class VisitorAdapter implements IVisitor {
 	}
 	
 	/**
-	 * Do visit.
+	 * Execute a visit method
 	 *
 	 * @param vType the v type
 	 * @param t the t

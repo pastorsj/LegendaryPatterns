@@ -1,15 +1,15 @@
 package legendary.visitor;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface ITraverser.
+ * This class allows for the any class using the visitor
+ * to traverse through the class being analyzed
  */
 public interface ITraverser {
 	
 	/**
-	 * Accept.
+	 * The accept method
 	 *
-	 * @param v the v
+	 * @param v the visitor
 	 */
 	public void accept(IVisitor v);
 }

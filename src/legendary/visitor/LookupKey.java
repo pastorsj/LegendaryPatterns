@@ -1,15 +1,14 @@
 package legendary.visitor;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class LookupKey.
+ * This class creates a hash key between the VisitType and the class
  */
 class LookupKey {
 	
 	/** The visit type. */
 	VisitType visitType;
 	
-	/** The clazz. */
+	/** The class. */
 	Class<?> clazz;
 	
 	/**

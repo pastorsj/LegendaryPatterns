@@ -1,8 +1,7 @@
 package legendary.visitor;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Enum VisitType.
+ * The Enumeration VisitType.
  */
 public enum VisitType {
 	

@@ -9,32 +9,32 @@ import java.util.Map;
 public interface IVisitor {
 	
 	/**
-	 * Pre visit.
+	 * The pre visit method
 	 *
-	 * @param t the t
+	 * @param t the traverser
 	 */
 	public void preVisit(ITraverser t);
 	
 	/**
-	 * Visit.
+	 * The visit method
 	 *
-	 * @param t the t
+	 * @param t the traverser
 	 */
 	public void visit(ITraverser t);
 	
 	/**
-	 * Post visit.
+	 * The post visit method
 	 *
-	 * @param t the t
+	 * @param t the traverser
 	 */
 	public void postVisit(ITraverser t);
 	
 	/**
 	 * Adds the visit.
 	 *
-	 * @param visitType the visit type
-	 * @param clazz the clazz
-	 * @param m the m
+	 * @param visitType the visit type, defined in VisitType
+	 * @param clazz the class
+	 * @param m the model
 	 */
 	public void addVisit(VisitType visitType, Class<?> clazz, IVisitMethod m);
 	
