@@ -2,7 +2,6 @@ package legendary.patterns;
 
 import legendary.Interfaces.IPattern;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class contains the aspects of the singleton pattern
  */

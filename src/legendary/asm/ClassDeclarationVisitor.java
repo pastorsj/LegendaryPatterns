@@ -54,7 +54,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				try {
 					DesignParser.executeASM(superName, legendaryModel, false);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -70,7 +69,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 				try {
 					DesignParser.executeASM(i, legendaryModel, false);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

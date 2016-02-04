@@ -2,7 +2,6 @@ package legendary.visitor;
 
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface IVisitor.
  */
