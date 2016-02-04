@@ -1,8 +1,8 @@
 package legendary.patterns;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CompositeLeafPattern.
+ * This class contains the unique aspects of the leaf class within 
+ * an composite pattern
  */
 public class CompositeLeafPattern extends AbstractCompositePattern{
 

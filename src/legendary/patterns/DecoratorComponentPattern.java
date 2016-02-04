@@ -1,8 +1,8 @@
 package legendary.patterns;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class DecoratorComponentPattern.
+ * This class contains the unique aspects of the component class within 
+ * an decorator pattern
  */
 public class DecoratorComponentPattern extends AbstractDecoratorPattern {
 

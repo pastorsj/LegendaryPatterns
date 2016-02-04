@@ -2,9 +2,9 @@ package legendary.patterns;
 
 import legendary.Interfaces.IPattern;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AbstractCompositePattern.
+ * This class contains the similar aspects of the composite pattern 
+ * when displaying in the uml diagram
  */
 public abstract class AbstractCompositePattern implements IPattern {
 

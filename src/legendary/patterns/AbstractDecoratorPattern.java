@@ -2,9 +2,9 @@ package legendary.patterns;
 
 import legendary.Interfaces.IPattern;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AbstractDecoratorPattern.
+ * This class contains the similar aspects of the adapter pattern 
+ * when displaying in the uml diagram
  */
 public abstract class AbstractDecoratorPattern implements IPattern{
 	

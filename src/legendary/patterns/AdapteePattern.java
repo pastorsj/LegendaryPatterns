@@ -1,8 +1,8 @@
 package legendary.patterns;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AdapteePattern.
+ * This class contains the unique aspects of the adaptee class within 
+ * an adapter pattern
  */
 public class AdapteePattern extends AbstractAdapterPattern{
 	

@@ -4,7 +4,7 @@ import legendary.Interfaces.IPattern;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SingletonPattern.
+ * This class contains the aspects of the singleton pattern
  */
 public class SingletonPattern implements IPattern {
 
