@@ -1,5 +1,7 @@
 package legendary.patterns;
 
+import java.util.Set;
+
 import legendary.Interfaces.IPattern;
 
 /**
@@ -7,8 +9,9 @@ import legendary.Interfaces.IPattern;
  */
 public class SingletonPattern implements IPattern {
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IPattern#tag()
 	 */
 	@Override
@@ -16,7 +19,9 @@ public class SingletonPattern implements IPattern {
 		return "Singleton, ";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see legendary.Interfaces.IPattern#color()
 	 */
 	@Override
@@ -24,4 +29,8 @@ public class SingletonPattern implements IPattern {
 		return "color = blue";
 	}
 
+	@Override
+	public String tagArrow(Set<IPattern> cPatterns, Set<IPattern> c2Patterns) {
+		return "";
+	}
 }

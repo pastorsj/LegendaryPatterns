@@ -1,5 +1,7 @@
 package legendary.patterns;
 
+import java.util.Set;
+
 import legendary.Interfaces.IPattern;
 
 /**
@@ -14,7 +16,20 @@ public abstract class AbstractAdapterPattern implements IPattern{
 	@Override
 	public String color(){
 		return "style = \"filled\"\nfillcolor = \"red\"";
-		
+	}
+	
+	@Override
+	public String tagArrow(Set<IPattern> cPatterns, Set<IPattern> c2Patterns){
+		for (IPattern p : cPatterns) {
+			if (p instanceof AdapterPattern) {
+				for (IPattern p2 : c2Patterns) {
+					if (p2 instanceof AdapteePattern) {
+						return "adapts, ";
+					}
+				}
+			}
+		}
+		return "";
 	}
 	
 }

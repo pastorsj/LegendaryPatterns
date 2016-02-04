@@ -12,10 +12,6 @@ import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.ParsingUtil.GeneralUtil;
 import legendary.asm.DesignParser;
-import legendary.patterns.AdapteePattern;
-import legendary.patterns.AdapterPattern;
-import legendary.patterns.DecoratorComponentPattern;
-import legendary.patterns.DecoratorPattern;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitMethod;
 import legendary.visitor.IVisitor;
@@ -23,41 +19,49 @@ import legendary.visitor.VisitType;
 import legendary.visitor.VisitorAdapter;
 
 /**
- * This class goes through the model and sets up a convienent way to parse
- * the model into the appropriate representation.
- * This is done using the Visitor Pattern
+ * This class goes through the model and sets up a convienent way to parse the
+ * model into the appropriate representation. This is done using the Visitor
+ * Pattern
  */
 public class GraphVizOutputStream {
-	
-	/** The string builder that will contain the final 
-	 * representation of the uml diagram
+
+	/**
+	 * The string builder that will contain the final representation of the uml
+	 * diagram
 	 */
 	private final StringBuilder builder;
-	
-	/** The visitor will traverse the model and call
-	 * the defined functions in the right order to produce the correct uml
-	 * representation of the model
+
+	/**
+	 * The visitor will traverse the model and call the defined functions in the
+	 * right order to produce the correct uml representation of the model
 	 */
 	private final IVisitor visitor;
-	
+
 	/** The set of relations defined in the model between classes in the model */
 	private final Map<Relations, String> relationRep;
-	
-	/** The patterns found in the model */
+
+	/** The patterns found in the model, with classes as the keys */
 	private static Map<IClass, Set<IPattern>> patterns;
+
+	/** The patterns found in the model, with the pattern as the key */
+	private static Map<Class<? extends IPattern>, Set<IClass>> patMapIn;
 
 	/**
 	 * Instantiates a new graph viz output stream.
 	 *
-	 * @param builder (see field)
-	 * @param map (the map contains a representation of the patterns)
-	 * @param m (the model, see field)
+	 * @param builder
+	 *            (see field)
+	 * @param map
+	 *            (the map contains a representation of the patterns)
+	 * @param m
+	 *            (the model, see field)
 	 */
 	public GraphVizOutputStream(StringBuilder builder,
 			Map<Class<? extends IPattern>, Set<IClass>> map, IModel m) {
 		this.builder = builder;
 		this.relationRep = new HashMap<>();
 		this.initialize();
+		patMapIn = map;
 		patterns = invertPatternMap(map);
 		this.visitor = new VisitorAdapter();
 		this.initializeVisitors();
@@ -82,7 +86,8 @@ public class GraphVizOutputStream {
 	/**
 	 * Invert pattern map.
 	 *
-	 * @param in the in
+	 * @param in
+	 *            the in
 	 * @return the map
 	 */
 	private Map<IClass, Set<IPattern>> invertPatternMap(
@@ -106,7 +111,8 @@ public class GraphVizOutputStream {
 	/**
 	 * Write to the string builder
 	 *
-	 * @param s a string
+	 * @param s
+	 *            a string
 	 */
 	private void write(String s) {
 		this.builder.append(s);
@@ -135,7 +141,8 @@ public class GraphVizOutputStream {
 	/**
 	 * Adds the arrows for the relations.
 	 *
-	 * @param m the m
+	 * @param m
+	 *            the m
 	 * @return the string
 	 */
 	private String addArrows(IModel m) {
@@ -162,7 +169,6 @@ public class GraphVizOutputStream {
 							if (!this.relationRep.get(r).equals("")) {
 								sb.append(this.relationRep.get(r));
 								String label = "[label = \"\\<\\<";
-								boolean toLabel = false;
 								if (patterns.containsKey(c)
 										&& patterns.containsKey(c2)) {
 									if (r.equals(Relations.ASSOCIATES)) {
@@ -170,29 +176,18 @@ public class GraphVizOutputStream {
 												.get(c);
 										Set<IPattern> c2Patterns = patterns
 												.get(c2);
-										for (IPattern p : cPatterns) {
-											if (p instanceof AdapterPattern) {
-												for (IPattern p2 : c2Patterns) {
-													if (p2 instanceof AdapteePattern) {
-														toLabel = true;
-														label += "adapts, ";
-													}
-												}
-											}
-										}
-										for (IPattern p : cPatterns) {
-											if (p instanceof DecoratorPattern) {
-												for (IPattern p2 : c2Patterns) {
-													if (p2 instanceof DecoratorComponentPattern) {
-														toLabel = true;
-														label += "decorates, ";
-													}
-												}
+										for (Class<? extends IPattern> p : patMapIn
+												.keySet()) {
+											try {
+												label+=p.newInstance().tagArrow(cPatterns, c2Patterns);
+											} catch (InstantiationException
+													| IllegalAccessException e) {
+												e.printStackTrace();
 											}
 										}
 									}
 								}
-								if (toLabel) {
+								if (!label.equals("[label = \"\\<\\<")) {
 									label = label.substring(0,
 											label.lastIndexOf(","));
 									sb.append(label + "\\>\\>\"]");
@@ -262,7 +257,8 @@ public class GraphVizOutputStream {
 	/**
 	 * Adds the pattern tags.
 	 *
-	 * @param c The class containing a part of a pattern
+	 * @param c
+	 *            The class containing a part of a pattern
 	 */
 	private void addPatternTags(IClass c) {
 		String s = "\\n\\<\\<";
@@ -289,7 +285,8 @@ public class GraphVizOutputStream {
 	/**
 	 * Gets pattern color of a class.
 	 *
-	 * @param c A class
+	 * @param c
+	 *            A class
 	 * @return the color of the class
 	 */
 	private String patternColor(IClass c) {

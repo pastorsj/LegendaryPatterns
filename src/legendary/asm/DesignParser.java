@@ -32,12 +32,12 @@ public class DesignParser {
 	
 	/** The directory. */
 	public static final String[] directories = {
-			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
+//			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 //			"javax/swing/AbstractAction"};
 //			"C:/Users/Jason/Documents/374/Lab7-2/src/problem" };
+	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	
 /** The classes that have already been seen. */
-//	 "C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	/**
