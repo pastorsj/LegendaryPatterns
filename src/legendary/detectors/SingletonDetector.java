@@ -15,8 +15,8 @@ import legendary.Interfaces.IPatternDetector;
 import legendary.patterns.SingletonPattern;
 
 /**
- * This class allows for the detection of any singleton class 
- * with the given model
+ * This class allows for the detection of any singleton class with the given
+ * model
  */
 public class SingletonDetector implements IPatternDetector {
 
@@ -32,14 +32,18 @@ public class SingletonDetector implements IPatternDetector {
 	/**
 	 * Instantiates a new singleton detector.
 	 *
-	 * @param detector The pattern detector
+	 * @param detector
+	 *            The pattern detector
 	 */
 	public SingletonDetector(IPatternDetector detector) {
 		this.detector = detector;
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
 	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
@@ -48,15 +52,21 @@ public class SingletonDetector implements IPatternDetector {
 		for (Set<IClass> candidateSet : candidates) {
 			for (IClass candidate : candidateSet) {
 				boolean privCtorsOnly = true;
-				for (IMethod method : candidate.getMethods().get("<init>").values()) {
-					privCtorsOnly = privCtorsOnly && method.getAccess().equals("-");
+				if (!candidate.getMethods().containsKey("<init>"))
+					continue;
+				for (IMethod method : candidate.getMethods().get("<init>")
+						.values()) {
+					privCtorsOnly = privCtorsOnly
+							&& method.getAccess().equals("-");
 				}
 				if (privCtorsOnly) {
 					for (IField f : candidate.getFields()) {
-						if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
+						if (f.getAccess().equals("-_")
+								&& f.getType().equals(candidate.getClassName())) {
 							for (IMethod method : candidate.getMethodObjects()) {
 								// System.out.println(method.getReturnType());
-								if (method.getReturnType().equals(candidate.getClassName())
+								if (method.getReturnType().equals(
+										candidate.getClassName())
 										&& method.getAccess().equals("+_")) {
 									singletons.add(candidate);
 								}
@@ -76,8 +86,12 @@ public class SingletonDetector implements IPatternDetector {
 		return res;
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces
+	 * .IModel)
 	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
