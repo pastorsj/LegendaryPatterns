@@ -14,9 +14,8 @@ import java.util.Set;
 
 import legendary.asm.DesignParser;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GeneralUtil.
+ * This class contains most parsing code for asm syntax
  */
 public class GeneralUtil {
 
@@ -42,10 +41,10 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * Type argument collections.
+	 * TODO: Jason
 	 *
-	 * @param in the in
-	 * @return the list
+	 * @param in A string containing the arguments
+	 * @return the list of arguments
 	 */
 	public static List<String> typeArgumentCollections(String in) {
 		String s = in;
@@ -74,10 +73,10 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * Convert.
+	 * TODO: Jason
 	 *
-	 * @param argSet the arg set
-	 * @return the list
+	 * @param argSet A set of arguments
+	 * @return TODO: what does it convert to?
 	 */
 	private static List<String> convert(List<String> argSet) {
 		List<String> finalArgSet = new LinkedList<>();
@@ -152,10 +151,10 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * Parses the prim out.
+	 * Parses the primitives out of the argument set
 	 *
-	 * @param arg the arg
-	 * @param argSet the arg set
+	 * @param arg the argument
+	 * @param argSet the argument set
 	 */
 	private static void parsePrimOut(String arg, List<String> argSet) {
 		argSet.add(String.valueOf(arg.charAt(0)));
@@ -174,10 +173,10 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * Gets the base fields.
+	 * TODO: Jason
 	 *
-	 * @param in the in
-	 * @return the base fields
+	 * @param in The string containing the field
+	 * @return TODO: what does this return?
 	 */
 	public static Set<String> getBaseFields(String in) {
 		Set<String> res = new HashSet<>();
@@ -211,20 +210,20 @@ public class GeneralUtil {
 	}
 
 	/**
-	 * Type field collections.
+	 * TODO: Jason
 	 *
-	 * @param in the in
-	 * @return the string
+	 * @param in The field collection
+	 * @return TODO: what does this return?
 	 */
 	public static String typeFieldCollections(String in) {
 		return typeMethodCollections(in, new ArrayList<>());
 	}
 
 	/**
-	 * Gets the classes from dir.
+	 * Gets the classes from given directory.
 	 *
-	 * @param dir the dir
-	 * @return the classes from dir
+	 * @param dir the directory
+	 * @return the classes from directory
 	 */
 	public static List<String> getClassesFromDir(File dir) {
 		ArrayList<String> res = new ArrayList<String>();
@@ -264,7 +263,7 @@ public class GeneralUtil {
 	}
 	
 	/**
-	 * Write and exec sd edit.
+	 * Write and exec sd dit.
 	 *
 	 * @param builder the builder
 	 * @throws IOException Signals that an I/O exception has occurred.
