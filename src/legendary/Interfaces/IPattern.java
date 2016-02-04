@@ -1,22 +1,21 @@
 package legendary.Interfaces;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IPattern.
+ * The representation of a pattern
  */
 public interface IPattern{
 	
 	/**
-	 * Tag.
+	 * The appropriate tag of a pattern component
 	 *
-	 * @return the string
+	 * @return the tag
 	 */
 	public String tag();
 	
 	/**
-	 * Color.
+	 * The appropriate color of a pattern component
 	 *
-	 * @return the string
+	 * @return the color
 	 */
 	public String color();
 }

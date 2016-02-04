@@ -3,14 +3,12 @@ package legendary.Interfaces;
 import java.util.List;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /*
+ * This interface is the internal representation
+ * of a class
  * Author: Jason Lane
  */
 
-/**
- * The Interface IClass.
- */
 public interface IClass {
 	
 	/**
@@ -21,28 +19,28 @@ public interface IClass {
 	public void setClassName(String className);
 	
 	/**
-	 * Sets the super.
+	 * Sets the superclass name if it exists.
 	 *
 	 * @param superClassName the new super
 	 */
 	public void setSuper(String superClassName);
 	
 	/**
-	 * Sets the interfaces.
+	 * Sets any interfaces.
 	 *
 	 * @param interfaces the new interfaces
 	 */
 	public void setInterfaces(List<String> interfaces);
 	
 	/**
-	 * Adds the method.
+	 * Adds a method to the class.
 	 *
 	 * @param method the method
 	 */
 	public void addMethod(IMethod method);
 	
 	/**
-	 * Adds the field.
+	 * Adds a field to the class.
 	 *
 	 * @param field the field
 	 */
@@ -56,14 +54,14 @@ public interface IClass {
 	public String getClassName();
 	
 	/**
-	 * Gets the super name.
+	 * Gets the super class name if it exists.
 	 *
 	 * @return the super name
 	 */
 	public String getSuperName();
 	
 	/**
-	 * Gets the interfaces.
+	 * Gets the interfaces if any exist.
 	 *
 	 * @return the interfaces
 	 */
@@ -84,37 +82,37 @@ public interface IClass {
 	public List<IField> getFields();
 	
 	/**
-	 * Sets the checks if is interface.
+	 * Sets the field that determines whether the class is an interface.
 	 *
-	 * @param isInterface the new checks if is interface
+	 * @param isInterface
 	 */
 	public void setIsInterface(boolean isInterface);
 	
 	/**
-	 * Checks if is interface.
+	 * Checks if the class is interface.
 	 *
-	 * @return true, if is interface
+	 * @return true, if the class is an interface
 	 */
 	public boolean isInterface();
 	
 	/**
-	 * Gets the method objects.
+	 * Gets all of the methods in the class.
 	 *
-	 * @return the method objects
+	 * @return the methods
 	 */
 	public List<IMethod> getMethodObjects();
 	
 	/**
-	 * Sets the drawable.
+	 * Sets the drawable property of the class.
 	 *
-	 * @param drawable the new drawable
+	 * @param drawable
 	 */
 	public void setDrawable(boolean drawable);
 	
 	/**
-	 * Checks if is drawable.
+	 * Checks if the class is drawable.
 	 *
-	 * @return true, if is drawable
+	 * @return true, if the class is drawable
 	 */
 	public boolean isDrawable();
 };

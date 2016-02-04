@@ -2,38 +2,37 @@ package legendary.Interfaces;
 
 import java.util.Set;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Interface IField.
- */
+
 /*
+ * This is the internal representation of a field in java
+ * 
  * Author: Jason Lane
  */
 public interface IField {
 	
 	/**
-	 * Sets the access.
+	 * Sets the access/visibility.
 	 *
-	 * @param methodAccessType the new access
+	 * @param fieldAccessType
 	 */
-	public void setAccess(String methodAccessType);
+	public void setAccess(String fieldAccessType);
 	
 	/**
 	 * Sets the field name.
 	 *
-	 * @param methodName the new field name
+	 * @param fieldName
 	 */
-	public void setFieldName(String methodName);
+	public void setFieldName(String fieldName);
 	
 	/**
-	 * Sets the type.
+	 * Sets the type of the field (String, boolean...)
 	 *
-	 * @param methodReturnType the new type
+	 * @param fieldReturnType the new type
 	 */
-	public void setType(String methodReturnType);
+	public void setType(String fieldReturnType);
 	
 	/**
-	 * Gets the access.
+	 * Gets the access/visibility of the field.
 	 *
 	 * @return the access
 	 */
@@ -47,12 +46,13 @@ public interface IField {
 	public String getFieldName();
 	
 	/**
-	 * Gets the type.
+	 * Gets the type of the field
 	 *
 	 * @return the type
 	 */
 	public String getType();
 	
+	//TODO: Jason
 	/**
 	 * Gets the base types.
 	 *

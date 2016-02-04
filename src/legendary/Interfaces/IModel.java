@@ -6,9 +6,10 @@ import java.util.Set;
 
 import legendary.Classes.Relations;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IModel.
+ * This is the internal representation of the project
+ * being analyzed. It has relations, patterns, and a set of classes that
+ * compose it
  */
 public interface IModel {
 	
@@ -20,7 +21,7 @@ public interface IModel {
 	public Set<IClass> getClasses();
 	
 	/**
-	 * Adds the class.
+	 * Adds a class.
 	 *
 	 * @param c the c
 	 */
@@ -34,38 +35,40 @@ public interface IModel {
 	public Map<List<String>, List<Relations>> getRelations();
 	
 	/**
-	 * Adds the relation.
+	 * Adds a relation.
 	 *
-	 * @param c1 the c1
-	 * @param c2 the c2
-	 * @param r the r
+	 * @param c1 The first class in the relation
+	 * @param c2 The second class in the relation
+	 * @param r The relation type
 	 */
 	public void addRelation(String c1, String c2, Relations r);
 	
 	/**
-	 * Convert to graph.
+	 * Convert the model to a graph. This allows use to get back edges 
+	 * which will make it much easier for pattern detection
 	 */
 	public void convertToGraph();
 	
+	//TODO: Jason
 	/**
-	 * Gets the rel graph.
+	 * Gets the relations graph.
 	 *
-	 * @return the rel graph
+	 * @return the relations graph
 	 */
 	public Map<IClass, Map<Relations, Set<IClass>>> getRelGraph();
 	
 	/**
-	 * Removes the dup arrows.
+	 * Removes any arrows that are unnecessary 
 	 *
-	 * @param tempMap the temp map
+	 * @param tempMap the current map of the model
 	 */
 	public void removeDupArrows(Map<IClass, Map<Relations, Set<IClass>>> tempMap);
 	
 	/**
-	 * Contains class.
+	 * Checks to see is the model contains a class
 	 *
-	 * @param i the i
-	 * @return true, if successful
+	 * @param clazz The class
+	 * @return true, if the class is in the model
 	 */
-	public boolean containsClass(String i);
+	public boolean containsClass(String clazz);
 }

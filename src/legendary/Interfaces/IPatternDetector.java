@@ -3,22 +3,25 @@ package legendary.Interfaces;
 import java.util.Map;
 import java.util.Set;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IPatternDetector.
+ * This is the interface that defines how a pattern will
+ * be analyzed
  */
 public interface IPatternDetector {
 	
 	/**
-	 * Detect.
+	 * The main detection function that will return which classes are part
+	 * of the pattern being analyzed
 	 *
-	 * @param m the m
+	 * @param m the model
 	 * @return the map< class<? extends i pattern>, set< i class>>
 	 */
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m);
 	
+	//TODO: Jason
 	/**
-	 * Gets the candidates.
+	 * A helper method that will reduce the amount of work
+	 * done in the detect method. 
 	 *
 	 * @param m the m
 	 * @return the candidates

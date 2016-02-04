@@ -4,40 +4,37 @@ import java.util.List;
 import java.util.Queue;
 
 
-// TODO: Auto-generated Javadoc
-/**
- * The Interface IMethod.
- */
 /*
+ * This is the internal representation of a method in java
  * Author: Jason Lane
  */
 public interface IMethod {
 	
 	/**
-	 * Sets the access.
+	 * Sets the access/visibility of the method.
 	 *
-	 * @param accessType the new access
+	 * @param accessType
 	 */
 	public void setAccess(String accessType);
 	
 	/**
 	 * Sets the method name.
 	 *
-	 * @param methodName the new method name
+	 * @param methodName
 	 */
 	public void setMethodName(String methodName);
 	
 	/**
 	 * Sets the parameters.
 	 *
-	 * @param parameters the new parameters
+	 * @param parameters
 	 */
 	public void setParameters(List<String> parameters);
 	
 	/**
 	 * Sets the return type.
 	 *
-	 * @param returnType the new return type
+	 * @param returnType
 	 */
 	public void setReturnType(String returnType);
 	
@@ -70,19 +67,20 @@ public interface IMethod {
 	public String getReturnType();
 	
 	/**
-	 * Gets the call stack.
+	 * Gets the call stack of the method.
+	 * This is all of the methods that are called inside of this method
 	 *
 	 * @return the call stack
 	 */
 	public Queue<List<List<String>>> getCallStack();
 	
 	/**
-	 * Adds the method to call stack.
+	 * Adds a method to call stack.
 	 *
-	 * @param methodOwner the method owner
-	 * @param className the class name
-	 * @param methodName the method name
-	 * @param params the params
+	 * @param methodOwner the owner of this method
+	 * @param className the owner of the class of the called method
+	 * @param methodName the name of the called method
+	 * @param params the params of the called method
 	 */
 	public void addMethodToCallStack(String methodOwner, String className, String methodName, List<String> params);
 }
