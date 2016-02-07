@@ -5,10 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -64,7 +60,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			if(this.file == null) {
 				System.err.println("Print to panel: You have not chosen a file");
 			} else {
-				properties.analyse(this.file);
+				properties.analyse();
 			}
 		}
 	}
