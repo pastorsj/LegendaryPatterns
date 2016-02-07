@@ -21,10 +21,7 @@ import legendary.patterns.AdapterTargetPattern;
 /**
  * This class allows for the detection of the Adapter pattern
  */
-public class AdapterDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detector;
+public class AdapterDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new adapter detector.

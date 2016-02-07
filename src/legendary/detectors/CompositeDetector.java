@@ -19,10 +19,7 @@ import legendary.patterns.CompositePattern;
 /**
  * This class allows for the detection of the composite pattern
  */
-public class CompositeDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detector;
+public class CompositeDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new composite detector.

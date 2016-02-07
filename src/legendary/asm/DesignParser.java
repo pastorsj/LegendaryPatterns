@@ -42,6 +42,8 @@ public class DesignParser {
 /** The classes that have already been seen. */
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
+	public static int DirectoryLevels = 0;
+
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
 	 *
@@ -57,7 +59,7 @@ public class DesignParser {
 		List<String> classes = new ArrayList<String>();
 		IModel legendaryModel = new LegendaryModel();
 		for (String dir : directories) {
-			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir)));
+			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir), DirectoryLevels));
 		}
 
 		for (String className : classes) {

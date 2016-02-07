@@ -18,10 +18,7 @@ import legendary.patterns.DecoratorPattern;
  * This class allows for the detection of the decorator pattern
  * with the given model.
  */
-public class DecoratorDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detect;
+public class DecoratorDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new decorator detector.
@@ -35,7 +32,7 @@ public class DecoratorDetector implements IPatternDetector {
 	 * @param detect The pattern detector
 	 */
 	public DecoratorDetector(IPatternDetector detect) {
-		this.detect = detect;
+		this.detector = detect;
 	}
 
 	/* (non-Javadoc)
@@ -77,10 +74,10 @@ public class DecoratorDetector implements IPatternDetector {
 			}
 		}
 		Map<Class<? extends IPattern>, Set<IClass>> res;
-		if (this.detect == null) {
+		if (this.detector == null) {
 			res = new HashMap<>();
 		} else {
-			res = this.detect.detect(m);
+			res = this.detector.detect(m);
 		}
 		boolean draw = false;
 		for (IClass c : decSet) {

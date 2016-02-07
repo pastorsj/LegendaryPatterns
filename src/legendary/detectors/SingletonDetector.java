@@ -18,10 +18,7 @@ import legendary.patterns.SingletonPattern;
  * This class allows for the detection of any singleton class with the given
  * model
  */
-public class SingletonDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detector;
+public class SingletonDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new singleton detector.

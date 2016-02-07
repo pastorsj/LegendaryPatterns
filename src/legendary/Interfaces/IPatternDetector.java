@@ -34,4 +34,6 @@ public interface IPatternDetector {
 	 * @return the candidates
 	 */
 	public Set<Set<IClass>> getCandidates(IModel m);
+
+	public void addDetector(IPatternDetector detector);
 }
