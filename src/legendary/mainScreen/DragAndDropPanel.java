@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import net.iharder.dnd.FileDrop;
+
 public class DragAndDropPanel extends JPanel {
 
 	LegendaryProperties properties = LegendaryProperties.getInstance();
