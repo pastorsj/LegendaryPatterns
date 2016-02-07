@@ -84,7 +84,7 @@ public class AdapterDetector implements IPatternDetector {
 								List<List<String>> call = new ArrayList<>();
 								List<String> al = new ArrayList<>();
 								al.add(c.getClassName());
-								al.add(c2.getClassName().substring(c2.getClassName().lastIndexOf(":")+1));
+								al.add(c2.getClassName());
 								al.add(method2.getMethodName());
 								call.add(al);
 								call.add(method.getParameters());

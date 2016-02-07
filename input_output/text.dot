@@ -533,9 +533,10 @@ legendaryClassesSDEditOutputStream [
 	|
 	- initializeVisitors() : void\l
 	+ postvisitMethod() : void\l
-	 _access5(SDEditOutputStream) : int_\l
-	 _access4(SDEditOutputStream) : List_\l
 	+ visitMethod() : void\l
+	 _access6(SDEditOutputStream) : int_\l
+	 _access5(SDEditOutputStream) : IVisitor_\l
+	 _access4(SDEditOutputStream) : List_\l
 	 _access3(SDEditOutputStream) : IModel_\l
 	+ write(String) : void\l
 	 _access2(SDEditOutputStream) : Set_\l
@@ -840,6 +841,8 @@ legendarypatternsAdapterTargetPattern [
 	[label = ""]legendaryClassesSDEditOutputStream->legendaryvisitorVisitorAdapter
 	edge [style = "dashed"] [arrowhead = "open"]
 	[label = ""]legendaryClassesSDEditOutputStream->legendaryClassesSDEditOutputStream
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]legendaryClassesSDEditOutputStream->legendaryInterfacesIMethod
 	edge [style = "solid"] [arrowhead = "open"]
 	[label = ""]legendaryClassesSDEditOutputStream->legendaryInterfacesIModel
 	edge [style = "solid"] [arrowhead = "open"]

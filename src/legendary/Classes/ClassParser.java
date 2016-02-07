@@ -10,7 +10,6 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
 
-
 /*
  * This class allows the user to parse the data in the model
  * into a UML representation and/or a Sequence Diagram 
@@ -18,10 +17,10 @@ import legendary.Interfaces.IPatternDetector;
  * Author: Sam Pastoriza
  */
 public class ClassParser {
-	
+
 	/** A Singleton instance of ClassParser */
 	private static ClassParser instance;
-	
+
 	/** The pattern detector for uml diagrams */
 	private IPatternDetector detect;
 
@@ -45,34 +44,43 @@ public class ClassParser {
 	/**
 	 * Adds the pattern detector.
 	 *
-	 * @param detect (see field)
+	 * @param detect
+	 *            (see field)
 	 */
 	public void addDetector(IPatternDetector detect) {
 		this.detect = detect;
 	}
 
 	/**
-	 * Make the sequence diagram given the model and other params
-	 * listed below
+	 * Make the sequence diagram given the model and other params listed below
 	 *
-	 * @param classname The Class containing the method we start at
-	 * @param methodname The method name that we start the sequence diagram
-	 * @param depth The depth at which we want to generate the diagram
-	 * @param model The model of the current project
-	 * @param builder A string builder that will contain the representation of the sequence
-	 * diagram at the end of the method
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param classname
+	 *            The Class containing the method we start at
+	 * @param methodname
+	 *            The method name that we start the sequence diagram
+	 * @param depth
+	 *            The depth at which we want to generate the diagram
+	 * @param model
+	 *            The model of the current project
+	 * @param builder
+	 *            A string builder that will contain the representation of the
+	 *            sequence diagram at the end of the method
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void makeSDEdit(String classname, String methodname, int depth, IModel model, StringBuilder builder)
-			throws IOException {
-		String params = methodname.substring(methodname.indexOf("(") + 1, methodname.indexOf(")"));
+	public void makeSDEdit(String classname, String methodname, int depth,
+			IModel model, StringBuilder builder) throws IOException {
+		String params = methodname.substring(methodname.indexOf("(") + 1,
+				methodname.indexOf(")"));
 		methodname = methodname.substring(0, methodname.indexOf("("));
 		String[] paramTypeSplit;
 		List<String> paramTypes = new ArrayList<>();
 		if (params.length() != 0) {
 			paramTypeSplit = params.split(", ");
 			for (String s : paramTypeSplit) {
-				paramTypes.add((s.contains(" ") ? s.substring(0, s.indexOf(" ")) : s));
+				paramTypes
+						.add((s.contains(" ") ? s.substring(0, s.indexOf(" "))
+								: s));
 			}
 		}
 		outerloop: for (IClass c : model.getClasses()) {
@@ -81,14 +89,16 @@ public class ClassParser {
 					List<String> genParams = new ArrayList<>();
 					for (String s : method.getParameters()) {
 						if (s.contains(":"))
-							s = s.substring(s.lastIndexOf(":")+1);
-						genParams.add(
-								(s.contains("<") ? (s.substring(0, s.indexOf("<") + 1).replace("\\", "") + "?>") : s));
+							s = s.substring(s.lastIndexOf(":") + 1);
+						genParams.add((s.contains("<") ? (s.substring(0,
+								s.indexOf("<") + 1).replace("\\", "") + "?>")
+								: s));
 					}
 					if (method.getMethodName().equals(methodname)) {
 						if (paramTypes.equals(genParams)) {
 							@SuppressWarnings("unused")
-							SDEditOutputStream stream = new SDEditOutputStream(model, depth, builder);
+							SDEditOutputStream stream = new SDEditOutputStream(
+									method, model, depth, builder);
 							break outerloop;
 						}
 					}
@@ -98,18 +108,24 @@ public class ClassParser {
 	}
 
 	/**
-	 * Given the current model of the project, this method generates 
-	 * a UML diagram representation that can be parsed and exported into a
-	 * picture using GraphViz
+	 * Given the current model of the project, this method generates a UML
+	 * diagram representation that can be parsed and exported into a picture
+	 * using GraphViz
 	 *
-	 * @param m The model of the current representation of the project
-	 * @param builder The string builder that will contain the representation of the 
-	 * uml diagram at the end of the method
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param m
+	 *            The model of the current representation of the project
+	 * @param builder
+	 *            The string builder that will contain the representation of the
+	 *            uml diagram at the end of the method
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void makeGraphViz(IModel m, StringBuilder builder) throws IOException {
+	public void makeGraphViz(IModel m, StringBuilder builder)
+			throws IOException {
 		@SuppressWarnings("unused")
-		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(builder,
-				(this.detect == null) ? new HashMap<>() : this.detect.detect(m), m);
+		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(
+				builder,
+				(this.detect == null) ? new HashMap<>() : this.detect.detect(m),
+				m);
 	}
 }

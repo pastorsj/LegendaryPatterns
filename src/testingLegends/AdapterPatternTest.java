@@ -43,6 +43,7 @@ public class AdapterPatternTest {
 
 	@Before
 	public void setUp() {
+		DesignParser.AdapterThreshold = 0;
 		DesignParser.packageName = "";
 		this.testITarget = new LegendaryClass();
 		this.testAbstractTarget = new LegendaryClass();

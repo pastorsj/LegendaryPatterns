@@ -37,7 +37,7 @@ public class DesignParser {
 //			"C:/Users/Administrator/Documents/CSSE374/Lab7-2-Solution/src/problem" };
 	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	
-	public static final int AdapterThreshold = 2;
+	public static int AdapterThreshold = 2;
 	
 /** The classes that have already been seen. */
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
