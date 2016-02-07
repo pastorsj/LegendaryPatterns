@@ -51,13 +51,14 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	        this.file = this.fileChooser.getSelectedFile();
 	        if(this.file.getPath().endsWith(".properties")) {
 	        	//Do stuff with the file
-	        	properties.readProperties(this.file);
+	        	properties.setFile(file);
+	        	properties.readProperties();
 	        } else {
 	        	System.err.println("This is not a legit file");
 	        }
 	      }
 		} else if(e.getSource().equals(this.analyseFile)) {
-			if(this.file == null) {
+			if(properties.getFile() == null) {
 				System.err.println("Print to panel: You have not chosen a file");
 			} else {
 				properties.analyse();

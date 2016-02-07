@@ -27,6 +27,8 @@ public class LegendaryProperties {
 	private IPatternDetector detector;
 	private IModel model;
 	private static Map<String, ICommand> commandMap = new HashMap<>();
+	private File file;
+	
 	static {
 		commandMap.put("Singleton-Detection", new DetectorCommand(
 				SingletonDetector.class));
@@ -43,6 +45,7 @@ public class LegendaryProperties {
 	private LegendaryProperties() {
 		this.propertyMap = new HashMap<>();
 		this.properties = new Properties();
+		this.file = null;
 	}
 
 	public static LegendaryProperties getInstance() {
@@ -54,11 +57,23 @@ public class LegendaryProperties {
 	public Map<String, String> getPropertyMap() {
 		return this.propertyMap;
 	}
+	
+	public void setFile(File file) {
+		this.file = file;
+	}
+	
+	public String getCurrentFilename() {
+		return this.file.getName();
+	}
+	
+	public File getFile() {
+		return this.file;
+	}
 
-	public void readProperties(File file) {
+	public void readProperties() {
 		InputStream reader = null;
 		try {
-			reader = new FileInputStream(file);
+			reader = new FileInputStream(this.file);
 			properties.load(reader);
 			this.propertyMap.put("dirLevels",
 					properties.getProperty("Directory-Levels"));
