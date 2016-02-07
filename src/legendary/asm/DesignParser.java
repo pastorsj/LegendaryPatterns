@@ -28,14 +28,14 @@ import legendary.detectors.SingletonDetector;
 public class DesignParser {
 
 	/** The package name. */
-	public static String packageName = "problem";
+	public static String packageName = "legendary";
 	
 	/** The directory. */
 	public static final String[] directories = {
 //			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 //			"C:/Program Files/Java/jdk1.8.0_20/src/javax/swing"};
-			"C:/Users/Administrator/Documents/CSSE374/Lab5-1-Solution/src/problem" };
-//	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
+//			"C:/Users/Administrator/Documents/CSSE374/Lab7-2-Solution/src/problem" };
+	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	
 	public static final int AdapterThreshold = 2;
 	
