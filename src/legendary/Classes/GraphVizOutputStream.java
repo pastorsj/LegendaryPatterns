@@ -179,7 +179,11 @@ public class GraphVizOutputStream {
 										for (Class<? extends IPattern> p : patMapIn
 												.keySet()) {
 											try {
-												label+=p.newInstance().tagArrow(cPatterns, c2Patterns);
+												String toAdd = p.newInstance()
+														.tagArrow(cPatterns,
+																c2Patterns);
+												if (!label.contains(toAdd))
+													label += toAdd;
 											} catch (InstantiationException
 													| IllegalAccessException e) {
 												e.printStackTrace();
