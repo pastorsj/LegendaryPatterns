@@ -312,9 +312,9 @@ public class GeneralUtil {
 				"./input_output/text.dot"));
 		writer.write(builder.toString().replace("$", ""));
 		writer.close();
-		// Runtime rt = Runtime.getRuntime();
-		// rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o
-		// ./input_output/GraphVizoutput.png");
+		 Runtime rt = Runtime.getRuntime();
+		 rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o"
+		 +" ./input_output/GraphVizoutput.png");
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));
 	}

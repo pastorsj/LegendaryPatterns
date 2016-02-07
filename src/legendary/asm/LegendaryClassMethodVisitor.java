@@ -53,10 +53,10 @@ public class LegendaryClassMethodVisitor extends MethodVisitor {
 			}
 			this.legendaryModel.addRelation(this.legendaryClass.getClassName(), n, Relations.USES);
 		}
-		if (owner.startsWith(DesignParser.packageName)) {
+//		if (owner.startsWith(DesignParser.packageName)) {
 			String ownerClass = owner.substring(owner.lastIndexOf("/") + 1);
 			this.legendaryMethod.addMethodToCallStack(this.legendaryClass.getClassName(), ownerClass, name,
 					GeneralUtil.typeArgumentCollections(desc));
-		}
+//		}
 	}
 }

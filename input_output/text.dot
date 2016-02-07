@@ -1,0 +1,53 @@
+digraph G{
+	node [shape = "record"]
+problemclientIteratorToEnumerationAdapter [
+	label = "{problem.client::IteratorToEnumerationAdapter\n\<\<adapter\>\>|
+	- itr: Iterator\<\>\l
+	|
+	+ hasMoreElements() : boolean\l
+	+ nextElement() : \l
+	}"
+	style = "filled"
+fillcolor = "red"]
+problemlibLinearTransformer [
+	label = "{problem.lib::LinearTransformer|
+	- enumTion: Enumeration\<\>\l
+	|
+	+ transform(OutputStream) : void\l
+	}"
+	]
+problemclientApp [
+	label = "{problem.client::App|
+	|
+	+ _main(String[]) : void_\l
+	}"
+	]
+javautilEnumeration [
+	label = "{\<\<interface\>\>\njava.util::Enumeration\n\<\<target\>\>|
+	|
+	+ hasMoreElements() : boolean\l
+	+ nextElement() : \l
+	}"
+	style = "filled"
+fillcolor = "red"]
+javautilIterator [
+	label = "{\<\<interface\>\>\njava.util::Iterator\n\<\<adaptee\>\>|
+	|
+	+ next() : \l
+	+ hasNext() : boolean\l
+	+ forEachRemaining(Consumer\<\>) : void\l
+	+ remove() : void\l
+	}"
+	style = "filled"
+fillcolor = "red"]
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = "\<\<adapts\>\>"]problemclientIteratorToEnumerationAdapter->javautilIterator
+	edge [style = "dashed"] [arrowhead = "empty"]
+	[label = ""]problemclientIteratorToEnumerationAdapter->javautilEnumeration
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = ""]problemlibLinearTransformer->javautilEnumeration
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemclientApp->problemclientIteratorToEnumerationAdapter
+	edge [style = "dashed"] [arrowhead = "open"]
+	[label = ""]problemclientApp->problemlibLinearTransformer
+}

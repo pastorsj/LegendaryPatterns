@@ -33,14 +33,18 @@ public class CompositeDetector implements IPatternDetector {
 	/**
 	 * Instantiates a new composite detector.
 	 *
-	 * @param detector The pattern detector
+	 * @param detector
+	 *            The pattern detector
 	 */
 	public CompositeDetector(IPatternDetector detector) {
 		this.detector = detector;
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
 	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
@@ -84,15 +88,20 @@ public class CompositeDetector implements IPatternDetector {
 			}
 			if (three) {
 				temp3 = iter.next();
-				if (rels.get(temp).get(Relations.ASSOCIATES).contains(temp3)) {
+				if (compos != null)
+					mid = temp3;
+				else if (rels.get(temp).get(Relations.ASSOCIATES)
+						.contains(temp3)) {
 					compos = temp;
 					compon = temp3;
 					mid = temp2;
-				} else if (rels.get(temp3).get(Relations.ASSOCIATES).contains(temp)) {
+				} else if (rels.get(temp3).get(Relations.ASSOCIATES)
+						.contains(temp)) {
 					compos = temp3;
 					compon = temp;
 					mid = temp2;
-				} else if (rels.get(temp2).get(Relations.ASSOCIATES).contains(temp3)) {
+				} else if (rels.get(temp2).get(Relations.ASSOCIATES)
+						.contains(temp3)) {
 					compos = temp2;
 					compon = temp3;
 					mid = temp;
@@ -102,19 +111,26 @@ public class CompositeDetector implements IPatternDetector {
 					mid = temp;
 				}
 			}
+			System.out.println();
+			if (!compos.isDrawable())
+				continue outer;
 			for (IField f : compos.getFields()) {
-				if (f.getBaseTypes().contains(compon.getClassName()) || f.getBaseTypes().contains(compon.getClassName()+"[]")) {
-					for (String s : f.getBaseTypes()) {
-						if (collectionExt.contains(s) || f.getType().endsWith("[]")) {
-							if (!compos.isDrawable())
-								continue outer;
+				Set<String> baseTypes = f.getBaseTypes();
+				if (baseTypes.contains(compon.getClassName())
+						|| baseTypes.contains(compon.getClassName() + "[]")) {
+					for (String s : baseTypes) {
+						if (collectionExt.contains(s)
+								|| f.getType().endsWith("[]")) {
 							composites.add(compos);
 							components.add(compon);
 							components.add(mid);
-							leaves.addAll(mid.isInterface() ? rels.get(mid).get(Relations.REV_IMPLEMENTS)
-									: rels.get(mid).get(Relations.REV_EXTENDS));
-							composites.addAll(mid.isInterface() ? rels.get(compos).get(Relations.REV_IMPLEMENTS)
-									: rels.get(compos).get(Relations.REV_EXTENDS));
+							leaves.addAll(mid.isInterface() ? rels.get(mid)
+									.get(Relations.REV_IMPLEMENTS) : rels.get(
+									mid).get(Relations.REV_EXTENDS));
+							composites.addAll(mid.isInterface() ? rels.get(
+									compos).get(Relations.REV_IMPLEMENTS)
+									: rels.get(compos).get(
+											Relations.REV_EXTENDS));
 							leaves.removeAll(composites);
 							leaves.removeAll(components);
 						}
@@ -140,16 +156,20 @@ public class CompositeDetector implements IPatternDetector {
 		return res;
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces
+	 * .IModel)
 	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
 		Set<Set<IClass>> result = new HashSet<>();
 		Map<IClass, Map<Relations, Set<IClass>>> rels = m.getRelGraph();
 		for (IClass c : m.getClasses()) {
-			if (!(rels.get(c).get(Relations.REV_IMPLEMENTS).isEmpty()
-					&& rels.get(c).get(Relations.REV_EXTENDS).isEmpty())) {
+			if (!(rels.get(c).get(Relations.REV_IMPLEMENTS).isEmpty() && rels
+					.get(c).get(Relations.REV_EXTENDS).isEmpty())) {
 				Set<IClass> subs = new HashSet<>();
 				subs.addAll(rels.get(c).get(Relations.REV_IMPLEMENTS));
 				subs.addAll(rels.get(c).get(Relations.REV_EXTENDS));
@@ -157,7 +177,8 @@ public class CompositeDetector implements IPatternDetector {
 				allSupers.add(c);
 				for (IClass sub : subs) {
 					for (IClass superC : allSupers) {
-						if (rels.get(sub).get(Relations.ASSOCIATES).contains(superC)) {
+						if (rels.get(sub).get(Relations.ASSOCIATES)
+								.contains(superC)) {
 							Set<IClass> cand = new HashSet<>();
 							cand.add(superC);
 							cand.add(sub);
@@ -172,11 +193,13 @@ public class CompositeDetector implements IPatternDetector {
 	}
 
 	/**
-	 * Gets the all classes that extend or implement the 
-	 * class that was passed in.
+	 * Gets the all classes that extend or implement the class that was passed
+	 * in.
 	 *
-	 * @param m The current model
-	 * @param c The current class
+	 * @param m
+	 *            The current model
+	 * @param c
+	 *            The current class
 	 * @return all supers of the class
 	 */
 	private Set<IClass> getAllSupers(IModel m, IClass c) {

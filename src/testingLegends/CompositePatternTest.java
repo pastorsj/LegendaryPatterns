@@ -291,7 +291,7 @@ public class CompositePatternTest {
 	public void testBaseCaseDetectWithInterfaceFail() {
 		this.setUpModel2();
 		this.addRelations2(false);
-		this.testField.setType("IComponent[]");
+		this.testField.setType("int"); //composite does not associate with IComponent in this case
 		this.testModel.convertToGraph();
 		Map<Class<? extends IPattern>, Set<IClass>> result = this.compositeDetector.detect(testModel);
 		Set<IClass> components = new HashSet<>();

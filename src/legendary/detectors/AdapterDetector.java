@@ -1,15 +1,19 @@
 package legendary.detectors;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
+import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
+import legendary.asm.DesignParser;
 import legendary.patterns.AdapteePattern;
 import legendary.patterns.AdapterPattern;
 import legendary.patterns.AdapterTargetPattern;
@@ -31,14 +35,18 @@ public class AdapterDetector implements IPatternDetector {
 	/**
 	 * Instantiates a new adapter detector.
 	 *
-	 * @param detector The pattern detector
+	 * @param detector
+	 *            The pattern detector
 	 */
 	public AdapterDetector(IPatternDetector detector) {
 		this.detector = detector;
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
 	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
@@ -58,16 +66,43 @@ public class AdapterDetector implements IPatternDetector {
 					supers.addAll(rels.get(c).get(Relations.EXTENDS));
 					supers.addAll(rels.get(c).get(Relations.IMPLEMENTS));
 					for (IClass c2 : supers) {
-						Set<IClass> revassoc = rels.get(c2).get(Relations.REV_ASSOCIATES);
-						if ((revassoc.size() == 1 && !(revassoc.contains(c) || revassoc.contains(c2)))
-								|| (revassoc.size() == 2 && !(revassoc.contains(c) && revassoc.contains(c2)))
-								|| revassoc.size() > 2) {
+						Set<IClass> revassoc = rels.get(c2).get(
+								Relations.REV_ASSOCIATES);
+						boolean rc = revassoc.contains(c);
+						boolean rc2 = revassoc.contains(c2);
+						int rsize = revassoc.size();
+						if ((rsize == 1 && !(rc || rc2))
+								|| (rsize == 2 && !(rc && rc2)) || rsize > 2) {
 							tempSet1.add(c2);
 						} else
 							draw = false;
 					}
 					for (IClass c2 : rels.get(c).get(Relations.ASSOCIATES)) {
-						tempSet2.add(c2);
+						int count = 0;
+						for (IMethod method : c.getMethodObjects()) {
+							for (IMethod method2 : c2.getMethodObjects()) {
+								List<List<String>> call = new ArrayList<>();
+								List<String> al = new ArrayList<>();
+								al.add(c.getClassName());
+								al.add(c2.getClassName().substring(c2.getClassName().lastIndexOf(":")+1));
+								al.add(method2.getMethodName());
+								call.add(al);
+								call.add(method.getParameters());
+								if (method.getCallStack().contains(call)) {
+									count++;
+									break;
+								}
+							}
+							if (method.getMethodName().contains("<init>")) {
+								if (method.getParameters().contains(
+										c2.getClassName()))
+									count++;
+							}
+						}
+						if (count >= DesignParser.AdapterThreshold)
+							tempSet2.add(c2);
+						if (tempSet2.isEmpty())
+							draw = false;
 
 					}
 					if (draw) {
@@ -104,8 +139,12 @@ public class AdapterDetector implements IPatternDetector {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces
+	 * .IModel)
 	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {
@@ -129,10 +168,12 @@ public class AdapterDetector implements IPatternDetector {
 				Set<IClass> assocs = new HashSet<>();
 				assocs.addAll(rels.get(c).get(Relations.ASSOCIATES));
 				assocs.remove(c);
-				if (!assocs.isEmpty() && !assocs.equals(supers)) {
+				if (!assocs.isEmpty() && !supers.containsAll(assocs)) {
 					for (IClass c2 : supers) {
-						Set<IClass> revs = rels.get(c2).get(Relations.REV_ASSOCIATES);
-						if (!revs.isEmpty() && (!(revs.size() == 1 && revs.contains(c)))) {
+						Set<IClass> revs = rels.get(c2).get(
+								Relations.REV_ASSOCIATES);
+						if (!revs.isEmpty()
+								&& (!(revs.size() == 1 && revs.contains(c)))) {
 							in = true;
 						}
 					}
