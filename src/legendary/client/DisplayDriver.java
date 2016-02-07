@@ -2,17 +2,17 @@ package legendary.client;
 
 import javax.swing.SwingUtilities;
 
-import legendary.mainScreen.MainScreen;
+import legendary.DisplayScreen.DisplayFrame;
 
-public class Driver {
-	
+public class DisplayDriver {
+
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				MainScreen mainScreen = new MainScreen();
-				mainScreen.createScreen();
+				DisplayFrame displayScreen = new DisplayFrame();
+				displayScreen.createDisplay();
 			}
 		});
 
