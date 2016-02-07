@@ -1,6 +1,5 @@
 package legendary.mainScreen;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -14,9 +13,10 @@ public class MainScreen{
 		frame.setSize(640, 480);
 		frame.setTitle("Design Parser");
 		
-		JPanel rows = new JPanel(new GridLayout(2, 1));
+		JPanel rows = new JPanel(new GridLayout(3, 1));
 		JPanel buttonPanel = new ButtonPanel();
 		JPanel dndPanel = new DragAndDropPanel();
+		JPanel pbarPanel = new ProgressBarPanel();
 		
 		buttonPanel.setPreferredSize(new Dimension(100, 200));
 		dndPanel.setPreferredSize(new Dimension(100, 100));

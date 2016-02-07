@@ -52,35 +52,35 @@ public class DesignParser {
 	 *            edu.rosehulman.csse374.ClassFieldVisitor java.lang.Math
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static void main(String[] args) throws IOException {
-		ClassParser legendaryParser = ClassParser.getInstance();
-		legendaryParser.addDetector(
-				new SingletonDetector(new DecoratorDetector(new AdapterDetector(new CompositeDetector()))));
-		List<String> classes = new ArrayList<String>();
-		IModel legendaryModel = new LegendaryModel();
-		for (String dir : directories) {
-			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir), DirectoryLevels));
-		}
-
-		for (String className : classes) {
-			executeASM(className, legendaryModel, true);
-		}
-		legendaryModel.convertToGraph();
-		StringBuilder builder = new StringBuilder();
-		legendaryParser.makeGraphViz(legendaryModel, builder);
-		GeneralUtil.writeAndExecGraphViz(builder);
-		if (args.length > 0) {
-			if (args.length != 3 && args.length != 2) {
-				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
-			}
-			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));
-			String arg2 = args[0].substring(args[0].lastIndexOf(".") + 1);
-			builder = new StringBuilder();
-			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5), legendaryModel,
-					builder);
-			GeneralUtil.writeAndExecSDEdit(builder);
-		}
-	}
+//	public static void main(String[] args) throws IOException {
+//		ClassParser legendaryParser = ClassParser.getInstance();
+//		legendaryParser.addDetector(
+//				new SingletonDetector(new DecoratorDetector(new AdapterDetector(new CompositeDetector()))));
+//		List<String> classes = new ArrayList<String>();
+//		IModel legendaryModel = new LegendaryModel();
+//		for (String dir : directories) {
+//			classes.addAll(GeneralUtil.getClassesFromDir(new File(dir), DirectoryLevels));
+//		}
+//
+//		for (String className : classes) {
+//			executeASM(className, legendaryModel, true);
+//		}
+//		legendaryModel.convertToGraph();
+//		StringBuilder builder = new StringBuilder();
+//		legendaryParser.makeGraphViz(legendaryModel, builder);
+//		GeneralUtil.writeAndExecGraphViz(builder);
+//		if (args.length > 0) {
+//			if (args.length != 3 && args.length != 2) {
+//				throw new IllegalArgumentException(String.format("%s %s %s", args[0], args[1], args[2]));
+//			}
+//			String arg1 = args[0].substring(0, args[0].lastIndexOf("."));
+//			String arg2 = args[0].substring(args[0].lastIndexOf(".") + 1);
+//			builder = new StringBuilder();
+//			legendaryParser.makeSDEdit(arg1, arg2, (args.length == 2 ? Integer.parseInt(args[1]) : 5), legendaryModel,
+//					builder);
+//			GeneralUtil.writeAndExecSDEdit(builder);
+//		}
+//	}
 
 	/**
 	 * Execute ASM library to read classes.

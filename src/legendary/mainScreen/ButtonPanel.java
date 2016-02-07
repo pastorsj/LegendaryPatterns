@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements ActionListener{
 	
-	private JButton chooseFile, analyseFile;
+	public static JButton chooseFile, analyseFile;
 	private JFileChooser fileChooser;
 	private File file;
 	
@@ -26,12 +26,12 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	private void initializeButtons() {
 		JPanel layout = new JPanel(new BorderLayout());
 		
-		this.chooseFile = new JButton("Choose a Config File");
-		this.analyseFile = new JButton("Analyse");
+		chooseFile = new JButton("Choose a Config File");
+		analyseFile = new JButton("Analyse");
 		this.fileChooser = new JFileChooser();
 		
-		this.chooseFile.addActionListener(this);
-		this.analyseFile.addActionListener(this);
+		chooseFile.addActionListener(this);
+		analyseFile.addActionListener(this);
 		
 		layout.add(chooseFile, BorderLayout.NORTH);
 		layout.add(analyseFile, BorderLayout.SOUTH);
@@ -44,7 +44,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		LegendaryProperties properties = LegendaryProperties.getInstance();
-		if(e.getSource().equals(this.chooseFile)) {
+		if(e.getSource().equals(chooseFile)) {
 	      int returnVal = this.fileChooser.showOpenDialog(ButtonPanel.this);
 
 	      if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -57,7 +57,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	        	System.err.println("This is not a legit file");
 	        }
 	      }
-		} else if(e.getSource().equals(this.analyseFile)) {
+		} else if(e.getSource().equals(analyseFile)) {
 			if(properties.getFile() == null) {
 				System.err.println("Print to panel: You have not chosen a file");
 			} else {

@@ -1,198 +1,28 @@
 digraph G{
 	node [shape = "record"]
-problemspritesAbstractSprite [
-	label = "{problem.sprites::AbstractSprite\n\<\<Component\>\>|
-	# dx: double\l
-	# dy: double\l
-	# shape: Shape\l
+problemclientIteratorToEnumerationAdapter [
+	label = "{problem.client::IteratorToEnumerationAdapter|
+	- itr: Iterator\<\>\l
 	|
-	+ add(ISprite) : void\l
-	+ iterator() : Iterator\<ISprite\>\l
-	+ move(Dimension) : void\l
-	# computeNewBoundsAfterMoving(Dimension) : Rectangle2D\l
-	+ getChild(int) : ISprite\l
-	+ getShape() : Shape\l
-	+ remove(ISprite) : void\l
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemspritesCompositeSpriteIterator [
-	label = "{problem.sprites::CompositeSpriteIterator|
-	- stack: Stack\<Iterator\<ISprite\>\>\l
-	|
-	+ next() : Object\l
-	+ hasNext() : boolean\l
-	+ remove() : void\l
+	+ hasMoreElements() : boolean\l
+	+ nextElement() : \l
 	}"
 	]
-problemgraphicsAnimationPanel [
-	label = "{problem.graphics::AnimationPanel|
-	- _serialVersionUID: long_\l
-	- sprites: List\<ISprite\>\l
-	- animating: boolean\l
-	- sleepTime: long\l
-	|
-	+ add(ISprite) : void\l
-	+ getSize() : Dimension\l
-	# paintComponent(Graphics) : void\l
-	+ reset() : void\l
-	+ animate() : void\l
-	 _access2(AnimationPanel) : long_\l
-	 _access1(AnimationPanel) : List_\l
-	 _access0(AnimationPanel) : boolean_\l
-	}"
-	]
-problemspritesISprite [
-	label = "{\<\<interface\>\>\nproblem.sprites::ISprite\n\<\<Component\>\>|
-	|
-	+ add(ISprite) : void\l
-	+ move(Dimension) : void\l
-	+ getChild(int) : ISprite\l
-	+ getShape() : Shape\l
-	+ remove(ISprite) : void\l
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemspritesISprite [
-	label = "{\<\<interface\>\>\nproblem.sprites::ISprite|
-	|
-	+ add(ISprite) : void\l
-	+ move(Dimension) : void\l
-	+ getChild(int) : ISprite\l
-	+ getShape() : Shape\l
-	+ remove(ISprite) : void\l
-	}"
-	]
-problemspritesCircleSprite [
-	label = "{problem.sprites::CircleSprite\n\<\<Leaf\>\>|
-	|
-	+ move(Dimension) : void\l
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemspritesRectangleTower [
-	label = "{problem.sprites::RectangleTower\n\<\<Composite\>\>|
-	|
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemgraphicsMainWindow [
-	label = "{problem.graphics::MainWindow|
-	- frame: JFrame\l
-	- actionPanel: JPanel\l
-	- animationPanel: AnimationPanel\l
-	- moveButton: JButton\l
-	- createButton: JButton\l
-	- resetButton: JButton\l
-	|
-	- createWidgets(String, long) : void\l
-	+ show() : void\l
-	 _access2(MainWindow) : JButton_\l
-	 _access1(MainWindow) : JButton_\l
-	- assignActions() : void\l
-	 _access0(MainWindow) : AnimationPanel_\l
-	}"
-	]
-problemspritesCrystalBall [
-	label = "{problem.sprites::CrystalBall\n\<\<Composite\>\>|
-	|
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemspritesCompositeSprite [
-	label = "{problem.sprites::CompositeSprite\n\<\<Composite\>\>|
-	 children: List\<ISprite\>\l
-	|
-	+ add(ISprite) : void\l
-	+ iterator() : Iterator\<ISprite\>\l
-	+ move(Dimension) : void\l
-	+ getChild(int) : ISprite\l
-	+ remove(ISprite) : void\l
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemspritesSpriteFactory [
-	label = "{problem.sprites::SpriteFactory|
-	+ _DX: double_\l
-	+ _DY: double_\l
-	+ _WIDTH: double_\l
-	+ _HEIGHT: double_\l
-	- _random: Random_\l
-	- _sprites: List\<Class\<ISprite\>\>_\l
-	|
-	+ _createRandomSprite(Dimension) : ISprite_\l
-	+ _computeRandomLocation(Dimension) : Point2D_\l
-	}"
-	]
-problemspritesRectangleSprite [
-	label = "{problem.sprites::RectangleSprite\n\<\<Leaf\>\>|
-	|
-	+ move(Dimension) : void\l
-	}"
-	style = "filled"
-fillcolor = "yellow"]
-problemspritesNullSpriteIterator [
-	label = "{problem.sprites::NullSpriteIterator|
-	|
-	+ next() : Object\l
-	+ hasNext() : boolean\l
-	+ remove() : void\l
-	}"
-	]
-problemclientAnimatorApp [
-	label = "{problem.client::AnimatorApp|
+problemclientApp [
+	label = "{problem.client::App|
 	|
 	+ _main(String[]) : void_\l
 	}"
 	]
-	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]problemspritesAbstractSprite->problemspritesISprite
+problemlibLinearTransformer [
+	label = "{problem.lib::LinearTransformer|
+	- enumTion: Enumeration\<\>\l
+	|
+	+ transform(OutputStream) : void\l
+	}"
+	]
 	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesAbstractSprite->problemspritesNullSpriteIterator
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemspritesCompositeSpriteIterator->problemspritesISprite
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemgraphicsAnimationPanel->problemspritesISprite
+	[label = ""]problemclientApp->problemclientIteratorToEnumerationAdapter
 	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemgraphicsAnimationPanel->problemspritesCompositeSpriteIterator
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemgraphicsAnimationPanel->problemgraphicsAnimationPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesISprite->problemspritesISprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesCircleSprite->problemspritesAbstractSprite
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemspritesCircleSprite->problemspritesAbstractSprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesRectangleTower->problemspritesRectangleSprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesRectangleTower->problemspritesCompositeSprite
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemspritesRectangleTower->problemspritesCompositeSprite
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemgraphicsMainWindow->problemgraphicsAnimationPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemgraphicsMainWindow->problemgraphicsMainWindow
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesCrystalBall->problemspritesRectangleTower
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesCrystalBall->problemspritesCircleSprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesCrystalBall->problemspritesCompositeSprite
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemspritesCrystalBall->problemspritesCompositeSprite
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]problemspritesCompositeSprite->problemspritesISprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesCompositeSprite->problemspritesCompositeSpriteIterator
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesCompositeSprite->problemspritesAbstractSprite
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemspritesCompositeSprite->problemspritesAbstractSprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemspritesRectangleSprite->problemspritesAbstractSprite
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]problemspritesRectangleSprite->problemspritesAbstractSprite
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]problemclientAnimatorApp->problemgraphicsMainWindow
+	[label = ""]problemclientApp->problemlibLinearTransformer
 }

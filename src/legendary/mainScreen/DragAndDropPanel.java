@@ -9,6 +9,7 @@ import javax.swing.JTextArea;
 
 import net.iharder.dnd.FileDrop;
 
+@SuppressWarnings("serial")
 public class DragAndDropPanel extends JPanel {
 
 	LegendaryProperties properties = LegendaryProperties.getInstance();
@@ -23,11 +24,13 @@ public class DragAndDropPanel extends JPanel {
 		}
 		this.add(new JScrollPane(text));
 
+		@SuppressWarnings("unused")
 		FileDrop fd = new FileDrop(null, text, /* dragBorder, */ new FileDrop.Listener() {
 			public void filesDropped(File[] files) {
 				File file = files[0];
 				if(file.getName().endsWith(".properties")) {
 					properties.setFile(file);
+					properties.readProperties();
 					text.setText(file.getName());
 				} else {
 					text.setText("Please drop a .properties type file");
