@@ -116,6 +116,7 @@ public class SDEditTest {
 		out.add("TestClass1:TestClass1\n");
 		out.add("TestClass1:int=TestClass2.testCallMethod1()\n");
 		out.add("TestClass1:double=TestClass3.testCallMethod2()\n");
+		System.out.println(this.builder.toString());
 		assertTrue(this.builder.toString().contains(out.get(0)));
 		assertTrue(this.builder.toString().contains(out.get(1)));
 		assertTrue(this.builder.toString().contains(out.get(2)));
