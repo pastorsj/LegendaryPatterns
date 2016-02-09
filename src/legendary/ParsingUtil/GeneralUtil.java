@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import legendary.mainScreen.LegendaryProperties;
+
 /**
  * This class contains most parsing code for asm syntax
  */
@@ -312,7 +314,8 @@ public class GeneralUtil {
 		writer.write(builder.toString().replace("$", ""));
 		writer.close();
 		Runtime rt = Runtime.getRuntime();
-		rt.exec("./lib/Graphviz2.38/bin/dot -Tpng ./input_output/text.dot -o"
+		LegendaryProperties properties = LegendaryProperties.getInstance();
+		rt.exec(properties.getDotPath() + " -Tpng ./input_output/text.dot -o"
 				+ " ./input_output/GraphVizoutput.png");
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));

@@ -1,5 +1,6 @@
 package legendary.DisplayScreen;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ public class DisplayFrame implements ActionListener{
 
 	public void createDisplay() {
 		JFrame frame = new DropdownMenuPanel();
+		frame.setBackground(Color.WHITE);
 		frame.setSize(1280, 720);
 		frame.setTitle("Design Parser");
 		

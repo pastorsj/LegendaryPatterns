@@ -69,6 +69,10 @@ public class LegendaryProperties {
 	public File getFile() {
 		return this.file;
 	}
+	
+	public String getDotPath() {
+		return this.propertyMap.get("dotPath");
+	}
 
 	public void readProperties() {
 		InputStream reader = null;

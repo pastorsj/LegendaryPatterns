@@ -1,16 +1,17 @@
 package legendary.DisplayScreen;
 
-import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
-
-import legendary.mainScreen.LegendaryProperties;
 
 @SuppressWarnings("serial")
 public class PatternSelector extends JPanel {
 
 	public PatternSelector() {
-		this.setBackground(Color.WHITE);
-
+		CheckBoxTree checkBoxTree = new CheckBoxTree();
+		System.out.println("Creating a new check box tree");
+		checkBoxTree.setPreferredSize(new Dimension(300, 700));
+		checkBoxTree.createTree();
+		this.add(checkBoxTree);
 	}
 }
