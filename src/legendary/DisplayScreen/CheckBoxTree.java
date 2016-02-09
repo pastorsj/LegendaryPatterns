@@ -2,6 +2,7 @@ package legendary.DisplayScreen;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,6 +87,8 @@ public class CheckBoxTree extends JPanel {
 		tree.setCellRenderer(renderer);
 
 		JScrollPane scrollPane = new JScrollPane(tree);
+		scrollPane.setPreferredSize(new Dimension(300, 700));
+		scrollPane.setBorder(null);
 		this.add(scrollPane);
 	}
 
@@ -96,7 +99,7 @@ class CheckBoxNodeRenderer implements TreeCellRenderer {
 
 	private DefaultTreeCellRenderer nonLeafRenderer = new DefaultTreeCellRenderer();
 
-	Color selectionBorderColor, selectionForeground, selectionBackground, textForeground, textBackground;
+	Color selectionForeground, selectionBackground, textForeground, textBackground;
 
 	protected JCheckBox getLeafRenderer() {
 		return leafRenderer;
@@ -108,10 +111,7 @@ class CheckBoxNodeRenderer implements TreeCellRenderer {
 		if (fontValue != null) {
 			leafRenderer.setFont(fontValue);
 		}
-		Boolean booleanValue = (Boolean) UIManager.get("Tree.drawsFocusBorderAroundIcon");
-		leafRenderer.setFocusPainted((booleanValue != null) && (booleanValue.booleanValue()));
-
-		selectionBorderColor = UIManager.getColor("Tree.selectionBorderColor");
+		
 		selectionForeground = UIManager.getColor("Tree.selectionForeground");
 		selectionBackground = UIManager.getColor("Tree.selectionBackground");
 		textForeground = UIManager.getColor("Tree.textForeground");

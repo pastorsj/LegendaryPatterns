@@ -17,12 +17,12 @@ public class DisplayFrame implements ActionListener{
 		frame.setSize(1280, 720);
 		frame.setTitle("Design Parser");
 		
-		JPanel rows = new JPanel(new FlowLayout());
+		JPanel rows = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		rows.setBackground(Color.WHITE);
 		JPanel patternSelector = new PatternSelector();
+		patternSelector.setBackground(Color.WHITE);
 		JPanel patternDisplay = new PatternDisplay();
-		
-		patternSelector.setPreferredSize(new Dimension(300, 700));
-		patternDisplay.setPreferredSize(new Dimension(900, 700));
+		patternDisplay.setBackground(Color.WHITE);
 		
 		rows.add(patternSelector);
 		rows.add(patternDisplay);
