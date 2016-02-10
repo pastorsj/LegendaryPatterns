@@ -128,4 +128,8 @@ public class ClassParser {
 				(this.detect == null) ? new HashMap<>() : this.detect.detect(m),
 				m);
 	}
+	
+	public IPatternDetector getDetector() {
+		return this.detect;
+	}
 }

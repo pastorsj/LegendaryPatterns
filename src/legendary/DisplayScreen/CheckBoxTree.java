@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.TreeNode;
 
+import legendary.Classes.ClassParser;
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IPatternDetector;
 import legendary.detectors.AdapterDetector;
@@ -21,7 +23,7 @@ import legendary.detectors.SingletonDetector;
 @SuppressWarnings("serial")
 public class CheckBoxTree extends JPanel {
 
-	Map<IPatternDetector, List<IClass>> patternInformation;
+	Map<IPatternDetector, Map<IClass, Set<IClass>>> patternInformation;
 	Map<IPatternDetector, List<TreeNode>> checkBoxPatternArrays;
 	List<CheckBoxNode> rootList;
 	JPanel panel;
@@ -34,21 +36,22 @@ public class CheckBoxTree extends JPanel {
 		this.initializeRootVector();
 	}
 
-	private Map<IPatternDetector, List<IClass>> getPatternInformation() {
+	private Map<IPatternDetector, Map<IClass, Set<IClass>>> getPatternInformation() {
 		// Need to get the pattern information
 		// It is a map of pattern detectors to a list of the pattern sets...
-		Map<IPatternDetector, List<IClass>> detectors = new HashMap<>();
-		detectors.put(new AdapterDetector(), new ArrayList<>());
-		detectors.put(new DecoratorDetector(), new ArrayList<>());
-		detectors.put(new SingletonDetector(), new ArrayList<>());
-		detectors.put(new CompositeDetector(), new ArrayList<>());
+		Map<IPatternDetector, Map<IClass, Set<IClass>>> detectors = new HashMap<>();
+		IPatternDetector detector = ClassParser.getInstance().getDetector();
+		while(detector != null){
+			detectors.put(detector, detector.getKeyMap());
+			detector = detector.getDecorated();
+		}
 		return detectors;
 	}
 	
 	private void initializeCheckBoxPatternArrays() {
 		for (IPatternDetector p : this.patternInformation.keySet()) {
 			List<TreeNode> cbNodes = new ArrayList<>();
-			for (IClass patternName : this.patternInformation.get(p)) {
+			for (IClass patternName : this.patternInformation.get(p).keySet()) {
 				CheckBoxNode t = new CheckBoxNode(patternName.getClassName(), false, new ArrayList<>());
 				cbNodes.add(t);
 			}

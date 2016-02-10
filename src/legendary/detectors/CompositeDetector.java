@@ -25,6 +25,7 @@ public class CompositeDetector extends AbstractPatternDetector {
 	 * Instantiates a new composite detector.
 	 */
 	public CompositeDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -35,6 +36,7 @@ public class CompositeDetector extends AbstractPatternDetector {
 	 */
 	public CompositeDetector(IPatternDetector detector) {
 		this.detector = detector;
+		this.keyMap = new HashMap<>();
 	}
 
 	/*
@@ -130,6 +132,11 @@ public class CompositeDetector extends AbstractPatternDetector {
 											Relations.REV_EXTENDS));
 							leaves.removeAll(composites);
 							leaves.removeAll(components);
+							Set<IClass> deps = new HashSet<>();
+							deps.addAll(composites);
+							deps.addAll(components);
+							deps.addAll(leaves);
+							this.keyMap.put(compos, deps);
 						}
 					}
 				}
@@ -139,6 +146,7 @@ public class CompositeDetector extends AbstractPatternDetector {
 		allRes.addAll(components);
 		allRes.addAll(composites);
 		allRes.addAll(leaves);
+		//TODO
 		for (IClass c : allRes) {
 			c.setDrawable(true);
 		}

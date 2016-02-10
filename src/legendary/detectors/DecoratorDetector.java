@@ -24,6 +24,7 @@ public class DecoratorDetector extends AbstractPatternDetector {
 	 * Instantiates a new decorator detector.
 	 */
 	public DecoratorDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -33,6 +34,7 @@ public class DecoratorDetector extends AbstractPatternDetector {
 	 */
 	public DecoratorDetector(IPatternDetector detect) {
 		this.detector = detect;
+		this.keyMap = new HashMap<>();
 	}
 
 	/* (non-Javadoc)
@@ -68,6 +70,8 @@ public class DecoratorDetector extends AbstractPatternDetector {
 						tempSet.addAll(m.getRelGraph().get(c2)
 								.get(c2.isInterface() ? Relations.REV_IMPLEMENTS : Relations.REV_EXTENDS));
 						compSet.add(c);
+						keyMap.put(c, tempSet);
+						keyMap.get(c).add(c);
 						decSet.addAll(tempSet);
 					}
 				}

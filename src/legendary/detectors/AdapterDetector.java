@@ -27,6 +27,7 @@ public class AdapterDetector extends AbstractPatternDetector {
 	 * Instantiates a new adapter detector.
 	 */
 	public AdapterDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -37,6 +38,8 @@ public class AdapterDetector extends AbstractPatternDetector {
 	 */
 	public AdapterDetector(IPatternDetector detector) {
 		this.detector = detector;
+		this.keyMap = new HashMap<>();
+
 	}
 
 	/*
@@ -104,6 +107,11 @@ public class AdapterDetector extends AbstractPatternDetector {
 					}
 					if (draw) {
 						adapterSet.add(c);
+						Set<IClass> deps = new HashSet<>();
+						deps.addAll(tempSet2);
+						deps.addAll(tempSet1);
+						deps.add(c);
+						this.keyMap.put(c, deps);
 						adapteeSet.addAll(tempSet2);
 						targetSet.addAll(tempSet1);
 					}

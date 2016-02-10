@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
+import legendary.client.DisplayDriver;
+
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements ActionListener{
 	
@@ -64,6 +66,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			} else {
 				System.out.println(properties.getCurrentFilename());
 				properties.analyse();
+				System.out.println("Finished Analysis");
+				DisplayDriver.go();
 			}
 		}
 	}

@@ -6,7 +6,7 @@ import legendary.DisplayScreen.DisplayFrame;
 
 public class DisplayDriver {
 
-	public static void main(String[] args) {
+	public static void go() {
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
@@ -15,6 +15,5 @@ public class DisplayDriver {
 				displayScreen.createDisplay();
 			}
 		});
-
 	}
 }

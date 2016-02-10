@@ -37,5 +37,9 @@ public interface IPatternDetector {
 
 	public String getPatternName();
 	
+	public Map<IClass, Set<IClass>> getKeyMap();
+	
 	public void addDetector(IPatternDetector detector);
+	
+	public IPatternDetector getDecorated();
 }

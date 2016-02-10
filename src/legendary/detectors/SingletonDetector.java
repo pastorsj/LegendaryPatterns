@@ -24,6 +24,7 @@ public class SingletonDetector extends AbstractPatternDetector {
 	 * Instantiates a new singleton detector.
 	 */
 	public SingletonDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -34,6 +35,7 @@ public class SingletonDetector extends AbstractPatternDetector {
 	 */
 	public SingletonDetector(IPatternDetector detector) {
 		this.detector = detector;
+		this.keyMap = new HashMap<>();
 	}
 
 	/*
@@ -51,21 +53,20 @@ public class SingletonDetector extends AbstractPatternDetector {
 				boolean privCtorsOnly = true;
 				if (!candidate.getMethods().containsKey("<init>"))
 					continue;
-				for (IMethod method : candidate.getMethods().get("<init>")
-						.values()) {
-					privCtorsOnly = privCtorsOnly
-							&& method.getAccess().equals("-");
+				for (IMethod method : candidate.getMethods().get("<init>").values()) {
+					privCtorsOnly = privCtorsOnly && method.getAccess().equals("-");
 				}
 				if (privCtorsOnly) {
 					for (IField f : candidate.getFields()) {
-						if (f.getAccess().equals("-_")
-								&& f.getType().equals(candidate.getClassName())) {
+						if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
 							for (IMethod method : candidate.getMethodObjects()) {
 								// System.out.println(method.getReturnType());
-								if (method.getReturnType().equals(
-										candidate.getClassName())
+								if (method.getReturnType().equals(candidate.getClassName())
 										&& method.getAccess().equals("+_")) {
 									singletons.add(candidate);
+									Set<IClass> deps = new HashSet<>();
+									deps.add(candidate);
+									this.keyMap.put(candidate, deps);
 								}
 							}
 						}
