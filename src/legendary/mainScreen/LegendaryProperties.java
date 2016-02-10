@@ -11,6 +11,7 @@ import java.util.Properties;
 import legendary.Interfaces.ICommand;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
+import legendary.Interfaces.Phase;
 import legendary.commands.DetectorCommand;
 import legendary.commands.GVGenCommand;
 import legendary.commands.ModelGenCommand;
@@ -18,6 +19,9 @@ import legendary.detectors.AdapterDetector;
 import legendary.detectors.CompositeDetector;
 import legendary.detectors.DecoratorDetector;
 import legendary.detectors.SingletonDetector;
+import legendary.phases.DetectorPhase;
+import legendary.phases.GetDirPhase;
+import legendary.phases.ModelGenPhase;
 
 public class LegendaryProperties {
 
@@ -28,6 +32,7 @@ public class LegendaryProperties {
 	private IModel model;
 	private static Map<String, ICommand> commandMap = new HashMap<>();
 	private File file;
+	private static Map<String, Phase> phaseMap;
 	
 	static {
 		commandMap.put("Singleton-Detection", new DetectorCommand(
@@ -40,6 +45,12 @@ public class LegendaryProperties {
 				CompositeDetector.class));
 		commandMap.put("Class-Loading", new ModelGenCommand());
 		commandMap.put("DOT-Generation", new GVGenCommand());
+		phaseMap.put("Singleton-Detection", new DetectorPhase(SingletonDetector.class));
+		phaseMap.put("Adapter-Detection", new DetectorPhase(AdapterDetector.class));
+		phaseMap.put("Decorator-Detection", new DetectorPhase(DecoratorDetector.class));
+		phaseMap.put("Composite-Detection", new DetectorPhase(CompositeDetector.class));
+		phaseMap.put("Class-Loading", new ModelGenPhase());
+//		phaseMap.put("DOT-Generation", new GVGenPhase());
 	}
 
 	private LegendaryProperties() {
@@ -112,8 +123,10 @@ public class LegendaryProperties {
 
 	public void analyse() {
 		String[] phaseList = propertyMap.get("phases").split(", ");
-		for (String s : phaseList) {
-			commandMap.get(s).execute();
+		Phase[] pBarPhases = new Phase[phaseList.length + 1];
+		pBarPhases[0] = new GetDirPhase();
+		for (int i = 0; i < phaseList.length; i++) {
+			pBarPhases[i] = phaseMap.get(phaseList[i + 1]);
 		}
 	}
 

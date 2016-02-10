@@ -1,24 +1,15 @@
 package legendary.asm;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
+import legendary.Classes.LegendaryClass;
+import legendary.Interfaces.IClass;
+import legendary.Interfaces.IModel;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
-
-import legendary.Classes.ClassParser;
-import legendary.Classes.LegendaryClass;
-import legendary.Classes.LegendaryModel;
-import legendary.Interfaces.IClass;
-import legendary.Interfaces.IModel;
-import legendary.ParsingUtil.GeneralUtil;
-import legendary.detectors.AdapterDetector;
-import legendary.detectors.CompositeDetector;
-import legendary.detectors.DecoratorDetector;
-import legendary.detectors.SingletonDetector;
 
 /*
  * This runnable Design Parser class begins the java project 

@@ -10,43 +10,65 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
+import legendary.Interfaces.IModel;
+import legendary.Interfaces.Phase;
+import legendary.phases.GetDirPhase;
+
 @SuppressWarnings("serial")
 public class ProgressBarPanel extends JPanel implements ActionListener,
 		PropertyChangeListener {
 
 	private JProgressBar overallPBar;
 	private JProgressBar taskPBar;
-	private LegendaryProperties properties = LegendaryProperties.getInstance();
-	private SwingWorker<List<String>, String> dirtask = new GetDirTask(properties
-			.getPropertyMap().get("inputFolder"), properties.getPropertyMap()
-			.get("dirLevels"));
+	private Phase phase;
+	private Phase[] phases;
+	private SwingWorker<?, ?> task;
+	private static ProgressBarPanel instance;
+	public IModel model;
+	public List<String> classes;
 
-	public ProgressBarPanel() {
-		overallPBar = new JProgressBar(0, 3);
-		overallPBar.setValue(0);
-		overallPBar.setStringPainted(true);
-		overallPBar.setString("");
+	private ProgressBarPanel() {
 		taskPBar = new JProgressBar();
 		taskPBar.setIndeterminate(true);
 		taskPBar.setStringPainted(true);
 		taskPBar.setString("");
+		phase = new GetDirPhase();
+	}
+
+	public static ProgressBarPanel getInstance() {
+		if (instance == null) {
+			instance = new ProgressBarPanel();
+		}
+		return instance;
+	}
+
+	public void setPhases(Phase[] phases) {
+		this.phases = phases;
+		overallPBar = new JProgressBar(0, phases.length + 1);
+		overallPBar.setValue(0);
+		overallPBar.setStringPainted(true);
+		overallPBar.setString("");
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (overallPBar.getValue() == 0) {
-			taskPBar.setString(String.format("Found %d classes",
-					evt.getNewValue()));
-		}
+		taskPBar.setString(String.format(phase.formatString(),
+				evt.getNewValue()));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(ButtonPanel.analyseFile)) {
 			ButtonPanel.analyseFile.setEnabled(false);
-			overallPBar.setString("Finding classes...");
-			taskPBar.setString("Found 0 classes");
-			dirtask.addPropertyChangeListener(this);
+			for (Phase p : phases) {
+				phase = p;
+				overallPBar.setString(p.getPhaseName());
+				taskPBar.setString(String.format(p.formatString(), 0));
+				this.task = phase.getTask();
+				this.taskPBar.addPropertyChangeListener(this);
+				this.task.execute();
+				overallPBar.setValue(overallPBar.getValue() + 1);
+			}
 		}
 	}
 

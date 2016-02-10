@@ -8,10 +8,9 @@ import java.util.List;
 import legendary.Classes.LegendaryModel;
 import legendary.Interfaces.ICommand;
 import legendary.Interfaces.IModel;
-import legendary.ParsingUtil.GeneralUtil;
 import legendary.asm.DesignParser;
-import legendary.mainScreen.GetDirTask;
 import legendary.mainScreen.LegendaryProperties;
+import legendary.tasks.GetDirTask;
 
 public class ModelGenCommand implements ICommand {
 

@@ -16,7 +16,7 @@ public class MainScreen{
 		JPanel rows = new JPanel(new GridLayout(3, 1));
 		JPanel buttonPanel = new ButtonPanel();
 		JPanel dndPanel = new DragAndDropPanel();
-		JPanel pbarPanel = new ProgressBarPanel();
+		JPanel pbarPanel = ProgressBarPanel.getInstance();
 		
 		buttonPanel.setPreferredSize(new Dimension(100, 200));
 		dndPanel.setPreferredSize(new Dimension(100, 100));
