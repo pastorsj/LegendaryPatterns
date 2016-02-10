@@ -7,23 +7,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import legendary.mainScreen.LegendaryProperties;
+
 @SuppressWarnings("serial")
 public class PatternDisplay extends JPanel {
 
 	public PatternDisplay() {
+		LegendaryProperties properties = LegendaryProperties.getInstance();
+		JLabel picLabel = new JLabel(new ImageIcon(
+				properties.getOutputDirectory() + "GraphVizoutput.png"));
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
+			System.out.println("Waiting on image to load");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JLabel picLabel = new JLabel(new ImageIcon(
-				"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/input_output/GraphVizoutput.png"));
 		JScrollPane pane = new JScrollPane(picLabel);
 		pane.setPreferredSize(new Dimension(950, 650));
 		pane.setViewportView(picLabel);
 		this.add(pane);
-		this.setVisible(true);
-		this.validate();
 	}
 }

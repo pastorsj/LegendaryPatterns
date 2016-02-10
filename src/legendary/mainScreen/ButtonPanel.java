@@ -67,7 +67,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				System.out.println(properties.getCurrentFilename());
 				properties.analyse();
 				System.out.println("Finished Analysis");
-				//DisplayDriver.go();
+				DisplayDriver.go();
 			}
 		}
 	}
