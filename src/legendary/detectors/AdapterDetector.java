@@ -184,4 +184,10 @@ public class AdapterDetector extends AbstractPatternDetector {
 		return candSet;
 	}
 
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Adapter Pattern";
+	}
+
 }

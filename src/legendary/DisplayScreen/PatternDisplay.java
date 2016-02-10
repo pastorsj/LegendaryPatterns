@@ -21,7 +21,7 @@ public class PatternDisplay extends JPanel {
 					"/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/input_output/GraphVizoutput.png"));
 			JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 			JScrollPane pane = new JScrollPane(picLabel);
-			pane.setPreferredSize(new Dimension(950, 700));
+			pane.setPreferredSize(new Dimension(950, 650));
 			pane.setViewportView(picLabel);
 			this.add(pane);
 			

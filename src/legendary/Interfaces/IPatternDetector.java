@@ -35,5 +35,7 @@ public interface IPatternDetector {
 	 */
 	public Set<Set<IClass>> getCandidates(IModel m);
 
+	public String getPatternName();
+	
 	public void addDetector(IPatternDetector detector);
 }

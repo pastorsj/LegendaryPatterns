@@ -210,4 +210,10 @@ public class CompositeDetector extends AbstractPatternDetector {
 		}
 		return result;
 	}
+
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Composite Pattern";
+	}
 }

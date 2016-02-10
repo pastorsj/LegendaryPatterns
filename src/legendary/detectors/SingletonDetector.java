@@ -103,4 +103,10 @@ public class SingletonDetector extends AbstractPatternDetector {
 		return res;
 	}
 
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Singleton Pattern";
+	}
+
 }

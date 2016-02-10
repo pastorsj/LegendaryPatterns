@@ -133,4 +133,10 @@ public class DecoratorDetector extends AbstractPatternDetector {
 		return candidates;
 	}
 
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Decorator Pattern";
+	}
+
 }

@@ -14,8 +14,7 @@ public class PatternSelector extends JPanel {
 		JScrollPane pane = new JScrollPane(checkBoxTree);
 		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		pane.setPreferredSize(new Dimension(300, 700));
-		System.out.println("Creating a new check box tree");
+		pane.setPreferredSize(new Dimension(300, 650));
 		checkBoxTree.createTree();
 		checkBoxTree.setBackground(Color.WHITE);
 		pane.setViewportView(checkBoxTree);
