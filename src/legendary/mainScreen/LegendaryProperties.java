@@ -71,6 +71,7 @@ public class LegendaryProperties {
 	}
 	
 	public String getDotPath() {
+		System.out.println(this.propertyMap.get("dotPath"));
 		return this.propertyMap.get("dotPath");
 	}
 	

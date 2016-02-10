@@ -316,8 +316,9 @@ public class GeneralUtil {
 		Runtime rt = Runtime.getRuntime();
 		LegendaryProperties properties = LegendaryProperties.getInstance();
 		System.out.println("Run");
-		rt.exec(properties.getDotPath() + " -Tpng" + properties.getOutputDirectory() +"-o"
+		rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory() +" -o "
 				+ " ./input_output/GraphVizoutput.png");
+		
 		// Desktop.getDesktop().open(new
 		// File("./input_output/GraphVizoutput.png"));
 	}

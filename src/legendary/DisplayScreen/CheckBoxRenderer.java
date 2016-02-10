@@ -52,6 +52,9 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 		}
 
 //		System.out.println(this);
+		if(!(value instanceof DynamicUtilTreeNode)){
+			return checkBox;
+		}
 		value = ((DynamicUtilTreeNode) value).getUserObject();
 		if ((value != null) && (value instanceof CheckBoxNode)) {
 			CheckBoxNode node = (CheckBoxNode) value;
