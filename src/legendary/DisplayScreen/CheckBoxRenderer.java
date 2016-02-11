@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTree;
 import javax.swing.JTree.DynamicUtilTreeNode;
 import javax.swing.UIManager;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 
 public class CheckBoxRenderer implements TreeCellRenderer {
@@ -51,11 +52,10 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 			checkBox.setBackground(textBackground);
 		}
 
-//		System.out.println(this);
-		if(!(value instanceof DynamicUtilTreeNode)){
+		if(!(value instanceof DefaultMutableTreeNode)){
 			return checkBox;
 		}
-		value = ((DynamicUtilTreeNode) value).getUserObject();
+		
 		if ((value != null) && (value instanceof CheckBoxNode)) {
 			CheckBoxNode node = (CheckBoxNode) value;
 			checkBox.setText(node.getText());
