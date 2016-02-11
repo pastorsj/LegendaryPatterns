@@ -1,6 +1,8 @@
 package legendary.DisplayScreen;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +26,7 @@ public class CheckBoxModel {
 		this.initializeCheckBoxPatternArrays();
 		this.model = new DefaultTreeModel(this.root);
 	}
-	
+
 	public TreeModel getModel() {
 		return this.model;
 	}
@@ -41,11 +43,36 @@ public class CheckBoxModel {
 		return detectors;
 	}
 
+	public void regen() {
+		List<CheckBoxNode> nodes = new ArrayList<>();
+		CheckBoxNode leaf = (CheckBoxNode) root.getFirstLeaf();
+		while (leaf != null) {
+			nodes.add(leaf);
+			leaf = (CheckBoxNode) leaf.getNextSibling();
+		}
+		for (CheckBoxNode n : nodes) {
+			System.out.println(n.getClasses());
+			for (IClass c : n.getClasses()) {
+				c.setDrawable(false);
+			}
+		}
+		for (CheckBoxNode n : nodes) {
+			if (n.isSelected()) {
+				for (IClass c : n.getClasses()) {
+					c.setDrawable(true);
+				}
+			}
+		}
+		ClassParser.getInstance().regenGV();
+	}
+
 	private void initializeCheckBoxPatternArrays() {
 		for (IPatternDetector p : this.patternInformation.keySet()) {
-			CheckBoxNode node = new CheckBoxNode(p.getPatternName(), false);
+			CheckBoxNode node = new CheckBoxNode(p.getPatternName(), this,
+					false);
 			for (IClass patternName : this.patternInformation.get(p).keySet()) {
-				CheckBoxNode t = new CheckBoxNode(patternName.getClassName(), false);
+				CheckBoxNode t = new CheckBoxNode(patternName.getClassName(),
+						patternInformation.get(p).get(patternName), this, false);
 				node.add(t);
 			}
 			this.root.add(node);

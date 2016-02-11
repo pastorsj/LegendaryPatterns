@@ -50,6 +50,9 @@ public class SingletonDetector extends AbstractPatternDetector {
 		Set<Set<IClass>> candidates = getCandidates(m);
 		for (Set<IClass> candidateSet : candidates) {
 			for (IClass candidate : candidateSet) {
+				if(!candidate.isDrawable()){
+					continue;
+				}
 				boolean privCtorsOnly = true;
 				if (!candidate.getMethods().containsKey("<init>"))
 					continue;
