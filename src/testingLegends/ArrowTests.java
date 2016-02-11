@@ -35,6 +35,8 @@ public class ArrowTests {
 		this.c2 = new LegendaryClass();
 		c1.setClassName("Class 1");
 		c2.setClassName("Class 2");
+		c1.setDrawable(true);
+		c2.setDrawable(true);
 		this.model = new LegendaryModel();
 		model.addClass(c1);
 		model.addClass(c2);
@@ -57,7 +59,7 @@ public class ArrowTests {
 		this.model.addRelation(c1.getClassName(), c2.getClassName(), Relations.ASSOCIATES);
 		model.convertToGraph();
 		String arrowRet = (String) arrowMethod.invoke(outputStream, model);
-		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
+		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]" + "Class 1->Class 2\n", arrowRet);
 	}
 
 	@Test
@@ -65,7 +67,7 @@ public class ArrowTests {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
 		model.convertToGraph();
 		String arrowRet = (String) arrowMethod.invoke(this.outputStream, this.model);
-		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
+		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t[label = \"\"]" + "Class 1->Class 2\n", arrowRet);
 	}
 
 	@Test
@@ -74,7 +76,7 @@ public class ArrowTests {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
 		model.convertToGraph();
 		String arrowRet = (String) arrowMethod.invoke(this.outputStream, this.model);
-		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
+		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]" + "Class 1->Class 2\n", arrowRet);
 	}
 
 	@Test
@@ -83,7 +85,7 @@ public class ArrowTests {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.USES);
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
-		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t" + "Class 1->Class 2\n", arrowRet);
+		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]" + "Class 1->Class 2\n", arrowRet);
 	}
 
 	@Test
@@ -91,7 +93,7 @@ public class ArrowTests {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.EXTENDS);
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
-		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
+		assertEquals("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t[label = \"\"]" + "Class 1->Class 2\n", arrowRet);
 	}
 
 	@Test
@@ -99,7 +101,7 @@ public class ArrowTests {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.IMPLEMENTS);
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
-		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t" + "Class 1->Class 2\n", arrowRet);
+		assertEquals("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t[label = \"\"]" + "Class 1->Class 2\n", arrowRet);
 	}
 
 	@Test
@@ -109,8 +111,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -122,8 +124,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -134,10 +136,9 @@ public class ArrowTests {
 		this.model.addRelation(this.c1.getClassName(), this.c2.getClassName(), Relations.ASSOCIATES);
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
-		System.out.println(arrowRet);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -149,8 +150,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -162,8 +163,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -175,8 +176,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -188,8 +189,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}
@@ -201,8 +202,8 @@ public class ArrowTests {
 		model.convertToGraph();
 		String arrowRet = (String) this.arrowMethod.invoke(this.outputStream, this.model);
 		List<String> out = new ArrayList<>();
-		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\tClass 1->Class 2\n");
-		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\tClass 1->Class 2\n");
+		out.add("\tedge [style = \"solid\"] [arrowhead = \"open\"]\n\t[label = \"\"]Class 1->Class 2\n");
+		out.add("\tedge [style = \"dashed\"] [arrowhead = \"empty\"]\n\t[label = \"\"]Class 1->Class 2\n");
 		assertTrue(arrowRet.contains(out.get(0)));
 		assertTrue(arrowRet.contains(out.get(1)));
 	}

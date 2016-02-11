@@ -1,0 +1,1939 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1">
+  <zoom_level>4</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>152</x>
+      <y>404</y>
+      <w>292</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassMethodVisitor
+--
+-usesClasses: List&lt;String&gt;
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassMethodVisitor(int api): ctor
++ClassMethodVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel): ctor
++visitMethod(int access, String name, String desc, String signature, String[] exceptions): MethodVisitor
+-addAccessLevel(int access, IMethod method): void
+-addReturnType(String desc, IMethod method): void
+-addArguments(String desc, IMethod method): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>508</y>
+      <w>400</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::LegendaryClassMethodVisitor
+--
+~legendaryClass: IClass
+~legendaryModel: IModel
+~legendaryMethod: IMethod
+--
++LegendaryClassMethodVisitor(int api, MethodVisitor decorated, IClass legendaryClass, IModel legendaryModel, IMethod legendaryMethod): ctor
++visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf): void
++visitFieldInsn(int opcode, String owner, String name, String desc): void
++visitTypeInsn(int opcode, String type): void
++visitVarInsn(int opcode, int var): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>152</x>
+      <y>608</y>
+      <w>284</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassFieldVisitor
+--
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassFieldVisitor(int api): ctor
++ClassFieldVisitor(int api, ClassVisitor decorated, IClass legendaryClass, IModel legendaryModel): ctor
++visitField(int access, String name, String desc, String signature, Object value): FieldVisitor
+~addAccessLevel(int access, IField field): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>232</y>
+      <w>240</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::DesignParser
+--
++packageName = "legendary": String
++directories = { //	"C:/Users/Jason/Documents/374/Lab5-1-Solution/src/problem" };
+"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary" }: String[]
++classesSeen = new ArrayList&lt;String&gt;(): ArrayList&lt;String&gt;
+--
++main(String[] args): void
++executeASM(String className, IModel legendaryModel, boolean drawable): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>332</y>
+      <w>288</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>legendary.asm::ClassDeclarationVisitor
+--
+-legendaryClass: IClass
+-legendaryModel: IModel
+--
++ClassDeclarationVisitor(int api, IClass legendaryClass, IModel legendaryModel): ctor
++visit(int version, int access, String name, String signature, String superName, String[] interfaces): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1252</x>
+      <y>552</y>
+      <w>172</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryClass
+--
+-className: String
+-superClassName: String
+-interfaces: List&lt;String&gt;
+-methods: Map&lt;String, Map&lt;List&lt;String&gt;, IMethod&gt;&gt;
+-fields: List&lt;IField&gt;
+-isInterface: boolean
+-creationOrder: int
+-drawable: boolean
+-count: int
+--
++LegendaryClass(): ctor
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): Map&lt;String, Map&lt;List&lt;String&gt;, IMethod&gt;&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
++accept(IVisitor v): void
++getMethodObjects(): List&lt;IMethod&gt;
++getCreationOrder(): int
++setDrawable(boolean drawable): void
++isDrawable(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2136</x>
+      <y>1316</y>
+      <w>320</w>
+      <h>164</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::GraphVizOutputStream
+--
+-builder: StringBuilder
+-visitor: IVisitor
+-relationRep: Map&lt;Relations, String&gt;
+-patterns: Map&lt;IClass, Set&lt;IPattern&gt;&gt;
+--
++GraphVizOutputStream(StringBuilder builder, Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt; map, IModel m): ctor
+-initializeVisitors(): void
+-invertPatternMap(Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt; in): Map&lt;IClass, Set&lt;IPattern&gt;&gt;
+-write(String s): void
+-previsitModel(): void
+-visitModel(): void
+-addArrows(IModel m): String
+-postvisitModel(): void
+-previsitClass(): void
+-visitClass(): void
+-addPatternTags(IClass c): void
+-postvisitClass(): void
+-patternColor(IClass c): String
+-visitField(): void
++visit(IMethod m): void
+-visitMethod(): void
++initialize(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1004</x>
+      <y>916</y>
+      <w>316</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryMethod
+--
+-methodAccess: String
+-methodName: String
+-parameters: List&lt;String&gt;
+-methodCallStack: Queue&lt;List&lt;List&lt;String&gt;&gt;&gt;
+-methodReturnType: String
+--
++LegendaryMethod(): ctor
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++accept(IVisitor v): void
++addMethodToCallStack(String methodOwner, String className, String methodName, List&lt;String&gt; params): void
++getCallStack(): Queue&lt;List&lt;List&lt;String&gt;&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1236</x>
+      <y>388</y>
+      <w>216</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryModel
+--
+-classList: Set&lt;IClass&gt;
+-relGraph: Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt;
+-relations: Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
+-patterns: Map&lt;IPattern, Set&lt;IClass&gt;&gt;
+--
++LegendaryModel(): ctor
++getClasses(): Set&lt;IClass&gt;
++addClass(IClass c): void
++getRelations(): Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
++addPattern(IPattern pat, Set&lt;IClass&gt; classes): void
++getPatterns(): Map&lt;IPattern, Set&lt;IClass&gt;&gt;
++convertToGraph(): void
++removeDupArrows(Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt; temp): void
++getRelGraph(): Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt;
++addRelation(String c1, String c2, Relations r): void
++accept(IVisitor v): void
++containsClass(String i): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>712</x>
+      <y>916</y>
+      <w>116</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::LegendaryField
+--
+-fieldAccessType: String
+-fieldName: String
+-fieldType: String
+-baseFields: Set&lt;String&gt;
+--
++LegendaryField(): ctor
++setAccess(String fieldAccessType): void
++setFieldName(String fieldName): void
++setType(String fieldType): void
++getAccess(): String
++getFieldName(): String
++getType(): String
++getBaseTypes(): Set&lt;String&gt;
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1824</x>
+      <y>1328</y>
+      <w>208</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::SDEditOutputStream
+--
+-visitor: IVisitor
+-model: IModel
+-builder: StringBuilder
+-classes: Set&lt;String&gt;
+-methodCalls: List&lt;String&gt;
+-depth: int
+-origDepth: int
+--
++SDEditOutputStream(IModel model, int depth, StringBuilder builder): ctor
+-initializeVisitors(): void
++write(String s): void
++previsitMethod(): void
++visitMethod(): void
++postvisitMethod(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1952</x>
+      <y>1160</y>
+      <w>292</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>legendary.Classes::ClassParser
+&lt;&lt;Singleton&gt;&gt;
+--
+-instance: ClassParser
+-detect: IPatternDetector
+--
+-ClassParser(): ctor
++getInstance(): ClassParser
++addDetector(IPatternDetector detect): void
++makeSDEdit(String classname, String methodname, int depth, IModel model, StringBuilder builder): void
++makeGraphViz(IModel m, StringBuilder builder): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>700</y>
+      <w>188</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::AdapterDetector
+--
+-detector: IPatternDetector
+--
++AdapterDetector(): ctor
++AdapterDetector(IPatternDetector detector): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>792</y>
+      <w>188</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::DecoratorDetector
+--
+-detect: IPatternDetector
+--
++DecoratorDetector(): ctor
++DecoratorDetector(IPatternDetector detect): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1516</x>
+      <y>600</y>
+      <w>188</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::SingletonDetector
+--
+-next: IPatternDetector
+--
++SingletonDetector(): ctor
++SingletonDetector(IPatternDetector next): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>832</x>
+      <y>564</y>
+      <w>172</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IClass
+--
+--
++setClassName(String className): void
++setSuper(String superClassName): void
++setInterfaces(List&lt;String&gt; interfaces): void
++addMethod(IMethod method): void
++addField(IField field): void
++getClassName(): String
++getSuperName(): String
++getInterfaces(): List&lt;String&gt;
++getMethods(): Map&lt;String, Map&lt;List&lt;String&gt;, IMethod&gt;&gt;
++getFields(): List&lt;IField&gt;
++setIsInterface(boolean isInterface): void
++isInterface(): boolean
++getMethodObjects(): List&lt;IMethod&gt;
++getCreationOrder(): int
++setDrawable(boolean drawable): void
++isDrawable(): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>892</x>
+      <y>760</y>
+      <w>316</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IMethod
+--
+--
++setAccess(String accessType): void
++setMethodName(String methodName): void
++setParameters(List&lt;String&gt; parameters): void
++setReturnType(String returnType): void
++getAccess(): String
++getMethodName(): String
++getParameters(): List&lt;String&gt;
++getReturnType(): String
++getCallStack(): Queue&lt;List&lt;List&lt;String&gt;&gt;&gt;
++addMethodToCallStack(String methodOwner, String className, String methodName, List&lt;String&gt; params): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>424</y>
+      <w>228</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IModel
+--
+--
++getClasses(): Set&lt;IClass&gt;
++addClass(IClass c): void
++getRelations(): Map&lt;List&lt;String&gt;, List&lt;Relations&gt;&gt;
++addRelation(String c1, String c2, Relations r): void
++convertToGraph(): void
++getRelGraph(): Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt;
++removeDupArrows(Map&lt;IClass, Map&lt;Relations, Set&lt;IClass&gt;&gt;&gt; tempMap): void
++containsClass(String i): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>768</y>
+      <w>128</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IField
+--
+--
++setAccess(String methodAccessType): void
++setFieldName(String methodName): void
++setType(String methodReturnType): void
++getAccess(): String
++getFieldName(): String
++getType(): String
+~getBaseTypes(): Set&lt;String&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2016</x>
+      <y>508</y>
+      <w>84</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1520</x>
+      <y>504</y>
+      <w>188</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.Interfaces::IPatternDetector
+--
+--
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>36</y>
+      <w>192</w>
+      <h>92</h>
+    </coordinates>
+    <panel_attributes>legendary.ParsingUtil::GeneralUtil
+--
++primCodes: Map&lt;String, String&gt;
+--
++typeArgumentCollections(String in): List&lt;String&gt;
+-convert(List&lt;String&gt; argSet): List&lt;String&gt;
++typeMethodCollections(String in, List&lt;String&gt; usesClasses): String
+-parsePrimOut(String arg, List&lt;String&gt; argSet): void
++getBaseFields(String in): Set&lt;String&gt;
++typeFieldCollections(String in): String
++getClassesFromDir(File dir): List&lt;String&gt;
++writeAndExecGraphViz(StringBuilder builder): void
++writeAndExecSDEdit(StringBuilder builder): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1252</x>
+      <y>1420</y>
+      <w>192</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>legendary.visitor::VisitorAdapter
+&lt;&lt;Adapter&gt;&gt;
+--
++keyToVisitMethodMap: Map&lt;LookupKey, IVisitMethod&gt;
+--
++VisitorAdapter(): ctor
++preVisit(ITraverser t): void
++visit(ITraverser t): void
++postVisit(ITraverser t): void
+-doVisit(VisitType vType, ITraverser t): void
++addVisit(VisitType visitType, Class&lt;?&gt; clazz, IVisitMethod m): void
++getMap(): Map&lt;LookupKey, IVisitMethod&gt;
++removeVisit(VisitType visitType, Class&lt;?&gt; clazz): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>1184</y>
+      <w>192</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.visitor::IVisitor
+&lt;&lt;Target&gt;&gt;
+--
+--
++preVisit(ITraverser t): void
++visit(ITraverser t): void
++postVisit(ITraverser t): void
++addVisit(VisitType visitType, Class&lt;?&gt; clazz, IVisitMethod m): void
++removeVisit(VisitType visitType, Class&lt;?&gt; clazz): void
++getMap(): Map&lt;LookupKey, IVisitMethod&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1276</x>
+      <y>1304</y>
+      <w>156</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>legendary.visitor::LookupKey
+&lt;&lt;Adaptee&gt;&gt;
+--
+~visitType: VisitType
+~clazz: Class&lt;?&gt;
+--
++LookupKey(VisitType visitType, Class&lt;?&gt; clazz): ctor
++hashCode(): int
++equals(Object obj): boolean
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1304</x>
+      <y>1196</y>
+      <w>84</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.visitor::ITraverser
+--
+--
++accept(IVisitor v): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1472</x>
+      <y>1196</y>
+      <w>88</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+legendary.visitor::IVisitMethod
+&lt;&lt;Adaptee&gt;&gt;
+--
+--
++execute(ITraverser t): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1504</x>
+      <y>468</y>
+      <w>860</w>
+      <h>584</h>
+    </coordinates>
+    <panel_attributes>PatternDetectionFramework
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>628</x>
+      <y>368</y>
+      <w>852</w>
+      <h>704</h>
+    </coordinates>
+    <panel_attributes>Model/Class/Method/Field Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>0</x>
+      <y>212</y>
+      <w>588</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>Class Analysis Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>972</x>
+      <y>1112</y>
+      <w>660</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>Visitor Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1764</x>
+      <y>1108</y>
+      <w>756</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>Visitor Analysis Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1040</x>
+      <y>464</y>
+      <w>204</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;490.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1000</x>
+      <y>632</y>
+      <w>260</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;630.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>840</y>
+      <w>12</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1060</x>
+      <y>852</y>
+      <w>12</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1616</x>
+      <y>544</y>
+      <w>12</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1696</x>
+      <y>528</y>
+      <w>36</w>
+      <h>212</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;10.0;70.0;10.0;70.0;510.0;10.0;510.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1696</x>
+      <y>528</y>
+      <w>36</w>
+      <h>304</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>30.0;10.0;70.0;10.0;70.0;740.0;10.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1620</x>
+      <y>480</y>
+      <w>452</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1110.0;70.0;1110.0;10.0;10.0;20.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>940</x>
+      <y>264</y>
+      <w>692</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;400.0;10.0;10.0;1710.0;10.0;1710.0;600.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1340</x>
+      <y>328</y>
+      <w>720</w>
+      <h>188</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1780.0;450.0;1780.0;10.0;10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>292</y>
+      <w>12</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>92</x>
+      <y>256</y>
+      <w>116</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>150.0;460.0;10.0;460.0;10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>56</x>
+      <y>256</y>
+      <w>152</w>
+      <h>396</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>240.0;970.0;10.0;970.0;10.0;10.0;360.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>124</x>
+      <y>452</y>
+      <w>36</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>436</x>
+      <y>256</y>
+      <w>500</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1230.0;420.0;1230.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1440</x>
+      <y>1228</y>
+      <w>108</w>
+      <h>244</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;adapts&gt;&gt;</panel_attributes>
+    <additional_attributes>190.0;10.0;190.0;590.0;10.0;590.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1112</x>
+      <y>1252</y>
+      <w>148</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;520.0;350.0;520.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>764</x>
+      <y>1024</y>
+      <w>596</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>1470.0;430.0;1470.0;180.0;10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1316</x>
+      <y>984</y>
+      <w>44</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>90.0;530.0;90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1348</x>
+      <y>756</y>
+      <w>12</w>
+      <h>448</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;1100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1348</x>
+      <y>516</y>
+      <w>96</w>
+      <h>688</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;1700.0;10.0;880.0;220.0;880.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>888</x>
+      <y>0</y>
+      <w>316</w>
+      <h>164</h>
+    </coordinates>
+    <panel_attributes>General Utility Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1488</x>
+      <y>524</y>
+      <w>624</w>
+      <h>644</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0;10.0;1380.0;1540.0;1380.0;1540.0;1590.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2240</x>
+      <y>1176</y>
+      <w>40</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;90.0;80.0;90.0;80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1952</x>
+      <y>1228</y>
+      <w>76</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;250.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2164</x>
+      <y>1228</y>
+      <w>100</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>230.0;220.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1032</x>
+      <y>356</y>
+      <w>1376</w>
+      <h>812</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0;3420.0;20.0;3420.0;1800.0;2730.0;1800.0;2730.0;2010.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1352</x>
+      <y>1356</y>
+      <w>36</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+&lt;&lt;adapts&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1208</x>
+      <y>1212</y>
+      <w>272</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>660.0;10.0;590.0;10.0;590.0;150.0;140.0;150.0;140.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>884</y>
+      <w>192</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>legendary.detectors::CompositeDetector
+--
+-detector: IPatternDetector
+--
++CompositeDetector(): ctor
++CompositeDetector(IPatternDetector detector): ctor
++detect(IModel m): Map&lt;Class&lt;? extends IPattern&gt;, Set&lt;IClass&gt;&gt;
++getCandidates(IModel m): Set&lt;Set&lt;IClass&gt;&gt;
+-getAllSupers(IModel m, IClass c): Set&lt;IClass&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1700</x>
+      <y>528</y>
+      <w>32</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>20.0;10.0;60.0;10.0;60.0;980.0;10.0;980.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1872</x>
+      <y>604</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::SingletonPattern
+--
+--
++tag(): String
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1752</x>
+      <y>796</y>
+      <w>128</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>/legendary.patterns::AbstractAdapterPattern/
+--
+--
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1996</x>
+      <y>788</y>
+      <w>136</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>/legendary.patterns::AbstractCompositePattern/
+--
+--
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2188</x>
+      <y>628</y>
+      <w>136</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>/legendary.patterns::AbstractDecoratorPattern/
+--
+--
++color(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1760</x>
+      <y>868</y>
+      <w>108</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::AdapteePattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1760</x>
+      <y>912</y>
+      <w>104</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::AdapterPattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1752</x>
+      <y>964</y>
+      <w>124</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::AdapterTargetPattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1992</x>
+      <y>852</y>
+      <w>144</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::CompositeComponentPattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2000</x>
+      <y>904</y>
+      <w>124</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::CompositeLeafPattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2004</x>
+      <y>960</y>
+      <w>112</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::CompositePattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2184</x>
+      <y>692</y>
+      <w>144</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::DecoratorComponentPattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2204</x>
+      <y>740</y>
+      <w>112</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.patterns::DecoratorPattern
+--
+--
++tag(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1856</x>
+      <y>576</y>
+      <w>136</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Singleton Pattern</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1744</x>
+      <y>780</y>
+      <w>164</w>
+      <h>228</h>
+    </coordinates>
+    <panel_attributes>Adapter Pattern</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>2172</x>
+      <y>612</y>
+      <w>184</w>
+      <h>164</h>
+    </coordinates>
+    <panel_attributes>Decorator Pattern</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>1980</x>
+      <y>772</y>
+      <w>180</w>
+      <h>236</h>
+    </coordinates>
+    <panel_attributes>Composite Pattern</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2128</x>
+      <y>800</y>
+      <w>32</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;170.0;20.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2120</x>
+      <y>800</y>
+      <w>40</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;80.0;10.0;80.0;300.0;10.0;300.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2112</x>
+      <y>800</y>
+      <w>48</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;100.0;10.0;100.0;430.0;10.0;430.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2072</x>
+      <y>548</y>
+      <w>12</w>
+      <h>248</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;600.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1976</x>
+      <y>548</y>
+      <w>108</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>250.0;10.0;250.0;180.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1860</x>
+      <y>812</y>
+      <w>44</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;90.0;10.0;90.0;280.0;10.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1864</x>
+      <y>812</y>
+      <w>40</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;10.0;80.0;10.0;80.0;170.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1872</x>
+      <y>812</y>
+      <w>32</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>20.0;10.0;60.0;10.0;60.0;420.0;10.0;420.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1812</x>
+      <y>548</y>
+      <w>272</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>660.0;10.0;660.0;410.0;10.0;410.0;10.0;620.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2320</x>
+      <y>636</y>
+      <w>40</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;170.0;20.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2312</x>
+      <y>636</y>
+      <w>48</w>
+      <h>124</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30.0;10.0;100.0;10.0;100.0;290.0;10.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2072</x>
+      <y>548</y>
+      <w>124</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0;290.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3628</x>
+      <y>808</y>
+      <w>320</w>
+      <h>92</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::CheckBoxNode
+--
+~text: String
+-model: CheckBoxModel
+-classes: Set&lt;IClass&gt;
+~selected: boolean
+--
++CheckBoxNode(String text, CheckBoxModel checkBoxModel, boolean selected): ctor
++CheckBoxNode(String name, Set&lt;IClass&gt; classes, CheckBoxModel checkBoxModel, boolean selected2): ctor
++isSelected(): boolean
++setSelected(boolean newValue): void
++getText(): String
++setText(String newValue): void
++toString(): String
++getClasses(): Set&lt;IClass&gt;
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3680</x>
+      <y>700</y>
+      <w>220</w>
+      <h>68</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::CheckBoxModel
+--
+-model: TreeModel
+-root: DefaultMutableTreeNode
+-patternInformation: Map&lt;IPatternDetector, Map&lt;IClass, Set&lt;IClass&gt;&gt;&gt;
+--
++CheckBoxModel(): ctor
++getModel(): TreeModel
+-getPatternInformation(): Map&lt;IPatternDetector, Map&lt;IClass, Set&lt;IClass&gt;&gt;&gt;
++regen(): void
+-initializeCheckBoxPatternArrays(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2980</x>
+      <y>996</y>
+      <w>116</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>legendary.mainScreen::ButtonPanel
+--
+-chooseFile, analyseFile: JButton
+-fileChooser: JFileChooser
+-file: File
+--
++ButtonPanel(): ctor
+-initializeButtons(): void
++actionPerformed(ActionEvent e): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3568</x>
+      <y>952</y>
+      <w>432</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::CheckBoxRenderer
+--
+-checkBox = new JCheckBox(): JCheckBox
+~selectionForeground, selectionBackground, textForeground, textBackground: Color
+--
++CheckBoxRenderer(): ctor
+#getLeafRenderer(): JCheckBox
++getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus): Component
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2744</x>
+      <y>996</y>
+      <w>176</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::DropdownMenuPanel
+--
+-menuBar: JMenuBar
+-fileMenu, helpMenu: JMenu
+-loadNewConfig, exportGraph, howTo, about: JMenuItem
+--
++DropdownMenuPanel(): ctor
++actionPerformed(ActionEvent e): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3716</x>
+      <y>620</y>
+      <w>132</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::CheckBoxTree
+--
+~panel: JPanel
+--
++createTree(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2976</x>
+      <y>608</y>
+      <w>128</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::DisplayFrame
+--
+--
++createDisplay(): void
++actionPerformed(ActionEvent e): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3132</x>
+      <y>996</y>
+      <w>212</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>legendary.mainScreen::DragAndDropPanel
+--
+~properties = LegendaryProperties.getInstance(): LegendaryProperties
+--
++DragAndDropPanel(): ctor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2820</x>
+      <y>708</y>
+      <w>132</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::PatternDisplay
+--
+--
++PatternDisplay(): ctor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3080</x>
+      <y>692</y>
+      <w>132</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.DisplayScreen::PatternSelector
+--
+--
++PatternSelector(): ctor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3324</x>
+      <y>440</y>
+      <w>104</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.client::DisplayDriver
+--
+--
++go(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3336</x>
+      <y>368</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.client::Driver
+--
+--
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2976</x>
+      <y>904</y>
+      <w>116</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>legendary.mainScreen::MainScreen
+--
+--
++createScreen(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>2708</x>
+      <y>828</y>
+      <w>680</w>
+      <h>284</h>
+    </coordinates>
+    <panel_attributes>Main Screen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>2708</x>
+      <y>544</y>
+      <w>680</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>interaction frame</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2920</x>
+      <y>624</y>
+      <w>64</w>
+      <h>92</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3100</x>
+      <y>620</y>
+      <w>60</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>130.0;180.0;130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2824</x>
+      <y>916</y>
+      <w>160</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0;380.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3028</x>
+      <y>928</y>
+      <w>12</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3088</x>
+      <y>916</y>
+      <w>160</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>380.0;200.0;380.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>3472</x>
+      <y>600</y>
+      <w>624</w>
+      <h>444</h>
+    </coordinates>
+    <panel_attributes>Check Box Tree Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2952</x>
+      <y>1208</y>
+      <w>188</w>
+      <h>148</h>
+    </coordinates>
+    <panel_attributes>legendary.mainScreen::LegendaryProperties
+&lt;&lt;Singleton&gt;&gt;
+--
+-instance: LegendaryProperties
+-properties: Properties
+-propertyMap: Map&lt;String, String&gt;
+-detector: IPatternDetector
+-model: IModel
+-commandMap = new HashMap(): Map&lt;String, ICommand&gt;
+-file: File
+--
+-LegendaryProperties(): ctor
++getInstance(): LegendaryProperties
++getPropertyMap(): Map&lt;String, String&gt;
++setFile(File file): void
++getCurrentFilename(): String
++getFile(): File
++getDotPath(): String
++getOutputDirectory(): String
++readProperties(): void
++analyse(): void
++updateDetector(Class&lt;? extends IPatternDetector&gt; detector): void
++setModel(IModel legendaryModel): void
++getModel(): IModel
++getDetector(): IPatternDetector
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3136</x>
+      <y>1244</y>
+      <w>40</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;80.0;130.0;80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3784</x>
+      <y>648</y>
+      <w>12</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3796</x>
+      <y>764</y>
+      <w>12</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3508</x>
+      <y>632</y>
+      <w>216</w>
+      <h>352</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>150.0;860.0;10.0;860.0;10.0;10.0;520.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1660</x>
+      <y>196</y>
+      <w>2232</w>
+      <h>512</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;770.0;10.0;10.0;5560.0;10.0;5560.0;1260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>196</y>
+      <w>2932</w>
+      <h>512</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;920.0;10.0;850.0;450.0;850.0;450.0;10.0;7310.0;10.0;7310.0;1260.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>3276</x>
+      <y>332</y>
+      <w>208</w>
+      <h>164</h>
+    </coordinates>
+    <panel_attributes>Client Framework</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3036</x>
+      <y>448</y>
+      <w>296</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;400.0;10.0;10.0;720.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3028</x>
+      <y>376</y>
+      <w>416</w>
+      <h>536</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;1320.0;10.0;1210.0;1020.0;1210.0;1020.0;10.0;980.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2676</x>
+      <y>900</y>
+      <w>380</w>
+      <h>316</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>930.0;770.0;930.0;640.0;10.0;640.0;10.0;10.0;750.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2676</x>
+      <y>716</y>
+      <w>380</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>930.0;1230.0;930.0;1100.0;10.0;1100.0;10.0;10.0;360.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3208</x>
+      <y>552</y>
+      <w>592</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>1460.0;170.0;1460.0;10.0;280.0;10.0;280.0;380.0;10.0;380.0</additional_attributes>
+  </element>
+</diagram>

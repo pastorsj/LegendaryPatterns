@@ -1,32 +1,5 @@
 digraph G{
 	node [shape = "record"]
-legendaryClassesClassParser [
-	label = "{legendary.Classes::ClassParser\n\<\<Singleton\>\>|
-	- _instance: ClassParser_\l
-	- detect: IPatternDetector\l
-	- patMap: Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	- model: IModel\l
-	|
-	+ regenGV() : void\l
-	+ getDetector() : IPatternDetector\l
-	+ _getInstance() : ClassParser_\l
-	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
-	+ addDetector(IPatternDetector) : void\l
-	+ makeGraphViz(IModel, StringBuilder) : void\l
-	}"
-	color = blue]
-legendarymainScreenLegendaryProgressBar [
-	label = "{legendary.mainScreen::LegendaryProgressBar\n\<\<Singleton\>\>|
-	- _instance: LegendaryProgressBar_\l
-	- progressBar: JProgressBar\l
-	- value: int\l
-	|
-	+ getProgressBar() : JProgressBar\l
-	+ setValue(int) : void\l
-	+ incrementBy(int) : void\l
-	+ _getInstance() : LegendaryProgressBar_\l
-	}"
-	color = blue]
 legendarymainScreenLegendaryProperties [
 	label = "{legendary.mainScreen::LegendaryProperties\n\<\<Singleton\>\>|
 	- _instance: LegendaryProperties_\l
@@ -52,10 +25,37 @@ legendarymainScreenLegendaryProperties [
 	+ _getInstance() : LegendaryProperties_\l
 	}"
 	color = blue]
+legendarymainScreenLegendaryProgressBar [
+	label = "{legendary.mainScreen::LegendaryProgressBar\n\<\<Singleton\>\>|
+	- _instance: LegendaryProgressBar_\l
+	- progressBar: JProgressBar\l
+	- value: int\l
+	|
+	+ getProgressBar() : JProgressBar\l
+	+ setValue(int) : void\l
+	+ incrementBy(int) : void\l
+	+ _getInstance() : LegendaryProgressBar_\l
+	}"
+	color = blue]
+legendaryClassesClassParser [
+	label = "{legendary.Classes::ClassParser\n\<\<Singleton\>\>|
+	- _instance: ClassParser_\l
+	- detect: IPatternDetector\l
+	- patMap: Map\<Class\<IPattern\>Set\<IClass\>\>\l
+	- model: IModel\l
+	|
+	+ regenGV() : void\l
+	+ getDetector() : IPatternDetector\l
+	+ _getInstance() : ClassParser_\l
+	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
+	+ addDetector(IPatternDetector) : void\l
+	+ makeGraphViz(IModel, StringBuilder) : void\l
+	}"
+	color = blue]
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesClassParser->legendaryClassesClassParser
+	[label = ""]legendarymainScreenLegendaryProperties->legendarymainScreenLegendaryProperties
 	edge [style = "solid"] [arrowhead = "open"]
 	[label = ""]legendarymainScreenLegendaryProgressBar->legendarymainScreenLegendaryProgressBar
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendarymainScreenLegendaryProperties
+	[label = ""]legendaryClassesClassParser->legendaryClassesClassParser
 }
