@@ -11,7 +11,6 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.ParsingUtil.GeneralUtil;
-import legendary.asm.DesignParser;
 import legendary.visitor.ITraverser;
 import legendary.visitor.IVisitMethod;
 import legendary.visitor.IVisitor;
@@ -149,14 +148,9 @@ public class GraphVizOutputStream {
 		StringBuilder sb = new StringBuilder();
 		Map<IClass, Map<Relations, Set<IClass>>> graph = m.getRelGraph();
 		outer: for (IClass c : graph.keySet()) {
-			if (c.getClassName().startsWith(DesignParser.packageName))
-				c.setDrawable(true);
 			if (c.isDrawable()) {
 				for (Relations r : graph.get(c).keySet()) {
 					for (IClass c2 : graph.get(c).get(r)) {
-						if (c2.getClassName().startsWith(
-								DesignParser.packageName))
-							c2.setDrawable(true);
 						if (c2.isDrawable()) {
 							// System.out.println(c2.getClassName());
 

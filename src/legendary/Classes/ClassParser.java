@@ -140,7 +140,7 @@ public class ClassParser {
 		}
 		@SuppressWarnings("unused")
 		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(builder,
-				patMap, m);
+				patMap, this.model);
 	}
 
 	public IPatternDetector getDetector() {
@@ -149,6 +149,11 @@ public class ClassParser {
 
 	public void regenGV(){
 		StringBuilder sb = new StringBuilder();
+		for(IClass c : this.model.getClasses()){
+			if(c.isDrawable()){
+//				System.out.println(c.getClassName());
+			}
+		}
 		new GraphVizOutputStream(sb, patMap, this.model);
 		try {
 			GeneralUtil.writeAndExecGraphViz(sb);

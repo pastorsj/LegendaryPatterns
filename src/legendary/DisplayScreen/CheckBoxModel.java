@@ -51,7 +51,6 @@ public class CheckBoxModel {
 			leaf = (CheckBoxNode) leaf.getNextSibling();
 		}
 		for (CheckBoxNode n : nodes) {
-			System.out.println(n.getClasses());
 			for (IClass c : n.getClasses()) {
 				c.setDrawable(false);
 			}
@@ -59,6 +58,7 @@ public class CheckBoxModel {
 		for (CheckBoxNode n : nodes) {
 			if (n.isSelected()) {
 				for (IClass c : n.getClasses()) {
+					System.out.println(c.getClassName());
 					c.setDrawable(true);
 				}
 			}
@@ -68,6 +68,9 @@ public class CheckBoxModel {
 
 	private void initializeCheckBoxPatternArrays() {
 		for (IPatternDetector p : this.patternInformation.keySet()) {
+			if (this.patternInformation.get(p).isEmpty()) {
+				continue;
+			}
 			CheckBoxNode node = new CheckBoxNode(p.getPatternName(), this,
 					false);
 			for (IClass patternName : this.patternInformation.get(p).keySet()) {
