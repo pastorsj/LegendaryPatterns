@@ -22,6 +22,7 @@ public class GeneralUtil {
 	/** The prim codes. */
 	public static Map<String, String> primCodes;
 	public static String packageName;
+	public static volatile boolean isGenning = false;
 
 	/*
 	 * Primitive Representations for ASM 5 Primitive representations: 'V' - void
@@ -298,18 +299,33 @@ public class GeneralUtil {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(properties.getOutputDirectory() + "text.dot"));
 		writer.write(builder.toString().replace("$", ""));
 		writer.close();
-		Runtime rt = Runtime.getRuntime();
-		if (System.getProperty("os.name").contains("Mac")) {
-			String cmd[] = { properties.getDotPath(),
-					"-Tpng", 
-					properties.getOutputDirectory() + "text.dot", 
-					"-o",
-					properties.getOutputDirectory() + "GraphVizOutput.png"};
-			rt.exec(cmd);
-		} else {
-			rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory() + "text.dot -o "
-					+ properties.getOutputDirectory() + "GraphVizOutput.png");
-		}
+		new Thread() {
+			public void run() {
+				Runtime rt = Runtime.getRuntime();
+				if (System.getProperty("os.name").contains("Mac")) {
+					String cmd[] = { properties.getDotPath(), "-Tpng", properties.getOutputDirectory() + "text.dot",
+							"-o", properties.getOutputDirectory() + "GraphVizOutput.png" };
+					Process p;
+					try {
+						p = rt.exec(cmd);
+						isGenning = true;
+						p.waitFor();
+						isGenning = false;
+					} catch (InterruptedException | IOException e) {
+					}
+				} else {
+					Process p;
+					try {
+						p = rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory()
+								+ "text.dot -o " + properties.getOutputDirectory() + "GraphVizOutput.png");
+						isGenning = true;
+						p.waitFor();
+						isGenning = false;
+					} catch (InterruptedException | IOException e) {
+					}
+				}
+			}
+		}.start();
 	}
 
 	/**

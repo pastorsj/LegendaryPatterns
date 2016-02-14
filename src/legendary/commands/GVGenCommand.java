@@ -18,6 +18,7 @@ public class GVGenCommand implements ICommand {
 		try {
 			ClassParser.getInstance().makeGraphViz(m, builder);
 			GeneralUtil.writeAndExecGraphViz(builder);
+			while(GeneralUtil.isGenning);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
