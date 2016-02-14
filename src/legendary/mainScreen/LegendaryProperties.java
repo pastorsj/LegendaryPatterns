@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.sun.javafx.charts.Legend;
+
 import legendary.Interfaces.ICommand;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
@@ -120,8 +122,13 @@ public class LegendaryProperties {
 
 	public void analyse() {
 		String[] phaseList = propertyMap.get("phases").split(", ");
+		LegendaryProgressBar.getInstance().setTaskList(phaseList);
+		LegendaryProgressBar.getInstance().begin(phaseList.length);
 		for (String s : phaseList) {
+			System.out.println();
 			commandMap.get(s).execute();
+			LegendaryProgressBar.getInstance().finishTask();
+			LegendaryProgressBar.getInstance().incrementBy(1);
 		}
 	}
 
