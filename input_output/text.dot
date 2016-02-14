@@ -1,3 +1,20 @@
 digraph G{
 	node [shape = "record"]
+legendaryClassesClassParser [
+	label = "{legendary.Classes::ClassParser\n\<\<Singleton\>\>|
+	- _instance: ClassParser_\l
+	- detect: IPatternDetector\l
+	- patMap: Map\<Class\<IPattern\>Set\<IClass\>\>\l
+	- model: IModel\l
+	|
+	+ regenGV() : void\l
+	+ getDetector() : IPatternDetector\l
+	+ _getInstance() : ClassParser_\l
+	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
+	+ addDetector(IPatternDetector) : void\l
+	+ makeGraphViz(IModel, StringBuilder) : void\l
+	}"
+	color = blue]
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = ""]legendaryClassesClassParser->legendaryClassesClassParser
 }
