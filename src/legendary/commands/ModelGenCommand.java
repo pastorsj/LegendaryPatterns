@@ -34,4 +34,9 @@ public class ModelGenCommand implements ICommand {
 		legendaryModel.convertToGraph();
 		LegendaryProperties.getInstance().setModel(legendaryModel);
 	}
+
+	@Override
+	public String name() {
+		return "Reading files and generating model...";
+	}
 }

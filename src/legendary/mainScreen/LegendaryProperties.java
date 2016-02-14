@@ -8,11 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import com.sun.javafx.charts.Legend;
-
 import legendary.Interfaces.ICommand;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
+import legendary.client.DisplayDriver;
 import legendary.commands.DetectorCommand;
 import legendary.commands.GVGenCommand;
 import legendary.commands.ModelGenCommand;
@@ -30,7 +29,7 @@ public class LegendaryProperties {
 	private IModel model;
 	private static Map<String, ICommand> commandMap = new HashMap<>();
 	private File file;
-	
+
 	static {
 		commandMap.put("Singleton-Detection", new DetectorCommand(
 				SingletonDetector.class));
@@ -59,23 +58,23 @@ public class LegendaryProperties {
 	public Map<String, String> getPropertyMap() {
 		return this.propertyMap;
 	}
-	
+
 	public void setFile(File file) {
 		this.file = file;
 	}
-	
+
 	public String getCurrentFilename() {
 		return this.file.getName();
 	}
-	
+
 	public File getFile() {
 		return this.file;
 	}
-	
+
 	public String getDotPath() {
 		return this.propertyMap.get("dotPath");
 	}
-	
+
 	public String getOutputDirectory() {
 		return this.propertyMap.get("outputDirectory");
 	}
@@ -122,14 +121,22 @@ public class LegendaryProperties {
 
 	public void analyse() {
 		String[] phaseList = propertyMap.get("phases").split(", ");
-		LegendaryProgressBar.getInstance().setTaskList(phaseList);
-		LegendaryProgressBar.getInstance().begin(phaseList.length);
-		for (String s : phaseList) {
-			System.out.println();
-			commandMap.get(s).execute();
-			LegendaryProgressBar.getInstance().finishTask();
-			LegendaryProgressBar.getInstance().incrementBy(1);
+		String[] stageList = new String[phaseList.length];
+		for(int i = 0; i < phaseList.length; i++){
+			stageList[i] = commandMap.get(phaseList[i]).name();
 		}
+		LegendaryProgressBar.getInstance().begin(stageList);
+		Thread t = new Thread() {
+			public void run() {
+				for (String s : phaseList) {
+					commandMap.get(s).execute();
+					LegendaryProgressBar.getInstance().finishTask();
+					LegendaryProgressBar.getInstance().incrementBy(1);
+				}
+				DisplayDriver.go();
+			}
+		};
+		t.start();
 	}
 
 	public void updateDetector(Class<? extends IPatternDetector> detector) {

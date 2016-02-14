@@ -10,8 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-import legendary.client.DisplayDriver;
-
 @SuppressWarnings("serial")
 public class ButtonPanel extends JPanel implements ActionListener{
 	
@@ -64,7 +62,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				System.err.println("Print to panel: You have not chosen a file");
 			} else {
 				properties.analyse();
-				DisplayDriver.go();
 			}
 		}
 	}

@@ -24,4 +24,9 @@ public class GVGenCommand implements ICommand {
 		}
 	}
 
+	@Override
+	public String name() {
+		return "Generating GraphViz...";
+	}
+
 }

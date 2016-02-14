@@ -37,9 +37,11 @@ public class LegendaryProgressBar extends JPanel {
 		this.progressBar.setMaximum(max);
 	}
 
-	public void begin(int max) {
-		this.setMax(max);
+	public void begin(String[] tasks) {
+		this.setMax(tasks.length);
+		this.tasks = tasks;
 		this.progressBar.setVisible(true);
+		this.progressBar.setString(tasks[0]);
 		this.setVisible(true);
 		this.validate();
 		this.repaint();
@@ -49,19 +51,7 @@ public class LegendaryProgressBar extends JPanel {
 		return this.progressBar;
 	}
 
-	public void setTaskList(String[] tasks) {
-		this.tasks = tasks;
-	}
-
 	public void finishTask() {
-		MainScreen.frame.repaint();
-		MainScreen.frame.validate();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		taskInd++;
 		if (taskInd >= progressBar.getMaximum())
 			progressBar.setString("Finished!");
