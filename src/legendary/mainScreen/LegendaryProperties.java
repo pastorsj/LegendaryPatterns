@@ -134,6 +134,7 @@ public class LegendaryProperties {
 					LegendaryProgressBar.getInstance().incrementBy(1);
 				}
 				DisplayDriver.go();
+				MainScreen.frame.dispose();
 			}
 		};
 		t.start();

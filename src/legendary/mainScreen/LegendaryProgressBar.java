@@ -38,6 +38,7 @@ public class LegendaryProgressBar extends JPanel {
 	}
 
 	public void begin(String[] tasks) {
+		this.progressBar.setValue(0);
 		this.setMax(tasks.length);
 		this.tasks = tasks;
 		this.progressBar.setVisible(true);

@@ -7,6 +7,10 @@ import legendary.mainScreen.MainScreen;
 public class Driver {
 	
 	public static void main(String[] args) {
+		go();
+	}
+	
+	public static void go(){
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
@@ -15,6 +19,5 @@ public class Driver {
 				mainScreen.createScreen();
 			}
 		});
-
 	}
 }

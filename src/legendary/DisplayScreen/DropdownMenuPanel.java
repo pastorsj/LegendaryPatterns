@@ -1,12 +1,26 @@
 package legendary.DisplayScreen;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import legendary.client.Driver;
+import legendary.mainScreen.LegendaryProperties;
 
 @SuppressWarnings("serial")
 public class DropdownMenuPanel extends JFrame implements ActionListener {
@@ -40,15 +54,55 @@ public class DropdownMenuPanel extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(this.loadNewConfig)) {
-			System.out.println("Load New Config");
+			DisplayFrame.stop();
+			Driver.go();
 		} else if (e.getSource().equals(this.exportGraph)) {
-			System.out.println("Export Graph");
+			JFileChooser fc = new JFileChooser();
+			int retVal = fc.showSaveDialog(this);
+			if (retVal == JFileChooser.APPROVE_OPTION) {
+				try {
+					Files.copy(new File(LegendaryProperties.getInstance()
+							.getOutputDirectory() + "GraphVizOutput.png")
+							.toPath(), fc.getSelectedFile().toPath());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
 		} else if (e.getSource().equals(this.howTo)) {
-			System.out.println("How to run the program");
+			readAndDisplayTxt("./docs/howTo.txt");
 		} else if (e.getSource().equals(this.about)) {
-			System.out.println("About the program");
+			readAndDisplayTxt("./docs/about.txt");
 		} else {
 			System.err.println("This source does not exist");
+		}
+	}
+	
+	private void readAndDisplayTxt(String filename){
+		JFrame aboutFrame = new JFrame();
+		aboutFrame.setLocationRelativeTo(null);
+		JLabel label = new JLabel();
+		label.setFont(new Font("Arial", 0, 20));
+		label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(
+					filename));
+			String line = br.readLine();
+			List<String> listOfStrings = new ArrayList<>();
+			while (line != null) {
+				listOfStrings.add(line + "  <br>  ");
+				line = br.readLine();
+			}
+			label.setText("<html>ABOUT:<br>");
+			for(String s : listOfStrings){
+				label.setText(label.getText() + s);
+			}
+			label.setText(label.getText() + "</html>");
+			aboutFrame.getContentPane().add(label);
+			aboutFrame.pack();
+			aboutFrame.setVisible(true);
+			br.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 }

@@ -12,11 +12,12 @@ public class DisplayFrame{
 
 	private PatternDisplay patternDisplay;
 	private JPanel patternSelector;
+	private static JFrame frame;
 	public static boolean changedFocus;
 	public static boolean scrollBarAdjusted;
 	
 	public void createDisplay() {
-		JFrame frame = new DropdownMenuPanel();
+		frame = new DropdownMenuPanel();
 		frame.addWindowFocusListener(new WindowAdapter() {
 			public void windowGainedFocus(WindowEvent e) {
 				System.out.println("In Focus");
@@ -46,6 +47,10 @@ public class DisplayFrame{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);	
 		
+	}
+
+	public static void stop() {
+		frame.dispose();
 	}
 
 }

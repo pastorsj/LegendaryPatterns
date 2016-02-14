@@ -12,7 +12,6 @@ import javax.swing.tree.TreeCellRenderer;
 
 public class CheckBoxRenderer implements TreeCellRenderer {
 	private JCheckBox checkBox = new JCheckBox();
-	private int focusInt = 0;
 
 	Color selectionForeground, selectionBackground, textForeground,
 			textBackground;

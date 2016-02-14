@@ -42,7 +42,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		LegendaryProperties properties = LegendaryProperties.getInstance();
 		if(e.getSource().equals(this.chooseFile)) {
 	      int returnVal = this.fileChooser.showOpenDialog(ButtonPanel.this);
@@ -61,6 +60,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			if(properties.getFile() == null) {
 				System.err.println("Print to panel: You have not chosen a file");
 			} else {
+				this.chooseFile.setEnabled(false);
+				this.analyseFile.setEnabled(false);
 				properties.analyse();
 			}
 		}
