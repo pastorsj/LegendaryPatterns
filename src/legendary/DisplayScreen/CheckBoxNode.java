@@ -14,15 +14,13 @@ public class CheckBoxNode extends DefaultMutableTreeNode {
 
 	boolean selected;
 
-	public CheckBoxNode(String text, CheckBoxModel checkBoxModel,
-			boolean selected) {
+	public CheckBoxNode(String text, CheckBoxModel checkBoxModel, boolean selected) {
 		this.text = text;
 		this.model = checkBoxModel;
 		this.selected = selected;
 	}
 
-	public CheckBoxNode(String name, Set<IClass> classes,
-			CheckBoxModel checkBoxModel, boolean selected2) {
+	public CheckBoxNode(String name, Set<IClass> classes, CheckBoxModel checkBoxModel, boolean selected2) {
 		this.classes = classes;
 		this.selected = selected2;
 		this.model = checkBoxModel;
@@ -37,16 +35,12 @@ public class CheckBoxNode extends DefaultMutableTreeNode {
 		selected = newValue;
 		if (hasFocus && !DisplayFrame.changedFocus) {
 			System.out.println("Regening");
-			new Thread() {
-				public void run() {
-					model.regen();
-					// This is tremendous code
-					// We clearly know what we are doing
-					// No violation of core design principles here
-					PatternDisplay display = PatternDisplay.getInstance();
-					display.update();
-				}
-			}.start();
+			model.regen();
+			// This is tremendous code
+			// We clearly know what we are doing
+			// No violation of core design principles here
+			PatternDisplay display = PatternDisplay.getInstance();
+			display.loadImage();
 		}
 
 	}

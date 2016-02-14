@@ -34,8 +34,6 @@ public class DisplayFrame{
 		this.patternSelector = new PatternSelector();
 		patternSelector.setBackground(Color.WHITE);
 		this.patternDisplay = PatternDisplay.getInstance();
-		patternDisplay.getImage();
-		patternDisplay.createPane();
 		patternDisplay.setBackground(Color.WHITE);
 		
 		rows.add(patternSelector);

@@ -1,8 +1,8 @@
 package legendary.DisplayScreen;
 
-import java.awt.Dimension;
+import java.awt.BorderLayout;
 
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,7 +14,7 @@ public class PatternDisplay extends JPanel {
 
 	private static PatternDisplay instance;
 	private JScrollPane pane;
-	private JLabel picture;
+	private JPanel contentPane;
 
 	private PatternDisplay() {
 	}
@@ -25,30 +25,25 @@ public class PatternDisplay extends JPanel {
 		}
 		return instance;
 	}
-
-	public void createPane() {
-		try {
-			this.remove(this.pane);
-		} catch (Exception e) {
+	
+	public void loadImage() {
+		// Use JLabel to show the image
+		if(this.pane != null) {
+			this.pane.setVisible(false);
 		}
-		this.pane = new JScrollPane(this.picture);
-		pane.setPreferredSize(new Dimension(950, 650));
-		pane.setViewportView(this.picture);
-		this.add(pane);
-		pane.repaint();
-		pane.validate();
-		this.repaint();
-		this.validate();
-	}
-
-	public void getImage() {
+		System.out.println("Loading");
 		LegendaryProperties properties = LegendaryProperties.getInstance();
-		this.picture = new JLabel(new ImageIcon(properties.getOutputDirectory()
-				+ "GraphVizOutput.png"));
-		createPane();
+		Icon gvIcon = new ImageProxy(properties.getOutputDirectory()
+				+ "GraphVizOutput.png");
+		this.pane = new JScrollPane(new JLabel(gvIcon));
+		this.add(this.pane, BorderLayout.CENTER);
+		
+		this.revalidate();
+		this.repaint();
 	}
 
 	public void update() {
-		this.getImage();
+		System.out.println("Updating");
+		this.loadImage();
 	}
 }
