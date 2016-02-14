@@ -1,9 +1,6 @@
 package legendary.DisplayScreen;
 
-import java.awt.Desktop;
 import java.awt.Dimension;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -30,25 +27,28 @@ public class PatternDisplay extends JPanel {
 	}
 
 	public void createPane() {
+		try {
+			this.remove(this.pane);
+		} catch (Exception e) {
+		}
 		this.pane = new JScrollPane(this.picture);
 		pane.setPreferredSize(new Dimension(950, 650));
 		pane.setViewportView(this.picture);
 		this.add(pane);
+		pane.repaint();
+		pane.validate();
+		this.repaint();
+		this.validate();
 	}
 
 	public void getImage() {
 		LegendaryProperties properties = LegendaryProperties.getInstance();
-		this.picture = new JLabel(new ImageIcon(properties.getOutputDirectory() + "GraphVizOutput.png"));
+		this.picture = new JLabel(new ImageIcon(properties.getOutputDirectory()
+				+ "GraphVizOutput.png"));
+		createPane();
 	}
 
 	public void update() {
 		this.getImage();
-		LegendaryProperties properties = LegendaryProperties.getInstance();
-		try {
-			Desktop.getDesktop().open(new File(properties.getOutputDirectory() + "GraphVizOutput.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }

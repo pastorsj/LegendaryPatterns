@@ -6,7 +6,6 @@ import java.awt.Font;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTree;
-import javax.swing.JTree.DynamicUtilTreeNode;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
@@ -15,7 +14,8 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 	private JCheckBox checkBox = new JCheckBox();
 	private int focusInt = 0;
 
-	Color selectionForeground, selectionBackground, textForeground, textBackground;
+	Color selectionForeground, selectionBackground, textForeground,
+			textBackground;
 
 	public CheckBoxRenderer() {
 		Font fontValue;
@@ -36,12 +36,14 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 		return this.checkBox;
 	}
 
-	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
-			boolean leaf, int row, boolean hasFocus) {
-		
-		String stringValue = tree.convertValueToText(value, selected, expanded, leaf, row, false);
+	public Component getTreeCellRendererComponent(JTree tree, Object value,
+			boolean selected, boolean expanded, boolean leaf, int row,
+			boolean hasFocus) {
+
+		String stringValue = tree.convertValueToText(value, selected, expanded,
+				leaf, row, false);
 		checkBox.setText(stringValue);
-//		checkBox.setSelected(false);
+		// checkBox.setSelected(false);
 
 		checkBox.setEnabled(tree.isEnabled());
 
@@ -53,19 +55,22 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 			checkBox.setBackground(textBackground);
 		}
 
-		if(!(value instanceof DefaultMutableTreeNode)){
+		if (!(value instanceof DefaultMutableTreeNode)) {
 			return checkBox;
 		}
-		
+
 		if ((value != null) && (value instanceof CheckBoxNode)) {
 			CheckBoxNode node = (CheckBoxNode) value;
 			checkBox.setText(node.getText());
-			if (selected) {
-				node.setSelected(!node.selected, hasFocus);
+			if (hasFocus && !DisplayFrame.changedFocus) {
+				if (selected) {
+					node.setSelected(!node.selected, hasFocus);
+				}
+			} else if (hasFocus) {
+				DisplayFrame.changedFocus = false;
 			}
 			checkBox.setSelected(node.isSelected());
 		}
-		DisplayFrame.changedFocus = false;
 		return checkBox;
 	}
 }

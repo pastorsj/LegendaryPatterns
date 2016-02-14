@@ -16,7 +16,6 @@ public class DisplayFrame{
 	public static boolean scrollBarAdjusted;
 	
 	public void createDisplay() {
-		changedFocus = false;
 		JFrame frame = new DropdownMenuPanel();
 		frame.addWindowFocusListener(new WindowAdapter() {
 			public void windowGainedFocus(WindowEvent e) {
@@ -24,6 +23,7 @@ public class DisplayFrame{
 				changedFocus = true;
 			}
 		});
+		changedFocus = false;
 		frame.setBackground(Color.WHITE);
 		frame.setSize(1280, 720);
 		frame.setTitle("Design Parser");
