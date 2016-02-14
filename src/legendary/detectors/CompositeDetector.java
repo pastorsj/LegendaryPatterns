@@ -110,7 +110,6 @@ public class CompositeDetector extends AbstractPatternDetector {
 					mid = temp;
 				}
 			}
-			System.out.println();
 			if (!compos.isDrawable())
 				continue outer;
 			for (IField f : compos.getFields()) {

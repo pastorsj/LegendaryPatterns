@@ -61,8 +61,7 @@ public class GeneralUtil {
 		if (s.isEmpty()) {
 			return new ArrayList<String>();
 		}
-		String args = s.contains(")") ? s.substring(1, s.lastIndexOf(")")) : s
-				.substring(1);
+		String args = s.contains(")") ? s.substring(1, s.lastIndexOf(")")) : s.substring(1);
 		if (args.length() < 1) {
 			return new ArrayList<String>();
 		}
@@ -110,8 +109,7 @@ public class GeneralUtil {
 			if (primCodes.containsKey(arg)) {
 				finalArgSet.add(primCodes.get(arg));
 			} else if (arg.startsWith("[")) {
-				finalArgSet.add(typeMethodCollections(arg.substring(1) + "[]",
-						new ArrayList<>()));
+				finalArgSet.add(typeMethodCollections(arg.substring(1) + "[]", new ArrayList<>()));
 			} else {
 				finalArgSet.add(typeMethodCollections(arg, new ArrayList<>()));
 			}
@@ -137,8 +135,7 @@ public class GeneralUtil {
 	 *            by the method
 	 * @return a readable string representation of the classes
 	 */
-	public static String typeMethodCollections(String in,
-			List<String> usesClasses) {
+	public static String typeMethodCollections(String in, List<String> usesClasses) {
 		if (in.length() < 1)
 			return in;
 		String s = in;
@@ -155,10 +152,8 @@ public class GeneralUtil {
 		String[] split = s.split(";");
 		String split1 = split[0];
 		if (split1.contains("<")) {
-			res += split1.substring(0, split1.indexOf("<") + 1).replace("/",
-					".");
-			res = res.substring(0, res.lastIndexOf(".")) + "::"
-					+ (res.substring(res.lastIndexOf(".") + 1));
+			res += split1.substring(0, split1.indexOf("<") + 1).replace("/", ".");
+			res = res.substring(0, res.lastIndexOf(".")) + "::" + (res.substring(res.lastIndexOf(".") + 1));
 			split[0] = split1.substring(split1.indexOf("<") + 1);
 			for (String s2 : split) {
 				if (!s2.equals(">"))
@@ -172,8 +167,7 @@ public class GeneralUtil {
 		} else {
 			res = split1.replace("/", ".");
 			if (res.contains("."))
-				res = res.substring(0, res.lastIndexOf(".")) + "::"
-						+ (res.substring(res.lastIndexOf(".") + 1));
+				res = res.substring(0, res.lastIndexOf(".")) + "::" + (res.substring(res.lastIndexOf(".") + 1));
 		}
 		if (res.endsWith(", "))
 			res = res.substring(0, res.lastIndexOf(", "));
@@ -227,14 +221,12 @@ public class GeneralUtil {
 		if (!s.contains("::")) {
 			s = s.replace("/", ".");
 			if (s.contains("."))
-				s = s.substring(0, s.lastIndexOf(".")) + "::"
-						+ s.substring(s.lastIndexOf(".") + 1, s.length());
+				s = s.substring(0, s.lastIndexOf(".")) + "::" + s.substring(s.lastIndexOf(".") + 1, s.length());
 		}
 		if (s.contains("<")) {
 			String split1, split2;
 			split1 = s.substring(0, s.indexOf("<"));
-			split2 = s.substring(s.indexOf("<") + 1,
-					(s.contains(">") ? s.indexOf(">") : s.length()));
+			split2 = s.substring(s.indexOf("<") + 1, (s.contains(">") ? s.indexOf(">") : s.length()));
 			res.add(split1);
 			for (String s2 : split2.split(";")) {
 				res.addAll(getBaseFields(s2));
@@ -278,22 +270,16 @@ public class GeneralUtil {
 			for (String r : res2) {
 				r = r.replace("\\", ".");
 				int start = r.lastIndexOf(packageName);
-				r = r.substring(
-						start,
-						(r.contains(".java") ? r.lastIndexOf(".java") : r
-								.length())).replace("\\", ".");
-				r = r.substring(
-						r.lastIndexOf(packageName),
-						(r.contains(".class") ? r.lastIndexOf(".class") : r
-								.length())).replace("\\", ".");
+				r = r.substring(start, (r.contains(".java") ? r.lastIndexOf(".java") : r.length())).replace("\\", ".");
+				r = r.substring(r.lastIndexOf(packageName),
+						(r.contains(".class") ? r.lastIndexOf(".class") : r.length())).replace("\\", ".");
 				int levels = r.length() - r.replace(".", "").length();
 				if (dirlevels >= 0 && levels >= dirlevels)
 					continue;
 				res.add(r);
 			}
 
-		} else if (dir.toString().endsWith(".java")
-				|| dir.toString().endsWith(".class")) {
+		} else if (dir.toString().endsWith(".java") || dir.toString().endsWith(".class")) {
 			res.add(dir.toString());
 		}
 		return res;
@@ -307,39 +293,40 @@ public class GeneralUtil {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static void writeAndExecGraphViz(StringBuilder builder)
-			throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(
-				"./input_output/text.dot"));
+	public static void writeAndExecGraphViz(StringBuilder builder) throws IOException {
+		LegendaryProperties properties = LegendaryProperties.getInstance();
+		BufferedWriter writer = new BufferedWriter(new FileWriter(properties.getOutputDirectory() + "text.dot"));
 		writer.write(builder.toString().replace("$", ""));
 		writer.close();
 		Runtime rt = Runtime.getRuntime();
-		LegendaryProperties properties = LegendaryProperties.getInstance();
-		System.out.println("Run");
-		rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory() + "text.dot -o "
-				+ " ./input_output/GraphVizoutput.png");
-		// Desktop.getDesktop().open(new
-		// File("./input_output/GraphVizoutput.png"));
+		if (System.getProperty("os.name").contains("Mac")) {
+			String cmd[] = { properties.getDotPath(),
+					"-Tpng", 
+					properties.getOutputDirectory() + "text.dot", 
+					"-o",
+					properties.getOutputDirectory() + "GraphVizOutput.png"};
+			rt.exec(cmd);
+		} else {
+			rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory() + "text.dot -o "
+					+ properties.getOutputDirectory() + "GraphVizOutput.png");
+		}
 	}
 
 	/**
-	 * Write and exec sd dit.
+	 * Write and exec sd edit.
 	 *
 	 * @param builder
 	 *            the builder
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	public static void writeAndExecSDEdit(StringBuilder builder)
-			throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(
-				"./input_output/text.sd"));
+	public static void writeAndExecSDEdit(StringBuilder builder) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("./input_output/text.sd"));
 		writer.write(builder.toString().replace("::", "."));
 		writer.close();
 		Runtime rt = Runtime.getRuntime();
 		rt.exec("java -jar ./lib/sdedit-4.2-beta1.jar -o "
 				+ "./input_output/SDEoutput.png -t png ./input_output/text.sd");
 		// Desktop.getDesktop().open(new File("./input_output/SDEoutput.png"));
-		// System.out.println(builder.toString());
 	}
 }

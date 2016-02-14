@@ -1,6 +1,9 @@
 package legendary.DisplayScreen;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,20 +15,40 @@ import legendary.mainScreen.LegendaryProperties;
 @SuppressWarnings("serial")
 public class PatternDisplay extends JPanel {
 
-	public PatternDisplay() {
+	private static PatternDisplay instance;
+	private JScrollPane pane;
+	private JLabel picture;
+
+	private PatternDisplay() {
+	}
+
+	public static PatternDisplay getInstance() {
+		if (instance == null) {
+			instance = new PatternDisplay();
+		}
+		return instance;
+	}
+
+	public void createPane() {
+		this.pane = new JScrollPane(this.picture);
+		pane.setPreferredSize(new Dimension(950, 650));
+		pane.setViewportView(this.picture);
+		this.add(pane);
+	}
+
+	public void getImage() {
 		LegendaryProperties properties = LegendaryProperties.getInstance();
-		JLabel picLabel = new JLabel(new ImageIcon(
-				properties.getOutputDirectory() + "GraphVizoutput.png"));
+		this.picture = new JLabel(new ImageIcon(properties.getOutputDirectory() + "GraphVizOutput.png"));
+	}
+
+	public void update() {
+		this.getImage();
+		LegendaryProperties properties = LegendaryProperties.getInstance();
 		try {
-			Thread.sleep(2000);
-			System.out.println("Waiting on image to load");
-		} catch (InterruptedException e) {
+			Desktop.getDesktop().open(new File(properties.getOutputDirectory() + "GraphVizOutput.png"));
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		JScrollPane pane = new JScrollPane(picLabel);
-		pane.setPreferredSize(new Dimension(950, 650));
-		pane.setViewportView(picLabel);
-		this.add(pane);
 	}
 }

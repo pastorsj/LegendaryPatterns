@@ -2,25 +2,39 @@ package legendary.DisplayScreen;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class DisplayFrame implements ActionListener{
+public class DisplayFrame{
 
+	private PatternDisplay patternDisplay;
+	private JPanel patternSelector;
+	public static boolean changedFocus;
+	public static boolean scrollBarAdjusted;
+	
 	public void createDisplay() {
+		changedFocus = false;
 		JFrame frame = new DropdownMenuPanel();
+		frame.addWindowFocusListener(new WindowAdapter() {
+			public void windowGainedFocus(WindowEvent e) {
+				System.out.println("In Focus");
+				changedFocus = true;
+			}
+		});
 		frame.setBackground(Color.WHITE);
 		frame.setSize(1280, 720);
 		frame.setTitle("Design Parser");
 		
 		JPanel rows = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		rows.setBackground(Color.WHITE);
-		JPanel patternSelector = new PatternSelector();
+		this.patternSelector = new PatternSelector();
 		patternSelector.setBackground(Color.WHITE);
-		JPanel patternDisplay = new PatternDisplay();
+		this.patternDisplay = PatternDisplay.getInstance();
+		patternDisplay.getImage();
+		patternDisplay.createPane();
 		patternDisplay.setBackground(Color.WHITE);
 		
 		rows.add(patternSelector);
@@ -31,12 +45,6 @@ public class DisplayFrame implements ActionListener{
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);	
-	}
-	
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

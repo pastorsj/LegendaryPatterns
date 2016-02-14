@@ -51,7 +51,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 	      if (returnVal == JFileChooser.APPROVE_OPTION) {
 	        this.file = this.fileChooser.getSelectedFile();
-	        System.out.println(this.file.getName());
 	        if(this.file.getPath().endsWith(".properties")) {
 	        	//Do stuff with the file
 	        	properties.setFile(this.file);
@@ -64,9 +63,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 			if(properties.getFile() == null) {
 				System.err.println("Print to panel: You have not chosen a file");
 			} else {
-				System.out.println(properties.getCurrentFilename());
 				properties.analyse();
-				System.out.println("Finished Analysis");
 				DisplayDriver.go();
 			}
 		}

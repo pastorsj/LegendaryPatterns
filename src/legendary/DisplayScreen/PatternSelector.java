@@ -2,6 +2,8 @@ package legendary.DisplayScreen;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,5 +21,11 @@ public class PatternSelector extends JPanel {
 		checkBoxTree.setBackground(Color.WHITE);
 		pane.setViewportView(checkBoxTree);
 		this.add(pane);
+		pane.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+			@Override
+			public void adjustmentValueChanged(AdjustmentEvent e) {
+				DisplayFrame.scrollBarAdjusted = true;
+			}
+		});
 	}
 }

@@ -58,7 +58,6 @@ public class CheckBoxModel {
 		for (CheckBoxNode n : nodes) {
 			if (n.isSelected()) {
 				for (IClass c : n.getClasses()) {
-					System.out.println(c.getClassName());
 					c.setDrawable(true);
 				}
 			}

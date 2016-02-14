@@ -13,6 +13,7 @@ import javax.swing.tree.TreeCellRenderer;
 
 public class CheckBoxRenderer implements TreeCellRenderer {
 	private JCheckBox checkBox = new JCheckBox();
+	private int focusInt = 0;
 
 	Color selectionForeground, selectionBackground, textForeground, textBackground;
 
@@ -37,7 +38,7 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 
 	public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded,
 			boolean leaf, int row, boolean hasFocus) {
-
+		
 		String stringValue = tree.convertValueToText(value, selected, expanded, leaf, row, false);
 		checkBox.setText(stringValue);
 //		checkBox.setSelected(false);
@@ -60,10 +61,11 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 			CheckBoxNode node = (CheckBoxNode) value;
 			checkBox.setText(node.getText());
 			if (selected) {
-				node.setSelected(!node.selected);
+				node.setSelected(!node.selected, hasFocus);
 			}
 			checkBox.setSelected(node.isSelected());
 		}
+		DisplayFrame.changedFocus = false;
 		return checkBox;
 	}
 }
