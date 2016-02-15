@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import legendary.DisplayScreen.ImageProxy;
 import legendary.mainScreen.LegendaryProperties;
 
 /**
@@ -23,6 +24,7 @@ public class GeneralUtil {
 	public static Map<String, String> primCodes;
 	public static String packageName;
 	public static volatile boolean isGenning = false;
+	public static volatile int fileNum = 0;
 
 	/*
 	 * Primitive Representations for ASM 5 Primitive representations: 'V' - void
@@ -301,10 +303,11 @@ public class GeneralUtil {
 		writer.close();
 		new Thread() {
 			public void run() {
+				fileNum++;
 				Runtime rt = Runtime.getRuntime();
 				if (System.getProperty("os.name").contains("Mac")) {
 					String cmd[] = { properties.getDotPath(), "-Tpng", properties.getOutputDirectory() + "text.dot",
-							"-o", properties.getOutputDirectory() + "GraphVizOutput.png" };
+							"-o", properties.getOutputDirectory() + "GraphVizOutput" + fileNum + ".png" };
 					Process p;
 					try {
 						p = rt.exec(cmd);
@@ -317,12 +320,15 @@ public class GeneralUtil {
 					Process p;
 					try {
 						p = rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory()
-								+ "text.dot -o " + properties.getOutputDirectory() + "GraphVizOutput.png");
+								+ "text.dot -o " + properties.getOutputDirectory() + "GraphVizOutput" + fileNum + ".png");
 						isGenning = true;
 						p.waitFor();
 						isGenning = false;
 					} catch (InterruptedException | IOException e) {
 					}
+				}
+				synchronized(ImageProxy.waitOnMe) {
+					ImageProxy.waitOnMe.notify();
 				}
 			}
 		}.start();

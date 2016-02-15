@@ -5,14 +5,16 @@ import java.awt.Graphics;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
-import legendary.ParsingUtil.GeneralUtil;
-
-class ImageProxy implements Icon {
+public class ImageProxy implements Icon {
 	ImageIcon imageIcon;
 	String pathToImage;
 	Thread retrievalThread;
 	boolean retrieving = false;
+	public static final String waitOnMe = "";
+	public JPanel contentPane;
+	public boolean checkImage;
 
 	public ImageProxy(String path) {
 		pathToImage = path;
@@ -46,7 +48,9 @@ class ImageProxy implements Icon {
 				retrievalThread = new Thread(new Runnable() {
 					public void run() {
 						try {
-							while(GeneralUtil.isGenning);
+							synchronized(waitOnMe) {
+								waitOnMe.wait();
+							}
 							System.out.println("staring load");
 							imageIcon = new ImageIcon(pathToImage, "Graph Viz Output");
 
@@ -54,6 +58,8 @@ class ImageProxy implements Icon {
 							// parent component
 							c.revalidate();
 							c.repaint();
+//							contentPane.revalidate();
+//							contentPane.repaint();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
