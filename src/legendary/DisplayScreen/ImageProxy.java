@@ -48,18 +48,18 @@ public class ImageProxy implements Icon {
 				retrievalThread = new Thread(new Runnable() {
 					public void run() {
 						try {
-							synchronized(waitOnMe) {
+							synchronized (waitOnMe) {
 								waitOnMe.wait();
 							}
 							System.out.println("staring load");
 							imageIcon = new ImageIcon(pathToImage, "Graph Viz Output");
-
+							System.out.println(imageIcon);
 							// NOTE: Do both revalidate() and repaint() on the
 							// parent component
 							c.revalidate();
 							c.repaint();
-//							contentPane.revalidate();
-//							contentPane.repaint();
+							// contentPane.revalidate();
+							// contentPane.repaint();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -70,8 +70,17 @@ public class ImageProxy implements Icon {
 			}
 		}
 	}
-	
-	public void update(){
-		this.imageIcon = null;
+
+	public void update() {
+		if (this.imageIcon != null) {
+			System.out.println(imageIcon);
+			imageIcon.getImage().flush();
+			this.imageIcon = null;
+		}
+	}
+
+	public void clear() {
+		if (this.imageIcon != null)
+			imageIcon.getImage().flush();
 	}
 }

@@ -20,6 +20,7 @@ public class PatternDisplay extends JPanel {
 	private static PatternDisplay instance;
 	private JScrollPane pane;
 	private JLabel label;
+	private ImageProxy icon;
 
 	private PatternDisplay() {
 	}
@@ -39,9 +40,11 @@ public class PatternDisplay extends JPanel {
 		}
 		System.out.println("Loading");
 		LegendaryProperties properties = LegendaryProperties.getInstance();
-		Icon gvIcon = new ImageProxy(properties.getOutputDirectory() + "GraphVizOutput" + GeneralUtil.fileNum + ".png");
-		checkAndDeleteFiles();
-		this.label = new JLabel(gvIcon);
+		if (icon != null)
+			icon.clear();
+		icon = new ImageProxy(properties.getOutputDirectory() + "GraphVizOutput.png");
+//		checkAndDeleteFiles();
+		this.label = new JLabel(icon);
 		this.pane = new JScrollPane(this.label);
 		this.add(this.pane, BorderLayout.CENTER);
 
@@ -53,7 +56,7 @@ public class PatternDisplay extends JPanel {
 		// TODO Auto-generated method stub
 		LegendaryProperties properties = LegendaryProperties.getInstance();
 		Path path = FileSystems.getDefault().getPath(properties.getOutputDirectory(),
-				"GraphVizOutput" + GeneralUtil.fileNum + ".png");
+				"GraphVizOutput.png");
 		try {
 			Files.delete(path);
 		} catch (IOException e) {

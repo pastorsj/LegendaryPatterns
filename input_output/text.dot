@@ -1,15 +1,29 @@
 digraph G{
 	node [shape = "record"]
-legendaryDisplayScreenPatternDisplay [
-	label = "{legendary.DisplayScreen::PatternDisplay\n\<\<Singleton\>\>|
-	- _instance: PatternDisplay_\l
-	- pane: JScrollPane\l
-	- label: JLabel\l
+legendarymainScreenLegendaryProperties [
+	label = "{legendary.mainScreen::LegendaryProperties\n\<\<Singleton\>\>|
+	- _instance: LegendaryProperties_\l
+	- properties: Properties\l
+	- propertyMap: Map\<String, String\>\l
+	- detector: IPatternDetector\l
+	- model: IModel\l
+	- _commandMap: Map\<String, ICommand\>_\l
+	- file: File\l
 	|
-	+ update() : void\l
-	+ _getInstance() : PatternDisplay_\l
-	+ loadImage() : void\l
-	- checkAndDeleteFiles() : void\l
+	+ getModel() : IModel\l
+	+ analyse() : void\l
+	+ getDetector() : IPatternDetector\l
+	+ getCurrentFilename() : String\l
+	+ getFile() : File\l
+	+ getOutputDirectory() : String\l
+	+ getPropertyMap() : Map\<String, String\>\l
+	+ readProperties() : void\l
+	+ setFile(File) : void\l
+	+ getDotPath() : String\l
+	+ updateDetector(Class\<IPatternDetector\>) : void\l
+	+ setModel(IModel) : void\l
+	+ _getInstance() : LegendaryProperties_\l
+	 _access0() : Map_\l
 	}"
 	color = blue]
 legendaryClassesClassParser [
@@ -27,8 +41,42 @@ legendaryClassesClassParser [
 	+ makeGraphViz(IModel, StringBuilder) : void\l
 	}"
 	color = blue]
+legendarymainScreenLegendaryProgressBar [
+	label = "{legendary.mainScreen::LegendaryProgressBar\n\<\<Singleton\>\>|
+	- _instance: LegendaryProgressBar_\l
+	- progressBar: JProgressBar\l
+	- value: int\l
+	- taskInd: int\l
+	- tasks: String[]\l
+	|
+	+ setMax(int) : void\l
+	+ getProgressBar() : JProgressBar\l
+	+ setValue(int) : void\l
+	+ incrementBy(int) : void\l
+	+ finishTask() : void\l
+	+ _getInstance() : LegendaryProgressBar_\l
+	+ begin(String[]) : void\l
+	}"
+	color = blue]
+legendaryDisplayScreenPatternDisplay [
+	label = "{legendary.DisplayScreen::PatternDisplay\n\<\<Singleton\>\>|
+	- _instance: PatternDisplay_\l
+	- pane: JScrollPane\l
+	- label: JLabel\l
+	- icon: ImageProxy\l
+	|
+	+ update() : void\l
+	+ _getInstance() : PatternDisplay_\l
+	+ loadImage() : void\l
+	- checkAndDeleteFiles() : void\l
+	}"
+	color = blue]
 	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenPatternDisplay->legendaryDisplayScreenPatternDisplay
+	[label = ""]legendarymainScreenLegendaryProperties->legendarymainScreenLegendaryProperties
 	edge [style = "solid"] [arrowhead = "open"]
 	[label = ""]legendaryClassesClassParser->legendaryClassesClassParser
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = ""]legendarymainScreenLegendaryProgressBar->legendarymainScreenLegendaryProgressBar
+	edge [style = "solid"] [arrowhead = "open"]
+	[label = ""]legendaryDisplayScreenPatternDisplay->legendaryDisplayScreenPatternDisplay
 }
