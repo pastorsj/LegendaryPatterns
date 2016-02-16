@@ -34,4 +34,12 @@ public interface IPatternDetector {
 	 * @return the candidates
 	 */
 	public Set<Set<IClass>> getCandidates(IModel m);
+
+	public String getPatternName();
+	
+	public Map<IClass, Set<IClass>> getKeyMap();
+	
+	public void addDetector(IPatternDetector detector);
+	
+	public IPatternDetector getDecorated();
 }

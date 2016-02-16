@@ -18,15 +18,13 @@ import legendary.patterns.SingletonPattern;
  * This class allows for the detection of any singleton class with the given
  * model
  */
-public class SingletonDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detector;
+public class SingletonDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new singleton detector.
 	 */
 	public SingletonDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -37,6 +35,7 @@ public class SingletonDetector implements IPatternDetector {
 	 */
 	public SingletonDetector(IPatternDetector detector) {
 		this.detector = detector;
+		this.keyMap = new HashMap<>();
 	}
 
 	/*
@@ -51,24 +50,26 @@ public class SingletonDetector implements IPatternDetector {
 		Set<Set<IClass>> candidates = getCandidates(m);
 		for (Set<IClass> candidateSet : candidates) {
 			for (IClass candidate : candidateSet) {
+				if(!candidate.isDrawable()){
+					continue;
+				}
 				boolean privCtorsOnly = true;
 				if (!candidate.getMethods().containsKey("<init>"))
 					continue;
-				for (IMethod method : candidate.getMethods().get("<init>")
-						.values()) {
-					privCtorsOnly = privCtorsOnly
-							&& method.getAccess().equals("-");
+				for (IMethod method : candidate.getMethods().get("<init>").values()) {
+					privCtorsOnly = privCtorsOnly && method.getAccess().equals("-");
 				}
 				if (privCtorsOnly) {
 					for (IField f : candidate.getFields()) {
-						if (f.getAccess().equals("-_")
-								&& f.getType().equals(candidate.getClassName())) {
+						if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
 							for (IMethod method : candidate.getMethodObjects()) {
 								// System.out.println(method.getReturnType());
-								if (method.getReturnType().equals(
-										candidate.getClassName())
+								if (method.getReturnType().equals(candidate.getClassName())
 										&& method.getAccess().equals("+_")) {
 									singletons.add(candidate);
+									Set<IClass> deps = new HashSet<>();
+									deps.add(candidate);
+									this.keyMap.put(candidate, deps);
 								}
 							}
 						}
@@ -104,6 +105,12 @@ public class SingletonDetector implements IPatternDetector {
 			}
 		}
 		return res;
+	}
+
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Singleton Pattern";
 	}
 
 }

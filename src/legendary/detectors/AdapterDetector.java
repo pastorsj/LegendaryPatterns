@@ -21,15 +21,13 @@ import legendary.patterns.AdapterTargetPattern;
 /**
  * This class allows for the detection of the Adapter pattern
  */
-public class AdapterDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detector;
+public class AdapterDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new adapter detector.
 	 */
 	public AdapterDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -40,6 +38,8 @@ public class AdapterDetector implements IPatternDetector {
 	 */
 	public AdapterDetector(IPatternDetector detector) {
 		this.detector = detector;
+		this.keyMap = new HashMap<>();
+
 	}
 
 	/*
@@ -107,6 +107,11 @@ public class AdapterDetector implements IPatternDetector {
 					}
 					if (draw) {
 						adapterSet.add(c);
+						Set<IClass> deps = new HashSet<>();
+						deps.addAll(tempSet2);
+						deps.addAll(tempSet1);
+						deps.add(c);
+						this.keyMap.put(c, deps);
 						adapteeSet.addAll(tempSet2);
 						targetSet.addAll(tempSet1);
 					}
@@ -185,6 +190,12 @@ public class AdapterDetector implements IPatternDetector {
 			}
 		}
 		return candSet;
+	}
+
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Adapter Pattern";
 	}
 
 }

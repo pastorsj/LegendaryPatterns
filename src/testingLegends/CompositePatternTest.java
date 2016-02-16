@@ -156,6 +156,7 @@ public class CompositePatternTest {
 		this.testModel.addRelation("LeafB", "Component", Relations.EXTENDS);
 		this.testModel.addRelation("LeafC", "Composite", Relations.EXTENDS);
 		this.testModel.addRelation("LeafD", "Composite", Relations.EXTENDS);
+		//Why: Composite must inherit Component
 		if(nofail)
 			this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
 		this.testModel.addRelation("Composite", "Component", Relations.ASSOCIATES);
@@ -177,6 +178,7 @@ public class CompositePatternTest {
 		this.testModel.addRelation("LeafC", "Composite", Relations.EXTENDS);
 		this.testModel.addRelation("LeafD", "Composite", Relations.EXTENDS);
 		this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
+		//Why: Composite must inherit from a Component
 		if(nofail)
 			this.testModel.addRelation("Composite", "IComponent", Relations.ASSOCIATES);
 		this.testModel.addRelation("Component", "IComponent", Relations.IMPLEMENTS);
@@ -192,9 +194,10 @@ public class CompositePatternTest {
 	private void addRelations3(boolean nofail) {
 		this.testModel.addRelation("LeafA", "Component", Relations.EXTENDS);
 		this.testModel.addRelation("LeafC", "Composite", Relations.EXTENDS);
+		//Why: Composite must associate with that Component
 		if(nofail)
-			this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
-		this.testModel.addRelation("Composite", "Component", Relations.ASSOCIATES);
+			this.testModel.addRelation("Composite", "Component", Relations.ASSOCIATES);
+		this.testModel.addRelation("Composite", "Component", Relations.EXTENDS);
 	}
 
 	@After

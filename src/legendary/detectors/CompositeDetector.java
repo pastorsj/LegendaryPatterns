@@ -19,15 +19,13 @@ import legendary.patterns.CompositePattern;
 /**
  * This class allows for the detection of the composite pattern
  */
-public class CompositeDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detector;
+public class CompositeDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new composite detector.
 	 */
 	public CompositeDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -38,6 +36,7 @@ public class CompositeDetector implements IPatternDetector {
 	 */
 	public CompositeDetector(IPatternDetector detector) {
 		this.detector = detector;
+		this.keyMap = new HashMap<>();
 	}
 
 	/*
@@ -111,7 +110,6 @@ public class CompositeDetector implements IPatternDetector {
 					mid = temp;
 				}
 			}
-			System.out.println();
 			if (!compos.isDrawable())
 				continue outer;
 			for (IField f : compos.getFields()) {
@@ -133,6 +131,11 @@ public class CompositeDetector implements IPatternDetector {
 											Relations.REV_EXTENDS));
 							leaves.removeAll(composites);
 							leaves.removeAll(components);
+							Set<IClass> deps = new HashSet<>();
+							deps.addAll(composites);
+							deps.addAll(components);
+							deps.addAll(leaves);
+							this.keyMap.put(compos, deps);
 						}
 					}
 				}
@@ -142,6 +145,7 @@ public class CompositeDetector implements IPatternDetector {
 		allRes.addAll(components);
 		allRes.addAll(composites);
 		allRes.addAll(leaves);
+		//TODO
 		for (IClass c : allRes) {
 			c.setDrawable(true);
 		}
@@ -212,5 +216,11 @@ public class CompositeDetector implements IPatternDetector {
 			result.addAll(getAllSupers(m, c2));
 		}
 		return result;
+	}
+
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Composite Pattern";
 	}
 }

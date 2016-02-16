@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import legendary.Interfaces.IClass;
 import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
+import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
+import legendary.ParsingUtil.GeneralUtil;
 
 /*
  * This class allows the user to parse the data in the model
@@ -23,6 +27,10 @@ public class ClassParser {
 
 	/** The pattern detector for uml diagrams */
 	private IPatternDetector detect;
+
+	private Map<Class<? extends IPattern>, Set<IClass>> patMap;
+
+	private IModel model;
 
 	/**
 	 * Instantiates a new class parser.
@@ -122,10 +130,36 @@ public class ClassParser {
 	 */
 	public void makeGraphViz(IModel m, StringBuilder builder)
 			throws IOException {
+		this.patMap = new HashMap<>();
+		this.model = m;
+		if (this.detect != null) {
+			this.patMap = this.detect.detect(m);
+		}
+		for (IClass c : m.getClasses()) {
+			c.setDrawable(false);
+		}
 		@SuppressWarnings("unused")
-		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(
-				builder,
-				(this.detect == null) ? new HashMap<>() : this.detect.detect(m),
-				m);
+		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(builder,
+				patMap, this.model);
+	}
+
+	public IPatternDetector getDetector() {
+		return this.detect;
+	}
+
+	public void regenGV(){
+		StringBuilder sb = new StringBuilder();
+		for(IClass c : this.model.getClasses()){
+			if(c.isDrawable()){
+//				System.out.println(c.getClassName());
+			}
+		}
+		new GraphVizOutputStream(sb, patMap, this.model);
+		try {
+			GeneralUtil.writeAndExecGraphViz(sb);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -18,15 +18,13 @@ import legendary.patterns.DecoratorPattern;
  * This class allows for the detection of the decorator pattern
  * with the given model.
  */
-public class DecoratorDetector implements IPatternDetector {
-
-	/** The next detector to run. */
-	private IPatternDetector detect;
+public class DecoratorDetector extends AbstractPatternDetector {
 
 	/**
 	 * Instantiates a new decorator detector.
 	 */
 	public DecoratorDetector() {
+		this.keyMap = new HashMap<>();
 	}
 
 	/**
@@ -35,7 +33,8 @@ public class DecoratorDetector implements IPatternDetector {
 	 * @param detect The pattern detector
 	 */
 	public DecoratorDetector(IPatternDetector detect) {
-		this.detect = detect;
+		this.detector = detect;
+		this.keyMap = new HashMap<>();
 	}
 
 	/* (non-Javadoc)
@@ -71,16 +70,18 @@ public class DecoratorDetector implements IPatternDetector {
 						tempSet.addAll(m.getRelGraph().get(c2)
 								.get(c2.isInterface() ? Relations.REV_IMPLEMENTS : Relations.REV_EXTENDS));
 						compSet.add(c);
+						keyMap.put(c, tempSet);
+						keyMap.get(c).add(c);
 						decSet.addAll(tempSet);
 					}
 				}
 			}
 		}
 		Map<Class<? extends IPattern>, Set<IClass>> res;
-		if (this.detect == null) {
+		if (this.detector == null) {
 			res = new HashMap<>();
 		} else {
-			res = this.detect.detect(m);
+			res = this.detector.detect(m);
 		}
 		boolean draw = false;
 		for (IClass c : decSet) {
@@ -134,6 +135,12 @@ public class DecoratorDetector implements IPatternDetector {
 			}
 		}
 		return candidates;
+	}
+
+	@Override
+	public String getPatternName() {
+		// TODO Auto-generated method stub
+		return "Decorator Pattern";
 	}
 
 }
