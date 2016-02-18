@@ -11,6 +11,10 @@ import net.iharder.dnd.FileDrop;
 
 public class DragAndDropPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	LegendaryProperties properties = LegendaryProperties.getInstance();
 	
 	public DragAndDropPanel() {
@@ -23,7 +27,7 @@ public class DragAndDropPanel extends JPanel {
 		}
 		this.add(new JScrollPane(text));
 
-		FileDrop fd = new FileDrop(null, text, /* dragBorder, */ new FileDrop.Listener() {
+		new FileDrop(null, text, /* dragBorder, */ new FileDrop.Listener() {
 			public void filesDropped(File[] files) {
 				File file = files[0];
 				if(file.getName().endsWith(".properties")) {

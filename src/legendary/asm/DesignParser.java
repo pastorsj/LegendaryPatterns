@@ -35,7 +35,7 @@ public class DesignParser {
 //			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
 //			"C:/Program Files/Java/jdk1.8.0_20/src/javax/swing"};
 //			"C:/Users/Administrator/Documents/CSSE374/Lab7-2-Solution/src/problem" };
-	"C:/Users/Administrator/Documents/GitHub/LegendaryPatterns/src/legendary"};
+	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	
 	public static int AdapterThreshold = 2;
 	

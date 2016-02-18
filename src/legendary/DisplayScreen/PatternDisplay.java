@@ -1,17 +1,11 @@
 package legendary.DisplayScreen;
 
 import java.awt.BorderLayout;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
-import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import legendary.ParsingUtil.GeneralUtil;
 import legendary.mainScreen.LegendaryProperties;
 
 @SuppressWarnings("serial")
@@ -50,18 +44,6 @@ public class PatternDisplay extends JPanel {
 
 		this.revalidate();
 		this.repaint();
-	}
-
-	private void checkAndDeleteFiles() {
-		// TODO Auto-generated method stub
-		LegendaryProperties properties = LegendaryProperties.getInstance();
-		Path path = FileSystems.getDefault().getPath(properties.getOutputDirectory(),
-				"GraphVizOutput.png");
-		try {
-			Files.delete(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void update() {
