@@ -302,31 +302,25 @@ public class GeneralUtil {
 		writer.close();
 		new Thread() {
 			public void run() {
-//				fileNum++;
+				// fileNum++;
 				Runtime rt = Runtime.getRuntime();
-				if (System.getProperty("os.name").contains("Mac")) {
-					String cmd[] = { properties.getDotPath(), "-Tpng", properties.getOutputDirectory() + "text.dot",
-							"-o", properties.getOutputDirectory() + "GraphVizOutput.png" };
-					Process p;
-					try {
+				try {
+					if (System.getProperty("os.name").contains("Mac")) {
+						String cmd[] = { properties.getDotPath(), "-Tpng", properties.getOutputDirectory() + "text.dot",
+								"-o", properties.getOutputDirectory() + "GraphVizOutput.png" };
+						Process p;
 						p = rt.exec(cmd);
-						isGenning = true;
 						p.waitFor();
-						isGenning = false;
-					} catch (InterruptedException | IOException e) {
-					}
-				} else {
-					Process p;
-					try {
+					} else {
+						Process p;
 						p = rt.exec(properties.getDotPath() + " -Tpng " + properties.getOutputDirectory()
 								+ "text.dot -o " + properties.getOutputDirectory() + "GraphVizOutput.png");
-						isGenning = true;
 						p.waitFor();
-						isGenning = false;
-					} catch (InterruptedException | IOException e) {
 					}
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
 				}
-				synchronized(ImageProxy.waitOnMe) {
+				synchronized (ImageProxy.waitOnMe) {
 					ImageProxy.waitOnMe.notify();
 				}
 			}
