@@ -1,3 +1,57 @@
-This is the how to file
-it might work
-if it does I'm going to bed
+Select checkboxes in the left panel to include patterns
+involving the listed classes in the diagram on the right.
+
+File>Export allows the current graph to be saved to a
+specified location (.png should be specified in filename).
+
+
+Config properties:
+
+-File Properties-
+
+Input-Folder - Absolute path to directory which will be
+recursively scanned for files to load
+
+Directory-Levels - Depth of search for the input directory
+-1 for unlimited
+
+Input-Classes - Names of classes to explicitly include
+(must be proper and in build path, i.e. java.lang.String)
+
+Output-Directory - Absolute path to directory which will
+be used to store temporary image and .dot files
+
+Dot-Path - Absolute path to dot.exe
+
+-Execution Properties-
+
+Phases - List, in order, of phases to be run by the
+application. Must be separated by ", "
+
+	Class-Loading - Load input classes (should
+	be run first in most cases)
+
+	*-Detection - Detect a pattern (must specify at
+	least one for the output to be nonempty)
+		Composite
+		Singleton
+		Decorator
+		Adapter
+
+	DOT-Generation - Generate the dot output
+	(has no meaningful effect in the current version
+	due to the initial output always being empty)
+
+-Detection Properties-
+
+Adapter-MethodDelegation - number of methods that must be
+called from a potential adapter in its adaptee for the
+pattern to be recognized
+
+Decorator-MethodDelegation - number of methods that must be
+called from a potential decorator in its component for the
+pattern to be recognized
+
+Singleton-RequireGetInstance - require a class to have a
+public static <class type> getInstance() to be recognized as
+Singleton

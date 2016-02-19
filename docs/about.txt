@@ -1,3 +1,16 @@
-test test test
-lololol
-test
+About the Java Analyzer:
+
+Current version: 1.0
+
+This application was developed by Sam Pastoriza and Jason Lane over
+several weeks as a final project for CSSE374 at the Rose-Hulman
+Institute of Technology.
+
+There are no plans for the commercialization of this software at
+the current time, so if you paid for this you should try to get
+your money back.
+
+The full README for this project is available at
+https://github.com/pastorsj/LegendaryPatterns/blob/master/README.md
+
+This file last edited: 11:19:00 18 February, 2016

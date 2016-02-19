@@ -81,7 +81,7 @@ public class DropdownMenuPanel extends JFrame implements ActionListener {
 		JFrame aboutFrame = new JFrame();
 		aboutFrame.setLocationRelativeTo(null);
 		JLabel label = new JLabel();
-		label.setFont(new Font("Arial", 0, 20));
+		label.setFont(new Font("Arial", 0, 14));
 		label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(
