@@ -18,17 +18,35 @@ We use GraphViz to generate the pictorial version of the UML diagram after parsi
 classes and writing that to a .dot file. Once converted to a .dot file, a simple command can be run  
 from the command line (or terminal if on a Mac), to produce a .png output.
 We are also able to produce sequence diagrams through the command line given a method call depth, a method and the owner of the method. The default depth is 5, but any depth can be specified.
-We are also able to detect three types of software design patterns in the code, mainly the  
-Singleton pattern, the Decorator Pattern, and the Adapter Pattern. Any class that is a  
+We are also able to detect four types of software design patterns in the code, mainly the  
+Singleton pattern, the Decorator Pattern, the Adapter Pattern and the Composite Pattern. Any class that is a  
 Singleton class will have an association arrow pointing to itself, be outlined in blue, and  
 will have a <<Singleton>> tag under the name of the class. The Decorator pattern will consist of  
 four parts, the Component, the Abstract Decorator or Decorator Interface, the Concrete Decorators,  
 and the Concrete Component. Each of these will have their own unique tags and will have a fill  
 color of green. The Adapter Patter will consist of three parts, the Target, which can be  
 an interface, abstract class or regular class, the Adaptee, and the Adapter. Each of these classes  
-will be filled with a red color and have unique identifying tags.
+will be filled with a red color and have unique identifying tags. The Composite pattern will consist of  
+at least a composite class containing leaves, and a component, which will also contain at least  
+one leaf.  Each of these classes are colored yellow and will have corresponding tags that identify  
+which part of the pattern they are.
+
+The current progress we made for milestone 7 allows the user to analyze the code with  
+a gui as a frontend. This make it much easier for the user to study the code and  
+figure out which patterns they should use to make their code more extensible. The  
+pattern detection has not changed since Milestone 6.
 
 ## How to use the code
+For the current iteration of the project:
+Write a config.properties file similar to the example in the project  
+that will specify certain properties such as output file path, input file path,  
+dot file path, and phases of execution. Run the Driver class, choose the  
+.properties file and click analyze. Once on the next screen, click through the  
+checkboxes to find the patterns and classes desired. Feel free to load a new config,  
+export the current graph, or view the about or help tabs through the File Menu.
+#### Directions for previous versions (Before Milestone 7/GUI)
+To run on previous version without the gui, make sure that you checkout a branch  
+at milestone 6 and earlier. This allows you to run on DesignParser.  
 Open DesignParser.java in an editor, probably Eclipse  
 Add the project you want to analyze to your build path  
 Change the value of the variable 'packageName' to the outer most package name  
