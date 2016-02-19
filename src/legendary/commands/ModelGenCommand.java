@@ -23,6 +23,9 @@ public class ModelGenCommand implements ICommand {
 		int levels = Integer.parseInt(LegendaryProperties.getInstance()
 				.getPropertyMap().get("dirLevels"));
 		classes.addAll(GeneralUtil.getClassesFromDir(new File(dir), levels));
+		for(String s : LegendaryProperties.getInstance().getPropertyMap().get("inputClasses").split(", ")){
+			classes.add(s);
+		}
 		for (String className : classes) {
 			try {
 				DesignParser.executeASM(className, legendaryModel, true);

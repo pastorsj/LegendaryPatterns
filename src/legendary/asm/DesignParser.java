@@ -29,31 +29,34 @@ public class DesignParser {
 
 	/** The package name. */
 	public static String packageName = "legendary";
-	
+
 	/** The directory. */
 	public static final String[] directories = {
-//			 "/Users/SamPastoriza/Documents/Programming/Java Development/LegendaryPatterns/src/legendary" };
-//			"C:/Program Files/Java/jdk1.8.0_20/src/javax/swing"};
-//			"C:/Users/Administrator/Documents/CSSE374/Lab7-2-Solution/src/problem" };
-	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
-	
+			// "/Users/SamPastoriza/Documents/Programming/Java
+			// Development/LegendaryPatterns/src/legendary" };
+			// "C:/Program Files/Java/jdk1.8.0_20/src/javax/swing"};
+			// "C:/Users/Administrator/Documents/CSSE374/Lab7-2-Solution/src/problem"
+			// };
+			"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary" };
+
 	public static int AdapterThreshold = 2;
 	public static int DecoratorThreshold = 2;
 	public static boolean SingletonRequireGetInstance;
-	
-/** The classes that have already been seen. */
+
+	/** The classes that have already been seen. */
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	public static int DirectoryLevels = 0;
 
-
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.
 	 *
-	 * @param args            : the names of the classes, separated by spaces. For example:
+	 * @param args
+	 *            : the names of the classes, separated by spaces. For example:
 	 *            java DesignParser java.lang.String
 	 *            edu.rosehulman.csse374.ClassFieldVisitor java.lang.Math
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public static void main(String[] args) throws IOException {
 		ClassParser legendaryParser = ClassParser.getInstance();
@@ -91,7 +94,8 @@ public class DesignParser {
 	 * @param className
 	 * @param legendaryModel
 	 * @param drawable
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public static void executeASM(String className, IModel legendaryModel, boolean drawable) throws IOException {
 		classesSeen.add(className);
@@ -101,7 +105,8 @@ public class DesignParser {
 		else
 			legendaryClass.setDrawable(drawable);
 		legendaryModel.addClass(legendaryClass);
-		
+		if (className.length() == 0)
+			return;
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor decVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, legendaryClass, legendaryModel);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, decVisitor, legendaryClass, legendaryModel);
