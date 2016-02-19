@@ -1,6 +1,7 @@
 package legendary.DisplayScreen;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,12 +44,18 @@ public class CheckBoxModel {
 		return detectors;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void regen() {
 		List<CheckBoxNode> nodes = new ArrayList<>();
-		CheckBoxNode leaf = (CheckBoxNode) root.getFirstLeaf();
-		while (leaf != null) {
-			nodes.add(leaf);
-			leaf = (CheckBoxNode) leaf.getNextSibling();
+		Enumeration<DefaultMutableTreeNode> children = root.children();
+		while(children.hasMoreElements()) {
+			CheckBoxNode child = (CheckBoxNode) children.nextElement();
+			Enumeration<DefaultMutableTreeNode> childChild = child.children();
+			while(childChild.hasMoreElements()) {
+				CheckBoxNode leaf = (CheckBoxNode) childChild.nextElement();
+				System.out.println(leaf.text);
+				nodes.add(leaf);
+			}
 		}
 		for (CheckBoxNode n : nodes) {
 			for (IClass c : n.getClasses()) {
