@@ -14,7 +14,6 @@ public class DisplayFrame{
 	private JPanel patternSelector;
 	private static JFrame frame;
 	public static boolean changedFocus;
-	public static boolean scrollBarAdjusted;
 	
 	public void createDisplay() {
 		frame = new DropdownMenuPanel();

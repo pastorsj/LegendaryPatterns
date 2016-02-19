@@ -70,6 +70,7 @@ public class CheckBoxRenderer implements TreeCellRenderer {
 			}
 			checkBox.setSelected(node.isSelected());
 		}
+		tree.clearSelection();
 		return checkBox;
 	}
 }
