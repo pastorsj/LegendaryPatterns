@@ -33,7 +33,7 @@ public class CheckBoxNode extends DefaultMutableTreeNode {
 
 	public void setSelected(boolean newValue, boolean hasFocus) {
 		selected = newValue;
-		if (hasFocus && !DisplayFrame.changedFocus) {
+		if (hasFocus && !DisplayFrame.changedFocus && !PatternDisplay.scrolled) {
 			System.out.println("Regening");
 			model.regen();
 			// This is tremendous code
