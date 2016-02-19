@@ -37,7 +37,6 @@ public class ImageProxy implements Icon {
 	}
 
 	public void paintIcon(final Component c, Graphics g, int x, int y) {
-		System.out.println("test");
 		if (imageIcon != null) {
 			imageIcon.paintIcon(c, g, x, y);
 		} else {
@@ -51,15 +50,9 @@ public class ImageProxy implements Icon {
 							synchronized (waitOnMe) {
 								waitOnMe.wait();
 							}
-							System.out.println("staring load");
 							imageIcon = new ImageIcon(pathToImage, "Graph Viz Output");
-							System.out.println(imageIcon);
-							// NOTE: Do both revalidate() and repaint() on the
-							// parent component
 							c.revalidate();
 							c.repaint();
-							// contentPane.revalidate();
-							// contentPane.repaint();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -68,14 +61,6 @@ public class ImageProxy implements Icon {
 				});
 				retrievalThread.start();
 			}
-		}
-	}
-
-	public void update() {
-		if (this.imageIcon != null) {
-			System.out.println(imageIcon);
-			imageIcon.getImage().flush();
-			this.imageIcon = null;
 		}
 	}
 

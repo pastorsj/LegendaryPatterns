@@ -19,7 +19,6 @@ public class DisplayFrame{
 		frame = new DropdownMenuPanel();
 		frame.addWindowFocusListener(new WindowAdapter() {
 			public void windowGainedFocus(WindowEvent e) {
-				System.out.println("In Focus");
 				changedFocus = true;
 			}
 		});

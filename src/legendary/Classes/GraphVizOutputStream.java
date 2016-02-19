@@ -152,8 +152,6 @@ public class GraphVizOutputStream {
 				for (Relations r : graph.get(c).keySet()) {
 					for (IClass c2 : graph.get(c).get(r)) {
 						if (c2.isDrawable()) {
-							// System.out.println(c2.getClassName());
-
 							if (!this.relationRep.containsKey(r)) {
 								System.out.println("null relation for classes "
 										+ c.getClassName() + " and "

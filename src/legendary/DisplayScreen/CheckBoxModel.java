@@ -53,7 +53,6 @@ public class CheckBoxModel {
 			Enumeration<DefaultMutableTreeNode> childChild = child.children();
 			while(childChild.hasMoreElements()) {
 				CheckBoxNode leaf = (CheckBoxNode) childChild.nextElement();
-				System.out.println(leaf.text);
 				nodes.add(leaf);
 			}
 		}

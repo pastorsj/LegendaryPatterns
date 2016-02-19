@@ -58,7 +58,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	      }
 		} else if(e.getSource().equals(this.analyseFile)) {
 			if(properties.getFile() == null) {
-				System.err.println("Print to panel: You have not chosen a file");
+				System.err.println("You have not chosen a file");
 			} else {
 				this.chooseFile.setEnabled(false);
 				this.analyseFile.setEnabled(false);

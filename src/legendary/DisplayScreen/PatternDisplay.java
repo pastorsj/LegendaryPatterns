@@ -32,7 +32,6 @@ public class PatternDisplay extends JPanel {
 			this.remove(this.pane);
 			this.pane.setVisible(false);
 		}
-		System.out.println("Loading");
 		LegendaryProperties properties = LegendaryProperties.getInstance();
 		if (icon != null)
 			icon.clear();
@@ -47,7 +46,6 @@ public class PatternDisplay extends JPanel {
 	}
 
 	public void update() {
-		System.out.println("Updating");
 		this.loadImage();
 
 	}

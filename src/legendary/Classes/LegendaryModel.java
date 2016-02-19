@@ -131,10 +131,6 @@ public class LegendaryModel implements IModel, ITraverser {
 					break inner;
 				}
 			}
-			// if (c1 != null && c2 != null)
-			// System.out.println(c1.getClassName() + " " + c2.getClassName() +
-			// " " + relations.get(al) + " "
-			// + this.relGraph.get(c1));
 		}
 		Map<IClass, Map<Relations, Set<IClass>>> temp = new HashMap<>();
 		for (IClass c : this.getClasses()) {
@@ -154,13 +150,10 @@ public class LegendaryModel implements IModel, ITraverser {
 	public void removeDupArrows(Map<IClass, Map<Relations, Set<IClass>>> temp) {
 		for (IClass c : this.relGraph.keySet()) {
 			for (IClass sup : this.relGraph.get(c).get(Relations.EXTENDS)) {
-				// System.err.println(sup.getClassName());
-				// if (!sup.isInterface())
 				temp.get(c).get(Relations.EXTENDS).add(sup);
 				temp.get(sup).get(Relations.REV_EXTENDS).add(c);
 			}
 			for (IClass sup : this.relGraph.get(c).get(Relations.IMPLEMENTS)) {
-				// if (sup.isInterface())
 				temp.get(c).get(Relations.IMPLEMENTS).add(sup);
 				temp.get(sup).get(Relations.REV_IMPLEMENTS).add(c);
 			}
@@ -193,7 +186,6 @@ public class LegendaryModel implements IModel, ITraverser {
 					if (!this.relGraph.containsKey(sup))
 						continue;
 					if (this.relGraph.get(sup).get(Relations.USES).contains(c2)) {
-						// System.out.println(sup.getClassName());
 						add = false;
 						break;
 					}
@@ -204,7 +196,6 @@ public class LegendaryModel implements IModel, ITraverser {
 				}
 			}
 		}
-		// System.out.println(temp.equals(this.relGraph));
 		this.relGraph = temp;
 	}
 
@@ -252,7 +243,7 @@ public class LegendaryModel implements IModel, ITraverser {
 					lr.add(Relations.REV_IMPLEMENTS);
 					return;
 				} else
-					System.out.println("wat");
+					System.out.println("wat@LegendaryModel:246");
 			}
 		}
 
