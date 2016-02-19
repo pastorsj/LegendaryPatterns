@@ -1,12 +1,15 @@
 package legendary.detectors;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import legendary.Classes.Relations;
 import legendary.Interfaces.IClass;
+import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
@@ -15,8 +18,8 @@ import legendary.patterns.DecoratorComponentPattern;
 import legendary.patterns.DecoratorPattern;
 
 /**
- * This class allows for the detection of the decorator pattern
- * with the given model.
+ * This class allows for the detection of the decorator pattern with the given
+ * model.
  */
 public class DecoratorDetector extends AbstractPatternDetector {
 
@@ -30,15 +33,19 @@ public class DecoratorDetector extends AbstractPatternDetector {
 	/**
 	 * Instantiates a new decorator detector.
 	 *
-	 * @param detect The pattern detector
+	 * @param detect
+	 *            The pattern detector
 	 */
 	public DecoratorDetector(IPatternDetector detect) {
 		this.detector = detect;
 		this.keyMap = new HashMap<>();
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#detect(legendary.Interfaces.IModel)
 	 */
 	@Override
 	public Map<Class<? extends IPattern>, Set<IClass>> detect(IModel m) {
@@ -63,6 +70,29 @@ public class DecoratorDetector extends AbstractPatternDetector {
 							}
 						}
 					} else if (!m.getRelGraph().get(c2).get(Relations.ASSOCIATES).contains(c)) {
+						add = false;
+					}
+					int count = 0;
+					for (IMethod method : c.getMethodObjects()) {
+						for (IMethod method2 : c2.getMethodObjects()) {
+							List<List<String>> call = new ArrayList<>();
+							List<String> al = new ArrayList<>();
+							al.add(c.getClassName());
+							al.add(c2.getClassName());
+							al.add(method2.getMethodName());
+							call.add(al);
+							call.add(method.getParameters());
+							if (method.getCallStack().contains(call)) {
+								count++;
+								break;
+							}
+						}
+						if (method.getMethodName().contains("<init>")) {
+							if (method.getParameters().contains(c2.getClassName()))
+								count++;
+						}
+					}
+					if (count < DesignParser.DecoratorThreshold && count < c.getMethodObjects().size()) {
 						add = false;
 					}
 					if (add) {
@@ -109,8 +139,12 @@ public class DecoratorDetector extends AbstractPatternDetector {
 		return res;
 	}
 
-	/* (non-Javadoc)
-	 * @see legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.IModel)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * legendary.Interfaces.IPatternDetector#getCandidates(legendary.Interfaces.
+	 * IModel)
 	 */
 	@Override
 	public Set<Set<IClass>> getCandidates(IModel m) {

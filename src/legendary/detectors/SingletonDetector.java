@@ -12,6 +12,7 @@ import legendary.Interfaces.IMethod;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPattern;
 import legendary.Interfaces.IPatternDetector;
+import legendary.asm.DesignParser;
 import legendary.patterns.SingletonPattern;
 
 /**
@@ -50,7 +51,7 @@ public class SingletonDetector extends AbstractPatternDetector {
 		Set<Set<IClass>> candidates = getCandidates(m);
 		for (Set<IClass> candidateSet : candidates) {
 			for (IClass candidate : candidateSet) {
-				if(!candidate.isDrawable()){
+				if (!candidate.isDrawable()) {
 					continue;
 				}
 				boolean privCtorsOnly = true;
@@ -63,9 +64,12 @@ public class SingletonDetector extends AbstractPatternDetector {
 					for (IField f : candidate.getFields()) {
 						if (f.getAccess().equals("-_") && f.getType().equals(candidate.getClassName())) {
 							for (IMethod method : candidate.getMethodObjects()) {
-								// System.out.println(method.getReturnType());
 								if (method.getReturnType().equals(candidate.getClassName())
 										&& method.getAccess().equals("+_")) {
+									if (!method.getMethodName().equals("getInstance")
+											&& DesignParser.SingletonRequireGetInstance) {
+										continue;
+									}
 									singletons.add(candidate);
 									Set<IClass> deps = new HashSet<>();
 									deps.add(candidate);

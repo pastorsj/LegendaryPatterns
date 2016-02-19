@@ -38,11 +38,14 @@ public class DesignParser {
 	"C:/Users/Jason/Documents/GitHub/LegendaryPatterns/src/legendary"};
 	
 	public static int AdapterThreshold = 2;
+	public static int DecoratorThreshold = 2;
+	public static boolean SingletonRequireGetInstance;
 	
 /** The classes that have already been seen. */
 	public static ArrayList<String> classesSeen = new ArrayList<String>();
 
 	public static int DirectoryLevels = 0;
+
 
 	/**
 	 * Reads in a list of Java Classes and reverse engineers their design.

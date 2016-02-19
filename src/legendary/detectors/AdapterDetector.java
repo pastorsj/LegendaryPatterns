@@ -99,7 +99,7 @@ public class AdapterDetector extends AbstractPatternDetector {
 									count++;
 							}
 						}
-						if (count >= DesignParser.AdapterThreshold)
+						if (count >= DesignParser.AdapterThreshold && count < c.getMethodObjects().size())
 							tempSet2.add(c2);
 						if (tempSet2.isEmpty())
 							draw = false;

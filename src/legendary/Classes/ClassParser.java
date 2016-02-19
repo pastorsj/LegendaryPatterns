@@ -136,7 +136,7 @@ public class ClassParser {
 			this.patMap = this.detect.detect(m);
 		}
 		for (IClass c : m.getClasses()) {
-//			c.setDrawable(false);
+			c.setDrawable(false);
 		}
 		@SuppressWarnings("unused")
 		GraphVizOutputStream dotVisitor = new GraphVizOutputStream(builder,

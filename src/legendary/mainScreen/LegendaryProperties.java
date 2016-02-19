@@ -11,6 +11,7 @@ import java.util.Properties;
 import legendary.Interfaces.ICommand;
 import legendary.Interfaces.IModel;
 import legendary.Interfaces.IPatternDetector;
+import legendary.asm.DesignParser;
 import legendary.client.DisplayDriver;
 import legendary.commands.DetectorCommand;
 import legendary.commands.GVGenCommand;
@@ -100,12 +101,6 @@ public class LegendaryProperties {
 					properties.getProperty("Decorator-MethodDelegation", "1"));
 			this.propertyMap.put("singletonGetInstance", properties
 					.getProperty("Singleton-RequireGetInstance", "true"));
-			this.propertyMap.put("maxCompositeDistance",
-					properties.getProperty("Max-Composite-Distance", "2"));
-			this.propertyMap.put("compositeGetChildren",
-					properties.getProperty("Composite-Get-Children", "false"));
-			this.propertyMap.put("compositeGetChildrenName", properties
-					.getProperty("Composite-Get-Children-Name", "getChildren"));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -120,6 +115,9 @@ public class LegendaryProperties {
 	}
 
 	public void analyse() {
+		DesignParser.AdapterThreshold = Integer.parseInt(propertyMap.get("adapterMethodDelegation"));
+		DesignParser.DecoratorThreshold = Integer.parseInt(propertyMap.get("decoratorMethodDelegation"));
+		DesignParser.SingletonRequireGetInstance = propertyMap.get("singletonGetInstance").equals("true");
 		String[] phaseList = propertyMap.get("phases").split(", ");
 		String[] stageList = new String[phaseList.length];
 		for(int i = 0; i < phaseList.length; i++){

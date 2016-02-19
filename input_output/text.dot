@@ -1,1508 +1,162 @@
 digraph G{
 	node [shape = "record"]
-legendaryasmDesignParser [
-	label = "{legendary.asm::DesignParser|
-	+ _packageName: String_\l
-	+ _directories: String[]_\l
-	+ _AdapterThreshold: int_\l
-	+ _classesSeen: ArrayList\<String\>_\l
-	+ _DirectoryLevels: int_\l
+javaawteventMouseMotionListener [
+	label = "{\<\<interface\>\>\njava.awt.event::MouseMotionListener\n\<\<decorator\>\>|
 	|
-	+ _executeASM(String, IModel, boolean) : void_\l
-	+ _main(String[]) : void_\l
-	}"
-	]
-legendarypatternsAbstractDecoratorPattern [
-	label = "{legendary.patterns::AbstractDecoratorPattern|
-	|
-	+ color() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendaryvisitorITraverser [
-	label = "{\<\<interface\>\>\nlegendary.visitor::ITraverser|
-	|
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendaryvisitorITraverser [
-	label = "{\<\<interface\>\>\nlegendary.visitor::ITraverser|
-	|
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendarydetectorsCompositeDetector [
-	label = "{legendary.detectors::CompositeDetector|
-	|
-	- getAllSupers(IModel, IClass) : Set\<IClass\>\l
-	+ getPatternName() : String\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendaryClassesLegendaryClass [
-	label = "{legendary.Classes::LegendaryClass|
-	- className: String\l
-	- superClassName: String\l
-	- interfaces: List\<String\>\l
-	- methods: Map\<String, Map\<List\<String\>IMethod\>\>\l
-	- fields: List\<IField\>\l
-	- isInterface: boolean\l
-	- drawable: boolean\l
-	|
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ accept(IVisitor) : void\l
-	+ setDrawable(boolean) : void\l
-	+ getFields() : List\<IField\>\l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ isDrawable() : boolean\l
-	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-legendaryvisitorIVisitor [
-	label = "{\<\<interface\>\>\nlegendary.visitor::IVisitor|
-	|
-	+ postVisit(ITraverser) : void\l
-	+ preVisit(ITraverser) : void\l
-	+ addVisit(VisitType, Class\<\>, IVisitMethod) : void\l
-	+ removeVisit(VisitType, Class\<\>) : void\l
-	+ visit(ITraverser) : void\l
-	+ getMap() : Map\<LookupKey, IVisitMethod\>\l
-	}"
-	]
-legendaryvisitorITraverser [
-	label = "{\<\<interface\>\>\nlegendary.visitor::ITraverser|
-	|
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendarypatternsDecoratorPattern [
-	label = "{legendary.patterns::DecoratorPattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendaryClassesGraphVizOutputStream [
-	label = "{legendary.Classes::GraphVizOutputStream|
-	- builder: StringBuilder\l
-	- visitor: IVisitor\l
-	- relationRep: Map\<Relations, String\>\l
-	- _patterns: Map\<IClass, Set\<IPattern\>\>_\l
-	- _patMapIn: Map\<Class\<IPattern\>Set\<IClass\>\>_\l
-	|
-	- initializeVisitors() : void\l
-	- previsitModel() : void\l
-	- visitMethod() : void\l
-	- addPatternTags(IClass) : void\l
-	- previsitClass() : void\l
-	- postvisitClass() : void\l
-	- visitField() : void\l
-	- addArrows(IModel) : String\l
-	- patternColor(IClass) : String\l
-	- postvisitModel() : void\l
-	- invertPatternMap(Map\<Class\<IPattern\>, Set\<IClass\>\>) : Map\<IClass, Set\<IPattern\>\>\l
-	- lambda4(ITraverser) : void\l
-	- lambda3(ITraverser) : void\l
-	- visitModel() : void\l
-	- lambda2(ITraverser) : void\l
-	- visitClass() : void\l
-	+ initialize() : void\l
-	- lambda1(ITraverser) : void\l
-	- lambda0(ITraverser) : void\l
-	- write(String) : void\l
-	 _access2(GraphVizOutputStream, IClass) : void_\l
-	 _access1() : Map_\l
-	 _access0(GraphVizOutputStream, String) : void_\l
-	}"
-	]
-legendarypatternsAdapterTargetPattern [
-	label = "{legendary.patterns::AdapterTargetPattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendaryInterfacesIMethod [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IMethod|
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	}"
-	]
-javaxswingImageIcon [
-	label = "{javax.swing::ImageIcon\n\<\<adaptee\>\>|
-	- filename: String\l
-	- location: URL\l
-	 image: Image\l
-	 loadStatus: int\l
-	 imageObserver: ImageObserver\l
-	 description: String\l
-	# _component: Component_\l
-	# _tracker: MediaTracker_\l
-	- _mediaTrackerID: int_\l
-	- _TRACKER_KEY: Object_\l
-	 width: int\l
-	 height: int\l
-	- accessibleContext: ImageIconAccessibleImageIcon\l
-	|
-	+ getIconWidth() : int\l
-	+ setImageObserver(ImageObserver) : void\l
-	- writeObject(ObjectOutputStream) : void\l
-	 _access000() : Component_\l
-	+ getImageLoadStatus() : int\l
-	+ setDescription(String) : void\l
-	- getTracker() : MediaTracker\l
-	+ getDescription() : String\l
-	+ getImageObserver() : ImageObserver\l
-	+ getAccessibleContext() : AccessibleContext\l
-	# loadImage(Image) : void\l
-	- readObject(ObjectInputStream) : void\l
-	+ getIconHeight() : int\l
-	- getNextID() : int\l
-	+ toString() : String\l
-	- _createNoPermsComponent() : Component_\l
-	+ paintIcon(Component, Graphics, int, int) : void\l
-	+ getImage() : Image\l
-	+ setImage(Image) : void\l
+	+ mouseDragged(MouseEvent) : void\l
+	+ mouseMoved(MouseEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendaryInterfacesICommand [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::ICommand|
+fillcolor = "green"]
+javautilEventListener [
+	label = "{\<\<interface\>\>\njava.util::EventListener\n\<\<component, decorator\>\>|
 	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendarydetectorsAbstractPatternDetector [
-	label = "{legendary.detectors::AbstractPatternDetector|
-	# detector: IPatternDetector\l
-	# keyMap: Map\<IClass, Set\<IClass\>\>\l
-	|
-	+ getKeyMap() : Map\<IClass, Set\<IClass\>\>\l
-	+ getDecorated() : IPatternDetector\l
-	+ addDetector(IPatternDetector) : void\l
-	}"
-	]
-legendaryInterfacesICommand [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::ICommand|
-	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendarycommandsGVGenCommand [
-	label = "{legendary.commands::GVGenCommand|
-	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendaryasmClassFieldVisitor [
-	label = "{legendary.asm::ClassFieldVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	|
-	+ visitField(int, String, String, String, Object) : FieldVisitor\l
-	 addAccessLevel(int, IField) : void\l
-	}"
-	]
-legendaryInterfacesIModel [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IModel|
-	|
-	+ convertToGraph() : void\l
-	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : void\l
-	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
-	+ containsClass(String) : boolean\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	}"
-	]
-legendaryvisitorIVisitor [
-	label = "{\<\<interface\>\>\nlegendary.visitor::IVisitor|
-	|
-	+ postVisit(ITraverser) : void\l
-	+ preVisit(ITraverser) : void\l
-	+ addVisit(VisitType, Class\<\>, IVisitMethod) : void\l
-	+ removeVisit(VisitType, Class\<\>) : void\l
-	+ visit(ITraverser) : void\l
-	+ getMap() : Map\<LookupKey, IVisitMethod\>\l
-	}"
-	]
-legendaryDisplayScreenPatternDisplay [
-	label = "{legendary.DisplayScreen::PatternDisplay\n\<\<Singleton, adapter, adaptee\>\>|
-	- _instance: PatternDisplay_\l
-	- pane: JScrollPane\l
-	- label: JLabel\l
-	- icon: ImageProxy\l
-	|
-	+ update() : void\l
-	+ _getInstance() : PatternDisplay_\l
-	+ loadImage() : void\l
-	}"
-	color = blue]
-legendaryClassesLegendaryModel [
-	label = "{legendary.Classes::LegendaryModel|
-	- classList: Set\<IClass\>\l
-	- relGraph: Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	- relations: Map\<List\<String\>List\<Relations\>\>\l
-	- patterns: Map\<IPattern, Set\<IClass\>\>\l
-	|
-	+ convertToGraph() : void\l
-	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ getPatterns() : Map\<IPattern, Set\<IClass\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : void\l
-	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
-	+ addPattern(IPattern, Set\<IClass\>) : void\l
-	+ addRelation(String, String, Relations) : void\l
-	+ containsClass(String) : boolean\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendaryvisitorIVisitMethod [
-	label = "{\<\<interface\>\>\nlegendary.visitor::IVisitMethod|
-	|
-	+ execute(ITraverser) : void\l
-	}"
-	]
-legendaryInterfacesIPatternDetector [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPatternDetector|
-	|
-	+ getPatternName() : String\l
-	+ getKeyMap() : Map\<IClass, Set\<IClass\>\>\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ getDecorated() : IPatternDetector\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	+ addDetector(IPatternDetector) : void\l
-	}"
-	]
-legendaryDisplayScreenPatternSelector [
-	label = "{legendary.DisplayScreen::PatternSelector|
-	|
-	}"
-	]
-legendarycommandsModelGenCommand [
-	label = "{legendary.commands::ModelGenCommand|
-	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendaryInterfacesIPattern [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendaryasmClassMethodVisitor [
-	label = "{legendary.asm::ClassMethodVisitor|
-	- usesClasses: List\<String\>\l
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	|
-	- addArguments(String, IMethod) : void\l
-	- addAccessLevel(int, IMethod) : void\l
-	+ visitMethod(int, String, String, String, String[]) : MethodVisitor\l
-	- addReturnType(String, IMethod) : void\l
-	}"
-	]
-legendarymainScreenButtonPanel [
-	label = "{legendary.mainScreen::ButtonPanel|
-	- chooseFile: JButton\l
-	- analyseFile: JButton\l
-	- fileChooser: JFileChooser\l
-	- file: File\l
-	|
-	+ actionPerformed(ActionEvent) : void\l
-	- initializeButtons() : void\l
-	}"
-	]
-legendaryDisplayScreenDropdownMenuPanel [
-	label = "{legendary.DisplayScreen::DropdownMenuPanel|
-	- menuBar: JMenuBar\l
-	- fileMenu: JMenu\l
-	- helpMenu: JMenu\l
-	- loadNewConfig: JMenuItem\l
-	- exportGraph: JMenuItem\l
-	- howTo: JMenuItem\l
-	- about: JMenuItem\l
-	|
-	+ actionPerformed(ActionEvent) : void\l
-	- readAndDisplayTxt(String) : void\l
-	}"
-	]
-legendarymainScreenLegendaryProgressBar [
-	label = "{legendary.mainScreen::LegendaryProgressBar\n\<\<adapter, Singleton\>\>|
-	- _instance: LegendaryProgressBar_\l
-	- progressBar: JProgressBar\l
-	- value: int\l
-	- taskInd: int\l
-	- tasks: String[]\l
-	|
-	+ setMax(int) : void\l
-	+ getProgressBar() : JProgressBar\l
-	+ setValue(int) : void\l
-	+ incrementBy(int) : void\l
-	+ finishTask() : void\l
-	+ _getInstance() : LegendaryProgressBar_\l
-	+ begin(String[]) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-javaxswingJPanel [
-	label = "{javax.swing::JPanel\n\<\<target\>\>|
-	- _uiClassID: String_\l
+fillcolor = "green"]
+javaawteventHierarchyBoundsListener [
+	label = "{\<\<interface\>\>\njava.awt.event::HierarchyBoundsListener\n\<\<decorator\>\>|
 	|
-	+ getUI() : PanelUI\l
-	# paramString() : String\l
-	+ setUI(PanelUI) : void\l
-	- writeObject(ObjectOutputStream) : void\l
-	+ updateUI() : void\l
-	+ getUIClassID() : String\l
-	+ getAccessibleContext() : AccessibleContext\l
+	+ ancestorMoved(HierarchyEvent) : void\l
+	+ ancestorResized(HierarchyEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendaryInterfacesICommand [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::ICommand|
+fillcolor = "green"]
+javaawteventFocusListener [
+	label = "{\<\<interface\>\>\njava.awt.event::FocusListener\n\<\<decorator\>\>|
 	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendaryInterfacesIPattern [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendarypatternsSingletonPattern [
-	label = "{legendary.patterns::SingletonPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendarypatternsAdapterPattern [
-	label = "{legendary.patterns::AdapterPattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendaryInterfacesIPattern [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendarypatternsCompositePattern [
-	label = "{legendary.patterns::CompositePattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendarymainScreenLegendaryProperties [
-	label = "{legendary.mainScreen::LegendaryProperties\n\<\<Singleton\>\>|
-	- _instance: LegendaryProperties_\l
-	- properties: Properties\l
-	- propertyMap: Map\<String, String\>\l
-	- detector: IPatternDetector\l
-	- model: IModel\l
-	- _commandMap: Map\<String, ICommand\>_\l
-	- file: File\l
-	|
-	+ getModel() : IModel\l
-	+ analyse() : void\l
-	+ getDetector() : IPatternDetector\l
-	+ getCurrentFilename() : String\l
-	+ getFile() : File\l
-	+ getOutputDirectory() : String\l
-	+ getPropertyMap() : Map\<String, String\>\l
-	+ readProperties() : void\l
-	+ setFile(File) : void\l
-	+ getDotPath() : String\l
-	+ updateDetector(Class\<IPatternDetector\>) : void\l
-	+ setModel(IModel) : void\l
-	+ _getInstance() : LegendaryProperties_\l
-	 _access0() : Map_\l
-	}"
-	color = blue]
-javaxswingIcon [
-	label = "{\<\<interface\>\>\njavax.swing::Icon\n\<\<target\>\>|
-	|
-	+ getIconWidth() : int\l
-	+ getIconHeight() : int\l
-	+ paintIcon(Component, Graphics, int, int) : void\l
+	+ focusGained(FocusEvent) : void\l
+	+ focusLost(FocusEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendaryasmLegendaryClassMethodVisitor [
-	label = "{legendary.asm::LegendaryClassMethodVisitor|
-	 legendaryClass: IClass\l
-	 legendaryModel: IModel\l
-	 legendaryMethod: IMethod\l
+fillcolor = "green"]
+javaawtdndDragSourceListener [
+	label = "{\<\<interface\>\>\njava.awt.dnd::DragSourceListener\n\<\<decorator\>\>|
 	|
-	+ visitMethodInsn(int, String, String, String, boolean) : void\l
-	}"
-	]
-legendarymainScreenDragAndDropPanel [
-	label = "{legendary.mainScreen::DragAndDropPanel|
-	- _serialVersionUID: long_\l
-	 properties: LegendaryProperties\l
-	|
-	}"
-	]
-legendaryasmClassDeclarationVisitor [
-	label = "{legendary.asm::ClassDeclarationVisitor|
-	- legendaryClass: IClass\l
-	- legendaryModel: IModel\l
-	|
-	+ visit(int, int, String, String, String, String[]) : void\l
-	}"
-	]
-legendaryDisplayScreenCheckBoxRenderer [
-	label = "{legendary.DisplayScreen::CheckBoxRenderer|
-	- checkBox: JCheckBox\l
-	 selectionForeground: Color\l
-	 selectionBackground: Color\l
-	 textForeground: Color\l
-	 textBackground: Color\l
-	|
-	# getLeafRenderer() : JCheckBox\l
-	+ getTreeCellRendererComponent(JTree, Object, boolean, boolean, boolean, int, boolean) : Component\l
-	}"
-	]
-legendarymainScreenMainScreen [
-	label = "{legendary.mainScreen::MainScreen|
-	+ _frame: JFrame_\l
-	|
-	+ createScreen() : void\l
-	}"
-	]
-legendarycommandsDetectorCommand [
-	label = "{legendary.commands::DetectorCommand|
-	- detector: Class\<IPatternDetector\>\l
-	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendaryInterfacesIMethod [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IMethod|
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	}"
-	]
-legendaryInterfacesIModel [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IModel|
-	|
-	+ convertToGraph() : void\l
-	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : void\l
-	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
-	+ containsClass(String) : boolean\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	}"
-	]
-legendaryvisitorLookupKey [
-	label = "{legendary.visitor::LookupKey|
-	 visitType: VisitType\l
-	 clazz: Class\<\>\l
-	|
-	+ hashCode() : int\l
-	+ equals(Object) : boolean\l
-	}"
-	]
-legendaryInterfacesIMethod [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IMethod|
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	}"
-	]
-legendarypatternsCompositeComponentPattern [
-	label = "{legendary.patterns::CompositeComponentPattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendaryClassesRelations [
-	label = "{legendary.Classes::Relations|
-	+ _EXTENDS: Relations_\l
-	+ _IMPLEMENTS: Relations_\l
-	+ _USES: Relations_\l
-	+ _ASSOCIATES: Relations_\l
-	+ _REV_EXTENDS: Relations_\l
-	+ _REV_IMPLEMENTS: Relations_\l
-	+ _REV_USES: Relations_\l
-	+ _REV_ASSOCIATES: Relations_\l
-	- _ENUMVALUES: Relations[]_\l
-	|
-	+ _valueOf(String) : Relations_\l
-	+ _values() : Relations_\l
-	}"
-	]
-legendaryvisitorIVisitor [
-	label = "{\<\<interface\>\>\nlegendary.visitor::IVisitor|
-	|
-	+ postVisit(ITraverser) : void\l
-	+ preVisit(ITraverser) : void\l
-	+ addVisit(VisitType, Class\<\>, IVisitMethod) : void\l
-	+ removeVisit(VisitType, Class\<\>) : void\l
-	+ visit(ITraverser) : void\l
-	+ getMap() : Map\<LookupKey, IVisitMethod\>\l
-	}"
-	]
-legendaryInterfacesIModel [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IModel|
-	|
-	+ convertToGraph() : void\l
-	+ getRelGraph() : Map\<IClass, Map\<Relations, Set\<IClass\>\>\>\l
-	+ removeDupArrows(Map\<IClass, Map\<Relations, Set\<IClass\>\>\>) : void\l
-	+ getRelations() : Map\<List\<String\>List\<Relations\>\>\l
-	+ addRelation(String, String, Relations) : void\l
-	+ containsClass(String) : boolean\l
-	+ getClasses() : Set\<IClass\>\l
-	+ addClass(IClass) : void\l
-	}"
-	]
-legendaryvisitorVisitorAdapter [
-	label = "{legendary.visitor::VisitorAdapter|
-	+ keyToVisitMethodMap: Map\<LookupKey, IVisitMethod\>\l
-	|
-	+ postVisit(ITraverser) : void\l
-	- doVisit(VisitType, ITraverser) : void\l
-	+ preVisit(ITraverser) : void\l
-	+ addVisit(VisitType, Class\<\>, IVisitMethod) : void\l
-	+ removeVisit(VisitType, Class\<\>) : void\l
-	+ visit(ITraverser) : void\l
-	+ getMap() : Map\<LookupKey, IVisitMethod\>\l
-	}"
-	]
-legendarypatternsAbstractAdapterPattern [
-	label = "{legendary.patterns::AbstractAdapterPattern|
-	|
-	+ color() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendaryInterfacesIPattern [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-legendaryClassesSDEditOutputStream [
-	label = "{legendary.Classes::SDEditOutputStream|
-	- visitor: IVisitor\l
-	- model: IModel\l
-	- builder: StringBuilder\l
-	- classes: Set\<String\>\l
-	- methodCalls: List\<String\>\l
-	- depth: int\l
-	- origDepth: int\l
-	|
-	- initializeVisitors() : void\l
-	+ postvisitMethod() : void\l
-	+ visitMethod() : void\l
-	 _access6(SDEditOutputStream) : int_\l
-	 _access5(SDEditOutputStream) : IVisitor_\l
-	 _access4(SDEditOutputStream) : List_\l
-	 _access3(SDEditOutputStream) : IModel_\l
-	+ write(String) : void\l
-	 _access2(SDEditOutputStream) : Set_\l
-	+ previsitMethod() : void\l
-	 _access1(SDEditOutputStream, int) : void_\l
-	 _access0(SDEditOutputStream) : int_\l
-	}"
-	]
-legendarydetectorsSingletonDetector [
-	label = "{legendary.detectors::SingletonDetector|
-	|
-	+ getPatternName() : String\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendaryDisplayScreenCheckBoxNode [
-	label = "{legendary.DisplayScreen::CheckBoxNode\n\<\<adapter\>\>|
-	 text: String\l
-	- model: CheckBoxModel\l
-	- classes: Set\<IClass\>\l
-	 selected: boolean\l
-	|
-	+ setSelected(boolean, boolean) : void\l
-	+ getText() : String\l
-	+ isSelected() : boolean\l
-	+ toString() : String\l
-	+ getClasses() : Set\<IClass\>\l
-	+ setText(String) : void\l
+	+ dragEnter(DragSourceDragEvent) : void\l
+	+ dragDropEnd(DragSourceDropEvent) : void\l
+	+ dragOver(DragSourceDragEvent) : void\l
+	+ dropActionChanged(DragSourceDragEvent) : void\l
+	+ dragExit(DragSourceEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendarypatternsDecoratorComponentPattern [
-	label = "{legendary.patterns::DecoratorComponentPattern|
+fillcolor = "green"]
+javaawteventHierarchyListener [
+	label = "{\<\<interface\>\>\njava.awt.event::HierarchyListener\n\<\<decorator\>\>|
 	|
-	+ tag() : String\l
-	}"
-	]
-legendaryDisplayScreenCheckBoxModel [
-	label = "{legendary.DisplayScreen::CheckBoxModel\n\<\<adaptee\>\>|
-	- model: TreeModel\l
-	- root: DefaultMutableTreeNode\l
-	- patternInformation: Map\<IPatternDetector, Map\<IClass, Set\<IClass\>\>\>\l
-	|
-	+ getModel() : TreeModel\l
-	+ regen() : void\l
-	- initializeCheckBoxPatternArrays() : void\l
-	- getPatternInformation() : Map\<IPatternDetector, Map\<IClass, Set\<IClass\>\>\>\l
+	+ hierarchyChanged(HierarchyEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendaryClassesLegendaryField [
-	label = "{legendary.Classes::LegendaryField|
-	- fieldAccessType: String\l
-	- fieldName: String\l
-	- fieldType: String\l
-	- baseFields: Set\<String\>\l
+fillcolor = "green"]
+javabeansPropertyChangeListener [
+	label = "{\<\<interface\>\>\njava.beans::PropertyChangeListener\n\<\<decorator\>\>|
 	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendaryInterfacesIClass [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IClass|
-	|
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setDrawable(boolean) : void\l
-	+ getFields() : List\<IField\>\l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ isDrawable() : boolean\l
-	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-legendaryClassesLegendaryMethod [
-	label = "{legendary.Classes::LegendaryMethod|
-	- methodAccess: String\l
-	- methodName: String\l
-	- parameters: List\<String\>\l
-	- methodCallStack: Queue\<List\<List\<String\>\>\>\l
-	- methodReturnType: String\l
-	|
-	+ setParameters(List\<String\>) : void\l
-	+ addMethodToCallStack(String, String, String, List\<String\>) : void\l
-	+ setAccess(String) : void\l
-	+ setMethodName(String) : void\l
-	+ getAccess() : String\l
-	+ getMethodName() : String\l
-	+ getReturnType() : String\l
-	+ setReturnType(String) : void\l
-	+ getParameters() : List\<String\>\l
-	+ getCallStack() : Queue\<List\<List\<String\>\>\>\l
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendaryvisitorVisitType [
-	label = "{legendary.visitor::VisitType|
-	+ _PreVisit: VisitType_\l
-	+ _Visit: VisitType_\l
-	+ _PostVisit: VisitType_\l
-	- _ENUMVALUES: VisitType[]_\l
-	|
-	+ _valueOf(String) : VisitType_\l
-	+ _values() : VisitType_\l
-	}"
-	]
-legendaryDisplayScreenCheckBoxTree [
-	label = "{legendary.DisplayScreen::CheckBoxTree|
-	 panel: JPanel\l
-	|
-	+ createTree() : void\l
-	}"
-	]
-legendaryclientDisplayDriver [
-	label = "{legendary.client::DisplayDriver|
-	|
-	+ _go() : void_\l
-	}"
-	]
-javaxswingJProgressBar [
-	label = "{javax.swing::JProgressBar\n\<\<adaptee\>\>|
-	- _uiClassID: String_\l
-	# orientation: int\l
-	# paintBorder: boolean\l
-	# model: BoundedRangeModel\l
-	# progressString: String\l
-	# paintString: boolean\l
-	- _defaultMinimum: int_\l
-	- _defaultMaximum: int_\l
-	- _defaultOrientation: int_\l
-	# changeEvent: ChangeEvent\l
-	# changeListener: ChangeListener\l
-	- format: Format\l
-	- indeterminate: boolean\l
-	|
-	# fireStateChanged() : void\l
-	+ setMaximum(int) : void\l
-	+ updateUI() : void\l
-	+ setBorderPainted(boolean) : void\l
-	+ getUIClassID() : String\l
-	+ setIndeterminate(boolean) : void\l
-	+ getMaximum() : int\l
-	+ isIndeterminate() : boolean\l
-	+ addChangeListener(ChangeListener) : void\l
-	# paramString() : String\l
-	+ getOrientation() : int\l
-	# paintBorder(Graphics) : void\l
-	+ setStringPainted(boolean) : void\l
-	+ isBorderPainted() : boolean\l
-	+ getMinimum() : int\l
-	+ setOrientation(int) : void\l
-	+ getChangeListeners() : ChangeListener\l
-	+ getModel() : BoundedRangeModel\l
-	- writeObject(ObjectOutputStream) : void\l
-	+ isStringPainted() : boolean\l
-	# createChangeListener() : ChangeListener\l
-	+ getString() : String\l
-	+ getAccessibleContext() : AccessibleContext\l
-	+ getUI() : ProgressBarUI\l
-	+ getValue() : int\l
-	+ setString(String) : void\l
-	+ setUI(ProgressBarUI) : void\l
-	+ removeChangeListener(ChangeListener) : void\l
-	+ setValue(int) : void\l
-	+ setModel(BoundedRangeModel) : void\l
-	+ setMinimum(int) : void\l
-	+ getPercentComplete() : double\l
+	+ propertyChange(PropertyChangeEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendaryInterfacesIPatternDetector [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPatternDetector|
+fillcolor = "green"]
+javaawteventKeyListener [
+	label = "{\<\<interface\>\>\njava.awt.event::KeyListener\n\<\<decorator\>\>|
 	|
-	+ getPatternName() : String\l
-	+ getKeyMap() : Map\<IClass, Set\<IClass\>\>\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ getDecorated() : IPatternDetector\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	+ addDetector(IPatternDetector) : void\l
-	}"
-	]
-legendaryClassesClassParser [
-	label = "{legendary.Classes::ClassParser\n\<\<Singleton\>\>|
-	- _instance: ClassParser_\l
-	- detect: IPatternDetector\l
-	- patMap: Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	- model: IModel\l
-	|
-	+ regenGV() : void\l
-	+ getDetector() : IPatternDetector\l
-	+ _getInstance() : ClassParser_\l
-	+ makeSDEdit(String, String, int, IModel, StringBuilder) : void\l
-	+ addDetector(IPatternDetector) : void\l
-	+ makeGraphViz(IModel, StringBuilder) : void\l
-	}"
-	color = blue]
-legendaryDisplayScreenImageProxy [
-	label = "{legendary.DisplayScreen::ImageProxy\n\<\<adapter\>\>|
-	 imageIcon: ImageIcon\l
-	 pathToImage: String\l
-	 retrievalThread: Thread\l
-	 retrieving: boolean\l
-	+ _waitOnMe: String_\l
-	+ contentPane: JPanel\l
-	+ checkImage: boolean\l
-	|
-	+ getIconWidth() : int\l
-	+ getIconHeight() : int\l
-	+ clear() : void\l
-	+ paintIcon(Component, Graphics, int, int) : void\l
+	+ keyPressed(KeyEvent) : void\l
+	+ keyReleased(KeyEvent) : void\l
+	+ keyTyped(KeyEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendaryvisitorITraverser [
-	label = "{\<\<interface\>\>\nlegendary.visitor::ITraverser|
+fillcolor = "green"]
+javaawteventMouseListener [
+	label = "{\<\<interface\>\>\njava.awt.event::MouseListener\n\<\<decorator\>\>|
 	|
-	+ accept(IVisitor) : void\l
-	}"
-	]
-legendaryInterfacesIClass [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IClass|
-	|
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setDrawable(boolean) : void\l
-	+ getFields() : List\<IField\>\l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ isDrawable() : boolean\l
-	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-legendarydetectorsAdapterDetector [
-	label = "{legendary.detectors::AdapterDetector|
-	|
-	+ getPatternName() : String\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	}"
-	]
-legendaryInterfacesICommand [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::ICommand|
-	|
-	+ name() : String\l
-	+ execute() : void\l
-	}"
-	]
-legendaryDisplayScreenPatternDisplay [
-	label = "{legendary.DisplayScreen::PatternDisplay|
-	- _instance: PatternDisplay_\l
-	- pane: JScrollPane\l
-	- label: JLabel\l
-	- icon: ImageProxy\l
-	|
-	+ update() : void\l
-	+ _getInstance() : PatternDisplay_\l
-	+ loadImage() : void\l
-	}"
-	]
-legendaryInterfacesIField [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IField|
-	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	}"
-	]
-legendaryvisitorVisitType [
-	label = "{legendary.visitor::VisitType|
-	+ _PreVisit: VisitType_\l
-	+ _Visit: VisitType_\l
-	+ _PostVisit: VisitType_\l
-	- _ENUMVALUES: VisitType[]_\l
-	|
-	+ _valueOf(String) : VisitType_\l
-	+ _values() : VisitType_\l
-	}"
-	]
-javaxswingtreeDefaultMutableTreeNode [
-	label = "{javax.swing.tree::DefaultMutableTreeNode\n\<\<target\>\>|
-	- _serialVersionUID: long_\l
-	+ _EMPTY_ENUMERATION: Enumeration\<TreeNode\>_\l
-	# parent: MutableTreeNode\l
-	# children: Vector\l
-	# userObject: Object\l
-	# allowsChildren: boolean\l
-	|
-	+ getUserObjectPath() : Object\l
-	# getPathToRoot(TreeNode, int) : TreeNode\l
-	+ getNextSibling() : DefaultMutableTreeNode\l
-	+ getIndex(TreeNode) : int\l
-	+ isRoot() : boolean\l
-	+ isLeaf() : boolean\l
-	+ preorderEnumeration() : Enumeration\l
-	+ children() : Enumeration\l
-	+ getPath() : TreeNode\l
-	+ pathFromAncestorEnumeration(TreeNode) : Enumeration\l
-	+ setUserObject(Object) : void\l
-	+ getSiblingCount() : int\l
-	+ add(MutableTreeNode) : void\l
-	+ getPreviousSibling() : DefaultMutableTreeNode\l
-	+ isNodeAncestor(TreeNode) : boolean\l
-	- writeObject(ObjectOutputStream) : void\l
-	+ breadthFirstEnumeration() : Enumeration\l
-	+ getLastChild() : TreeNode\l
-	+ getFirstLeaf() : DefaultMutableTreeNode\l
-	- readObject(ObjectInputStream) : void\l
-	+ getChildCount() : int\l
-	+ getUserObject() : Object\l
-	+ removeFromParent() : void\l
-	+ getNextNode() : DefaultMutableTreeNode\l
-	+ getPreviousLeaf() : DefaultMutableTreeNode\l
-	+ isNodeChild(TreeNode) : boolean\l
-	+ getDepth() : int\l
-	+ isNodeDescendant(DefaultMutableTreeNode) : boolean\l
-	+ insert(MutableTreeNode, int) : void\l
-	+ getLeafCount() : int\l
-	+ remove(MutableTreeNode) : void\l
-	+ remove(int) : void\l
-	+ getChildAfter(TreeNode) : TreeNode\l
-	+ getSharedAncestor(DefaultMutableTreeNode) : TreeNode\l
-	+ getLastLeaf() : DefaultMutableTreeNode\l
-	+ getPreviousNode() : DefaultMutableTreeNode\l
-	+ getFirstChild() : TreeNode\l
-	+ getNextLeaf() : DefaultMutableTreeNode\l
-	+ setParent(MutableTreeNode) : void\l
-	+ isNodeSibling(TreeNode) : boolean\l
-	+ getRoot() : TreeNode\l
-	+ depthFirstEnumeration() : Enumeration\l
-	+ postorderEnumeration() : Enumeration\l
-	+ getParent() : TreeNode\l
-	+ isNodeRelated(DefaultMutableTreeNode) : boolean\l
-	+ removeAllChildren() : void\l
-	+ getChildAt(int) : TreeNode\l
-	+ getLevel() : int\l
-	+ setAllowsChildren(boolean) : void\l
-	+ getAllowsChildren() : boolean\l
-	+ clone() : Object\l
-	+ getChildBefore(TreeNode) : TreeNode\l
-	+ toString() : String\l
+	+ mouseReleased(MouseEvent) : void\l
+	+ mouseExited(MouseEvent) : void\l
+	+ mouseEntered(MouseEvent) : void\l
+	+ mouseClicked(MouseEvent) : void\l
+	+ mousePressed(MouseEvent) : void\l
 	}"
 	style = "filled"
-fillcolor = "red"]
-legendarypatternsAbstractCompositePattern [
-	label = "{legendary.patterns::AbstractCompositePattern|
+fillcolor = "green"]
+javaawtdndDragSourceMotionListener [
+	label = "{\<\<interface\>\>\njava.awt.dnd::DragSourceMotionListener\n\<\<decorator\>\>|
 	|
-	+ color() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
+	+ dragMouseMoved(DragSourceDragEvent) : void\l
 	}"
-	]
-legendaryInterfacesIPatternDetector [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPatternDetector|
+	style = "filled"
+fillcolor = "green"]
+javabeansVetoableChangeListener [
+	label = "{\<\<interface\>\>\njava.beans::VetoableChangeListener\n\<\<decorator\>\>|
 	|
-	+ getPatternName() : String\l
-	+ getKeyMap() : Map\<IClass, Set\<IClass\>\>\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ getDecorated() : IPatternDetector\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
-	+ addDetector(IPatternDetector) : void\l
+	+ vetoableChange(PropertyChangeEvent) : void\l
 	}"
-	]
-legendaryclientDriver [
-	label = "{legendary.client::Driver|
+	style = "filled"
+fillcolor = "green"]
+javaawteventMouseWheelListener [
+	label = "{\<\<interface\>\>\njava.awt.event::MouseWheelListener\n\<\<decorator\>\>|
 	|
-	+ _go() : void_\l
-	+ _main(String[]) : void_\l
+	+ mouseWheelMoved(MouseWheelEvent) : void\l
 	}"
-	]
-legendaryDisplayScreenImageProxy [
-	label = "{legendary.DisplayScreen::ImageProxy|
-	 imageIcon: ImageIcon\l
-	 pathToImage: String\l
-	 retrievalThread: Thread\l
-	 retrieving: boolean\l
-	+ _waitOnMe: String_\l
-	+ contentPane: JPanel\l
-	+ checkImage: boolean\l
+	style = "filled"
+fillcolor = "green"]
+javaawteventComponentListener [
+	label = "{\<\<interface\>\>\njava.awt.event::ComponentListener\n\<\<decorator\>\>|
 	|
-	+ getIconWidth() : int\l
-	+ getIconHeight() : int\l
-	+ clear() : void\l
-	+ paintIcon(Component, Graphics, int, int) : void\l
+	+ componentHidden(ComponentEvent) : void\l
+	+ componentResized(ComponentEvent) : void\l
+	+ componentMoved(ComponentEvent) : void\l
+	+ componentShown(ComponentEvent) : void\l
 	}"
-	]
-legendaryvisitorITraverser [
-	label = "{\<\<interface\>\>\nlegendary.visitor::ITraverser|
+	style = "filled"
+fillcolor = "green"]
+javaawteventContainerListener [
+	label = "{\<\<interface\>\>\njava.awt.event::ContainerListener\n\<\<decorator\>\>|
 	|
-	+ accept(IVisitor) : void\l
+	+ componentAdded(ContainerEvent) : void\l
+	+ componentRemoved(ContainerEvent) : void\l
 	}"
-	]
-legendaryDisplayScreenDisplayFrame [
-	label = "{legendary.DisplayScreen::DisplayFrame|
-	- patternDisplay: PatternDisplay\l
-	- patternSelector: JPanel\l
-	- _frame: JFrame_\l
-	+ _changedFocus: boolean_\l
+	style = "filled"
+fillcolor = "green"]
+javaawteventInputMethodListener [
+	label = "{\<\<interface\>\>\njava.awt.event::InputMethodListener\n\<\<decorator\>\>|
 	|
-	+ _stop() : void_\l
-	+ createDisplay() : void\l
+	+ inputMethodTextChanged(InputMethodEvent) : void\l
+	+ caretPositionChanged(InputMethodEvent) : void\l
 	}"
-	]
-legendarydetectorsDecoratorDetector [
-	label = "{legendary.detectors::DecoratorDetector|
+	style = "filled"
+fillcolor = "green"]
+javaawtdndDragGestureListener [
+	label = "{\<\<interface\>\>\njava.awt.dnd::DragGestureListener\n\<\<decorator\>\>|
 	|
-	+ getPatternName() : String\l
-	+ getCandidates(IModel) : Set\<Set\<IClass\>\>\l
-	+ detect(IModel) : Map\<Class\<IPattern\>Set\<IClass\>\>\l
+	+ dragGestureRecognized(DragGestureEvent) : void\l
 	}"
-	]
-legendaryInterfacesIField [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IField|
-	|
-	+ setAccess(String) : void\l
-	+ getBaseTypes() : Set\<String\>\l
-	+ setFieldName(String) : void\l
-	+ getAccess() : String\l
-	+ getType() : String\l
-	+ setType(String) : void\l
-	+ getFieldName() : String\l
-	}"
-	]
-legendaryParsingUtilGeneralUtil [
-	label = "{legendary.ParsingUtil::GeneralUtil|
-	+ _primCodes: Map\<String, String\>_\l
-	+ _packageName: String_\l
-	+ _isGenning: boolean_\l
-	|
-	+ _writeAndExecSDEdit(StringBuilder) : void_\l
-	+ _getBaseFields(String) : Set\<String\>_\l
-	+ _writeAndExecGraphViz(StringBuilder) : void_\l
-	+ _typeMethodCollections(String, List\<String\>) : String_\l
-	- _convert(List\<String\>) : List\<String\>_\l
-	- _parsePrimOut(String, List\<String\>) : void_\l
-	+ _typeArgumentCollections(String) : List\<String\>_\l
-	+ _getClassesFromDir(File, int) : List\<String\>_\l
-	+ _typeFieldCollections(String) : String_\l
-	}"
-	]
-legendarymainScreenLegendaryProperties [
-	label = "{legendary.mainScreen::LegendaryProperties|
-	- _instance: LegendaryProperties_\l
-	- properties: Properties\l
-	- propertyMap: Map\<String, String\>\l
-	- detector: IPatternDetector\l
-	- model: IModel\l
-	- _commandMap: Map\<String, ICommand\>_\l
-	- file: File\l
-	|
-	+ getModel() : IModel\l
-	+ analyse() : void\l
-	+ getDetector() : IPatternDetector\l
-	+ getCurrentFilename() : String\l
-	+ getFile() : File\l
-	+ getOutputDirectory() : String\l
-	+ getPropertyMap() : Map\<String, String\>\l
-	+ readProperties() : void\l
-	+ setFile(File) : void\l
-	+ getDotPath() : String\l
-	+ updateDetector(Class\<IPatternDetector\>) : void\l
-	+ setModel(IModel) : void\l
-	+ _getInstance() : LegendaryProperties_\l
-	 _access0() : Map_\l
-	}"
-	]
-legendaryInterfacesIClass [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IClass|
-	|
-	+ setInterfaces(List\<String\>) : void\l
-	+ getSuperName() : String\l
-	+ setIsInterface(boolean) : void\l
-	+ addField(IField) : void\l
-	+ getInterfaces() : List\<String\>\l
-	+ setClassName(String) : void\l
-	+ setSuper(String) : void\l
-	+ setDrawable(boolean) : void\l
-	+ getFields() : List\<IField\>\l
-	+ getMethodObjects() : List\<IMethod\>\l
-	+ getClassName() : String\l
-	+ isDrawable() : boolean\l
-	+ getMethods() : Map\<String, Map\<List\<String\>IMethod\>\>\l
-	+ isInterface() : boolean\l
-	+ addMethod(IMethod) : void\l
-	}"
-	]
-legendarypatternsAdapteePattern [
-	label = "{legendary.patterns::AdapteePattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendarypatternsCompositeLeafPattern [
-	label = "{legendary.patterns::CompositeLeafPattern|
-	|
-	+ tag() : String\l
-	}"
-	]
-legendaryInterfacesIPattern [
-	label = "{\<\<interface\>\>\nlegendary.Interfaces::IPattern|
-	|
-	+ color() : String\l
-	+ tag() : String\l
-	+ tagArrow(Set\<IPattern\>, Set\<IPattern\>) : String\l
-	}"
-	]
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendaryasmClassFieldVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendarydetectorsDecoratorDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendaryClassesLegendaryModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendaryasmClassMethodVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendarydetectorsCompositeDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendaryClassesLegendaryClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendaryasmClassDeclarationVisitor
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendarydetectorsAdapterDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmDesignParser->legendarydetectorsSingletonDetector
+	style = "filled"
+fillcolor = "green"]
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsAbstractDecoratorPattern->legendaryInterfacesIPattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorITraverser->legendaryvisitorIVisitor
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarydetectorsCompositeDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsCompositeDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsCompositeDetector->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsCompositeDetector->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsCompositeDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesLegendaryClass->legendaryInterfacesIField
+	[label = ""]javaawteventMouseMotionListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryClass->legendaryvisitorITraverser
+	[label = ""]javaawteventHierarchyBoundsListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryClass->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorIVisitor->legendaryvisitorITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorIVisitor->legendaryvisitorVisitType
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorIVisitor->legendaryvisitorIVisitMethod
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsDecoratorPattern->legendarypatternsAbstractDecoratorPattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsDecoratorPattern->legendarypatternsAbstractDecoratorPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryvisitorIVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryInterfacesIClass
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryClassesRelations
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryvisitorITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryvisitorVisitorAdapter
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesGraphVizOutputStream->legendaryClassesGraphVizOutputStream
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsAdapterTargetPattern->legendarypatternsAbstractAdapterPattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsAdapterTargetPattern->legendarypatternsAbstractAdapterPattern
+	[label = ""]javaawteventFocusListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]javaxswingImageIcon->javaxswingIcon
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]javaxswingImageIcon->javaxswingImageIcon
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsAbstractPatternDetector->legendaryInterfacesIPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsAbstractPatternDetector->legendaryInterfacesIClass
+	[label = ""]javaawtdndDragSourceListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarydetectorsAbstractPatternDetector->legendaryInterfacesIPatternDetector
+	[label = ""]javaawteventHierarchyListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarycommandsGVGenCommand->legendaryInterfacesICommand
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassFieldVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassFieldVisitor->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassFieldVisitor->legendaryClassesLegendaryField
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassFieldVisitor->legendaryInterfacesIField
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryInterfacesIModel->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryInterfacesIModel->legendaryClassesRelations
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendaryDisplayScreenPatternDisplay->javaxswingJPanel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<adapts\>\>"]legendaryDisplayScreenPatternDisplay->legendaryDisplayScreenPatternDisplay
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenPatternDisplay->legendaryDisplayScreenImageProxy
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesLegendaryModel->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesLegendaryModel->legendaryInterfacesIClass
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesLegendaryModel->legendaryClassesRelations
+	[label = ""]javabeansPropertyChangeListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryModel->legendaryvisitorITraverser
+	[label = ""]javaawteventKeyListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryModel->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorIVisitMethod->legendaryvisitorITraverser
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryInterfacesIPatternDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryInterfacesIPatternDetector->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendaryDisplayScreenPatternSelector->javaxswingJPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenPatternSelector->legendaryDisplayScreenCheckBoxTree
+	[label = ""]javaawteventMouseListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarycommandsModelGenCommand->legendaryInterfacesICommand
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarycommandsModelGenCommand->legendaryClassesLegendaryModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassMethodVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassMethodVisitor->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassMethodVisitor->legendaryClassesLegendaryMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassMethodVisitor->legendaryInterfacesIMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassMethodVisitor->legendaryasmLegendaryClassMethodVisitor
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarymainScreenButtonPanel->javaxswingJPanel
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarymainScreenLegendaryProgressBar->javaxswingJPanel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<adapts\>\>"]legendarymainScreenLegendaryProgressBar->javaxswingJProgressBar
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProgressBar->legendarymainScreenLegendaryProgressBar
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]javaxswingJPanel->javaxswingJPanel
+	[label = ""]javaawtdndDragSourceMotionListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsSingletonPattern->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsAdapterPattern->legendarypatternsAbstractAdapterPattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsAdapterPattern->legendarypatternsAbstractAdapterPattern
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsCompositePattern->legendarypatternsAbstractCompositePattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsCompositePattern->legendarypatternsAbstractCompositePattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendaryInterfacesIPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendaryInterfacesICommand
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendarymainScreenLegendaryProperties
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendarycommandsDetectorCommand
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendarycommandsGVGenCommand
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenLegendaryProperties->legendarycommandsModelGenCommand
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIClass
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmLegendaryClassMethodVisitor->legendaryInterfacesIMethod
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarymainScreenDragAndDropPanel->javaxswingJPanel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenDragAndDropPanel->legendarymainScreenLegendaryProperties
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassDeclarationVisitor->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryasmClassDeclarationVisitor->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenMainScreen->legendarymainScreenDragAndDropPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenMainScreen->javaxswingJPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarymainScreenMainScreen->legendarymainScreenButtonPanel
+	[label = ""]javabeansVetoableChangeListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarycommandsDetectorCommand->legendaryInterfacesICommand
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorLookupKey->legendaryvisitorVisitType
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsCompositeComponentPattern->legendarypatternsAbstractCompositePattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsCompositeComponentPattern->legendarypatternsAbstractCompositePattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesRelations->legendaryClassesRelations
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorVisitorAdapter->legendaryvisitorLookupKey
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorVisitorAdapter->legendaryvisitorIVisitMethod
+	[label = ""]javaawteventMouseWheelListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryvisitorVisitorAdapter->legendaryvisitorIVisitor
+	[label = ""]javaawteventComponentListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsAbstractAdapterPattern->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesSDEditOutputStream->legendaryvisitorIVisitor
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesSDEditOutputStream->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesSDEditOutputStream->legendaryvisitorVisitorAdapter
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesSDEditOutputStream->legendaryInterfacesIMethod
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesSDEditOutputStream->legendaryClassesSDEditOutputStream
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarydetectorsSingletonDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsSingletonDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsSingletonDetector->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsSingletonDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendaryDisplayScreenCheckBoxNode->javaxswingtreeDefaultMutableTreeNode
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<adapts\>\>"]legendaryDisplayScreenCheckBoxNode->legendaryDisplayScreenCheckBoxModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxNode->legendaryInterfacesIClass
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsDecoratorComponentPattern->legendarypatternsAbstractDecoratorPattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsDecoratorComponentPattern->legendarypatternsAbstractDecoratorPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxModel->legendaryInterfacesIPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxModel->javaxswingtreeDefaultMutableTreeNode
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxModel->legendaryInterfacesIClass
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxModel->legendaryDisplayScreenCheckBoxNode
+	[label = ""]javaawteventContainerListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryField->legendaryvisitorITraverser
+	[label = ""]javaawteventInputMethodListener->javautilEventListener
 	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryField->legendaryInterfacesIField
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryInterfacesIClass->legendaryInterfacesIField
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryInterfacesIClass->legendaryInterfacesIMethod
-	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryMethod->legendaryvisitorITraverser
-	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryClassesLegendaryMethod->legendaryInterfacesIMethod
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryvisitorVisitType->legendaryvisitorVisitType
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendaryDisplayScreenCheckBoxTree->javaxswingJPanel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxTree->javaxswingJPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxTree->legendaryDisplayScreenCheckBoxModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenCheckBoxTree->legendaryDisplayScreenCheckBoxRenderer
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryclientDisplayDriver->legendaryDisplayScreenDisplayFrame
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]javaxswingJProgressBar->javaxswingJProgressBar
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesClassParser->legendaryInterfacesIPatternDetector
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesClassParser->legendaryInterfacesIModel
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryClassesClassParser->legendaryClassesClassParser
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesClassParser->legendaryClassesGraphVizOutputStream
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryClassesClassParser->legendaryClassesSDEditOutputStream
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = "\<\<adapts\>\>"]legendaryDisplayScreenImageProxy->javaxswingImageIcon
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenImageProxy->javaxswingJPanel
-	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendaryDisplayScreenImageProxy->javaxswingIcon
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarydetectorsAdapterDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsAdapterDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsAdapterDetector->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsAdapterDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]javaxswingtreeDefaultMutableTreeNode->javaxswingtreeDefaultMutableTreeNode
-	edge [style = "dashed"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsAbstractCompositePattern->legendaryInterfacesIPattern
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenDisplayFrame->legendaryDisplayScreenPatternDisplay
-	edge [style = "solid"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenDisplayFrame->javaxswingJPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenDisplayFrame->legendaryDisplayScreenDropdownMenuPanel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendaryDisplayScreenDisplayFrame->legendaryDisplayScreenPatternSelector
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarydetectorsDecoratorDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsDecoratorDetector->legendaryInterfacesIPatternDetector
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsDecoratorDetector->legendaryInterfacesIModel
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarydetectorsDecoratorDetector->legendarydetectorsAbstractPatternDetector
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsAdapteePattern->legendarypatternsAbstractAdapterPattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsAdapteePattern->legendarypatternsAbstractAdapterPattern
-	edge [style = "solid"] [arrowhead = "empty"]
-	[label = ""]legendarypatternsCompositeLeafPattern->legendarypatternsAbstractCompositePattern
-	edge [style = "dashed"] [arrowhead = "open"]
-	[label = ""]legendarypatternsCompositeLeafPattern->legendarypatternsAbstractCompositePattern
+	[label = ""]javaawtdndDragGestureListener->javautilEventListener
 }
