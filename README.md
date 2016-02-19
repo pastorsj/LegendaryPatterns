@@ -142,6 +142,26 @@ Pattern color/tag framework refactor
 Composite Pattern details  
 Unit/Integration/Regression Tests for Composite Pattern  
 Massive documentation of entire project  
+###Milestone 7
+We added an entire gui to our project that allows users to view specific patterns and the  
+corresponding classes in a concise and compact fashion. We used several pattern to implement  
+this feature, including the observer and proxy patterns to update the display every time a  
+checkbox is checked. When a checkbox is checked, a new class will show up with the correct  
+pattern tags. Most of the core code was not changed while creating the gui, which implies that  
+any additions for pattern matching wold not change the core framework or the gui. This  
+implementation closely followed the open closed principle, where the core code is open  
+for extension, but closed for modification.
+![UML Milestone 7](https://github.com/pastorsj/LegendaryPatterns/blob/master/docs/UMLLegendaryPatternsManualM7.png)  
+#### Completed by Jason Lane
+Progress Bars  
+Slight modifications made in core framework  
+Pattern detection fixes  
+Overall GUI framework
+#### Completed by Sam Pastoriza
+Checkbox trees  
+Overall GUI framework and details   
+Main and Display screen creation  
+Manual testing  
 
 #### Notes
 * framework = interfaces and basic class structures  
